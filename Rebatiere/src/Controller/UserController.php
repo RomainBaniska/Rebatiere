@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class UserController extends AbstractController
 {
     #[Route('/enregistrement', name: 'app_enregistrement')]
-
+// dd
     
 
     #[Route('/dbTestConnection', name: 'app_dbTestConnection')]
