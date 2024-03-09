@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Users;
+use App\Form\UserType;
 use App\Repository\UsersRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,14 +15,22 @@ class UserController extends AbstractController
     #[Route('/enregistrement', name: 'app_enregistrement')]
     public function register(EntityManagerInterface $entityManager, UsersRepository $user): Response
     {
-        $entityManager->getConnection()->connect();
+        $entityManager->getConnection()->close();
+        // $entityManager->getConnection()->connect();
+        dd($user);
     }
 
-    #[Route('/enregistrement/{id}/edit', name: 'app_enregistrement_edit')]
+    #[Route('/enregistrement/{id}/edit', name: 'app_enregistrement_edit')] // on peut remplacer id par n'importe quel autre champs
     public function editUser(EntityManagerInterface $entityManager, Users $user): Response
     {
-        dd($user);
-        $entityManager->getConnection()->connect();
+        $form = $this->createForm(UserType::class, $user);
+
+
+        // dd($user); 
+        return $this->render('user/edit.html.twig', [
+            'user' => $user,
+            'form' => $form
+        ]);
     }
 
     #[Route('/dbTestConnection', name: 'app_dbTestConnection')]
