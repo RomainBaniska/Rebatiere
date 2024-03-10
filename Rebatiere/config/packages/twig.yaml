@@ -1,5 +1,7 @@
 twig:
     file_name_pattern: '*.twig'
+    # Rajout d'une clé form pour son thème -> Ne fonctionne pas donc à revoir https://youtu.be/V--4N-vRIvI?si=TVOiCkdoTwkp_6-F&t=401
+    form_themes: ['bootstrap_5_layout.html.twig'] 
 
 when@test:
     twig:
