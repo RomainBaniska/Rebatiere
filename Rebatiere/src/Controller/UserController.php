@@ -13,6 +13,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UserController extends AbstractController
 {
+
+    #[Route('/monprofil', name: 'app_monprofil')]
+    public function getProfile(EntityManagerInterface $entityManager, UsersRepository $user): Response
+    {
+
+        
+
+        return $this->render('user/profil.html.twig', [
+            'user' => $user
+        ]);
+ 
+    }
+
     #[Route('/enregistrement', name: 'app_enregistrement')]
     public function register(EntityManagerInterface $entityManager, UsersRepository $user): Response
     {
