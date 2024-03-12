@@ -6,21 +6,59 @@ use App\Entity\Users;
 use App\Form\UserType;
 use App\Repository\UsersRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 
 class UserController extends AbstractController
 {
 
-    #[Route('/monprofil', name: 'app_monprofil')]
-    public function getProfile(EntityManagerInterface $entityManager, UsersRepository $user): Response
+    #[Route('/login', name: 'app_login')]
+    public function getProfile(ManagerRegistry $managerRegistry, Request $request, AuthenticationUtils $authenticationUtils, SessionInterface $sessionInterface): Response
     {
 
-        
+        // Récupère le dernier nom d'utilisateur utilisé
+        $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('user/profil.html.twig', [
+        // Crée une nouvelle instance de l'entité Users
+        $user = new Users();
+
+        // Pré-remplit le champ "utilisateur"
+        $user->setUsername($lastUsername);
+
+        // Formulaire
+        $form = $this->createForm(UserType::class, $user);
+
+        // Soumission du formulaire
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Récupère l'utilisateur correspondant à l'adresse e-mail fournie depuis la base de données
+            $userRepository = $managerRegistry->getRepository(Users::class);
+            $authenticatedUser = $userRepository->findOneBy(['id' => $user->getId()]);
+
+        if (!$authenticatedUser) {
+            // Si aucun utilisateur n'est trouvé on affiche un message d'erreur
+            throw new CustomUserMessageAuthenticationException('ID incorrect.');
+        }
+
+         // Compare si le mot de passe fourni correspond au mot de passe de l'utilisateur
+         if (password_verify($user->getPassword(), $authenticatedUser->password)) {
+
+            // Stocke l'e-mail de l'utilisateur connecté dans la session
+            $sessionInterface-> set('id', $user->getId());
+        }
+
+        // Redirige vers la page profil
+        return $this->redirectToRoute('app_home');
+    }
+
+        return $this->render('user/login.html.twig', [
             'user' => $user
         ]);
  
