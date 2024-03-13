@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Hello CalendarController!{% endblock %}
 
 {% block body %}
 <style>
@@ -11,8 +11,17 @@
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
-    
+    <h1>Calendrier</h1>
+   
+    <h2>{{year}}</h2>
 
+    <h3>{{month.name}}</h3>
+
+   <ul>
+    {% for day in month.days %}
+        <li>{{ day }}</li>
+    {% endfor %}
+</ul>
 
 </div>
 {% endblock %}
