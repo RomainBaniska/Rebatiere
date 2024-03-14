@@ -19,7 +19,7 @@ class UserController extends AbstractController
 {
 
     #[Route('/login', name: 'app_login')]
-    public function getProfile(ManagerRegistry $managerRegistry, Request $request, AuthenticationUtils $authenticationUtils, SessionInterface $sessionInterface): Response
+    public function getProfile(ManagerRegistry $managerRegistry, Request $request, AuthenticationUtils $authenticationUtils, SessionInterface $sessionInterface, UserPasswordEncoderInterface $passwordEncoder): Response
     {
 
         // Récupère le dernier nom d'utilisateur utilisé
@@ -40,29 +40,49 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // Récupère l'utilisateur correspondant à l'adresse e-mail fournie depuis la base de données
             $userRepository = $managerRegistry->getRepository(Users::class);
-            $authenticatedUser = $userRepository->findOneBy(['id' => $user->getId()]);
+            $authenticatedUser = $userRepository->findOneBy(['username' => $user->getUsername()]);
 
         if (!$authenticatedUser) {
             // Si aucun utilisateur n'est trouvé on affiche un message d'erreur
-            throw new CustomUserMessageAuthenticationException('ID incorrect.');
+            $this->addFlash('error', 'Nom d\'utilisateur incorrect.');
+            return $this->redirectToRoute('app_login');
         }
 
-         // Compare si le mot de passe fourni correspond au mot de passe de l'utilisateur
-         if (password_verify($user->getPassword(), $authenticatedUser->password)) {
+        // Compare si le mot de passe fourni correspond au mot de passe de l'utilisateur en utilisant le service PasswordEncoder
+        if (!$passwordEncoder->isPasswordValid($authenticatedUser, $user->getPassword())) {
+        // Si le mot de passe est incorrect, affiche un message d'erreur et redirige vers la page de connexion
+        $this->addFlash('error', 'Mot de passe incorrect.');
+        return $this->redirectToRoute('app_login');
+        }   
 
-            // Stocke l'e-mail de l'utilisateur connecté dans la session
-            $sessionInterface-> set('id', $user->getId());
+        // Stocke l'ID de l'utilisateur connecté dans la session
+        $sessionInterface->set('user_id', $authenticatedUser->getId());
+
+        //  // Compare si le mot de passe fourni correspond au mot de passe de l'utilisateur
+        //  if (password_verify($user->getPassword(), $authenticatedUser->getPassword())) {
+
+        //     // Stocke le nom de l'utilisateur connecté dans la session
+        //     $sessionInterface-> set('username', $user->getUsername());
+        // }
+
+    //     // Redirige vers la page profil
+    //     return $this->redirectToRoute('app_home');
+    // }
+
+    //     return $this->render('user/login.html.twig', [
+    //         'userForm' => $form->createView(),
+    //         'user' => $user
+    //     ]);
+ 
+            // Redirige vers la page d'accueil
+            return $this->redirectToRoute('app_home');
         }
-
-        // Redirige vers la page profil
-        return $this->redirectToRoute('app_home');
-    }
-
+    
+        // Affiche la page de connexion avec le formulaire
         return $this->render('user/login.html.twig', [
             'userForm' => $form->createView(),
             'user' => $user
         ]);
- 
     }
 
     #[Route('/enregistrement', name: 'app_enregistrement')]
