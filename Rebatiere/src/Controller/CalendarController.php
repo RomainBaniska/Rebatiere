@@ -14,7 +14,8 @@ class CalendarController extends AbstractController
     public int $year = 0;
     public int $month = 0;
     private array $months = [];
-    public array $datas = [];
+    public array $datasYear = [];
+    public array $datasMonth = [];
     private const DAYS_OFF = ["01-01", "01-05", "08-05", "14-07", "15-08", "01-11", "11-11", "25-12"];
    
     
@@ -23,17 +24,19 @@ class CalendarController extends AbstractController
 
     public function index(): Response
     {
-        $this->monthNumber  = $this->monthNumber > 12 || $this->monthNumber < 1 ? date("m") : $this->monthNumber;
+        $this->year         = isset($_GET['year']) ? intval($_GET['year']) : date("Y");
         $this->year         = $this->year < 2023 ? date("Y") : $this->year;
+        $this->monthNumber  = isset($_GET['month']) ? intval($_GET['month']) : date("m"); 
+        $this->monthNumber  = $this->monthNumber > 12 || $this->monthNumber < 1 ? date("m") : $this->monthNumber;
 
-        $datas = $this->getFullYear($this->year);
-        $month = $this->getMonth($this->monthNumber, $this->year);
+        $this->datasYear = $this->getFullYear($this->year);
+        $this->datasMonth = $this->getMonth($this->monthNumber, $this->year);
         
 
         return $this->render('calendar/index.html.twig', [
             'controller_name' => 'CalendarController',
-            
-            
+            'year'  => 'datasYear',
+            'month' => 'datasMonth'
         ]);
    }
     
@@ -43,9 +46,7 @@ class CalendarController extends AbstractController
     public function __construct()
     {
         $this->currentYear = date("Y");
-       $this->builMonthsList();
-
-  
+        $this->builMonthsList();
     }
 
     /**
