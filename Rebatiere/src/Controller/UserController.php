@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationExc
 class UserController extends AbstractController
 {
 
-    #[Route('/login', name: 'app_login')]
+    #[Route('/login2', name: 'app_login2')]
     public function getProfile(ManagerRegistry $managerRegistry, Request $request, AuthenticationUtils $authenticationUtils, SessionInterface $sessionInterface, UserPasswordEncoderInterface $passwordEncoder): Response
     {
 
