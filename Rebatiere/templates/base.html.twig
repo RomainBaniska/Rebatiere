@@ -7,12 +7,16 @@
         {% block stylesheets %}
         {% endblock %}
 
-        {% block javascripts %}
-        {% endblock %}
     </head>
     <body>
     {% include 'partials/flash.html.twig' %}
     {# {{ dump(app.flashes) }} #}
-        {% block body %}{% endblock %}
+        {% block body %}
+        
+        {% endblock %}
+
+
+        {% block javascripts %}
+        {% endblock %}
     </body>
 </html>

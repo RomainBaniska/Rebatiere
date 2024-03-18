@@ -16,9 +16,27 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CalendarRepository extends ServiceEntityRepository
 {
+    public int $monthNumber = 0;
+    public array $datasMonth = [];
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Calendar::class);
+    }
+
+    public function getCalendar()
+    {
+        $this->monthNumber  = isset($_GET['month']) ? intval($_GET['month']) : date("m"); 
+        $this->monthNumber  = $this->monthNumber > 12 || $this->monthNumber < 1 ? date("m") : $this->monthNumber;
+
+        $datasYear = $this->getFullYear($this->year);
+        $datasMonth = $this->getMonth($this->monthNumber, $this->year);
+        
+        return $this->render('calendar/index.html.twig', [
+            'year'            => $datasYear,
+            'month'           => $datasMonth
+        ]);
+
     }
 
     //    /**

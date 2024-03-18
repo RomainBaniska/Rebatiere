@@ -10,12 +10,9 @@ use Symfony\Component\Routing\Attribute\Route;
 class CalendarController extends AbstractController
 {
     private int $currentYear = 0;
-    public int $monthNumber = 0;
-    public int $year = 0;
+  
     public int $month = 0;
     private array $months = [];
-    public array $datasYear = [];
-    public array $datasMonth = [];
     private const DAYS_OFF = ["01-01", "01-05", "08-05", "14-07", "15-08", "01-11", "11-11", "25-12"];
    
     
@@ -24,21 +21,12 @@ class CalendarController extends AbstractController
 
     public function index(): Response
     {
-        $this->year         = isset($_GET['year']) ? intval($_GET['year']) : date("Y");
-        $this->year         = $this->year < 2023 ? date("Y") : $this->year;
-        $this->monthNumber  = isset($_GET['month']) ? intval($_GET['month']) : date("m"); 
-        $this->monthNumber  = $this->monthNumber > 12 || $this->monthNumber < 1 ? date("m") : $this->monthNumber;
-
-        $this->datasYear = $this->getFullYear($this->year);
-        $this->datasMonth = $this->getMonth($this->monthNumber, $this->year);
-        
-
+       
         return $this->render('calendar/index.html.twig', [
             'controller_name' => 'CalendarController',
-            'year'  => 'datasYear',
-            'month' => 'datasMonth'
+
         ]);
-   }
+    }
     
     /**
      * Construction du calendrier
