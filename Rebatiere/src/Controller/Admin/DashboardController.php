@@ -12,7 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 class DashboardController extends AbstractDashboardController
 {
     #[Route('/admin', name: 'admin')]
-    #[IsGrantedd('ROLE_ADMIN')]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(): Response
     {
         // return parent::index();
