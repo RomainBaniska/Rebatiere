@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CalendarRepository;
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -43,26 +44,26 @@ class Calendar
         return $this;
     }
 
-    public function getStart(): ?string
+    public function getStart(): ?\DateTimeInterface
     {
-        return $this->start->format('Y-m-d');
+        return $this->start;
     }
 
     public function setStart(\DateTimeInterface $start): static
     {
-        $this->start = $start;
+        $this->start = DateTime::createFromFormat('Y-m-d H:i:s', $start->format('Y-m-d 00:00:00'));
 
         return $this;
     }
 
-    public function getEnd(): ?string
+    public function getEnd(): ?\DateTimeInterface
     {
-        return $this->end->format('Y-m-d');
+        return $this->end;
     }
 
     public function setEnd(\DateTimeInterface $end): static
     {
-        $this->end = $end;
+        $this->end = DateTime::createFromFormat('Y-m-d H:i:s', $end->format('Y-m-d 00:00:00'));
 
         return $this;
     }
