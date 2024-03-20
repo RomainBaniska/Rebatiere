@@ -17,13 +17,13 @@ class Calendar
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: "date")]
     private ?\DateTimeInterface $start = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: "date")]
     private ?\DateTimeInterface $end = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: "text")]
     private ?string $description = null;
 
     public function getId(): ?int
@@ -43,9 +43,9 @@ class Calendar
         return $this;
     }
 
-    public function getStart(): ?\DateTimeInterface
+    public function getStart(): ?string
     {
-        return $this->start;
+        return $this->start->format('Y-m-d');
     }
 
     public function setStart(\DateTimeInterface $start): static
@@ -55,9 +55,9 @@ class Calendar
         return $this;
     }
 
-    public function getEnd(): ?\DateTimeInterface
+    public function getEnd(): ?string
     {
-        return $this->end;
+        return $this->end->format('Y-m-d');
     }
 
     public function setEnd(\DateTimeInterface $end): static
