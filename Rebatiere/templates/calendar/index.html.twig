@@ -1,38 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Calendrier{% endblock %}
-
-{% block stylesheets %}
-    <style>
-        #calendar {
-            width : 50%;
-            margin : auto;
-        }
-    </style>
-
-{% endblock %}
-
+{% block title %}Calendar index{% endblock %}
 
 {% block body %}
-    <div id='calendar'>
-    </div>
+    <h1>Calendar index</h1>
 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for calendar in calendars %}
+            <tr>
+                <td>{{ calendar.id }}</td>
+                <td>{{ calendar.title }}</td>
+                <td>{{ calendar.start ? calendar.start|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ calendar.end ? calendar.end|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ calendar.description }}</td>
+                <td>
+                    <a href="{{ path('app_calendar_show', {'id': calendar.id}) }}">show</a>
+                    <a href="{{ path('app_calendar_edit', {'id': calendar.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_calendar_new') }}">Create new</a>
 {% endblock %}
-
-{% block javascripts %}
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js" integrity="sha256-i4vDW9EgtaJmeauDDymtNF2omPZ1fCKpf4w1gBlU1IE=" crossorigin="anonymous"></script>
-    <script>
-        window.onload = () => {
-            let calendarElt = document.querySelector("#calendar")
-
-            let calendar = new FullCalendar.Calendar(calendarElt, {
-                initialView: 'dayGridMonth',
-                locale:'fr',
-                timeZone: 'Europe/Paris' 
-            })
-
-            calendar.render()
-        }
-    </script>
-{% endblock %}
-
