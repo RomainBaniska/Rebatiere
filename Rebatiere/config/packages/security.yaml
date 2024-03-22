@@ -22,6 +22,10 @@ security:
                 password_parameter: password
                 check_path: app_login
                 enable_csrf: true
+            # access_denied_handler: App\Security\AccessDeniedHandler
+            # service: 'twig'
+            # template: 'errors/403.html.twig'
+
             logout:
                 path: app_logout
             # custom_authenticator: App\Security\AppLoginAuthenticator
