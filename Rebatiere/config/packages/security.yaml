@@ -54,6 +54,7 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/main, roles: ROLE_USER }
+        - { path: ^/user, roles: ROLE_USER }
         # - { path: ^/calendar, roles: ROLE_INVITE }
 
 

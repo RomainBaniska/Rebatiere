@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Users;
+use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UsersRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,19 +13,25 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 
 class UserController extends AbstractController
 {
 
     #[Route('/enregistrement/{id}/edit', name: 'app_enregistrement_edit')] // on peut remplacer id par n'importe quel autre champs
-    public function editUser(EntityManagerInterface $em, Users $user, Request $request): Response
+    public function editUser(EntityManagerInterface $em, User $user, Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $em->flush(); // on appelle l'entityManager pour "flush" (save/valider) en BDD
+
+            // Hashage du mot de passe. Premier paramètre "$user" et on va chercher la valeur du password de $user
+            $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
+            $user->setPassword($hashedPassword);
+
+            $em->flush(); // on app elle l'entityManager pour "flush" (save/valider) en BDD
             $this->addFlash('success', 'L\'utilisateur a bien été modifié');
             // return $this->redirectToRoute('');
         }
