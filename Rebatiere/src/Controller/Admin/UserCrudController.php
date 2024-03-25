@@ -39,7 +39,7 @@ class UserCrudController extends AbstractCrudController
             TextField::new('username'),
                 //->setFormTypeOptions(['disabled' => 'disabled']),
             // TextField::new('password'),
-            Field::new('password')
+            Field::new('plainPassword')
             ->setColumns(2)
             ->onlyOnForms()
             ->setFormType(PasswordType::class),
