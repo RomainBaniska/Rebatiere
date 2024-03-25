@@ -19,8 +19,18 @@ use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationExc
 class UserController extends AbstractController
 {
 
-    #[Route('/enregistrement/{id}/edit', name: 'app_enregistrement_edit')] // on peut remplacer id par n'importe quel autre champs
-    public function editUser(EntityManagerInterface $em, User $user, Request $request, UserPasswordHasherInterface $passwordHasher): Response
+    #[Route('/monprofil/edit', name: 'monprofil_edit')]
+    public function editUser(EntityManagerInterface $em, Request $request, UserPasswordHasherInterface $passwordHasher): Response
+    {
+        // Récupérer l'utilisateur connecté
+        $currentUser = $this->getUser();
+
+        // Rediriger vers l'édition de son propre profil
+        return $this->redirectToRoute('monprofil', ['id' => $currentUser->getId()]);
+    }
+
+    #[Route('/monprofil/{id}', name: 'monprofil')] // on peut remplacer id par n'importe quel autre champs
+    public function editUser2(EntityManagerInterface $em, User $user, Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);

@@ -4,11 +4,13 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class UserCrudController extends AbstractCrudController
@@ -36,7 +38,11 @@ class UserCrudController extends AbstractCrudController
                 ->hideOnForm(),
             TextField::new('username'),
                 //->setFormTypeOptions(['disabled' => 'disabled']),
-            TextField::new('password'),
+            // TextField::new('password'),
+            Field::new('password')
+            ->setColumns(2)
+            ->onlyOnForms()
+            ->setFormType(PasswordType::class),
             ArrayField::new('roles'),
             // TextEditorField::new('description'),
             // DateTimeField::new('createdAt')
