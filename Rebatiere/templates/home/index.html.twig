@@ -4,10 +4,21 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
     <script>
 
+    {# Pour les majuscules en début de Mois/Jour : https://stackoverflow.com/questions/45819863/uppercase-first-letter-of-month-fullcalendar #}
+
+    {# initialView: 'dayGridMonth', #}
+
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
+          initialView: 'dayGridWeek',
+          displayTime: false, 
+          weekends: true,
+          dayHeaderFormat: { weekday: 'long' },
+          locale: 'fr',
+          firstDay: '1',
+          height : '80%',
+          aspectRatio: 1,
         });
         calendar.render();
       });
