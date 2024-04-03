@@ -1,12 +1,39 @@
 <html lang='en'>
   <head>
     <meta charset='utf-8' />
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {# Style Local #}
+    {# <link rel="stylesheet" href="Rebatiere/templates/home/css/home.css"> #}
+    <style>
+    .datepicker_container {
+    display: flex; 
+    justify-content: space-evenly; 
+    align-items: center; 
+    padding : 1%
+    }
+    </style>
+
+    {# Style jQuery #}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+
+    {# Scripts jQuery #}
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
+    $( function() {
+    $( "#datepicker" ).datepicker();
+    } );
+    </script>
 
+    {# FullCalendar Script 1 #}
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    
+    {# FullCalendar Script (2) : Paramétrage du FullCalendar #}
+    <script>
     {# Pour les majuscules en début de Mois/Jour : https://stackoverflow.com/questions/45819863/uppercase-first-letter-of-month-fullcalendar #}
-
-    {# initialView: 'dayGridMonth', #}
 
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
@@ -22,10 +49,20 @@
         });
         calendar.render();
       });
-
     </script>
+
+
   </head>
   <body>
+    {# Calendar #}
     <div id='calendar'></div>
+
+    {# Datepicker #}
+
+    <div class='datepicker_container'>
+    <p>Date début: <input type="text" id="datepicker"></p>
+    <p>Date fin: <input type="text" id="datepicker"></p>
+    </div>
+
   </body>
 </html>

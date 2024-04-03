@@ -26,6 +26,9 @@ class Reservation
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $chambername = null;
 
+    #[ORM\Column]
+    private ?bool $privatisation = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,18 @@ class Reservation
     public function setChambername(?string $chambername): static
     {
         $this->chambername = $chambername;
+
+        return $this;
+    }
+
+    public function isPrivatisation(): ?bool
+    {
+        return $this->privatisation;
+    }
+
+    public function setPrivatisation(bool $privatisation): static
+    {
+        $this->privatisation = $privatisation;
 
         return $this;
     }
