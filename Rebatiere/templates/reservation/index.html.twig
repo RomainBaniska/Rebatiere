@@ -1,8 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ReservationController!{% endblock %}
 
-{% block style %}
+{% block stylesheets  %}
     {# Style du Datepicker #}
     {# <link rel="stylesheet" href="Rebatiere/templates/home/css/home.css"> #}
     <style>
@@ -18,9 +17,35 @@
     {# Style jQuery #}
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
+    
 {% endblock %}
 
-{% block script %} 
+    {% block body %}
+    {# Datepicker #}
+    {# On pointe le formulaire vers le controlleur reservation #}
+    <form method="post" action="{{ path('app_reservation') }}">
+        <div class='datepicker_container'>
+        <label for="from">Date de début</label> &nbsp;
+        <input type="text" id="from" name="from"> &nbsp;
+        <label for="to">Date de fin </label> &nbsp;
+        <input type="text" id="to" name="to"> &nbsp;
+
+        <label for="Username">Username </label> &nbsp;
+        <input type="text" id="username" name="username"> &nbsp;
+
+        <label for="Chambername">Chambername </label> &nbsp;
+        <input type="text" id="chambername" name="chambername"> &nbsp;
+
+        <label for="Privatisation">Privatisation </label> &nbsp;
+        <input type="checkbox" id="privatisation" name="privatisation"> &nbsp;
+        {# la balise form comprend que le bouton renvoie direct sur app_reservation #}
+        <button type="submit">Réserver</button>
+        </div>
+    </form>
+
+{% endblock %}
+
+{% block javascripts %} 
 
     {# Scripts jQuery #}
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -55,6 +80,7 @@
     $.datepicker.setDefaults($.datepicker.regional['fr']);
     $('#date').datepicker();
 
+    /** Configuration du DatePicker Range */
       from = $( "#from" )
         .datepicker({
           defaultDate: "+1w",
@@ -82,33 +108,11 @@
       }
       return date;
     }
+
+
+    // Ajout du console.log pour tester
+    console.log("Script de datepicker exécuté avec succès !");
+
     });
     </script>
     {% endblock %}
-
-    {% block body %}
-
-    {# Datepicker #}
-
-    {# On pointe le formulaire vers le controlleur reservation #}
-    <form method="post" action="{{ path('app_reservation') }}">
-        <div class='datepicker_container'>
-        <label for="from">Date de début</label> &nbsp;
-        <input type="text" id="from" name="from"> &nbsp;
-        <label for="to">Date de fin </label> &nbsp;
-        <input type="text" id="to" name="to"> &nbsp;
-
-        <label for="Username">Username </label> &nbsp;
-        <input type="text" id="username" name="username"> &nbsp;
-
-        <label for="Chambername">Chambername </label> &nbsp;
-        <input type="text" id="chambername" name="chambername"> &nbsp;
-
-        <label for="Privatisation">Privatisation </label> &nbsp;
-        <input type="checkbox" id="privatisation" name="privatisation"> &nbsp;
-        {# la balise form comprend que le bouton renvoie direct sur app_reservation #}
-        <button type="submit">Réserver</button>
-        </div>
-    </form>
-
-{% endblock %}

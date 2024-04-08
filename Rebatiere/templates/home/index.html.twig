@@ -1,10 +1,25 @@
 <html lang='en'>
+  
+  
+    {% block head %}
   <head>
-    <meta charset='utf-8' />
-    
+    <meta charset='utf-8' />    
     <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+    {% endblock %}
 
-    {% block script %} 
+  {% block body %}
+  <body>
+    {# Calendar #}
+    <div id='calendar'></div>
+
+    {% include 'reservation/index.html.twig' %}
+
+  </body>
+   {% endblock %}  
+
+   
+    {% block javascripts %} 
     {# FullCalendar Script 1 #}
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
     
@@ -16,7 +31,7 @@
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: 'dayGridWeek',
-          displayTime: false, 
+          /**displayTime: false, */
           weekends: true,
           dayHeaderFormat: { weekday: 'long' },
           locale: 'fr',
@@ -28,16 +43,6 @@
       });
     </script>
     {% endblock %}
-  </head>
-
-  {% block body %}
-  <body>
-    {# Calendar #}
-    <div id='calendar'></div>
-
-    {% include 'reservation/index.html.twig' %}
-
-  </body>
-   {% endblock %}  
+   
    
 </html>
