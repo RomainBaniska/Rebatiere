@@ -14,9 +14,11 @@ class ReservationFormType extends AbstractType
         $builder
             ->add('start', null, [
                 'widget' => 'single_text',
+                'input_format' => 'dd/MM/yyyy',
             ])
             ->add('end', null, [
                 'widget' => 'single_text',
+                'input_format' => 'dd/MM/yyyy',
             ])
             ->add('username')
             ->add('chambername')

@@ -43,6 +43,21 @@
         </div>
     </form>
 
+  {# <form method="post" action="{{ path('app_reservation') }}">
+        {{ form_errors(reservationForm) }}
+        {{ form_start(reservationForm) }}
+            <div class='datepicker_container'>
+                {{ form_row(reservationForm.from, { label: 'Date de début' }) }}
+                {{ form_row(reservationForm.to, { label: 'Date de fin' }) }}
+                {{ form_row(reservationForm.username, { label: 'Username' }) }}
+                {{ form_row(reservationForm.chambername, { label: 'Chambername' }) }}
+                {{ form_row(reservationForm.privatisation, { label: 'Privatisation' }) }}
+
+                <button type="submit" class="btn">Réserver</button>
+            </div>
+        {{ form_end(reservationForm) }}
+  </form> #}
+
 {% endblock %}
 
 {% block javascripts %} 
