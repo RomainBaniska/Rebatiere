@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+Bienvenu dans l'espace réservation {{ currentUser }} !
+
+<body>
+    <h1>Formulaire d'Ajout d'Utilisateur</h1>
+    <form action="#" method="post">
+         <label for="utilisateur">Ajoutez un utilisateur :</label>
+            <select id="utilisateur" name="utilisateur">
+               {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.username }}</option>
+                {% endfor %}
+            </select>
+        <div>
+             <label for="nomChambre">Sélectionnez une chambre :</label>
+            <select id="nomChambre" name="nomChambre">
+                  {% for chamber in chambers %}
+                    <option value="{{ chamber.id }}">{{ chamber.chambername }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="privatisation">Privatisation ? :</label>
+            <input type="checkbox" id="privatisation" name="privatisation">
+        </div>
+        <button type="submit">Ajouter</button>
+    </form>
+</body>
+
+{% endblock %}

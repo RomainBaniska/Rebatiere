@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Entity\Chamber;
 use App\Entity\Reservation;
 use App\Form\ReservationFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,16 +16,31 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class ReservationController extends AbstractController
 {
     #[Route('/reservation', name: 'app_reservation')]
-    public function reservation(Request $request, EntityManagerInterface $entityManager, AuthenticationUtils $authenticationUtils): Response
+    public function reservation(Request $request, EntityManagerInterface $em, AuthenticationUtils $authenticationUtils): Response
     {
 
+        //Récupérer les from/to (start & end) de la page home
         $from = $request->request->get('from');
         $to = $request->request->get('to');
-        $username = $this->getUser()->getUsername();
-        $chambername = $request->request->get('chambername');
-        $privatisation = $request->request->get('privatisation');
 
-        dump($from, $to, $username, $chambername, $privatisation);
+        //Récupérer l'utilisateur connecté
+        $currentUser = $this->getUser()->getUsername();
+
+        // Récupérer la liste de tous les usernames et chambernames
+        $users = $em->getRepository(User::class)->findall();
+        $chambers = $em->getRepository(Chamber::class)->findall();
+
+          return $this->render('reservation/reservationsheet.html.twig', [
+            'from' => $from,
+            'to' => $to,
+            'users' => $users,
+            'chambers' => $chambers,
+            'currentUser' => $currentUser,
+            // 'reservationForm' => $reservationForm,
+        ]);        
+
+
+
 
         // $reservation = new Reservation();
         // $form = $this->createForm(ReservationFormType::class, $reservation);
