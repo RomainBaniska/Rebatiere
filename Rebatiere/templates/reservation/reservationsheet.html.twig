@@ -11,23 +11,52 @@
 
 <h1>Bienvenu dans l'espace réservation {{ currentUser }} !</h1>
 
+<p>Vous souhaitez réserver sur la période de {{ from }} à {{ to }} </p> 
 
-    <form action="#" method="post">
+    <form method="post" action="{{ path('app_persistreservation') }}">
+
+    {# <div class="formLine">
+         <label for="from">from:</label>
+            <string id="from" name="from">
+                   {{ from }}
+            </string>
+    </div> #}
 
     <div class="formLine">
-         <label for="utilisateurs">Ajoutez un utilisateur :</label>
-            <select id="utilisateurs" name="utilisateurs[]" multiple>
+         <label for="to">to:</label>
+            <select id="to" name="to">
+                  <option value="{{ to }}">{{ to }}</option>
+            </select>
+    </div>
+
+        <div class="formLine">
+         <label for="from">From :</label>
+            {# <select id="users" name="users[]"> #}
+            <select id="from" name="from">
+
+                    {# <option value="{{ user.id }}">{{ user.username }}</option> #}
+                    <option value="{{ from }}">{{ from }}</option>
+ 
+            </select>
+    </div>
+
+
+    <div class="formLine">
+         <label for="username">Ajoutez un utilisateur :</label>
+            {# <select id="users" name="users[]"> #}
+            <select id="username" name="username">
                {% for user in users %}
-                    <option value="{{ user.id }}">{{ user.username }}</option>
+                    {# <option value="{{ user.id }}">{{ user.username }}</option> #}
+                    <option value="{{ user.username }}">{{ user.username }}</option>
                 {% endfor %}
             </select>
     </div>
     
     <div class="formLine">
-         <label for="chambers">Sélectionnez une chambre :</label>
-            <select id="chambers" name="chambers[]" multiple>
+         <label for="chambername">Sélectionnez une chambre :</label>
+            <select id="chambername" name="chambername">
                   {% for chamber in chambers %}
-                    <option value="{{ chamber.id }}">{{ chamber.chambername }}</option>
+                    <option value="{{ chamber.chambername }}">{{ chamber.chambername }}</option>
                 {% endfor %}
             </select>
     </div>
@@ -38,6 +67,16 @@
     </div>
     
         <button type="submit">Ajouter</button>
+
     </form>
 
 {% endblock %}
+
+   {# {{ form_start(reservationForm, {'action': path('app_persistreservation')}) }}
+        {{ form_row(reservationForm.start) }}
+        {{ form_row(reservationForm.end) }}
+        {{ form_row(reservationForm.username) }}
+        {{ form_row(reservationForm.chambername) }}
+        {{ form_row(reservationForm.privatisation) }}
+          <button type="submit" class="btn">Envoyer</button>
+    {{ form_end(reservationForm) }} #}

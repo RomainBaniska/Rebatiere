@@ -11,24 +11,24 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class ReservationController extends AbstractController
 {
     #[Route('/reservation', name: 'app_reservation')]
-    public function reservation(Request $request, EntityManagerInterface $em, AuthenticationUtils $authenticationUtils): Response
+    public function reservation(Request $request, EntityManagerInterface $em): Response
     {
 
         //Récupérer les from/to (start & end) de la page home
         $from = $request->request->get('from');
         $to = $request->request->get('to');
 
-        //Récupérer l'utilisateur connecté
+        //Récupérer l'utilisateur connecté // Méthode de symfony qui vient d'AbstractController
         $currentUser = $this->getUser()->getUsername();
 
         // Récupérer la liste de tous les usernames et chambernames
         $users = $em->getRepository(User::class)->findall();
         $chambers = $em->getRepository(Chamber::class)->findall();
+        
 
           return $this->render('reservation/reservationsheet.html.twig', [
             'from' => $from,
@@ -38,41 +38,33 @@ class ReservationController extends AbstractController
             'currentUser' => $currentUser,
             // 'reservationForm' => $reservationForm,
         ]);        
+    }
 
+    #[Route('/persistreservation', name: 'app_persistreservation')]
+    public function reservationPersist(Request $request, EntityManagerInterface $em): Response
+    {
 
+        $allValues = $request->request->all();
+        
+        $from = new \DateTime($request->request->get('from'));
+        $to = new \DateTime($request->request->get('to'));
+        $user = $request->request->get('username');
+        $chamber = $request->request->get('chambername');
+        $privatisation = (bool) $request->request->get('privatisation');
 
+        // dump($from, $to, $user, $chamber, $privatisation, $allValues);
 
-        // $reservation = new Reservation();
-        // $form = $this->createForm(ReservationFormType::class, $reservation);
-        // $form->handleRequest($request);
+        // Nouvelle instance de l'entité Réservation
+        $reservation = new Reservation();
+        $reservation->setStart($from);
+        $reservation->setEnd($to);
+        $reservation->setUsername($user);
+        $reservation->setChambername($chamber);
+        $reservation->setPrivatisation($privatisation);
 
-        // // dump($from, $to, $username, $chambername, $privatisation);
+        $em->persist($reservation);
+        $em->flush();
 
-        // if ($form->isSubmitted() && $form->isValid()) {
-
-        //     $from = $form->get('from')->getData();
-        //     $to = $form->get('to')->getData();
-        //     $username = $form->get('username')->getData();
-        //     $chambername = $form->get('chambername')->getData();
-        //     $privatisation = $form->get('privatisation')->getData();
-
-        //     $reservation->setStart($from);
-        //     $reservation->setEnd($to);
-        //     $reservation->setUsername($username);
-        //     $reservation->setChambername($chambername);
-        //     $reservation->setPrivatisation($privatisation);
-
-        //     $entityManager->persist($reservation);
-        //     $entityManager->flush();
-
-        //     return $this->redirectToRoute('app_home');
-        // }
-
-
-        // return $this->render('errors/error403.html.twig', [
-        //     'reservationForm' => $form,
-        // ]);
-
- 
+        return $this->redirectToRoute('app_home');
     }
 }
