@@ -1,0 +1,7 @@
+<h1>Réservations de {{ user.username }}</h1>
+
+<ul>
+    {% for reservation in reservations %}
+        <li>Réservation {{ reservation.id }} : {{ reservation.start|date('Y-m-d H:i') }} - {{ reservation.end|date('Y-m-d H:i') }}</li>
+    {% endfor %}
+</ul>

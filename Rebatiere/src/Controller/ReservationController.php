@@ -66,4 +66,21 @@ class ReservationController extends AbstractController
 
         return $this->redirectToRoute('app_home');
     }
+
+    #[Route('/testrelation', name: 'app_testrelation')]
+    public function testRelation(EntityManagerInterface $em)
+{
+    // Récupérer l'utilisateur avec l'ID #1
+    $user = $em->getRepository(User::class)->find(1); // Changez 1 par l'ID de l'utilisateur désiré
+
+    // Récupérer les réservations associées à cet utilisateur
+    $reservations = $em->getRepository(Reservation::class)->findBy(['userId' => $user->getId()]);
+
+    // Maintenant vous pouvez envoyer ces réservations à votre vue pour les afficher
+    return $this->render('reservation/list_reservations.html.twig', [
+        'user' => $user,
+        'reservations' => $reservations,
+    ]);
+}
+
 }
