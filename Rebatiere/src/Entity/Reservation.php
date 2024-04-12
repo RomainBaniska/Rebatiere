@@ -20,11 +20,11 @@ class Reservation
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $end = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $username = null;
+    #[ORM\Column(name: "user_id", type: "integer", nullable: true)]
+    private ?int $userId = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $chambername = null;
+    #[ORM\Column(name: "chamber_id", type: "integer", nullable: true)]
+    private ?int $chamberId = null;
 
     #[ORM\Column]
     private ?bool $privatisation = null;
@@ -58,26 +58,26 @@ class Reservation
         return $this;
     }
 
-    public function getUsername(): ?string
+    public function getUserId(): ?int
     {
-        return $this->username;
+        return $this->userId;
     }
 
-    public function setUsername(?string $username): static
+    public function setUserId(?int $userId): static
     {
-        $this->username = $username;
+        $this->userId = $userId;
 
         return $this;
     }
 
-    public function getChambername(): ?string
+    public function getChamberId(): ?int
     {
-        return $this->chambername;
+        return $this->chamberId;
     }
 
-    public function setChambername(?string $chambername): static
+    public function setChamberId(?int $chamberId): static
     {
-        $this->chambername = $chambername;
+        $this->chamberId = $chamberId;
 
         return $this;
     }

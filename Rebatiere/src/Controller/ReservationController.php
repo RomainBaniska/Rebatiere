@@ -29,7 +29,6 @@ class ReservationController extends AbstractController
         $users = $em->getRepository(User::class)->findall();
         $chambers = $em->getRepository(Chamber::class)->findall();
         
-
           return $this->render('reservation/reservationsheet.html.twig', [
             'from' => $from,
             'to' => $to,
