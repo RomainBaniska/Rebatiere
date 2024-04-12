@@ -47,7 +47,7 @@
             <select id="username" name="username">
                {% for user in users %}
                     {# <option value="{{ user.id }}">{{ user.username }}</option> #}
-                    <option value="{{ user.username }}">{{ user.username }}</option>
+                    <option value="{{ user.id }}">{{ user.username }}</option>
                 {% endfor %}
             </select>
     </div>
@@ -56,7 +56,7 @@
          <label for="chambername">Sélectionnez une chambre :</label>
             <select id="chambername" name="chambername">
                   {% for chamber in chambers %}
-                    <option value="{{ chamber.chambername }}">{{ chamber.chambername }}</option>
+                    <option value="{{ chamber.id }}">{{ chamber.chambername }}</option>
                 {% endfor %}
             </select>
     </div>

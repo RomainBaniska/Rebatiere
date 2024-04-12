@@ -47,8 +47,8 @@ class ReservationController extends AbstractController
         
         $from = new \DateTime($request->request->get('from'));
         $to = new \DateTime($request->request->get('to'));
-        $user = $request->request->get('username');
-        $chamber = $request->request->get('chambername');
+        $user = $request->request->getInt('username');
+        $chamber = $request->request->getInt('chambername');
         $privatisation = (bool) $request->request->get('privatisation');
 
         // dump($from, $to, $user, $chamber, $privatisation, $allValues);
@@ -57,8 +57,8 @@ class ReservationController extends AbstractController
         $reservation = new Reservation();
         $reservation->setStart($from);
         $reservation->setEnd($to);
-        $reservation->setUsername($user);
-        $reservation->setChambername($chamber);
+        $reservation->setUserId($user);
+        $reservation->setChamberId($chamber);
         $reservation->setPrivatisation($privatisation);
 
         $em->persist($reservation);
