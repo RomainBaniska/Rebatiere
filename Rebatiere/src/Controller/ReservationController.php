@@ -47,18 +47,24 @@ class ReservationController extends AbstractController
         
         $from = new \DateTime($request->request->get('from'));
         $to = new \DateTime($request->request->get('to'));
-        $user = $request->request->getInt('username');
-        $chamber = $request->request->getInt('chambername');
+        $userId = $request->request->getInt('username');
+        $chamberId = $request->request->getInt('chambername');
         $privatisation = (bool) $request->request->get('privatisation');
 
-        // dump($from, $to, $user, $chamber, $privatisation, $allValues);
+        // On charge les objets User et Chamber correspondants pour pas avoir d'erreur d'attendu en BDD
+        $user = $em
+                ->getRepository(User::class)
+                ->find($userId);
+        $chamber = $em
+                ->getRepository(Chamber::class)
+                ->find($chamberId);
 
         // Nouvelle instance de l'entité Réservation
         $reservation = new Reservation();
         $reservation->setStart($from);
         $reservation->setEnd($to);
-        $reservation->setUserId($user);
-        $reservation->setChamberId($chamber);
+        $reservation->setUsers($user);
+        $reservation->setChambers($chamber);
         $reservation->setPrivatisation($privatisation);
 
         $em->persist($reservation);
@@ -70,17 +76,15 @@ class ReservationController extends AbstractController
     #[Route('/testrelation', name: 'app_testrelation')]
     public function testRelation(EntityManagerInterface $em)
 {
-    // Récupérer l'utilisateur avec l'ID #1
-    $user = $em->getRepository(User::class)->find(1); // Changez 1 par l'ID de l'utilisateur désiré
+   // Récupérer toutes les réservations avec les utilisateurs et les chambres associés
+   $reservations = $em->getRepository(Reservation::class)->findAll();
 
-    // Récupérer les réservations associées à cet utilisateur
-    $reservations = $em->getRepository(Reservation::class)->findBy(['userId' => $user->getId()]);
+   dump($reservations);
 
-    // Maintenant vous pouvez envoyer ces réservations à votre vue pour les afficher
-    return $this->render('reservation/list_reservations.html.twig', [
-        'user' => $user,
-        'reservations' => $reservations,
-    ]);
+   // Maintenant vous pouvez envoyer ces réservations à votre vue pour les afficher
+   return $this->render('reservation/list_reservations.html.twig', [
+       'reservations' => $reservations,
+   ]);
 }
 
 }

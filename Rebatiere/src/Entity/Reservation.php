@@ -64,30 +64,6 @@ class Reservation
         return $this;
     }
 
-    // public function getUserId(): ?int
-    // {
-    //     return $this->userId;
-    // }
-
-    // public function setUserId(?int $userId): static
-    // {
-    //     $this->userId = $userId;
-
-    //     return $this;
-    // }
-
-    // public function getChamberId(): ?int
-    // {
-    //     return $this->chamberId;
-    // }
-
-    // public function setChamberId(?int $chamberId): static
-    // {
-    //     $this->chamberId = $chamberId;
-
-    //     return $this;
-    // }
-
     public function isPrivatisation(): ?bool
     {
         return $this->privatisation;
