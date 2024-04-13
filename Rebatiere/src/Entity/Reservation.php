@@ -20,14 +20,20 @@ class Reservation
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $end = null;
 
-    #[ORM\Column(name: "user_id", type: "integer", nullable: true)]
-    private ?int $userId = null;
+    // #[ORM\Column(name: "user_id", type: "integer", nullable: true)]
+    // private ?int $userId = null;
 
-    #[ORM\Column(name: "chamber_id", type: "integer", nullable: true)]
-    private ?int $chamberId = null;
+    // #[ORM\Column(name: "chamber_id", type: "integer", nullable: true)]
+    // private ?int $chamberId = null;
 
     #[ORM\Column]
     private ?bool $privatisation = null;
+
+    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    private ?User $users = null;
+
+    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    private ?Chamber $chambers = null;
 
     public function getId(): ?int
     {
@@ -58,29 +64,29 @@ class Reservation
         return $this;
     }
 
-    public function getUserId(): ?int
-    {
-        return $this->userId;
-    }
+    // public function getUserId(): ?int
+    // {
+    //     return $this->userId;
+    // }
 
-    public function setUserId(?int $userId): static
-    {
-        $this->userId = $userId;
+    // public function setUserId(?int $userId): static
+    // {
+    //     $this->userId = $userId;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getChamberId(): ?int
-    {
-        return $this->chamberId;
-    }
+    // public function getChamberId(): ?int
+    // {
+    //     return $this->chamberId;
+    // }
 
-    public function setChamberId(?int $chamberId): static
-    {
-        $this->chamberId = $chamberId;
+    // public function setChamberId(?int $chamberId): static
+    // {
+    //     $this->chamberId = $chamberId;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function isPrivatisation(): ?bool
     {
@@ -90,6 +96,30 @@ class Reservation
     public function setPrivatisation(bool $privatisation): static
     {
         $this->privatisation = $privatisation;
+
+        return $this;
+    }
+
+    public function getUsers(): ?User
+    {
+        return $this->users;
+    }
+
+    public function setUsers(?User $users): static
+    {
+        $this->users = $users;
+
+        return $this;
+    }
+
+    public function getChambers(): ?Chamber
+    {
+        return $this->chambers;
+    }
+
+    public function setChambers(?Chamber $chambers): static
+    {
+        $this->chambers = $chambers;
 
         return $this;
     }
