@@ -46,21 +46,54 @@ class UserController extends AbstractController
             // return $this->redirectToRoute('');
         }
         // dd($user); 
-        return $this->render('user/edit.html.twig', [
+        return $this->render('user/edit2.html.twig', [
             'user' => $user,
             'form' => $form
         ]);
     }
 
-    #[Route('/dbTestConnection', name: 'app_dbTestConnection')]
-    public function testDatabaseConnection(EntityManagerInterface $entityManager): Response
+    #[Route('/user/edit/{id}', name: 'user.edit', methods: ['GET', 'POST'])]
+    public function edit(User $user, Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher): Response
     {
-        try {
-            $entityManager->getConnection()->connect();
-            
-            return new Response('Connexion à la base de données établie avec succès !');
-        } catch (\Exception $e) {
-            return new Response('Impossible de se connecter à la base de données : ' . $e->getMessage());
+        // Récupérer l'utilisateur connecté
+        $currentUser = $this->getUser();
+
+        if(!$currentUser) {
+            return $this->redirectToRoute('app_login');
         }
+
+        if($currentUser !== $user) {
+            return $this->redirectToRoute('app_home');
+        }
+
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+
+            //hashage pw
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+
+            $em->persist($user);
+            $em->flush();
+
+            // Remplacer plus tard le "addFlash" par une modal javascript
+        $this->addFlash(
+            'success',
+            'les informations de votre compte ont bien été modifiées'
+        );
+        return $this->redirectToRoute('app_home');
+        }
+
+        return $this->render('user/edit.html.twig', [
+            'form' => $form->createView(),
+            'user' => $user,
+        ]);
     }
 }

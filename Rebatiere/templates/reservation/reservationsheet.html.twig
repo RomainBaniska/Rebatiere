@@ -15,13 +15,6 @@
 
     <form method="post" action="{{ path('app_persistreservation') }}">
 
-    {# <div class="formLine">
-         <label for="from">from:</label>
-            <string id="from" name="from">
-                   {{ from }}
-            </string>
-    </div> #}
-
     <div class="formLine">
          <label for="to">to:</label>
             <select id="to" name="to">
@@ -33,7 +26,6 @@
          <label for="from">From :</label>
             {# <select id="users" name="users[]"> #}
             <select id="from" name="from">
-
                     {# <option value="{{ user.id }}">{{ user.username }}</option> #}
                     <option value="{{ from }}">{{ from }}</option>
  
@@ -46,7 +38,6 @@
             {# <select id="users" name="users[]"> #}
             <select id="username" name="username">
                {% for user in users %}
-                    {# <option value="{{ user.id }}">{{ user.username }}</option> #}
                     <option value="{{ user.id }}">{{ user.username }}</option>
                 {% endfor %}
             </select>
@@ -72,6 +63,7 @@
 
 {% endblock %}
 
+{# Approche traditionnel du formulaire ---->  #}
    {# {{ form_start(reservationForm, {'action': path('app_persistreservation')}) }}
         {{ form_row(reservationForm.start) }}
         {{ form_row(reservationForm.end) }}

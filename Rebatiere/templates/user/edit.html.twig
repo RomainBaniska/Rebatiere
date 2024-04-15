@@ -1,15 +1,16 @@
 {# {% extends 'base.html.twig' %} #}
 {% extends 'user.html.twig' %}
 
+{% block title  %}
 
-{% block title "Utilisateur : " ~ user.username %}
+{{ "Modification de l'Utilisateur : " ~ user.username }}
+{% endblock %}
 
 {% block body %}
-
-<h1>{{ user.username }}</h1>
-
+<div class="container">
+<h1 class="mt-4"> Formulaire de modification des infos de l'utilisateur</h1>
 
 {{ form(form) }}
-
+</div>
 
 {% endblock %}
