@@ -18,6 +18,20 @@ use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationExc
 
 class UserController extends AbstractController
 {
+    #[Route('/checkuser', name: 'user.check')]
+    public function checkUser(): Response
+    {
+        // Récupérer l'utilisateur connecté
+        $currentUser = $this->getUser();
+
+        if(!$currentUser) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        $currentUserId = $currentUser->getId();
+
+        return $this->redirectToRoute('user.edit', ['id' => $currentUserId]);
+    }
 
     #[Route('/user/edit/{id}', name: 'user.edit', methods: ['GET', 'POST'])]
     public function edit(User $user, Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher): Response

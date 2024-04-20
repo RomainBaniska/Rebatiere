@@ -20,10 +20,20 @@ margin : 1%;
 
 <div class="rebatiereHeader">
 {# Logout #}
+
+<a href="{{ path('app_logout') }}">
+<button>
 <i class="fa-solid fa-right-from-bracket"></i>
+</button>
+</a>
 
 {# Menu profil #}
+
+<a href="{{ path('user.check') }}">
+<button>
 <i class="fa-solid fa-user"></i>
+</button>
+</a>
 </div>
 
 {% endblock %}
