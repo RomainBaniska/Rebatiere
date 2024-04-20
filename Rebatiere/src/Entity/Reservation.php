@@ -14,17 +14,13 @@ class Reservation
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    // #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: 'date')]
     private ?\DateTimeInterface $start = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    // #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: 'date')]
     private ?\DateTimeInterface $end = null;
-
-    // #[ORM\Column(name: "user_id", type: "integer", nullable: true)]
-    // private ?int $userId = null;
-
-    // #[ORM\Column(name: "chamber_id", type: "integer", nullable: true)]
-    // private ?int $chamberId = null;
 
     #[ORM\Column]
     private ?bool $privatisation = null;
