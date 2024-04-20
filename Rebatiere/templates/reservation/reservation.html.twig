@@ -1,108 +1,14 @@
 {% extends 'base.html.twig' %}
 
 
-{% block stylesheets  %}
-    {# Style du Datepicker #}
-    {# <link rel="stylesheet" href="Rebatiere/templates/home/css/home.css"> #}
-    <style>
-    .datepicker_container {
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    padding : 1%;
-    margin : 1%;
-    }
-    </style>
-
-    {# Style jQuery #}
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    
-{% endblock %}
-
-    {% block body %}
-    {# Datepicker #}
-    {# On pointe le formulaire vers le controlleur reservation #}
+{% block body %}
+ 
+    {# On pointe le formulaire de réservation vers le ReservationController avec le datePicker #}
     <form method="post" action="{{ path('app_reservation') }}">
-        <div class='datepicker_container'>
-        <label for="from">Date de début</label> &nbsp;
-        <input type="text" id="from" name="from"> &nbsp;
-        <label for="to">Date de fin </label> &nbsp;
-        <input type="text" id="to" name="to"> &nbsp;
-        <button type="submit">Réserver</button>
-        </div>
+  
+      {% include 'datePicker/datepicker.html.twig' %}
+
     </form>
 
 {% endblock %}
 
-{% block javascripts %} 
-
-    {# Scripts jQuery #}
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    {# https://api.jqueryui.com/datepicker/#/date-range #}
-    
-    <script>
-    $( function() {
-    /** Mise en français du datepicker */
-    $.datepicker.regional['fr'] = {
-                dateFormat: 'dd-mm-yy',
-                closeText: 'Fermer',
-                prevText: '&#x3c;Préc',
-                nextText: 'Suiv&#x3e;',
-                currentText: 'Aujourd\'hui',
-                monthNames: ['Janvier','Fevrier','Mars','Avril','Mai','Juin',
-                'Juillet','Aout','Septembre','Octobre','Novembre','Decembre'],
-                monthNamesShort: ['Jan','Fev','Mar','Avr','Mai','Jun',
-                'Jul','Aou','Sep','Oct','Nov','Dec'],
-                dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
-                dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
-                dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
-                weekHeader: 'Sm',
-                firstDay: 1,
-                isRTL: false,
-                showMonthAfterYear: false,
-                yearSuffix: '',
-                minDate: 0,
-                maxDate: '+12M +0D',
-                showButtonPanel: true
-                };
-    $.datepicker.setDefaults($.datepicker.regional['fr']);
-    $('#date').datepicker();
-
-    /** Configuration du DatePicker Range */
-      from = $( "#from" )
-        .datepicker({
-          defaultDate: "+1w",
-          changeMonth: true,
-          numberOfMonths: 1
-        })
-        .on( "change", function() {
-          to.datepicker( "option", "minDate", getDate( this ) );
-        }),
-      to = $( "#to" ).datepicker({
-        defaultDate: "+1w",
-        changeMonth: true,
-        numberOfMonths: 1
-      })
-      .on( "change", function() {
-        from.datepicker( "option", "maxDate", getDate( this ) );
-      });
- 
-    function getDate( element ) {
-      var date;
-      try {
-        date = $.datepicker.parseDate( dateFormat, element.value );
-      } catch( error ) {
-        date = null;
-      }
-      return date;
-    }
-
-
-    // Ajout du console.log pour tester
-    console.log("Script de datepicker exécuté avec succès !");
-
-    });
-    </script>
-    {% endblock %}

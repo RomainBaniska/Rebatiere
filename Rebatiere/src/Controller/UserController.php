@@ -19,39 +19,6 @@ use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationExc
 class UserController extends AbstractController
 {
 
-    #[Route('/monprofil/edit', name: 'monprofil_edit')]
-    public function editUser(EntityManagerInterface $em, Request $request, UserPasswordHasherInterface $passwordHasher): Response
-    {
-        // Récupérer l'utilisateur connecté
-        $currentUser = $this->getUser();
-
-        // Rediriger vers l'édition de son propre profil
-        return $this->redirectToRoute('monprofil', ['id' => $currentUser->getId()]);
-    }
-
-    #[Route('/monprofil/{id}', name: 'monprofil')] // on peut remplacer id par n'importe quel autre champs
-    public function editUser2(EntityManagerInterface $em, User $user, Request $request, UserPasswordHasherInterface $passwordHasher): Response
-    {
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
-
-            // Hashage du mot de passe. Premier paramètre "$user" et on va chercher la valeur du password de $user
-            $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
-            $user->setPassword($hashedPassword);
-
-            $em->flush(); // on app elle l'entityManager pour "flush" (save/valider) en BDD
-            $this->addFlash('success', 'L\'utilisateur a bien été modifié');
-            // return $this->redirectToRoute('');
-        }
-        // dd($user); 
-        return $this->render('user/edit2.html.twig', [
-            'user' => $user,
-            'form' => $form
-        ]);
-    }
-
     #[Route('/user/edit/{id}', name: 'user.edit', methods: ['GET', 'POST'])]
     public function edit(User $user, Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher): Response
     {

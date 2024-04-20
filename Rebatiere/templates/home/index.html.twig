@@ -1,8 +1,7 @@
-<html lang='en'>
-  
-  
+
     {% block head %}
   <head>
+    <html lang='en'>  
     <meta charset='utf-8' />    
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
@@ -10,40 +9,14 @@
 
   {% block body %}
   <body>
+
     {# Calendar #}
-    <div id='calendar'></div>
+    {% include 'fullCalendar/calendar.html.twig' %}
 
     {# DatePicker jQuery #}
     {% include 'reservation/reservation.html.twig' %}
 
   </body>
-   {% endblock %}  
-
-   
-    {% block javascripts %} 
-    {# FullCalendar Script 1 #}
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
-    
-    {# FullCalendar Script (2) : Paramétrage du FullCalendar #}
-    <script>
-    {# Pour les majuscules en début de Mois/Jour : https://stackoverflow.com/questions/45819863/uppercase-first-letter-of-month-fullcalendar #}
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridWeek',
-          /**displayTime: false, */
-          weekends: true,
-          dayHeaderFormat: { weekday: 'long' },
-          locale: 'fr',
-          firstDay: '1',
-          height : '80%',
-          aspectRatio: 1,
-        });
-        calendar.render();
-      });
-    </script>
-    {% endblock %}
-   
+  {% endblock %}  
    
 </html>

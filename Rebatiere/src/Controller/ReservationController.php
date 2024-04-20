@@ -79,7 +79,7 @@ class ReservationController extends AbstractController
    // Récupérer toutes les réservations avec les utilisateurs et les chambres associés
    $reservations = $em->getRepository(Reservation::class)->findAll();
 
-   dump($reservations);
+//    dump($reservations);
 
    // Maintenant vous pouvez envoyer ces réservations à votre vue pour les afficher
    return $this->render('reservation/list_reservations.html.twig', [

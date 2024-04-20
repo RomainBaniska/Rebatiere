@@ -1,7 +1,7 @@
-<h1>Réservations de {{ user.username }}</h1>
+{# <h1>Réservations de {{ user.username }}</h1> #}
 
 <ul>
     {% for reservation in reservations %}
-        <li>Réservation {{ reservation.id }} : {{ reservation.start|date('Y-m-d H:i') }} - {{ reservation.end|date('Y-m-d H:i') }}</li>
+        <li>Réservation {{ reservation.id }} : {{ reservation.start|date('Y-m-d') }} - {{ reservation.end|date('Y-m-d') }}</li>
     {% endfor %}
 </ul>
