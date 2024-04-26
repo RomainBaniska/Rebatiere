@@ -1,6 +1,10 @@
 {# {% extends 'base.html.twig' %} #}
 {% extends 'user.html.twig' %}
 
+{% block stylesheets  %}
+<link rel="stylesheet" href="{{ asset('assets/css/profil.css') }}">
+{% endblock  %}
+
 {% block title  %}
 
 {{ "Modification de l'Utilisateur : " ~ user.username }}
@@ -8,7 +12,10 @@
 
 {% block body %}
 <div class="container">
-<h1 class="mt-4"> Formulaire de modification des infos de l'utilisateur</h1>
+
+<div class="titreProfil">
+<h1 class="mt-4"> Mes informations utilisateur</h1>
+</div>
 
 {{ form(form) }}
 </div>

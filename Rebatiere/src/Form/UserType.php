@@ -24,9 +24,10 @@ class UserType extends AbstractType
                 'label' => 'Prénom'
             ])
             ->add('username', TextType::class, [
-                'label' => 'Nom d\'utilisateur'
+                'label' => 'Pseudonyme'
             ])
             ->add('plainPassword', PasswordType::class, [
+                'label' => 'Mot de passe',
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
@@ -41,7 +42,9 @@ class UserType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('save', SubmitType::class)
+            ->add('save', SubmitType::class, [
+                'label' => 'Enregistrer'
+            ])
             ;
 
             // Ajouter Réservations !!!
