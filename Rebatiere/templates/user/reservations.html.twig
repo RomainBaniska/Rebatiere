@@ -7,17 +7,26 @@
 
 {% block title  %}
 
-{{ "Modification de l'Utilisateur : " ~ user.username }}
+{# {{ "Modification de l'Utilisateur : " ~ user.username }} #}
 {% endblock %}
 
 {% block body %}
 <div class="container">
 
 <div class="titreProfil">
-<h1 class="mt-4"> Mes informations utilisateur</h1>
+<h1 class="mt-4"> Mes réservations</h1>
 </div>
 
-{{ form(form) }}
+{# {{ form(form) }} #}
+
+{% for reservation in reservations %}
+
+<p>
+Du {{ reservation.start | date('d/m/Y') }} au {{ reservation.end | date('d/m/Y') }}
+</p>
+
+{% endfor %}
 </div>
+
 
 {% endblock %}

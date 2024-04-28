@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Entity\Reservation;
 use App\Repository\UsersRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -77,4 +78,31 @@ class UserController extends AbstractController
             'user' => $user,
         ]);
     }
+
+    #[Route('/user/reservationedit/{id}', name: 'user.reservation.edit', methods: ['GET', 'POST'])]
+    public function reservationEdit(User $user, Request $request, EntityManagerInterface $em, Reservation $reservation) {
+        // Récupérer l'utilisateur connecté
+        $currentUser = $this->getUser();
+
+        if(!$currentUser) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        if($currentUser !== $user) {
+            return $this->redirectToRoute('app_home');
+        }
+
+        $reservations = $em->getRepository(Reservation::class)->findby(
+            ['users' => $currentUser],
+        );
+
+        // dump($reservations);
+
+        return $this->render('user/reservations.html.twig', [
+            'reservations' => $reservations,
+            'currentUser' => $currentUser,
+        ]);
+
+    }
+
 }
