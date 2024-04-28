@@ -24,7 +24,7 @@
       <nav class="navbar shadow-1 primary">
         {# <a href="#" target="_blank" class="navbar-brand">Axentix</a> #}
         <div class="navbar-menu ml-auto">
-          <a class="navbar-link" href="#">Mon profil</a>
+          <a class="navbar-link" href="{{ path('user.edit', {'id': currentUser.id}) }} ">Mon profil</a>
           <a class="navbar-link" href=" {{ path('user.reservation.edit', {'id': currentUser.id}) }} ">Mes réservations</a>
           {# <a class="navbar-link" href="#">Mes réservations</a> #}
         </div>
