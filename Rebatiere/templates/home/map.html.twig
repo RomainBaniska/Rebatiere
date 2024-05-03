@@ -1,0 +1,37 @@
+
+    <html lang='en'>  
+    
+    {% block head %}
+  <head>
+    <meta charset='utf-8' />    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+    {% endblock %}
+
+  {% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('assets/css/map.css') }}">
+  {% endblock %}
+
+  {% block body %}
+  <body>
+
+    {# header #}
+    {% include 'header.html.twig' %}
+
+  <div>
+  <img src="assets/images/firstfloor.jpg" class="responsive">
+  </div>
+
+  <img usemap="#chambermap" href="{{ asset('assets/images/firstfloor.jpg') }}" alt="Carte des chambres"/>
+
+  <map name="chambermap">
+  <area 
+      shape="poly"
+      coords=""
+  
+  </map>
+
+  </body>
+  {% endblock %}  
+   
+</html>

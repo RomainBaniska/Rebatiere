@@ -81,7 +81,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/user/reservationedit/{id}', name: 'user.reservation.edit', methods: ['GET', 'POST'])]
-    public function reservationEdit(User $user, Request $request, EntityManagerInterface $em, Reservation $reservation) {
+    public function viewReservation(User $user, Request $request, EntityManagerInterface $em, Reservation $reservation) {
         // Récupérer l'utilisateur connecté
         $currentUser = $this->getUser();
 

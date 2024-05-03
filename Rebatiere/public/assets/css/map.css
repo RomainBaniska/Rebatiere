@@ -1,0 +1,6 @@
+img.responsive {
+    height: 80%;
+    width: 100%; /* prend la largeur du conteneur, ici le corps du document */
+    height: auto; /* maintient les proportions de l'image */
+    display: flex; /* empêche l'affichage d'espaces supplémentaires autour de l'image */
+  }
