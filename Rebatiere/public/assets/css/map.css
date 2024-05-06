@@ -1,6 +1,15 @@
-img.responsive {
-    height: 80%;
-    width: 100%; /* prend la largeur du conteneur, ici le corps du document */
-    height: auto; /* maintient les proportions de l'image */
-    display: flex; /* empêche l'affichage d'espaces supplémentaires autour de l'image */
+.responsive {
+    max-width: 100%;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    position: relative;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
+
+.box {
+    display: flex;
+    align-items: center;
+}

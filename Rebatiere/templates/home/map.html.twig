@@ -18,20 +18,26 @@
     {# header #}
     {% include 'header.html.twig' %}
 
-  <div>
-  <img src="assets/images/firstfloor.jpg" class="responsive">
-  </div>
-
-  <img usemap="#chambermap" href="{{ asset('assets/images/firstfloor.jpg') }}" alt="Carte des chambres"/>
+    <img usemap="#chambermap" src="{{ asset('assets/images/firstfloor.jpg') }}" alt="Carte des chambres" class="responsive"/>
 
   <map name="chambermap">
-  <area 
-      shape="poly"
-      coords=""
-  
+  <area  
+      shape="rect"
+      coords="1125,2704,1949,3450"
+      shape="rect"
+      href="google.fr"
+      alt="Dortoir Fond"
+      title="Sélectionner le dortoir du fond"
+      /> 
   </map>
+ 
 
   </body>
   {% endblock %}  
+
+   {% block javascripts %}
+  <script src="{{ asset('assets/javascript/mapresizer.min.js') }}"></script>
+  <script> imageMapResize(); </script>
+  {% endblock %}
    
 </html>
