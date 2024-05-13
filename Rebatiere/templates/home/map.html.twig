@@ -25,12 +25,95 @@
       shape="rect"
       coords="1125,2704,1949,3450"
       shape="rect"
-      href="google.fr"
-      alt="Dortoir Fond"
+      href="#"
+      alt="DortoirFond"
       title="Sélectionner le dortoir du fond"
+      id="DortoirFond"
       /> 
+
+  <area 
+      alt="DortoirPetits" 
+      title="Dortoir des petits"  
+      href="#"
+      coords="1133,1344,1932,2682" 
+      shape="rect"
+      id="DortoirPetits"
+      />
+
+  <area 
+      alt="Chambrebleue" 
+      title="Chambre bleue"
+      href="#" 
+      coords="3090,1604,3893,2420"
+      shape="rect"
+      id="ChambreBleue"
+      />
+
+  <area 
+      alt="Jean-Claude" 
+      title="Jean-Claude"
+      href="#"
+      coords="3972,1322,4770,2432"
+      shape="rect"
+      id="Jean-Claude"
+    />
+
+    <area 
+      alt="Alex" 
+      title="Alex"
+      href="#"
+      coords="4182,657,4849,1262"
+      shape="rect"
+      id="Alex"
+    />
+
+      <area 
+      alt="Fenetre" 
+      title="Fenetre"
+      href="#"
+      coords="2011,78,2980,600"
+      shape="rect"
+      id="Fenetre"
+    />
+
+          <area 
+      alt="Fond" 
+      title="Fond"
+      href="#"
+      coords="3989,82,4761,600" 
+      shape="rect"
+      id="Fond"
+    />
+
+          <area 
+      alt="Milieu" 
+      title="Milieu"
+      href="#"
+      coords="3077,94,3853,598"
+      shape="rect"
+      id="Milieu"
+    />
+
+              <area 
+      alt="Nicolas" 
+      title="Nicolas"
+      href="#"
+      coords="98,94,945,629"
+      shape="rect"
+      id="Nicolas"
+    />
+
+              <area 
+      alt="Gauche" 
+      title="Gauche"
+      href="#" 
+      coords="1054,651,1936,1248" 
+      shape="rect"
+      id="Gauche"
+    />
+
+
   </map>
- 
 
   </body>
   {% endblock %}  
@@ -38,6 +121,9 @@
    {% block javascripts %}
   <script src="{{ asset('assets/javascript/mapresizer.min.js') }}"></script>
   <script> imageMapResize(); </script>
+
+  <script src="{{ asset('assets/javascript/imagemapevent.js') }}"></script>
+  
   {% endblock %}
    
 </html>
