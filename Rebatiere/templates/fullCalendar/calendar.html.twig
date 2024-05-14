@@ -17,8 +17,7 @@
     
     {# FullCalendar Script (2) : Paramétrage du FullCalendar #}
     <script>
-    {# Pour les majuscules en début de Mois/Jour : https://stackoverflow.com/questions/45819863/uppercase-first-letter-of-month-fullcalendar #}
-
+    
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -28,15 +27,32 @@
             headerToolbar: {
             left: 'prev,next',
             center: 'title',
-            right: 'dayGridWeek,dayGridMonth'
+            right: 'dayGridWeek,dayGridMonth, myCustomButton'
           },
+
+          customButtons: {
+          myCustomButton: {
+            text: 'custom!',
+            click: function() {
+              alert('clicked the custom button!');
+            }
+          }
+        },
 
           weekends: true,
           dayHeaderFormat: { weekday: 'long' },
+
           locale: 'fr',
           firstDay: '1',
           height : '80%',
           aspectRatio: 1,
+          buttonText: {
+          today: 'aujourd\'hui',
+          month: 'mois',
+          week: 'semaine',
+          day: 'jour',
+          list: 'liste'
+        },
         });
         calendar.render();
       });
