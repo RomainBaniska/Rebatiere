@@ -32,9 +32,9 @@
 
           customButtons: {
           myCustomButton: {
-            text: 'custom!',
+            text: 'Nouvelle réservation',
             click: function() {
-              alert('clicked the custom button!');
+               window.location.href = "{{ path('app_reservation') }}";
             }
           }
         },
