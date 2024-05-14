@@ -20,39 +20,34 @@
     
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          
-
+        var calendar = new FullCalendar.Calendar(calendarEl, {          
           initialView: 'dayGridWeek',
-            headerToolbar: {
-            left: 'prev,next',
-            center: 'title',
-            right: 'dayGridWeek,dayGridMonth, myCustomButton'
-          },
-
-          customButtons: {
-          myCustomButton: {
-            text: 'Nouvelle réservation',
-            click: function() {
-               window.location.href = "{{ path('app_reservation') }}";
-            }
-          }
-        },
-
           weekends: true,
           dayHeaderFormat: { weekday: 'long' },
-
           locale: 'fr',
           firstDay: '1',
           height : '80%',
           aspectRatio: 1,
+          headerToolbar: {
+            left: 'prev,next',
+            center: 'title',
+            right: 'dayGridWeek,dayGridMonth, myCustomButton'
+          },
+          customButtons: {
+            myCustomButton: {
+              text: 'Nouvelle réservation',
+              click: function() {
+                window.location.href = "{{ path('app_reservation') }}";
+              }
+            }
+          },
           buttonText: {
-          today: 'aujourd\'hui',
-          month: 'mois',
-          week: 'semaine',
-          day: 'jour',
-          list: 'liste'
-        },
+            today: 'aujourd\'hui',
+            month: 'mois',
+            week: 'semaine',
+            day: 'jour',
+            list: 'liste'
+            },
         });
         calendar.render();
       });
