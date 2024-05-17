@@ -34,6 +34,21 @@ class UserController extends AbstractController
         return $this->redirectToRoute('user.edit', ['id' => $currentUserId]);
     }
 
+    #[Route('/checkreservation', name: 'user.checkreservation')]
+    public function checkReservation(): Response
+    {
+        // Récupérer l'utilisateur connecté
+        $currentUser = $this->getUser();
+
+        if(!$currentUser) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        $currentUserId = $currentUser->getId();
+
+        return $this->redirectToRoute('user.reservation.edit', ['id' => $currentUserId]);
+    }
+
     #[Route('/user/edit/{id}', name: 'user.edit', methods: ['GET', 'POST'])]
     public function edit(User $user, Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher): Response
     {
