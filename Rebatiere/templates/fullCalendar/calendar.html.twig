@@ -1,7 +1,5 @@
 
-{% block stylesheets %}
-<link rel="stylesheet" href="{{ asset('assets/css/calendar.css') }}">
-{% endblock %}
+
 
 {% block body %}
 
@@ -12,6 +10,7 @@
 
 
 {% block javascripts %} 
+
     {# FullCalendar Script 1 #}
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
     
@@ -29,9 +28,9 @@
           height : '80%',
           aspectRatio: 1,
           headerToolbar: {
-            left: 'prev,next',
-            center: 'title',
-            right: 'dayGridWeek,dayGridMonth, myCustomButton'
+            left: 'title',
+            center: '',
+            right: 'myCustomButton prev,dayGridWeek,dayGridMonth,next'
           },
           customButtons: {
             myCustomButton: {
@@ -53,3 +52,11 @@
       });
     </script>
     {% endblock %}
+
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/calendar.css') }}">
+    {# font Poppins #}
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'> 
+    {% endblock %}
+
+    

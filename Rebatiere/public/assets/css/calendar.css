@@ -1,3 +1,55 @@
+:root {
+    --fc-button-bg-color: #0D87FF; 
+    --fc-button-border-color: transparent; 
+    --fc-button-active-bg-color: #0D87FF; 
+    --fc-button-active-border-color: transparent; 
+    --fc-custombutton-active-bg-color: #0D87FF;
+    --fc-custombutton-active-border-color: transparent;
+    --fc-button-hover-bg-color: #0e68c2;
+    --fc-button-hover-border-color: #0e68c2;
+  }
+
 .fc-toolbar {
     text-transform: capitalize;
 }
+
+.fc-button-primary:not(:disabled):active {
+    background-color: #0D87FF;
+    border-color: #0D87FF;
+    color: #0D87FF !important;
+}
+
+.fc-button-primary {
+    background-color: #0D87FF;
+    border-color: #0D87FF;
+}
+
+.fc-myCustomButton-button {
+    background-color: var(--fc-custombutton-active-bg-color);
+    border-color: #E2E2EA;
+    color: white !important;
+}
+
+
+.fc .fc-button-primary {
+    background-color: var(--fc-button-bg-color);
+    border-color: var(--fc-button-border-color);
+    color: var(--fc-button-text-color);
+}
+
+.fc-col-header-cell-cushion {
+    color : #92929D;
+}
+
+body {
+    font-family: 'Poppins';
+}
+
+/* Annuler l'effet de mise en avant pour tous les boutons dans le groupe de boutons */
+
+/* .fc .fc-button-group > .fc-button.fc-button-active, 
+.fc .fc-button-group > .fc-button:active, 
+.fc .fc-button-group > .fc-button:focus, 
+.fc .fc-button-group > .fc-button:hover {
+    z-index: 0;
+} */
