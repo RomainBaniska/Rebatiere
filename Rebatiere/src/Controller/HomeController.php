@@ -20,11 +20,19 @@ class HomeController extends AbstractController
         $currentUserFirstName = $this->getUser()->getFirstname();
         $currentUserLastName = $this->getUser()->getLastname();
 
+        $photo = $this->getUser()->getImageFileName();
+        if(!$photo) {
+            $photo = 'assets/images/defaultavatar.png';
+        } else {
+            $photo = 'uploads/images/' . $photo;
+        }
+
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'currentUser' => $currentUser,
             'currentUserFirstName' => $currentUserFirstName,
             'currentUserLastName' => $currentUserLastName,
+            'photo' => $photo,
         ]);
     }
 
