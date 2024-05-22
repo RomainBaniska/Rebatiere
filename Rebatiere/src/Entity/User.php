@@ -47,6 +47,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'users')]
     private Collection $reservations;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imageFileName = null;
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
@@ -189,6 +192,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $reservation->setUsers(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImageFileName(): ?string
+    {
+        return $this->imageFileName;
+    }
+
+    public function setImageFileName(?string $imageFileName): static
+    {
+        $this->imageFileName = $imageFileName;
 
         return $this;
     }
