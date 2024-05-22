@@ -16,10 +16,27 @@ class CalendarController extends AbstractController
     {
         $events = $em->getRepository(Reservation::class)->findall();
     
+        // Initialisez le tableau pour stocker tous les événements
+        $calendarEvents = [];
+
+        // Boucle sur tous les événements pour récupérer les données et les afficher
+        foreach ($events as $event) {
+            $calendarEvent = [
+                'title' => $event->getUsers()->getUsername(),
+                'start' => $event->getStart()->format('Y-m-d\TH:i:s'),
+                'end' => $event->getEnd()->format('Y-m-d\TH:i:s'),
+            ];
+            $calendarEvents[] = $calendarEvent;
+        }
+
+        $datas = json_encode($calendarEvents);
+
+        // dump($datas);
 
         return $this->render('calendar/eventslist.html.twig', [
             'controller_name' => 'CalendarController',
             'events' => $events,
+            'datas' => $datas,
         ]);
     }
 }

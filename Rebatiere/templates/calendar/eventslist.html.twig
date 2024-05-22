@@ -1,10 +1,68 @@
-{% extends 'base.html.twig' %}
 
-{% block title %}Hello CalendarController!{% endblock %}
+
 
 {% block body %}
 
-<ul>
+{# Calendar #}
+<div id='calendar'></div>
+
+{% endblock %}
+
+
+{% block javascripts %} 
+
+    {# FullCalendar Script 1 #}
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    
+    {# FullCalendar Script (2) : Paramétrage du FullCalendar #}
+    <script>
+    
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {          
+          initialView: 'dayGridWeek',
+          weekends: true,
+          dayHeaderFormat: { weekday: 'long' },
+          locale: 'fr',
+          firstDay: '1',
+          height : '80%',
+          aspectRatio: 1,
+          headerToolbar: {
+            left: 'myCustomButton',
+            center: 'title' ,
+            right: 'prev,dayGridWeek,dayGridMonth,next'
+          },
+        events: {{ datas|raw }},
+          customButtons: {
+            myCustomButton: {
+              text: 'Nouvelle réservation',
+              click: function() {
+                window.location.href = "{{ path('app_reservation') }}";
+              }
+            }
+          },
+          buttonText: {
+            today: 'aujourd\'hui',
+            month: 'mois',
+            week: 'semaine',
+            day: 'jour',
+            list: 'liste'
+            },
+        });
+        calendar.render();
+      });
+    </script>
+    {% endblock %}
+
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/calendar.css') }}">
+    {# font Poppins #}
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'> 
+    {% endblock %}
+
+    
+
+{# <ul>
 
 {% for event in events %}
 
@@ -28,6 +86,6 @@
 
 {% endfor %}
 
-</ul>
+</ul> #}
 
-{% endblock %}
+
