@@ -11,6 +11,11 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(): Response
     {
+
+        if (!$this->getUser()) {
+            return $this->render('home/ask.html.twig');
+        }
+
         $currentUser = $this->getUser()->getUsername();
         $currentUserFirstName = $this->getUser()->getFirstname();
         $currentUserLastName = $this->getUser()->getLastname();

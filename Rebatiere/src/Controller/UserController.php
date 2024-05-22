@@ -46,6 +46,8 @@ class UserController extends AbstractController
 
         $currentUserId = $currentUser->getId();
 
+        // dump($currentUserId);
+
         return $this->redirectToRoute('user.reservation.edit', ['id' => $currentUserId]);
     }
 

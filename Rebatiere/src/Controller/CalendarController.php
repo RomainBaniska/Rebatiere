@@ -25,6 +25,7 @@ class CalendarController extends AbstractController
                 'title' => $event->getUsers()->getUsername(),
                 'start' => $event->getStart()->format('Y-m-d\TH:i:s'),
                 'end' => $event->getEnd()->format('Y-m-d\TH:i:s'),
+                'extendedProps' => $event->getUsers()->getAvatar()
             ];
             $calendarEvents[] = $calendarEvent;
         }
@@ -35,7 +36,6 @@ class CalendarController extends AbstractController
 
         return $this->render('calendar/eventslist.html.twig', [
             'controller_name' => 'CalendarController',
-            'events' => $events,
             'datas' => $datas,
         ]);
     }

@@ -1,0 +1,19 @@
+
+    {% block head %}
+  <head>
+    <html lang='en'>  
+    <meta charset='utf-8' />    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+    {% endblock %}
+
+  {% block body %}
+  <body>
+
+<a href="{{ path('app_login') }}">Merci de se login</a>
+<a href="{{ path('app_register') }}">Merci de s'enregistrer</a>
+
+  </body>
+  {% endblock %}  
+   
+</html>
