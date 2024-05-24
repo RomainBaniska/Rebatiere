@@ -14,18 +14,28 @@ class CalendarController extends AbstractController
     #[Route('/calendar', name: 'app_calendar')]
     public function index(EntityManagerInterface $em): Response
     {
-        $events = $em->getRepository(Reservation::class)->findall();
+        $events = $em->getRepository(Reservation::class)->findAll();
     
         // Initialisez le tableau pour stocker tous les événements
         $calendarEvents = [];
 
         // Boucle sur tous les événements pour récupérer les données et les afficher
         foreach ($events as $event) {
+
+            $userAvatarUrl = '/uploads/images/' . $event->getUsers()->getImageFileName();
+            
             $calendarEvent = [
                 'title' => $event->getUsers()->getUsername(),
                 'start' => $event->getStart()->format('Y-m-d\TH:i:s'),
                 'end' => $event->getEnd()->format('Y-m-d\TH:i:s'),
-                'extendedProps' => $event->getUsers()->getAvatar()
+                'color' => '#AB351C',
+                'extendedProps' => [
+                    'userAvatarUrl' => $userAvatarUrl,
+                ],
+                // 'extendedProps' => [
+                //     'icon' => 'public/upload/images/' . $event->getUsers()->getImageFileName()
+                //     // Rajouter une condition si null
+                // ],
             ];
             $calendarEvents[] = $calendarEvent;
         }

@@ -27,6 +27,7 @@
           firstDay: '1',
           height : '80%',
           aspectRatio: 1,
+          displayEventTime: false,
           headerToolbar: {
             left: 'myCustomButton',
             center: 'title' ,
@@ -48,6 +49,24 @@
             day: 'jour',
             list: 'liste'
             },
+        eventContent: function(arg) {
+            let containerEl = document.createElement('div')
+
+            let avatarEl = document.createElement('img')
+            avatarEl.src = arg.event.extendedProps.userAvatarUrl
+            avatarEl.style.width = '30px'
+            avatarEl.style.height = '30px'
+            avatarEl.style.borderRadius = '50%'
+            avatarEl.style.marginRight = '10px'
+
+            let textEl = document.createElement('span')
+            textEl.innerHTML = arg.event.title
+
+            containerEl.appendChild(avatarEl)
+            containerEl.appendChild(textEl)
+
+            return { domNodes: [containerEl] }
+        }, 
         });
         calendar.render();
       });
