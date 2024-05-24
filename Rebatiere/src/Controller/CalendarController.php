@@ -21,8 +21,6 @@ class CalendarController extends AbstractController
 
         // Boucle sur tous les événements pour récupérer les données et les afficher
         foreach ($events as $event) {
-
-            $userAvatarUrl = '/uploads/images/' . $event->getUsers()->getImageFileName();
             
             $calendarEvent = [
                 'title' => $event->getUsers()->getUsername(),
@@ -30,12 +28,9 @@ class CalendarController extends AbstractController
                 'end' => $event->getEnd()->format('Y-m-d\TH:i:s'),
                 'color' => '#AB351C',
                 'extendedProps' => [
-                    'userAvatarUrl' => $userAvatarUrl,
+                    'icon' => '/uploads/images/' . $event->getUsers()->getImageFileName()
+                    // Rajouter une condition si null
                 ],
-                // 'extendedProps' => [
-                //     'icon' => 'public/upload/images/' . $event->getUsers()->getImageFileName()
-                //     // Rajouter une condition si null
-                // ],
             ];
             $calendarEvents[] = $calendarEvent;
         }

@@ -31,7 +31,7 @@ class RegistrationController extends AbstractController
                 )
             );
 
-                // Ajout de l'avatar en BDD avec la condition de null
+            // Ajout de l'avatar en BDD avec la condition de null
             $photo = $form['photo']->getData();  
             if(isset($photo)) {
                 $fileName = uniqid().'.'.$photo->guessExtension();
@@ -39,10 +39,10 @@ class RegistrationController extends AbstractController
             }
             $user->setImageFileName($fileName);
 
+
+            // Persist & Flush en BDD
             $entityManager->persist($user);
             $entityManager->flush();
-
-            // do anything else you need here, like send an email
 
             return $security->login($user, 'form_login', 'main');
         }

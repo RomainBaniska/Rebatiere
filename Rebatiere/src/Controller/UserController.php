@@ -11,6 +11,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -52,7 +53,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/user/edit/{id}', name: 'user.edit', methods: ['GET', 'POST'])]
-    public function edit(User $user, Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher): Response
+    public function edit(User $user, Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher, #[Autowire('%photo_dir%')] string $photoDir): Response
     {
         // Récupérer l'utilisateur connecté
         $currentUser = $this->getUser();
@@ -79,6 +80,16 @@ class UserController extends AbstractController
                 )
             );
 
+            // Ajout de l'avatar en BDD avec la condition de null
+            $photo = $form['photo']->getData();  
+            if(isset($photo)) {
+                $fileName = uniqid().'.'.$photo->guessExtension();
+                $photo->move($photoDir, $fileName);
+            }
+            $user->setImageFileName($fileName);
+
+
+            // Persist & Flush en BDD
             $em->persist($user);
             $em->flush();
 
