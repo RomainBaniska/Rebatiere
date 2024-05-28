@@ -95,4 +95,10 @@ class Reservation
 
         return $this;
     }
+
+    // // Méthode qui va empêcher l'overlapping des événements :
+    public function isOverlapping(\DateTimeInterface $start, \DateTimeInterface $end): bool
+    {
+        return ($this->start < $end && $this->end > $start);
+    }
 }

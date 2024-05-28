@@ -17,7 +17,6 @@ class ReservationController extends AbstractController
     #[Route('/reservation', name: 'app_reservation')]
     public function reservation(Request $request, EntityManagerInterface $em): Response
     {
-
         //Récupérer les from/to (start & end) de la page home
         $from = $request->request->get('from');
         $to = $request->request->get('to');
@@ -42,8 +41,6 @@ class ReservationController extends AbstractController
     #[Route('/persistreservation', name: 'app_persistreservation')]
     public function reservationPersist(Request $request, EntityManagerInterface $em): Response
     {
-
-        $allValues = $request->request->all();
         
         $from = new \DateTime($request->request->get('from'));
         $to = new \DateTime($request->request->get('to'));
@@ -59,6 +56,18 @@ class ReservationController extends AbstractController
                 ->getRepository(Chamber::class)
                 ->find($chamberId);
 
+
+
+        // On vérifie si les réservations d'un même utilisateur se chevauchent 
+        $overlappingReservations = $em->getRepository(Reservation::class)
+        ->findOverlappingReservations($userId, $from, $to);
+
+        if (count($overlappingReservations) > 0 ) {
+            $this->addFlash('error', 'Vous tentez de créer une réservation qui en chevauche une autre rendez-vous dans "Mes Réservations"');
+            return $this->redirectToRoute('app_reservation');
+        }
+
+
         // Nouvelle instance de l'entité Réservation
         $reservation = new Reservation();
         $reservation->setStart($from);
@@ -67,11 +76,14 @@ class ReservationController extends AbstractController
         $reservation->setChambers($chamber);
         $reservation->setPrivatisation($privatisation);
 
+        // Si entre setStart et setEnd il y a déjà une réservation à l'ID de userId, alors refus et modal, sinon persist & flush
+
         $em->persist($reservation);
         $em->flush();
 
         return $this->redirectToRoute('app_home');
     }
+
 
     #[Route('/testrelation', name: 'app_testrelation')]
     public function testRelation(EntityManagerInterface $em)
