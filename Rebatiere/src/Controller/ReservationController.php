@@ -112,6 +112,7 @@ class ReservationController extends AbstractController
                     'title' => $reservation->getUsers()->getUsername(),
                     'start' => $date,
                     'end' => $date,
+                     'color' => 'transparent',
                     'extendedProps' => [
                         'chamber' => $reservation->getChambers()->getChambername(),
                         'privatisation' => $reservation->isPrivatisation(),
