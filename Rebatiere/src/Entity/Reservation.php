@@ -22,6 +22,9 @@ class Reservation
     #[ORM\Column(type: 'date')]
     private ?\DateTimeInterface $end = null;
 
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    private ?array $dates = [];
+
     #[ORM\Column]
     private ?bool $privatisation = null;
 
@@ -57,6 +60,18 @@ class Reservation
     {
         $this->end = $end;
 
+        return $this;
+    }
+
+    // Array de dates
+    public function getDates(): ?array
+    {
+        return $this->dates;
+    }
+
+    public function setDates(array $dates): static
+    {
+        $this->dates = $dates;
         return $this;
     }
 

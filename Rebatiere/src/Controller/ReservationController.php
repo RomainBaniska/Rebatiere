@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ReservationController extends AbstractController
@@ -17,7 +18,7 @@ class ReservationController extends AbstractController
     #[Route('/reservation', name: 'app_reservation')]
     public function reservation(Request $request, EntityManagerInterface $em): Response
     {
-        //Récupérer les from/to (start & end) de la page home
+        // //Récupérer les from/to (start & end) de la page home
         $from = $request->request->get('from');
         $to = $request->request->get('to');
 
@@ -67,21 +68,60 @@ class ReservationController extends AbstractController
             return $this->redirectToRoute('app_reservation');
         }
 
+        // On va multiplier le nombre de réservations pour afficher les éléments dans le calendar
+        $dates = [];
+        $currentDate = clone $from;
+        while ($currentDate <= $to) {
+            $dates[] = $currentDate->format('Y-m-d');
+            $currentDate->modify('+1 day');
+        }
 
-        // Nouvelle instance de l'entité Réservation
         $reservation = new Reservation();
         $reservation->setStart($from);
         $reservation->setEnd($to);
+        $reservation->setDates($dates);
         $reservation->setUsers($user);
         $reservation->setChambers($chamber);
         $reservation->setPrivatisation($privatisation);
 
-        // Si entre setStart et setEnd il y a déjà une réservation à l'ID de userId, alors refus et modal, sinon persist & flush
+        $overlappingReservations = $em->getRepository(Reservation::class)
+            ->findOverlappingReservations($userId, $from, $to);
+
+        if (count($overlappingReservations) > 0) {
+            $this->addFlash('error', 'Vous tentez de créer une réservation qui en chevauche une autre. Rendez-vous dans "Mes Réservations".');
+            return $this->redirectToRoute('app_reservation');
+        }
 
         $em->persist($reservation);
         $em->flush();
 
         return $this->redirectToRoute('app_home');
+    }
+
+    // Méthode de traitement de l'information envoyé au fullcalendar concernant les dates 
+    #[Route('/api/reservations', name: 'api_reservations')]
+    public function getReservations(EntityManagerInterface $em): JsonResponse
+    {
+        $reservations = $em->getRepository(Reservation::class)->findAll();
+
+        $events = [];
+        foreach ($reservations as $reservation) {
+            foreach ($reservation->getDates() as $date) {
+                $events[] = [
+                    'id' => $reservation->getId(),
+                    'title' => $reservation->getUsers()->getUsername(),
+                    'start' => $date,
+                    'end' => $date,
+                    'extendedProps' => [
+                        'chamber' => $reservation->getChambers()->getChambername(),
+                        'privatisation' => $reservation->isPrivatisation(),
+                        'icon' => $reservation->getUsers()->getImageFileName() ? '/uploads/images/' . $reservation->getUsers()->getImageFileName() : '/path/to/default/icon.png',
+                    ],
+                ];
+            }
+        }
+
+        return new JsonResponse($events);
     }
 
 

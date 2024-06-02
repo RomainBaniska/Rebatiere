@@ -33,8 +33,7 @@
             center: 'title' ,
             right: 'prev,dayGridWeek,dayGridMonth,next'
           },
-        events: {{ datas|raw }},
-        {# overlapEventsSeparate : true, #}
+        events: '/api/reservations',
           customButtons: {
             myCustomButton: {
               text: 'Nouvelle réservation',
