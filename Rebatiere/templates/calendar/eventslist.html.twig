@@ -34,6 +34,7 @@
             right: 'prev,dayGridWeek,dayGridMonth,next'
           },
         events: {{ datas|raw }},
+        {# overlapEventsSeparate : true, #}
           customButtons: {
             myCustomButton: {
               text: 'Nouvelle réservation',
@@ -66,7 +67,9 @@
             containerEl.appendChild(textEl)
 
             return { domNodes: [containerEl] }
-        }, 
+        },
+        
+
         });
         calendar.render();
       });

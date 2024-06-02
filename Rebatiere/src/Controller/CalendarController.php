@@ -23,10 +23,11 @@ class CalendarController extends AbstractController
         foreach ($events as $event) {
             
             $calendarEvent = [
-                'title' => $event->getUsers()->getUsername(),
+                // 'title' => $event->getUsers()->getUsername(),
                 'start' => $event->getStart()->format('Y-m-d\TH:i:s'),
                 'end' => $event->getEnd()->format('Y-m-d\TH:i:s'),
                 'color' => '#AB351C',
+                // 'color' => 'transparent',
                 'extendedProps' => [
                     'icon' => '/uploads/images/' . $event->getUsers()->getImageFileName()
                     // Rajouter une condition si null

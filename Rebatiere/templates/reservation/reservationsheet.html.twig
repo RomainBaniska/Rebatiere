@@ -13,29 +13,26 @@
 
 <p>Vous souhaitez réserver sur la période de {{ from }} à {{ to }} </p> 
 
+
     <form method="post" action="{{ path('app_persistreservation') }}">
 
-    <div class="formLine">
-         <label for="to">to:</label>
-            <select id="to" name="to">
-                  <option value="{{ to }}">{{ to }}</option>
-            </select>
+    
+    {# DatePicker jQuery #}
+    {# {% include 'reservation/reservation.html.twig' %} #}
+    {% include 'datePicker/datepicker.html.twig' %}
+
+     <div class='datepicker_container'>
+        <label for="from">Date de début</label> &nbsp;
+        <input type="text" id="from" name="from" autocomplete="off"> &nbsp;
+
+        <label for="to">Date de fin </label> &nbsp;
+        <input type="text" id="to" name="to" autocomplete="off"> &nbsp;
     </div>
 
-        <div class="formLine">
-         <label for="from">From :</label>
-            {# <select id="users" name="users[]"> #}
-            <select id="from" name="from">
-                    {# <option value="{{ user.id }}">{{ user.username }}</option> #}
-                    <option value="{{ from }}">{{ from }}</option>
- 
-            </select>
-    </div>
-
+  </div>
 
     <div class="formLine">
          <label for="username">Ajoutez un utilisateur :</label>
-            {# <select id="users" name="users[]"> #}
             <select id="username" name="username">
                {% for user in users %}
                     <option value="{{ user.id }}">{{ user.username }}</option>
@@ -62,13 +59,3 @@
     </form>
 
 {% endblock %}
-
-{# Approche traditionnel du formulaire ---->  #}
-   {# {{ form_start(reservationForm, {'action': path('app_persistreservation')}) }}
-        {{ form_row(reservationForm.start) }}
-        {{ form_row(reservationForm.end) }}
-        {{ form_row(reservationForm.username) }}
-        {{ form_row(reservationForm.chambername) }}
-        {{ form_row(reservationForm.privatisation) }}
-          <button type="submit" class="btn">Envoyer</button>
-    {{ form_end(reservationForm) }} #}

@@ -53,3 +53,15 @@ body {
 .fc .fc-button-group > .fc-button:hover {
     z-index: 0;
 } */
+
+
+/* RENDRE LES EVENEMENTS COMME DES DOTS */
+/* a.fc-event {
+    border-radius: 10px; 
+    width: 15px;
+    color: transparent; 
+  }
+  
+  div.fc-content-skeleton > table > tbody > tr {
+    display: inline-block;
+  } */
