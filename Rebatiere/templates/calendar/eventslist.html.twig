@@ -28,6 +28,8 @@
           height : '80%',
           aspectRatio: 1,
           displayEventTime: false,
+          {# eventDisplay : 'list-item', #}
+          eventDisplay : 'block',
           headerToolbar: {
             left: 'myCustomButton',
             center: 'title' ,
@@ -63,9 +65,10 @@
             textEl.innerHTML = arg.event.title
 
             containerEl.appendChild(avatarEl)
-            containerEl.appendChild(textEl)
+            {# containerEl.appendChild(textEl) #}
 
-            return { domNodes: [containerEl] }
+            {# return { domNodes: [containerEl] } #}
+            return { domNodes: [avatarEl] }
         },
         
 

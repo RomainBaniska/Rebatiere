@@ -109,7 +109,7 @@ class ReservationController extends AbstractController
             foreach ($reservation->getDates() as $date) {
                 $events[] = [
                     'id' => $reservation->getId(),
-                    'title' => $reservation->getUsers()->getUsername(),
+                    // 'title' => $reservation->getUsers()->getUsername(),
                     'start' => $date,
                     'end' => $date,
                      'color' => 'transparent',
