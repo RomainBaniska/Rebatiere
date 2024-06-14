@@ -47,11 +47,13 @@
                     var icon = event.extendedProps.icon;
                     var chamber = event.extendedProps.chamber;
                     var dates = event.startStr + ' - ' + event.endStr;
+                    var debut = event.extendedProps.debut;
+                    var fin = event.extendedProps.fin;
                     var eventInfo = `
                       <div>
                         <img src="${icon}" style="width: 30px; height: 30px; border-radius: 50%; margin: 5px;">
                         <p>Chambre: ${chamber}</p>
-                        <p>Dates: ${dates}</p>
+                        <p>Période de réservation: ${debut} - ${fin}</p>
                       </div>
                     `;
                     eventDetailsEl.innerHTML += eventInfo;
