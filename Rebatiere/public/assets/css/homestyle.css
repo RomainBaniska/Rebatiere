@@ -1,0 +1,25 @@
+.homeContainer {
+    display: flex;
+    flex-direction: row;
+    height: 100vh; /* ou une autre hauteur appropriée */
+}
+
+#infos {
+    width: auto; 
+    height: auto;
+    max-height: 15%;
+    word-wrap: break-word;
+    overflow-wrap: break-word; 
+    overflow-y: auto;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+    background-color: rgba(255,220,40,.15);
+    padding: 10px;
+}
+
+#calendar {
+    width: 100%;
+    height: auto;
+    max-height: 80%;
+}

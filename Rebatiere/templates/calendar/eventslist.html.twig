@@ -2,9 +2,14 @@
 
 
 {% block body %}
+    {# Calendar #}
+    <div id='calendar'></div>
 
-{# Calendar #}
-<div id='calendar'></div>
+  {# Informations #}
+    <div id='infos'>
+      Sélectionnez un événement pour laisser apparaitre le détail
+    </div>
+     <div id='event-details'></div> 
 
 {% endblock %}
 
@@ -19,6 +24,7 @@
     
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
+        var eventDetailsEl = document.getElementById('infos'); // Get reference to event details container
         var calendar = new FullCalendar.Calendar(calendarEl, {          
           initialView: 'dayGridWeek',
           weekends: true,
@@ -28,14 +34,40 @@
           height : '80%',
           aspectRatio: 1,
           displayEventTime: false,
-          {# eventDisplay : 'list-item', #}
+          dateClick: function(info) {
+                // Vide la div
+                eventDetailsEl.innerHTML = '';
+                // Filtre les événements de la date cliquée
+                var events = calendar.getEvents().filter(function(event) {
+                  return event.startStr === info.dateStr;
+                });
+                // Affiche les détails de l'événement
+                if (events.length > 0) {
+                  events.forEach(function(event) {
+                    var icon = event.extendedProps.icon;
+                    var chamber = event.extendedProps.chamber;
+                    var dates = event.startStr + ' - ' + event.endStr;
+                    var eventInfo = `
+                      <div>
+                        <img src="${icon}" style="width: 30px; height: 30px; border-radius: 50%; margin: 5px;">
+                        <p>Chambre: ${chamber}</p>
+                        <p>Dates: ${dates}</p>
+                      </div>
+                    `;
+                    eventDetailsEl.innerHTML += eventInfo;
+                  });
+                } else {
+                  eventDetailsEl.innerHTML = '<p>Aucun événement pour cette date.</p>';
+                }
+                },
           eventDisplay : 'block',
           headerToolbar: {
             left: 'myCustomButton',
             center: 'title' ,
             right: 'prev,dayGridWeek,dayGridMonth,next'
           },
-        events: '/api/reservations',
+          {# Voir ReservationController pour /api/reservations #}
+        events: '/api/reservations', 
           customButtons: {
             myCustomButton: {
               text: 'Nouvelle réservation',
@@ -59,15 +91,13 @@
             avatarEl.style.width = '30px'
             avatarEl.style.height = '30px'
             avatarEl.style.borderRadius = '50%'
-            avatarEl.style.marginRight = '10px'
+            avatarEl.style.margin = '5px'
 
             let textEl = document.createElement('span')
             textEl.innerHTML = arg.event.title
 
             containerEl.appendChild(avatarEl)
-            {# containerEl.appendChild(textEl) #}
 
-            {# return { domNodes: [containerEl] } #}
             return { domNodes: [avatarEl] }
         },
         
@@ -80,36 +110,10 @@
 
     {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('assets/css/calendar.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/homestyle.css') }}">
     {# font Poppins #}
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'> 
     {% endblock %}
 
-    
-
-{# <ul>
-
-{% for event in events %}
-
-<li>
-    <div>
-        <strong>Début:</strong> {{ event.start|date('Y-m-d H:i:s') }}
-    </div>
-    <div>
-        <strong>Fin:</strong> {{ event.end|date('Y-m-d H:i:s') }}
-    </div>
-    <div>
-        <strong>Utilisateur:</strong> {{ event.users.firstname }} {{ event.users.lastname }}
-    </div>
-    <div>
-        <strong>Chambre:</strong> {{ event.chambers.chambername }}
-    </div>
-    <div>
-        <strong>Privatisation:</strong> {{ event.privatisation ? 'Oui' : 'Non' }}
-    </div>
-</li>
-
-{% endfor %}
-
-</ul> #}
-
+  
 

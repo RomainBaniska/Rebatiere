@@ -116,7 +116,7 @@ class ReservationController extends AbstractController
                     'extendedProps' => [
                         'chamber' => $reservation->getChambers()->getChambername(),
                         'privatisation' => $reservation->isPrivatisation(),
-                        'icon' => $reservation->getUsers()->getImageFileName() ? '/uploads/images/' . $reservation->getUsers()->getImageFileName() : '/path/to/default/icon.png',
+                        'icon' => $reservation->getUsers()->getImageFileName() ? '/uploads/images/' . $reservation->getUsers()->getImageFileName() : 'assets/images/defaultavatar.png',
                     ],
                 ];
             }
