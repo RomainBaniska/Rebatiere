@@ -18,9 +18,9 @@ class ReservationController extends AbstractController
     #[Route('/reservation', name: 'app_reservation')]
     public function reservation(Request $request, EntityManagerInterface $em): Response
     {
-        // //Récupérer les from/to (start & end) de la page home
-        $from = $request->request->get('from');
-        $to = $request->request->get('to');
+        // // //Récupérer les from/to (start & end) de la page home
+        // $from = $request->request->get('from');
+        // $to = $request->request->get('to');
 
         //Récupérer l'utilisateur connecté // Méthode de symfony qui vient d'AbstractController
         $currentUser = $this->getUser()->getUsername();
@@ -30,8 +30,8 @@ class ReservationController extends AbstractController
         $chambers = $em->getRepository(Chamber::class)->findall();
         
           return $this->render('reservation/reservationsheet.html.twig', [
-            'from' => $from,
-            'to' => $to,
+            // 'from' => $from,
+            // 'to' => $to,
             'users' => $users,
             'chambers' => $chambers,
             'currentUser' => $currentUser,
@@ -68,6 +68,12 @@ class ReservationController extends AbstractController
             return $this->redirectToRoute('app_reservation');
         }
 
+        // // On va vérifier si la capacité d'une chambre est pleine (= ou > à 2)
+
+        // if (count(chambercapacity) >= maxcapacity) {
+        //     # code...
+        // }
+
         // On va multiplier le nombre de réservations pour afficher les éléments dans le calendar
         $dates = [];
         $currentDate = clone $from;
@@ -95,7 +101,8 @@ class ReservationController extends AbstractController
         $em->persist($reservation);
         $em->flush();
 
-        return $this->redirectToRoute('app_home');
+        // return $this->redirectToRoute('app_home');
+        return $this->redirectToRoute('app_calendar');
     }
 
     // Méthode de traitement de l'information envoyé au fullcalendar concernant les dates 

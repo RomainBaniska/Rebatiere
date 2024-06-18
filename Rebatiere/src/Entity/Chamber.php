@@ -19,7 +19,7 @@ class Chamber
     private ?string $chambername = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $capacity = null;
+    private ?int $maxcapacity = null;
 
     #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'chambers')]
     private Collection $reservations;
@@ -46,14 +46,14 @@ class Chamber
         return $this;
     }
 
-    public function getCapacity(): ?int
+    public function getMaxCapacity(): ?int
     {
-        return $this->capacity;
+        return $this->maxcapacity;
     }
 
-    public function setCapacity(?int $capacity): static
+    public function setMaxCapacity(?int $maxcapacity): static
     {
-        $this->capacity = $capacity;
+        $this->maxcapacity = $maxcapacity;
 
         return $this;
     }
