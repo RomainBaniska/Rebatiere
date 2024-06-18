@@ -2,10 +2,11 @@
 
 namespace App\Repository;
 
-use App\Entity\Reservation;
 use DateTimeInterface;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Chamber;
+use App\Entity\Reservation;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Reservation>
@@ -33,6 +34,20 @@ class ReservationRepository extends ServiceEntityRepository
                 ->setParameter('end', $end)
                 ->getQuery()
                 ->getResult();
+       }
+
+       public function countReservationsForChamberAndDates(Chamber $chamber, \DateTimeInterface $start, \DateTimeInterface $end): int
+       {
+            return (int) $this->createQueryBuilder('r')
+            ->select('count(r.id)')
+            ->andWhere('r.chambers = :chamber')
+            ->andWhere('r.start < :end')
+            ->andWhere('r.end > :start')
+            ->setParameter('chamber', $chamber)
+            ->setParameter('start', $start)
+            ->setParameter('end', $end)
+            ->getQuery()
+            ->getSingleScalarResult();
        }
 
 

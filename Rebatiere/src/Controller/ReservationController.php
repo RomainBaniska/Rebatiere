@@ -58,6 +58,11 @@ class ReservationController extends AbstractController
                 ->find($chamberId);
 
 
+            // Vérifier si la chambre est pleine pour cette période
+            if ($chamber->isChamberFull($from, $to, $em)) {
+                $this->addFlash('error', 'La chambre est pleine pour cette période.');
+                return $this->redirectToRoute('app_reservation');
+            }
 
         // On vérifie si les réservations d'un même utilisateur se chevauchent 
         $overlappingReservations = $em->getRepository(Reservation::class)
@@ -67,12 +72,6 @@ class ReservationController extends AbstractController
             $this->addFlash('error', 'Vous tentez de créer une réservation qui en chevauche une autre rendez-vous dans "Mes Réservations"');
             return $this->redirectToRoute('app_reservation');
         }
-
-        // // On va vérifier si la capacité d'une chambre est pleine (= ou > à 2)
-
-        // if (count(chambercapacity) >= maxcapacity) {
-        //     # code...
-        // }
 
         // On va multiplier le nombre de réservations pour afficher les éléments dans le calendar
         $dates = [];

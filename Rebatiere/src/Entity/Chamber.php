@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ChamberRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ChamberRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: ChamberRepository::class)]
 class Chamber
@@ -86,5 +87,14 @@ class Chamber
         }
 
         return $this;
+    }
+
+    public function isChamberFull(\DateTimeInterface $start, \DateTimeInterface $end, EntityManagerInterface $em): bool
+    {
+        $reservationsCount = $em->getRepository(Reservation::class)
+            ->countReservationsForChamberAndDates($this, $start, $end);
+
+        // Comparaison avec la capacité maximale de la chambre
+        return $reservationsCount >= $this->getMaxCapacity();
     }
 }

@@ -117,8 +117,4 @@ class Reservation
         return ($this->start < $end && $this->end > $start);
     }
 
-    public function isChamberFull(): bool 
-    {
-
-    }
 }
