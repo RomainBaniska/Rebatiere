@@ -45,6 +45,8 @@
                 if (events.length > 0) {
                   events.forEach(function(event) {
                     var icon = event.extendedProps.icon;
+                    var firstname = event.extendedProps.firstname
+                    var lastname = event.extendedProps.lastname
                     var chamber = event.extendedProps.chamber;
                     var dates = event.startStr + ' - ' + event.endStr;
                     var debut = event.extendedProps.debut;
@@ -52,6 +54,7 @@
                     var eventInfo = `
                       <div>
                         <img src="${icon}" style="width: 30px; height: 30px; border-radius: 50%; margin: 5px;">
+                        ${firstname} ${lastname}
                         <p>Chambre: ${chamber}</p>
                         <p>Période de réservation: ${debut} - ${fin}</p>
                       </div>

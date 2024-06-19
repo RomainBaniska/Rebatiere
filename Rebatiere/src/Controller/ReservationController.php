@@ -120,6 +120,8 @@ class ReservationController extends AbstractController
                     'end' => $date,
                      'color' => 'transparent',
                     'extendedProps' => [
+                        'firstname' => $reservation->getUsers()->getFirstname(),
+                        'lastname' => $reservation->getUsers()->getLastname(),
                         'chamber' => $reservation->getChambers()->getChambername(),
                         'privatisation' => $reservation->isPrivatisation(),
                         'debut' => $reservation->getStart()->format('d-m-Y'),
