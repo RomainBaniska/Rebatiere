@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -37,6 +38,10 @@ class UserCrudController extends AbstractCrudController
             IdField::new('id')
                 ->hideOnForm(),
             TextField::new('username'),
+            TextField::new('firstname'),
+            TextField::new('lastname'),
+            ImageField::new('imageFileName')
+            ->setUploadDir('public\uploads\images/'),
                 //->setFormTypeOptions(['disabled' => 'disabled']),
             // TextField::new('password'),
             Field::new('plainPassword')

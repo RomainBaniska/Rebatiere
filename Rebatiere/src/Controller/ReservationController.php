@@ -150,4 +150,12 @@ class ReservationController extends AbstractController
    ]);
 }
 
+#[Route('/dropmonth', name: 'app_dropmonth')]
+    public function dropmonth(): Response
+    {
+      
+          return $this->render('calendar/dropmonth.html.twig', [
+        ]);        
+    }
+
 }
