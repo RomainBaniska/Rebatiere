@@ -3,3 +3,21 @@
     justify-content: center;
     padding: 1%;
 }
+
+.reservationContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.date {
+    display: flex;
+    padding-right: 5px;
+}
+
+.formButton {
+    display: flex;
+    padding-left: 5px;
+}

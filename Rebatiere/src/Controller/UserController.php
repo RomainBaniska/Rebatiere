@@ -109,7 +109,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/user/reservation/{id}', name: 'user.reservation.edit', methods: ['GET', 'POST'])]
-    public function viewReservation(User $user, Request $request, EntityManagerInterface $em, Reservation $reservation) {
+    public function viewReservation(User $user, EntityManagerInterface $em) {
         // Récupérer l'utilisateur connecté
         $currentUser = $this->getUser();
 
@@ -125,13 +125,25 @@ class UserController extends AbstractController
             ['users' => $currentUser],
         );
 
-        // dump($reservations);
-
         return $this->render('user/reservations.html.twig', [
             'reservations' => $reservations,
             'currentUser' => $currentUser,
         ]);
 
+    }
+
+    #[Route('/user/reservation/{id}/delete', name: 'user.reservation.delete', methods: ['POST'])]
+    public function reservationDelete(Reservation $reservation, EntityManagerInterface $em, Request $request): Response {
+          
+        // Protection contre les CSRF
+          if ($this->isCsrfTokenValid('delete'.$reservation->getId(), $request->request->get('_token'))) {
+            $em->remove($reservation);
+            $em->flush();
+
+            $this->addFlash('success', 'Reservation deleted successfully');
+        }
+
+        return $this->redirectToRoute('user.reservation.edit');
     }
 
 }
