@@ -5,6 +5,8 @@
     {# Calendar #}
     <div id='calendar'></div>
 
+   
+
   {# Informations #}
     <div id='infos'>
       Sélectionnez un événement pour laisser apparaitre le détail
@@ -23,9 +25,9 @@
     <script>
     
       document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var eventDetailsEl = document.getElementById('infos'); // Get reference to event details container
-        var calendar = new FullCalendar.Calendar(calendarEl, {          
+        let calendarEl = document.getElementById('calendar');
+        let eventDetailsEl = document.getElementById('infos'); 
+        let calendar = new FullCalendar.Calendar(calendarEl, {          
           initialView: 'dayGridWeek',
           weekends: true,
           dayHeaderFormat: { weekday: 'long' },
@@ -34,24 +36,34 @@
           height : '80%',
           aspectRatio: 1,
           displayEventTime: false,
+          dayCellContent: function(arg) {
+                let dateText = arg.date.getDate();
+                
+                let pastille = `     
+                <div class="green-circle"></div>
+                <div class="red-circle"></div>
+                ` 
+                let dateHtml = `<div>${dateText}</div>`;
+                return { html: dateText + pastille };
+                },
           dateClick: function(info) {
                 // Vide la div
                 eventDetailsEl.innerHTML = '';
                 // Filtre les événements de la date cliquée
-                var events = calendar.getEvents().filter(function(event) {
+                let events = calendar.getEvents().filter(function(event) {
                   return event.startStr === info.dateStr;
                 });
                 // Affiche les détails de l'événement
                 if (events.length > 0) {
                   events.forEach(function(event) {
-                    var icon = event.extendedProps.icon;
-                    var firstname = event.extendedProps.firstname
-                    var lastname = event.extendedProps.lastname
-                    var chamber = event.extendedProps.chamber;
-                    var dates = event.startStr + ' - ' + event.endStr;
-                    var debut = event.extendedProps.debut;
-                    var fin = event.extendedProps.fin;
-                    var eventInfo = `
+                    let icon = event.extendedProps.icon;
+                    let firstname = event.extendedProps.firstname
+                    let lastname = event.extendedProps.lastname
+                    let chamber = event.extendedProps.chamber;
+                    let dates = event.startStr + ' - ' + event.endStr;
+                    let debut = event.extendedProps.debut;
+                    let fin = event.extendedProps.fin;
+                    let eventInfo = `
                       <div>
                         <img src="${icon}" style="width: 30px; height: 30px; border-radius: 50%; margin: 5px;">
                         ${firstname} ${lastname}
@@ -71,8 +83,7 @@
             center: 'title' ,
             right: 'prev,dayGridWeek,dayGridMonth,next'
           },
-          {# Voir ReservationController pour /api/reservations #}
-        events: '/api/reservations', 
+          events: '/api/reservations', 
           customButtons: {
             myCustomButton: {
               text: 'Nouvelle réservation',

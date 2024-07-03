@@ -11,6 +11,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -46,8 +47,6 @@ class UserController extends AbstractController
         }
 
         $currentUserId = $currentUser->getId();
-
-        // dump($currentUserId);
 
         return $this->redirectToRoute('user.reservation.edit', ['id' => $currentUserId]);
     }
@@ -139,11 +138,11 @@ class UserController extends AbstractController
           if ($this->isCsrfTokenValid('delete'.$reservation->getId(), $request->request->get('_token'))) {
             $em->remove($reservation);
             $em->flush();
-
-            $this->addFlash('success', 'Reservation deleted successfully');
         }
 
-        return $this->redirectToRoute('user.reservation.edit');
+    // Rediriger vers la page actuelle
+    $referer = $request->headers->get('referer');
+    return new RedirectResponse($referer);
     }
 
 }

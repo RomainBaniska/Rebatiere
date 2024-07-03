@@ -7,6 +7,7 @@
     --fc-custombutton-active-border-color: transparent;
     --fc-button-hover-bg-color: #0e68c2;
     --fc-button-hover-border-color: #0e68c2;
+    --fc-button-text-color: #FFFFFF; /* Ajout de la variable manquante */
 }
 
 .fc-toolbar {
@@ -14,26 +15,21 @@
 }
 
 .fc-button-primary:not(:disabled):active {
-    background-color: #0D87FF;
-    border-color: #0D87FF;
-    color: #0D87FF !important;
+    background-color: var(--fc-button-active-bg-color);
+    border-color: var(--fc-button-active-border-color);
+    color: var(--fc-button-text-color) !important;
 }
 
 .fc-button-primary {
-    background-color: #0D87FF;
-    border-color: #0D87FF;
+    background-color: var(--fc-button-bg-color);
+    border-color: var(--fc-button-border-color);
+    color: var(--fc-button-text-color);
 }
 
 .fc-myCustomButton-button {
     background-color: var(--fc-custombutton-active-bg-color);
     border-color: #E2E2EA;
     color: white !important;
-}
-
-.fc .fc-button-primary {
-    background-color: var(--fc-button-bg-color);
-    border-color: var(--fc-button-border-color);
-    color: var(--fc-button-text-color);
 }
 
 .fc-col-header-cell-cushion {
@@ -45,17 +41,29 @@ body {
 }
 
 .fc-daygrid-day-frame {
-    display: flex;
+    /* display: flex; */
     flex-wrap: wrap;
-    position: relative;
+    /* position: absolute; */
+}
+
+
+/* .fc-daygrid-day-top {
+} */
+
+
+td[role="gridcell"] {
+    display: table-cell;
+    /* background-color: red; */
 }
 
 .fc-daygrid-day-events {
     position: absolute;
+    display: flex;
+    flex-direction: row;
+    /* Ajuster width et height si nécessaire */
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+   
 }
 
 .fc-daygrid-event-harness {
@@ -86,6 +94,7 @@ body {
     display: inline-block !important;
 }
 
+/* Utilisation du sélecteur universel pour plus de clarté */
 .fc-daygrid-day-frame,
 .fc-scrollgrid-sync-inner,
 .fc-daygrid-day-events,
@@ -106,3 +115,35 @@ body {
     margin: 0 !important;
     box-shadow: none !important;
 }
+
+.green-circle {
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.red-circle {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+
+/* Lignes ci dessous probablement inutiles car pas prises en compte dans la page */
+.fc-daygrid-day-frame .fc-scrollgrid-sync-inner {
+    min-height: 10%;
+    display: flex;
+    flex-direction: column; /* Afficher en liste verticale */
+    align-items: flex-start; /* Aligner les éléments à gauche (ou ajuster selon vos besoins) */
+    gap: 10px; /* Espacement entre les éléments, ajustez selon vos besoins */
+}
+
+.fc-daygrid-day-frame .fc-scrollgrid-sync-inner > * {
+    width: 100%; /* Forcer la largeur des éléments à 100% pour occuper toute la largeur disponible */
+}
+
+
