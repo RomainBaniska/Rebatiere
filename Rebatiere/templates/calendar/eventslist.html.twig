@@ -36,16 +36,6 @@
           height : '80%',
           aspectRatio: 1,
           displayEventTime: false,
-          dayCellContent: function(arg) {
-                let dateText = arg.date.getDate();
-                
-                let pastille = `     
-                <div class="green-circle"></div>
-                <div class="red-circle"></div>
-                ` 
-                let dateHtml = `<div>${dateText}</div>`;
-                return { html: dateText + pastille };
-                },
           dateClick: function(info) {
                 // Vide la div
                 eventDetailsEl.innerHTML = '';
@@ -84,6 +74,16 @@
             right: 'prev,dayGridWeek,dayGridMonth,next'
           },
           events: '/api/reservations', 
+          dayCellContent: function(arg) {
+                let dateText = arg.date.getDate();
+                
+                let pastille = `     
+                <div class="green-circle"></div>
+                <div class="red-circle"></div>
+                ` 
+                let dateHtml = `<div>${dateText}</div>`;
+                return { html: dateText + pastille };
+                },
           customButtons: {
             myCustomButton: {
               text: 'Nouvelle réservation',

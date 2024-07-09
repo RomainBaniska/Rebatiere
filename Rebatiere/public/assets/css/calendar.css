@@ -60,6 +60,7 @@ td[role="gridcell"] {
     position: absolute;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     /* Ajuster width et height si nécessaire */
     top: 0;
     left: 0;

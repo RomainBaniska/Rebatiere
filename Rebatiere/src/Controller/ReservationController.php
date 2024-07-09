@@ -126,6 +126,7 @@ class ReservationController extends AbstractController
                         'privatisation' => $reservation->isPrivatisation(),
                         'debut' => $reservation->getStart()->format('d-m-Y'),
                         'fin' => $reservation->getEnd()->format('d-m-Y'),
+                        'dates' => $reservation->getDates(),
                         'icon' => $reservation->getUsers()->getImageFileName() ? '/uploads/images/' . $reservation->getUsers()->getImageFileName() : 'assets/images/defaultavatar.png',
                     ],
                 ];
