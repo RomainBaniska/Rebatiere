@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PiscineController!{% endblock %}
+
+
+{% block body %}
+
+<h1>Bienvenu dans l'espace gestion de la Piscine</h1>
+
+    {# Ouverture du formulaire #}
+    <form method="post" action="{{ path('app_persistpiscine') }}">
+
+    {# DatePicker jQuery #}
+    {% include 'datePicker/datepicker.html.twig' %}
+
+     <div class='datepicker_container'>
+        <label for="from">Date d'ouverture de la piscine</label> &nbsp;
+        <input type="text" id="from" name="from" autocomplete="off"> &nbsp;
+
+        <label for="to">Date de fermeture de la piscine</label> &nbsp;
+        <input type="text" id="to" name="to" autocomplete="off"> &nbsp;
+    </div>
+  </div>
+
+     <button type="submit">Ajouter</button>
+
+    </form>
+
+{% endblock %}

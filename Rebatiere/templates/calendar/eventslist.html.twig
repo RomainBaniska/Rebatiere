@@ -75,15 +75,17 @@
           },
           events: '/api/reservations', 
           dayCellContent: function(arg) {
-                let dateText = arg.date.getDate();
-                
-                let pastille = `     
-                <div class="green-circle"></div>
-                <div class="red-circle"></div>
-                ` 
-                let dateHtml = `<div>${dateText}</div>`;
-                return { html: dateText + pastille };
-                },
+          let dateText = arg.date.getDate();
+          
+          // Créez un identifiant unique basé sur la date
+          let id = `pastille-${arg.date.getFullYear()}-${arg.date.getMonth() + 1}-${dateText}`;
+          
+          let pastille = `     
+          <div id="${id}" class="circle red-circle" onclick="togglePastille('${id}')"></div>
+          ` 
+          let dateHtml = `<div>${dateText}</div>`;
+          return { html: dateHtml + pastille };
+          },
           customButtons: {
             myCustomButton: {
               text: 'Nouvelle réservation',
@@ -121,6 +123,18 @@
         });
         calendar.render();
       });
+
+      // Fonction qui change la couleur de la pastille lorsque click
+      function togglePastille(id) {
+      let pastille = document.getElementById(id);
+      if (pastille.classList.contains('red-circle')) {
+          pastille.classList.remove('red-circle');
+          pastille.classList.add('green-circle');
+      } else {
+          pastille.classList.remove('green-circle');
+          pastille.classList.add('red-circle');
+      }
+  }
     </script>
     {% endblock %}
 
