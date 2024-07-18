@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PiscineController!{% endblock %}
+
+
+{% block body %}
+
+{% for piscine in piscines %}
+
+Ouverture de la piscine du 
+{{ piscine.start|date('Y-m-d') }}
+au
+{{ piscine.end|date('Y-m-d') }}
+<div class="formButton">
+            <form action="{{ path('app_deletepiscine', {'id': piscine.id}) }}" method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ piscine.id) }}">
+                <button type="submit">X</button>
+            </form>
+        </div>
+
+{% endfor %}
+
+{% endblock %}
+
+{% block javacripts %}
+{% endblock %}

@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PiscineController extends AbstractController
@@ -14,8 +15,6 @@ class PiscineController extends AbstractController
     #[Route('/piscine', name: 'app_piscine')]
     public function watchPiscine(): Response
     {
-
-
 
         return $this->render('piscine/index.html.twig', [
             'controller_name' => 'PiscineController',
@@ -43,12 +42,30 @@ class PiscineController extends AbstractController
         }
     }
 
-    #[Route('/piscinelist', name: 'app_persistpiscine')]
+    #[Route('/piscineDelete/{id}', name: 'app_deletepiscine', methods: ['POST'])]
+    public function deletePiscine(EntityManagerInterface $em, Request $request, Piscine $piscine): Response
+    {
+           // Protection contre les CSRF
+           if ($this->isCsrfTokenValid('delete'.$piscine->getId(), $request->request->get('_token'))) {
+            $em->remove($piscine);
+            $em->flush();
+        }
+
+    // Rediriger vers la page actuelle
+    $referer = $request->headers->get('referer');
+    return new RedirectResponse($referer);
+    }
+
+    #[Route('/piscinelist', name: 'app_piscinelist')]
     public function piscinelist(EntityManagerInterface $em): Response
     {
         $piscineList = $em->getRepository(Piscine::class)->findAll();
 
-        dump($piscineList);
+        // dump($piscineList);
+
+        return $this->render('piscine/list.html.twig', [
+            'piscines' => $piscineList,
+        ]);
     }
 }
 
