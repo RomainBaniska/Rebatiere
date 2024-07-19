@@ -25,7 +25,7 @@ class PiscineCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             DateField::new('start'),
             DateField::new('end'),
-            TextField::new('statut'),
+            // TextField::new('statut'),
         ];
     }
 
@@ -34,7 +34,8 @@ class PiscineCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular('Piscine')
             ->setEntityLabelInPlural('Piscines')
-            ->setSearchFields(['statut']);
+            // ->setSearchFields(['statut'])
+            ;
     }
 
     // public function configureFilters(Filters $filters): Filters

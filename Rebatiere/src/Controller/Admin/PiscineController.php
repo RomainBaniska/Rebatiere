@@ -27,10 +27,17 @@ class PiscineController extends AbstractController
         try {
             $from = new \DateTime($request->request->get('from'));
             $to = new \DateTime($request->request->get('to'));
+            $dates = [];
+            $currentDate = clone $from;
+            while ($currentDate <= $to) {
+                $dates[] = $currentDate->format('Y-m-d');
+                $currentDate->modify('+1 day');
+                }
 
             $reservation = new Piscine();
             $reservation->setStart($from);
             $reservation->setEnd($to);
+            $reservation->setDates($dates);
             $reservation->setStatut("OPEN");
 
             $em->persist($reservation);

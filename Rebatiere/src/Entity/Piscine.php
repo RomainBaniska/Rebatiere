@@ -20,6 +20,9 @@ class Piscine
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $end = null;
 
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    private ?array $dates = [];
+
     #[ORM\Column(length: 10)]
     private ?string $statut = null;
 
@@ -51,6 +54,18 @@ class Piscine
 
         return $this;
     }
+
+        // Array de dates
+        public function getDates(): ?array
+        {
+            return $this->dates;
+        }
+    
+        public function setDates(array $dates): static
+        {
+            $this->dates = $dates;
+            return $this;
+        }
 
     public function getStatut(): ?string
     {
