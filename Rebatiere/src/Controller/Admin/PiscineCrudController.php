@@ -1,5 +1,7 @@
 <?php
 
+// https://symfony.com/bundles/EasyAdminBundle/current/crud.html
+
 namespace App\Controller\Admin;
 
 use App\Entity\Piscine;
@@ -35,11 +37,11 @@ class PiscineCrudController extends AbstractCrudController
             ->setSearchFields(['statut']);
     }
 
-    public function configureFilters(Filters $filters): Filters
-    {
-        return $filters
-            ->add('start')
-            ->add('end')
-            ->add('statut');
-    }
+    // public function configureFilters(Filters $filters): Filters
+    // {
+    //     return $filters
+    //         ->add('start')
+    //         ->add('end')
+    //         ->add('statut');
+    // }
 }

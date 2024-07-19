@@ -18,6 +18,11 @@
 
 {% block javascripts %} 
 
+    {# Moment.js Script #}
+    <script src="{{ asset('assets/javascript/moment.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/fr.min.js"></script>
+    <script> moment.locale('fr-FR');</script>
+
     {# FullCalendar Script 1 #}
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
     
@@ -51,14 +56,14 @@
                     let lastname = event.extendedProps.lastname
                     let chamber = event.extendedProps.chamber;
                     let dates = event.startStr + ' - ' + event.endStr;
-                    let debut = event.extendedProps.debut;
-                    let fin = event.extendedProps.fin;
+                    let debut = moment(event.extendedProps.debut, 'DD-MM-YYYY').format('dddd D MMMM');
+                    let fin = moment(event.extendedProps.fin, 'DD-MM-YYYY').format('dddd D MMMM');
                     let eventInfo = `
                       <div>
                         <img src="${icon}" style="width: 30px; height: 30px; border-radius: 50%; margin: 5px;">
                         ${firstname} ${lastname}
-                        <p>Chambre: ${chamber}</p>
-                        <p>Période de réservation: ${debut} - ${fin}</p>
+                        <strong>Chambre:</strong> ${chamber}
+                        <strong>Période de réservation:</strong> du ${debut} au ${fin}
                       </div>
                     `;
                     eventDetailsEl.innerHTML += eventInfo;
