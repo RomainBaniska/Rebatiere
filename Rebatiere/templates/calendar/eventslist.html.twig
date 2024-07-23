@@ -32,6 +32,19 @@
       document.addEventListener('DOMContentLoaded', function() {
         let calendarEl = document.getElementById('calendar');
         let eventDetailsEl = document.getElementById('infos'); 
+
+        {# Fetch des dates pour la piscine #}
+
+        // Fetch des dates pour la piscine
+        fetch('/api/piscine-dates')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(openDates => {
+
         let calendar = new FullCalendar.Calendar(calendarEl, {          
           initialView: 'dayGridWeek',
           weekends: true,
@@ -80,16 +93,20 @@
           },
           events: '/api/reservations', 
           dayCellContent: function(arg) {
-          let dateText = arg.date.getDate();
-          
-          // Créez un identifiant unique basé sur la date
-          let id = `pastille-${arg.date.getFullYear()}-${arg.date.getMonth() + 1}-${dateText}`;
-          
-          let pastille = `     
-          <div id="${id}" class="circle red-circle" onclick="togglePastille('${id}')"></div>
-          ` 
-          let dateHtml = `<div>${dateText}</div>`;
-          return { html: dateHtml + pastille };
+         let dateText = arg.date.getDate();
+                    let dateCopy = new Date(arg.date);
+                    dateCopy.setDate(dateCopy.getDate() + 1);
+                    let formattedDate = dateCopy.toISOString().split('T')[0];
+                    let color = openDates.includes(formattedDate) ? 'green' : 'red';
+
+                    // Créez un identifiant unique basé sur la date
+                    let id = `pastille-${arg.date.getFullYear()}-${arg.date.getMonth() + 1}-${dateText}`;
+                    
+                    let pastille = `     
+                        <div id="${id}" class="circle ${color}-circle"</div>
+                    `;
+                    let dateHtml = `<div>${dateText}</div>`;
+                    return { html: dateHtml + pastille };
           },
           customButtons: {
             myCustomButton: {
@@ -123,10 +140,11 @@
 
             return { domNodes: [avatarEl] }
         },
-        
-
         });
         calendar.render();
+      });
+
+      {# Fermeture du fetch #}
       });
 
       // Fonction qui change la couleur de la pastille lorsque click

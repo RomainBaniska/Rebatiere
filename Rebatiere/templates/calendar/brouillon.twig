@@ -1,0 +1,18 @@
+dayCellContent: function(arg) {
+            let dateText = arg.date.getDate();
+            
+            // Créez un identifiant unique basé sur la date
+            let id = `pastille-${arg.date.getFullYear()}-${arg.date.getMonth() + 1}-${dateText}`;
+            
+            // Interroger le backend pour vérifier si la date est présente
+            fetch(`/api/check-date/${arg.date.toISOString().split('T')[0]}`)
+                .then(response => response.json())
+                .then(data => {
+                    let pastilleColor = data.exists ? 'green-circle' : 'red-circle';
+                    document.getElementById(id).classList.add(pastilleColor);
+                });
+
+            let pastille = `<div id="${id}" class="circle red-circle"></div>`;
+            let dateHtml = `<div>${dateText}</div>`;
+            return { html: dateHtml + pastille };
+        },

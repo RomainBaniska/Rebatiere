@@ -7,8 +7,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Exception;
 
 class PiscineController extends AbstractController
 {
@@ -74,5 +76,36 @@ class PiscineController extends AbstractController
             'piscines' => $piscineList,
         ]);
     }
+
+    #[Route('/api/check-date/{date}', name: 'check_date')]
+    public function checkDate($date, EntityManagerInterface $em): JsonResponse
+    {
+        $piscineRepository = $em->getRepository(Piscine::class);
+        $piscines = $piscineRepository->findAll();
+
+        foreach ($piscines as $piscine) {
+            if (in_array($date, $piscine->getDates())) {
+                return new JsonResponse(['exists' => true]);
+            }
+        }
+
+        return new JsonResponse(['exists' => false]);
+    }
+    
+    #[Route('/api/piscine-dates', name: 'api_piscine_dates')]
+    public function getPiscineDates(EntityManagerInterface $em): JsonResponse
+    {
+        $piscineRepository = $em->getRepository(Piscine::class);
+        $piscines = $piscineRepository->findAll();
+    
+        $dates = [];
+        foreach ($piscines as $piscine) {
+            $dates = array_merge($dates, $piscine->getDates());
+        }
+        $dates = array_unique($dates); // Retirer les doublons
+    
+        return new JsonResponse($dates);
+    }
+
 }
 
