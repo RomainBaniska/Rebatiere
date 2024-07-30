@@ -47,6 +47,20 @@
 
         let calendar = new FullCalendar.Calendar(calendarEl, {          
           initialView: 'dayGridWeek',
+          views: {
+                  dayGridWeek : { dayHeaderContent: function(arg) {
+                    let date = arg.date;
+                    let dayName = arg.text;
+                    let dayNumber = date.getDate();
+                    return dayName + ' ' + dayNumber;
+                }
+                  },
+                  dayGridMonth: {
+                        dayHeaderContent: function(arg) {
+                            return arg.text;
+                }
+                  }
+          },
           weekends: true,
           dayHeaderFormat: { weekday: 'long' },
           locale: 'fr',
@@ -54,6 +68,8 @@
           height : '80%',
           aspectRatio: 1,
           displayEventTime: false,
+
+        {# Informations lorsque je clique sur une date #}
           dateClick: function(info) {
                 // Vide la div
                 eventDetailsEl.innerHTML = '';
@@ -91,23 +107,29 @@
             center: 'title' ,
             right: 'prev,dayGridWeek,dayGridMonth,next'
           },
-          events: '/api/reservations', 
+          events: '/api/reservations',
+ 
+        // Contenu de la cellule 'jour' //
           dayCellContent: function(arg) {
-         let dateText = arg.date.getDate();
-                    let dateCopy = new Date(arg.date);
-                    dateCopy.setDate(dateCopy.getDate() + 1);
-                    let formattedDate = dateCopy.toISOString().split('T')[0];
-                    let color = openDates.includes(formattedDate) ? 'green' : 'red';
+                        let dateText = arg.date.getDate();
+                        let dateCopy = new Date(arg.date);
+                        dateCopy.setDate(dateCopy.getDate() + 1);
+                        let formattedDate = dateCopy.toISOString().split('T')[0];
+                        let color = openDates.includes(formattedDate) ? 'green' : 'red';
 
-                    // Créez un identifiant unique basé sur la date
-                    let id = `pastille-${arg.date.getFullYear()}-${arg.date.getMonth() + 1}-${dateText}`;
-                    
-                    let pastille = `     
-                        <div id="${id}" class="circle ${color}-circle"</div>
-                    `;
-                    let dateHtml = `<div>${dateText}</div>`;
-                    return { html: dateHtml + pastille };
-          },
+                        let id = `pastille-${arg.date.getFullYear()}-${arg.date.getMonth() + 1}-${dateText}`;
+                        
+                        let pastille = `<div id="${id}" class="circle ${color}-circle"></div>`;
+                        let dateHtml = `<div>${dateText}</div>`;
+
+                        if (calendar.view.type === 'dayGridMonth') {
+                            return { html: dateHtml + pastille };
+                        } else if (calendar.view.type === 'dayGridWeek') {
+                            return { html: pastille };
+                        }
+                    },
+
+          // Ajout de boutons //
           customButtons: {
             myCustomButton: {
               text: 'Nouvelle réservation',
@@ -116,6 +138,8 @@
               }
             }
           },
+
+          {# Traduction des boutons #}
           buttonText: {
             today: 'aujourd\'hui',
             month: 'mois',
@@ -123,6 +147,8 @@
             day: 'jour',
             list: 'liste'
             },
+
+        {# Contenu des événements #}
         eventContent: function(arg) {
             let containerEl = document.createElement('div')
 
@@ -147,17 +173,6 @@
       {# Fermeture du fetch #}
       });
 
-      // Fonction qui change la couleur de la pastille lorsque click
-      function togglePastille(id) {
-      let pastille = document.getElementById(id);
-      if (pastille.classList.contains('red-circle')) {
-          pastille.classList.remove('red-circle');
-          pastille.classList.add('green-circle');
-      } else {
-          pastille.classList.remove('green-circle');
-          pastille.classList.add('red-circle');
-      }
-  }
     </script>
     {% endblock %}
 
