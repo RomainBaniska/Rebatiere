@@ -120,10 +120,10 @@
                         let id = `pastille-${arg.date.getFullYear()}-${arg.date.getMonth() + 1}-${dateText}`;
                         
                         let pastille = `<div id="${id}" class="circle ${color}-circle"></div>`;
-                        let dateHtml = `<div>${dateText}</div>`;
+                        let dateHtml = `<div class="fc-numerojour">${dateText}</div>`;
 
                         if (calendar.view.type === 'dayGridMonth') {
-                            return { html: dateHtml + pastille };
+                            return { html: pastille + dateHtml };
                         } else if (calendar.view.type === 'dayGridWeek') {
                             return { html: pastille };
                         }

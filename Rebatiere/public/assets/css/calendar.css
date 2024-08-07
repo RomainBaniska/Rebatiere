@@ -47,10 +47,6 @@ body {
 }
 
 
-/* .fc-daygrid-day-top {
-} */
-
-
 td[role="gridcell"] {
     display: table-cell;
     /* background-color: red; */
@@ -147,4 +143,38 @@ td[role="gridcell"] {
     width: 100%; /* Forcer la largeur des éléments à 100% pour occuper toute la largeur disponible */
 }
 
+.fc .fc-daygrid-day-top {
+    display: flex; /* Par défaut */
+    flex-direction: row-reverse; /* Par défaut */
+    justify-content: space-between;
+    /* align-items: center; */
+    /* border: 1px solid red; */
+}
 
+.fc-daygrid-day-top div{
+    /* display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important; */
+    /* border: 1px solid red; */
+}
+
+.fc .fc-daygrid-day-number{
+    width: 100%; /* LE COUPABLE !!!! */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* border: 1px solid blue; */
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* .fc-daygrid-day-number > div {
+    flex: 0 1 auto; 
+    min-width: 0; 
+} */
+
+.fc-numerojour {
+    color: #92929D;
+    font-weight: bold;
+}
