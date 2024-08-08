@@ -1,5 +1,13 @@
 framework:
     cache:
+
+    # Décommenter les deux lignes ci dessous si "redis" est OK
+        # app: cache.adapter.redis # ajouté pour le cache "redis"
+        # default_redis_provider: redis://localhost # ajouté pour le cache "redis" en localhost
+
+
+
+
         # Unique name of your app: used to compute stable namespaces for cache keys.
         #prefix_seed: your_vendor_name/app_name
 

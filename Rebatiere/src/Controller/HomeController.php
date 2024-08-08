@@ -35,22 +35,4 @@ class HomeController extends AbstractController
             'photo' => $photo,
         ]);
     }
-
-    #[Route('/map', name: 'app_map')]
-    public function map(): Response
-    {
-
-        return $this->render('home/map.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
-
-    #[Route('/testprofile', name: 'app_testprofile')]
-    public function testprofil(): Response
-    {
-
-        return $this->render('home/profiledropdown.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
 }

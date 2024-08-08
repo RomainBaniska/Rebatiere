@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>reCAPTCHA demo: Simple page</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  </head>
+  <body>
+
+    <?php 
+    require_once 'Rebatiere\src\Captcha\autoload.php';
+
+    if(isset($_POST['ok'])){
+        $recaptcha = new \ReCaptcha\ReCaptcha("6LdWXyIqAAAAAFFWXRXMU0ejF7rdNT7HMo5ga6D5");
+        $gRecaptchaResponse = $_POST['g-recaptcha-response'];
+        $resp = $recaptcha->setExpectedHostname('localhost')
+                        ->setExpectedAction('homepage')
+                        ->setScoreThreshold(0.5)
+                        ->verify($gRecaptchaResponse, $remoteIp);
+
+        if ($resp->isSuccess()) {
+            echo "Success !";
+        } else {
+            $errors = $resp->getErrorCodes();
+            // var_dump($errors);
+        }
+    }
+    ?>
+
+    <form method="POST">
+      <div class="g-recaptcha" data-sitekey="6LdWXyIqAAAAAGwplDPKwPJoJngvmxbJY1lP2Cqm"></div>
+      <br/>
+      <input type="submit" name="ok" value="Submit">
+    </form>
+  </body>
+</html>

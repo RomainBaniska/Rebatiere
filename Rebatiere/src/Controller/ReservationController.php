@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 
 class ReservationController extends AbstractController
 {
@@ -93,14 +95,20 @@ class ReservationController extends AbstractController
         $em->persist($reservation);
         $em->flush();
 
-        // return $this->redirectToRoute('app_home');
-        return $this->redirectToRoute('app_calendar');
+        return $this->redirectToRoute('app_home');
     }
 
     // Méthode de traitement de l'information envoyé au fullcalendar concernant les dates 
     #[Route('/api/reservations', name: 'api_reservations')]
-    public function getReservations(EntityManagerInterface $em): JsonResponse
+    public function getReservations(EntityManagerInterface $em, CacheInterface $cache): JsonResponse
     {
+
+        // // Cache
+        // $calendarData = $cache->get('events_cache', function (ItemInterface $item) use ($em) {
+        // $item->expiresAfter(1); // Une heure
+
+        // Ajouter purge du cache quand réservation faite !!!! /!\
+
         $reservations = $em->getRepository(Reservation::class)->findAll();
 
         $events = [];
@@ -126,30 +134,8 @@ class ReservationController extends AbstractController
             }
         }
 
+    //     return $events;
+    // }); 
         return new JsonResponse($events);
     }
-
-
-    #[Route('/testrelation', name: 'app_testrelation')]
-    public function testRelation(EntityManagerInterface $em)
-{
-   // Récupérer toutes les réservations avec les utilisateurs et les chambres associés
-   $reservations = $em->getRepository(Reservation::class)->findAll();
-
-//    dump($reservations);
-
-   // Maintenant vous pouvez envoyer ces réservations à votre vue pour les afficher
-   return $this->render('reservation/list_reservations.html.twig', [
-       'reservations' => $reservations,
-   ]);
-}
-
-#[Route('/dropmonth', name: 'app_dropmonth')]
-    public function dropmonth(): Response
-    {
-      
-          return $this->render('calendar/dropmonth.html.twig', [
-        ]);        
-    }
-
 }
