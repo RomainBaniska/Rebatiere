@@ -37,7 +37,7 @@ class RegistrationController extends AbstractController
                 $fileName = uniqid().'.'.$photo->guessExtension();
                 $photo->move($photoDir, $fileName);
             }
-            $user->setImageFileName($fileName);
+            $user->setImageFileName(null);
 
 
             // Persist & Flush en BDD
