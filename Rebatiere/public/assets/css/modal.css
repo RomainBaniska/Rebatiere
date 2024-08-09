@@ -1,0 +1,25 @@
+/* * {
+    background-color: blue;
+} */
+
+.close-animatedModal{
+/* background-color:#FFFADF; */
+animation-name: bounceOutDown;
+}
+
+#animatedModal.animated.animatedModal-on.zoomIn {
+    background-color: #FFFADF !important;
+}
+
+.zoomIn {
+    animation-name: lightSpeedIn;
+}
+
+.modal-content{
+    /* background-color: rgba(255,220,40,.15); */
+    border: 5px red;
+}
+
+.demo01 {
+    background-color: rgba(255,220,40,.15);
+}

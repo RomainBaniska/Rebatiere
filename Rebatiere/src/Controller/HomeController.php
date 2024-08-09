@@ -35,4 +35,12 @@ class HomeController extends AbstractController
             'photo' => $photo,
         ]);
     }
+
+    #[Route('modal', name: 'app_modal')]
+    public function modal(): Response 
+    {
+    return $this->render('home/modal.html.twig', [
+            'controller_name' => 'HomeController'
+    ]);
+    }
 }
