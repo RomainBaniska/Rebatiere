@@ -8,7 +8,12 @@ animation-name: bounceOutDown;
 }
 
 #animatedModal.animated.animatedModal-on.zoomIn {
+    box-sizing: border-box; /* Assurez-vous que le padding est inclus dans la largeur totale */
+    position: relative;
+    width: 80%;
     background-color: #FFFADF !important;
+    padding: 5%;
+    /* margin: 5%; */
 }
 
 .zoomIn {
