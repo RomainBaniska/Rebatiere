@@ -5,14 +5,24 @@
     {# Calendar #}
     <div id='calendar'></div>
 
-   
-
   {# Informations #}
-    <div id='infos'>
-      Sélectionnez un événement pour laisser apparaitre le détail
-    </div>
-     <div id='event-details'></div> 
+    {# <div id='infos'>Sélectionnez un événement pour laisser apparaitre le détail</div> #}
 
+  {# Modal #}
+
+    <!-- Lien pour ouvrir la modal -->
+    <a id="openModalButton" href="#animatedModal" style="display:none;">Ouvrir la modal</a>
+
+    <div id="animatedModal">
+        <div class="close-animatedModal"> 
+            Fermer
+        </div>
+        <div class="modal-content">
+          <div id='eventDetailsModalContent'>
+          {# Informations de la date cliquée injectées ici #}
+          </div>
+        </div>
+    </div>
 {% endblock %}
 
 
@@ -31,9 +41,9 @@
     
       document.addEventListener('DOMContentLoaded', function() {
         let calendarEl = document.getElementById('calendar');
-        let eventDetailsEl = document.getElementById('infos'); 
-
-        {# Fetch des dates pour la piscine #}
+     // let eventDetailsEl = document.getElementById('infos'); 
+        let eventDetailsModalContent = document.getElementById('eventDetailsModalContent');
+        let openModalButton = document.getElementById('openModalButton');
 
         // Fetch des dates pour la piscine
         fetch('/api/piscine-dates')
@@ -68,16 +78,16 @@
           height : '80%',
           aspectRatio: 1,
           displayEventTime: false,
-
-        {# Informations lorsque je clique sur une date #}
+        //Informations lorsque je clique sur une date
           dateClick: function(info) {
                 // Vide la div
-                eventDetailsEl.innerHTML = '';
-                // Filtre les événements de la date cliquée
+                // eventDetailsEl.innerHTML = '';
+                eventDetailsModalContent.innerHTML = '';
+                // Filtre les événements de la date cliquée -> Récupération des events, filtrage : Tous ceux dont la date de début 'startStr' = à la date cliquée 'dateStr'
                 let events = calendar.getEvents().filter(function(event) {
                   return event.startStr === info.dateStr;
                 });
-                // Affiche les détails de l'événement
+                // Affiche les détails de l'événement. Si 1 ou plusieurs events existent, chaque événement est parcouru et les détails extraits
                 if (events.length > 0) {
                   events.forEach(function(event) {
                     let icon = event.extendedProps.icon;
@@ -85,6 +95,7 @@
                     let lastname = event.extendedProps.lastname
                     let chamber = event.extendedProps.chamber;
                     let dates = event.startStr + ' - ' + event.endStr;
+                    // Formatage avec le script moment.js ("Lundi 1 Janvier")
                     let debut = moment(event.extendedProps.debut, 'DD-MM-YYYY').format('dddd D MMMM');
                     let fin = moment(event.extendedProps.fin, 'DD-MM-YYYY').format('dddd D MMMM');
                     let eventInfo = `
@@ -95,11 +106,15 @@
                         <strong>Période de réservation:</strong> du ${debut} au ${fin}
                       </div>
                     `;
-                    eventDetailsEl.innerHTML += eventInfo;
+                    // On remplit la div 'infos' qui n'est autre que la variable eventDetailsEl
+                    // eventDetailsEl.innerHTML += eventInfo;
+                     eventDetailsModalContent.innerHTML += eventInfo;
                   });
                 } else {
-                  eventDetailsEl.innerHTML = '<p>Aucun événement pour cette date.</p>';
+                  eventDetailsModalContent.innerHTML = '<p>Aucun événement pour cette date.</p>';
                 }
+                  // Affiche la modal en cliquant sur le lien invisible
+                 openModalButton.click();
                 },
           eventDisplay : 'block',
           headerToolbar: {
@@ -168,19 +183,29 @@
         },
         });
         calendar.render();
+        // Initialisation de la modal animée
+        $("#openModalButton").animatedModal();
       });
 
-      {# Fermeture du fetch #}
+      // Fermeture du fetch
       });
-
     </script>
+
+    {# Script de la Modal #}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{{ asset('assets/javascript/animatedModal.min.js') }}"></script>
+    <script>$("#demo01").animatedModal();</script>
     {% endblock %}
 
     {% block stylesheets %}
+    {# Calendar & homestyle #}
     <link rel="stylesheet" href="{{ asset('assets/css/calendar.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/homestyle.css') }}">
     {# font Poppins #}
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'> 
+    {# Modal #}
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/modal.css') }}">
     {% endblock %}
 
   

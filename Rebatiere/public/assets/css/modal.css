@@ -16,6 +16,14 @@ animation-name: bounceOutDown;
     /* margin: 5%; */
 }
 
+#animatedModal.animated.animatedModal-off.zoomOut {
+    background-color: #FFFADF !important;
+}
+
+#animatedModal.animated.animatedModal-off {
+    background-color: #FFFADF !important;
+}
+
 .zoomIn {
     animation-name: lightSpeedIn;
 }

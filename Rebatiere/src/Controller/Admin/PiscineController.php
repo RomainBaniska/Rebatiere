@@ -92,6 +92,8 @@ class PiscineController extends AbstractController
         return new JsonResponse(['exists' => false]);
     }
     
+    // Nécessaire à l'envoi la gestion de la pastille verte/rouge du calendar
+
     #[Route('/api/piscine-dates', name: 'api_piscine_dates')]
     public function getPiscineDates(EntityManagerInterface $em): JsonResponse
     {
