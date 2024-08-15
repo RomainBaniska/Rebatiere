@@ -1,129 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
 
-    <html lang='en'>  
-    
-    {% block head %}
-  <head>
-    <meta charset='utf-8' />    
+{% block head %}
+<head>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-    {% endblock %}
+    <link rel="stylesheet" href="{{ asset('assets/css/map.css') }}">
+</head>
+{% endblock %}
 
-  {% block stylesheets %}
-  <link rel="stylesheet" href="{{ asset('assets/css/map.css') }}">
-  {% endblock %}
+<body>
 
-  {% block body %}
-  <body>
-
+    {% block body %}
     {# header #}
     {% include 'header.html.twig' %}
 
-    <img usemap="#chambermap" src="{{ asset('assets/images/firstfloor.jpg') }}" alt="Carte des chambres" class="responsive"/>
+    {# Contient l'image en PNG/JPEG et l'image en SVG en overlay #}
+    <div class="box">
+        <div class="image-container">
+            <img usemap="#chambermap" src="{{ asset('assets/images/firstfloor/firstfloor.jpg') }}" alt="Carte des chambres" class="background-image responsive"/>
+            <img src="{{ asset('assets/images/firstfloor/overlay.svg') }}" alt="Overlay SVG" class="overlay-image">
+        </div>
+    </div>
 
-  <map name="chambermap">
-  <area  
-      shape="rect"
-      coords="1125,2704,1949,3450"
-      shape="rect"
-      href="#"
-      alt="DortoirFond"
-      title="Sélectionner le dortoir du fond"
-      id="DortoirFond"
-      /> 
+    <map name="chambermap">
+        <area shape="rect" coords="1125,2704,1949,3450" href="#" alt="DortoirFond" title="Sélectionner le dortoir du fond" id="DortoirFond" />
+        <area shape="rect" coords="1133,1344,1932,2682" href="#" alt="DortoirPetits" title="Dortoir des petits" id="DortoirPetits" />
+        <area shape="rect" coords="3090,1604,3893,2420" href="#" alt="Chambrebleue" title="Chambre bleue" id="ChambreBleue" />
+        <area shape="rect" coords="3972,1322,4770,2432" href="#" alt="Jean-Claude" title="Jean-Claude" id="Jean-Claude" />
+        <area shape="rect" coords="4182,657,4849,1262" href="#" alt="Alex" title="Alex" id="Alex" />
+        <area shape="rect" coords="2011,78,2980,600" href="#" alt="Fenetre" title="Fenetre" id="Fenetre" />
+        <area shape="rect" coords="3989,82,4761,600" href="#" alt="Fond" title="Fond" id="Fond" />
+        <area shape="rect" coords="3077,94,3853,598" href="#" alt="Milieu" title="Milieu" id="Milieu" />
+        <area shape="rect" coords="98,94,945,629" href="#" alt="Nicolas" title="Nicolas" id="Nicolas" />
+        <area shape="rect" coords="1054,651,1936,1248" href="#" alt="Gauche" title="Gauche" id="Gauche" />
+    </map>
+    {% endblock %}
 
-  <area 
-      alt="DortoirPetits" 
-      title="Dortoir des petits"  
-      href="#"
-      coords="1133,1344,1932,2682" 
-      shape="rect"
-      id="DortoirPetits"
-      />
+    {% block javascripts %}
+    <script src="{{ asset('assets/javascript/mapresizer.min.js') }}"></script>
+    <script>imageMapResize();</script>
+    <script src="{{ asset('assets/javascript/imagemapevent.js') }}"></script>
+    {% endblock %}
 
-  <area 
-      alt="Chambrebleue" 
-      title="Chambre bleue"
-      href="#" 
-      coords="3090,1604,3893,2420"
-      shape="rect"
-      id="ChambreBleue"
-      />
-
-  <area 
-      alt="Jean-Claude" 
-      title="Jean-Claude"
-      href="#"
-      coords="3972,1322,4770,2432"
-      shape="rect"
-      id="Jean-Claude"
-    />
-
-    <area 
-      alt="Alex" 
-      title="Alex"
-      href="#"
-      coords="4182,657,4849,1262"
-      shape="rect"
-      id="Alex"
-    />
-
-      <area 
-      alt="Fenetre" 
-      title="Fenetre"
-      href="#"
-      coords="2011,78,2980,600"
-      shape="rect"
-      id="Fenetre"
-    />
-
-          <area 
-      alt="Fond" 
-      title="Fond"
-      href="#"
-      coords="3989,82,4761,600" 
-      shape="rect"
-      id="Fond"
-    />
-
-          <area 
-      alt="Milieu" 
-      title="Milieu"
-      href="#"
-      coords="3077,94,3853,598"
-      shape="rect"
-      id="Milieu"
-    />
-
-              <area 
-      alt="Nicolas" 
-      title="Nicolas"
-      href="#"
-      coords="98,94,945,629"
-      shape="rect"
-      id="Nicolas"
-    />
-
-              <area 
-      alt="Gauche" 
-      title="Gauche"
-      href="#" 
-      coords="1054,651,1936,1248" 
-      shape="rect"
-      id="Gauche"
-    />
-
-
-  </map>
-
-  </body>
-  {% endblock %}  
-
-   {% block javascripts %}
-  <script src="{{ asset('assets/javascript/mapresizer.min.js') }}"></script>
-  <script> imageMapResize(); </script>
-
-  <script src="{{ asset('assets/javascript/imagemapevent.js') }}"></script>
-  
-  {% endblock %}
-   
+</body>
 </html>

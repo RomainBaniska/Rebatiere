@@ -52,6 +52,11 @@ class ReservationController extends AbstractController
                 ->getRepository(Chamber::class)
                 ->find($chamberId);
 
+            // On vérifie que la date de début n'est pas antérieure à la date de fin
+            if ($from >= $to) {
+                $this->addFlash('error', 'La date d\' arrivée à la Rebatière est ultérieure à la date de départ, veuillez réessayer');
+                return $this->redirectToRoute('app_reservation');
+            }
 
             // Vérifier si la chambre est pleine pour cette période
             if ($chamber->isChamberFull($from, $to, $em)) {

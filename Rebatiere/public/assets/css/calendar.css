@@ -178,3 +178,18 @@ td[role="gridcell"] {
     color: #92929D;
     font-weight: bold;
 }
+
+.fc-daygrid-day:hover {
+    background-color: rgba(245, 245, 220, 0.5);
+    cursor: pointer;
+  }
+
+  /* Cache tout le contenu de la page au départ */
+/* body {
+    visibility: hidden;
+} */
+
+/* Affiche le contenu lorsque le chargement est terminé */
+/* body.loaded {
+    visibility: visible;
+} */

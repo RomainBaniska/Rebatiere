@@ -36,10 +36,19 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('modal', name: 'app_modal')]
+    // #[Route('modal', name: 'app_modal')]
+    // public function modal(): Response 
+    // {
+    // return $this->render('home/modal.html.twig', [
+    //         'controller_name' => 'HomeController'
+    // ]);
+    // }
+
+
+        #[Route('map', name: 'app_map')]
     public function modal(): Response 
     {
-    return $this->render('home/modal.html.twig', [
+    return $this->render('home/map.html.twig', [
             'controller_name' => 'HomeController'
     ]);
     }

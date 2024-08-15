@@ -185,6 +185,9 @@
         calendar.render();
         // Initialisation de la modal animée
         $("#openModalButton").animatedModal();
+
+        // Affiche la modal lorsque le document est prêt
+          document.body.classList.add('show-modal');
       });
 
       // Fermeture du fetch

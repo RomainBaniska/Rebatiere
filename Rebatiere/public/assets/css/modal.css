@@ -1,9 +1,5 @@
-/* * {
-    background-color: blue;
-} */
 
 .close-animatedModal{
-/* background-color:#FFFADF; */
 animation-name: bounceOutDown;
 }
 
@@ -13,7 +9,6 @@ animation-name: bounceOutDown;
     width: 80%;
     background-color: #FFFADF !important;
     padding: 5%;
-    /* margin: 5%; */
 }
 
 #animatedModal.animated.animatedModal-off.zoomOut {
@@ -29,10 +24,29 @@ animation-name: bounceOutDown;
 }
 
 .modal-content{
-    /* background-color: rgba(255,220,40,.15); */
     border: 5px red;
 }
 
 .demo01 {
     background-color: rgba(255,220,40,.15);
+}
+
+/* Cache la modal par défaut */
+#animatedModal {
+    visibility: hidden; /* Utiliser visibility pour éviter le décalage de mise en page */
+    opacity: 0; /* Rendre invisible */
+    transition: opacity 0.5s; /* Transition douce pour l'apparition */
+}
+
+.close-animatedModal {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+/* Classe pour afficher la modal */
+.show-modal #animatedModal,
+.show-modal .close-animatedModal {
+    visibility: visible;
+    opacity: 1;
 }
