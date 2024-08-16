@@ -36,9 +36,9 @@
     color: #92929D;
 }
 
-body {
+/* body {
     font-family: 'Poppins';
-}
+} */
 
 .fc-daygrid-day-frame {
     /* display: flex; */
@@ -208,4 +208,44 @@ td[role="gridcell"] {
     
 .fall { 
         background-color: #ffebcd; 
+    }
+
+    .spring-background {
+        background-image: url('assets/images/spring.png'), linear-gradient(to bottom, #87CEEB, #87CEEB);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    
+    .summer-background {
+        background-image: url('assets/images/summer.png'), linear-gradient(to bottom, #87CEEB, #87CEEB);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    
+    .autumn-background {
+        background-image: url('assets/images/autumn.png'), linear-gradient(to bottom, #87CEEB, #87CEEB);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    
+    .winter-background {
+        background-image: url('assets/images/winter.png'), linear-gradient(to bottom, #87CEEB, #87CEEB);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    
+    /* Assurez-vous que la couleur de fond par défaut est appliquée même si l'image échoue */
+    /* .fc-scrollgrid-liquid {
+        background-color: #87CEEB; 
+    } */
+
+    @font-face {
+        font-family: 'Heyday Serif';
+        src: url('/assets/fonts/heyday-serif.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+    
+    * {
+        font-family: 'Heyday Serif', serif;
     }

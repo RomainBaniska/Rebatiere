@@ -79,28 +79,53 @@
           aspectRatio: 1,
           displayEventTime: false,
           datesSet: function(info) {
-          // Obtenir le début et la fin de la période visible
-          let start = new Date(info.start);
-          let end = new Date(info.end);
+                // Obtenir la plage visible
+                let start = new Date(info.start);
+                let end = new Date(info.end);
+                // Pour chaque jour visible
+                for (let date = start; date <= end; date.setDate(date.getDate() + 1)) {
+                    let cellClass = getSeasonClass(date);
 
-          // Obtenir la classe de saison pour la première date de la période visible
-          let firstDateClass = getSeasonClass(start);
+                    // Ajouter la classe saisonnière
+                      let cell = calendarEl.querySelector('.fc-daygrid-day[data-date="' + date.toISOString().substring(0, 10) + '"]');
+                      if (cell) {
+                        cell.classList.add(cellClass);
+                      }
+                      // Sélectionne l'en-tête de jour
+                      let headerCell = calendarEl.querySelector('.fc-col-header-cell[data-date="' + date.toISOString().substring(0, 10) + '"]');
+                      if (headerCell) {
+                        headerCell.classList.add(cellClass);
+                    }
+                }
+          },
 
-          if (calendar.view.type === 'dayGridWeek') {
+/** 
+
+datesSet: function(info) {
+            let start = new Date(info.start);
+            let end = new Date(info.end);
+
+            // Obtenir la classe de saison pour la première date de la période visible
+            let firstDateClass = getSeasonClass(start);
+
+            if (calendar.view.type === 'dayGridWeek') {
               // Appliquer l'image de fond à chaque ligne de semaine
-              let weekRows = calendarEl.querySelectorAll('.fc-scrollgrid-liquid .fc-scrollgrid-section-body .fc-week');
-              weekRows.forEach(weekRow => {
-                  weekRow.classList.remove('spring-background', 'summer-background', 'autumn-background', 'winter-background');
-                  weekRow.classList.add(firstDateClass + '-background');
+              let weekGrids = calendarEl.querySelectorAll('.fc-scrollgrid-liquid .fc-daygrid-day');
+              weekGrids.forEach(weekGrid => {
+                weekGrid.classList.remove('spring-background', 'summer-background', 'autumn-background', 'winter-background');
+                weekGrid.classList.add(firstDateClass + '-background');
               });
-          } else if (calendar.view.type === 'dayGridMonth') {
+            } else if (calendar.view.type === 'dayGridMonth') {
               // Appliquer l'image de fond à l'ensemble du mois
               let monthGrid = calendarEl.querySelector('.fc-scrollgrid-liquid');
               monthGrid.classList.remove('spring-background', 'summer-background', 'autumn-background', 'winter-background');
               monthGrid.classList.add(firstDateClass + '-background');
-          }
-      },
-           //Informations lorsque je clique sur une date
+            }
+          },
+
+*/ 
+
+        //Informations lorsque je clique sur une date
           dateClick: function(info) {
                 // Vide la div
                 // eventDetailsEl.innerHTML = '';
