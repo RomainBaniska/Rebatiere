@@ -78,6 +78,21 @@
           height : '80%',
           aspectRatio: 1,
           displayEventTime: false,
+          datesSet: function(info) {
+                // Obtenir la plage visible
+                let start = new Date(info.start);
+                let end = new Date(info.end);
+                // Pour chaque jour visible
+                for (let date = start; date <= end; date.setDate(date.getDate() + 1)) {
+                    let cellClass = getSeasonClass(date);
+
+                    // Ajouter la classe saisonnière
+                    let cell = calendarEl.querySelector('.fc-day[data-date="' + date.toISOString().substring(0, 10) + '"]');
+                    if (cell) {
+                        cell.classList.add(cellClass);
+                    }
+                }
+          },
         //Informations lorsque je clique sur une date
           dateClick: function(info) {
                 // Vide la div
@@ -197,6 +212,7 @@
     {# Script de la Modal #}
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="{{ asset('assets/javascript/animatedModal.min.js') }}"></script>
+    <script src="{{ asset('assets/javascript/seasonbackground.js') }}"></script>
     <script>$("#demo01").animatedModal();</script>
     {% endblock %}
 

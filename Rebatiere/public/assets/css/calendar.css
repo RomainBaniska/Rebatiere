@@ -193,3 +193,19 @@ td[role="gridcell"] {
 /* body.loaded {
     visibility: visible;
 } */
+
+.winter { 
+    background-color: #f0f8ff; 
+    }
+
+.spring {
+     background-color: #e6ffe6;
+    }
+
+.summer {
+        background-color: #fffacd; 
+    }
+    
+.fall { 
+        background-color: #ffebcd; 
+    }
