@@ -5,7 +5,21 @@
 </head>
 
 <body>
+
+{# Début Container #}
+<div class="container">
+
+{# Profil dropdown #}
 <div class="action">
+
+<div class="logoRebatiere">
+<img src="/assets/images/logout.png">
+  </div>
+
+<div class="logoRebatiere">
+<img src="/assets/images/logoRebatiere.png">
+  </div>
+
 <div class="profile" onclick="menuToggle();">
 
 <img src="{{ asset(photo) }}" alt="User Avatar">
@@ -20,6 +34,9 @@
         <li><i class="fa fa-right-from-bracket"></i> <a href="{{ path('app_logout') }}">Déconnexion</a></li>
     </ul>
 </div>
+</div>
+
+{# Fin container #}
 </div>
 
 <script>

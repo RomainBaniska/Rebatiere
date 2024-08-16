@@ -211,25 +211,26 @@ td[role="gridcell"] {
     }
 
     .spring-background {
-        background-image: url('assets/images/spring.png'), linear-gradient(to bottom, #87CEEB, #87CEEB);
+        background-image: url('/assets/images/printemps.jpeg'), linear-gradient(to bottom, #87CEEB, #87CEEB);
         background-size: cover;
         background-repeat: no-repeat;
+        background-position: center; 
     }
     
     .summer-background {
-        background-image: url('assets/images/summer.png'), linear-gradient(to bottom, #87CEEB, #87CEEB);
+        background-image: url('/assets/images/ete.jpg'), linear-gradient(to bottom, #87CEEB, #87CEEB);
         background-size: cover;
         background-repeat: no-repeat;
     }
     
     .autumn-background {
-        background-image: url('assets/images/autumn.png'), linear-gradient(to bottom, #87CEEB, #87CEEB);
+        background-image: url('/assets/images/automne.jpg'), linear-gradient(to bottom, #87CEEB, #87CEEB);
         background-size: cover;
         background-repeat: no-repeat;
     }
     
     .winter-background {
-        background-image: url('assets/images/winter.png'), linear-gradient(to bottom, #87CEEB, #87CEEB);
+        background-image: url('/assets/images/hiver.png'), linear-gradient(to bottom, red, red);
         background-size: cover;
         background-repeat: no-repeat;
     }
