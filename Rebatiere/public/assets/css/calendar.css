@@ -93,7 +93,7 @@ td[role="gridcell"] {
 
 /* Utilisation du sélecteur universel pour plus de clarté */
 .fc-daygrid-day-frame,
-.fc-scrollgrid-sync-inner,
+/* .fc-scrollgrid-sync-inner, */
 .fc-daygrid-day-events,
 .fc-daygrid-event-harness,
 .fc-event,
@@ -137,9 +137,11 @@ td[role="gridcell"] {
     flex-direction: column; /* Afficher en liste verticale */
     align-items: flex-start; /* Aligner les éléments à gauche (ou ajuster selon vos besoins) */
     gap: 10px; /* Espacement entre les éléments, ajustez selon vos besoins */
+    background-color: #0D87FF !important;
 }
 
 .fc-daygrid-day-frame .fc-scrollgrid-sync-inner > * {
+    /* background-color: #0D87FF !important; */
     width: 100%; /* Forcer la largeur des éléments à 100% pour occuper toute la largeur disponible */
 }
 
@@ -184,15 +186,10 @@ td[role="gridcell"] {
     cursor: pointer;
   }
 
-  /* Cache tout le contenu de la page au départ */
-/* body {
-    visibility: hidden;
-} */
 
-/* Affiche le contenu lorsque le chargement est terminé */
-/* body.loaded {
-    visibility: visible;
-} */
+  .fc-col-header table {
+    background-color: #0D87FF;
+  }
 
 .winter { 
     background-color: #f0f8ff; 
@@ -211,28 +208,31 @@ td[role="gridcell"] {
     }
 
     .spring-background {
-        background-image: url('/assets/images/printemps.jpeg'), linear-gradient(to bottom, #87CEEB, #87CEEB);
+        background-image: url('/assets/images/calendarImages/printemps.jpeg'), linear-gradient(to bottom, #87CEEB, #87CEEB);
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center; 
     }
     
     .summer-background {
-        background-image: url('/assets/images/ete.jpg'), linear-gradient(to bottom, #87CEEB, #87CEEB);
+        background-image: url('/assets/images/calendarImages/ete2.jpg'), linear-gradient(to bottom, #87CEEB, #87CEEB);
         background-size: cover;
         background-repeat: no-repeat;
+        background-position: center; 
     }
     
     .autumn-background {
-        background-image: url('/assets/images/automne.jpg'), linear-gradient(to bottom, #87CEEB, #87CEEB);
+        background-image: url('/assets/images/calendarImages/automne2.jpg'), linear-gradient(to bottom, #87CEEB, #87CEEB);
         background-size: cover;
         background-repeat: no-repeat;
+        background-position: center; 
     }
     
     .winter-background {
-        background-image: url('/assets/images/hiver.png'), linear-gradient(to bottom, red, red);
+        background-image: url('/assets/images/calendarImages/hiver.png'), linear-gradient(to bottom, red, red);
         background-size: cover;
         background-repeat: no-repeat;
+        background-position: center; 
     }
     
     /* Assurez-vous que la couleur de fond par défaut est appliquée même si l'image échoue */

@@ -9,11 +9,16 @@
 } */
 
 .action {
+    background-image: linear-gradient(to bottom right, rgba(135, 206, 235, 0.4), rgba(255, 160, 122, 0.4)), url('/assets/images/headerTexture.jpg');
+    background-size: cover;      /* Redimensionne l'image pour couvrir tout l'élément */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    background-position: center;  /* Centre l'image *
     /* ajout de moi */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
+    padding: 5px;
+    margin-top: -10px;
     margin-bottom: 5px;
     /* flex-direction: row-reverse; */
     /* padding-right: 10px; */
@@ -27,8 +32,8 @@
 }
 
 .logoRebatiere img {
-    max-width: 200px;
-    max-height: 130px;
+    max-width: 500px;
+    max-height: 200px;
     width: auto;
 }
 
