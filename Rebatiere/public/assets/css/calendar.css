@@ -14,16 +14,27 @@
     text-transform: capitalize;
 }
 
+.fc-toolbar-title {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
 .fc-button-primary:not(:disabled):active {
-    background-color: var(--fc-button-active-bg-color);
+    /* background-color: var(--fc-button-active-bg-color); */
+    /* background-color: rgba(255, 255, 255, 0.5) !important; */
+    background-color: rgba(14, 104, 194, 0.5) !important;
     border-color: var(--fc-button-active-border-color);
     color: var(--fc-button-text-color) !important;
+    border: 1px rgba(14, 104, 194, 1); 
 }
 
 .fc-button-primary {
-    background-color: var(--fc-button-bg-color);
+    /* background-color: var(--fc-button-bg-color); */
+    /* background-color: rgba(255, 255, 255, 0.5) !important; */
+    background-color: rgba(14, 104, 194, 0.5) !important;
     border-color: var(--fc-button-border-color);
     color: var(--fc-button-text-color);
+    border: 1px rgba(14, 104, 194, 1); 
 }
 
 .fc-myCustomButton-button {
@@ -33,17 +44,26 @@
 }
 
 .fc-col-header-cell-cushion {
-    color: #92929D;
+    /* color: #92929D; */
+    color: whitesmoke;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* body {
-    font-family: 'Poppins';
+body {
+    background-image: url('/assets/images/pages/toile_facade.jpg');
+    background-size: cover;      /* Redimensionne l'image pour couvrir tout l'élément */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    background-position: center;  /* Centre l'image */
+    margin : 0px !important;
+}
+
+/* .fc fc-media-screen fc-direction-ltr fc-theme-standard {
+    width: 80%;
 } */
 
 .fc-daygrid-day-frame {
-    /* display: flex; */
     flex-wrap: wrap;
-    /* position: absolute; */
+    background-color: red;
 }
 
 
@@ -60,23 +80,20 @@ td[role="gridcell"] {
     /* Ajuster width et height si nécessaire */
     top: 0;
     left: 0;
-   
-}
-
-.fc-daygrid-event-harness {
-    display: inline-block;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
-}
-
-.fc-event-main {
-    display: inline-block;
     background: none !important;
     border: none !important;
     padding: 0 !important;
     margin: 0 !important;
     box-shadow: none !important;
+}
+
+.fc-event-main {
+    display: inline-block;
+    background: none !important;
+    /* background-color: rgba(255, 255, 255, 0.5) !important; */
+    border: none !important;
+    padding: 0 !important; 
+    margin: 0 !important;
 }
 
 .fc-event-main img {
@@ -85,6 +102,8 @@ td[role="gridcell"] {
     width: 30px;
     height: 30px;
     border-radius: 50%;
+    background: none !important;
+    
 }
 
 .fc-event {
@@ -93,9 +112,6 @@ td[role="gridcell"] {
 
 /* Utilisation du sélecteur universel pour plus de clarté */
 .fc-daygrid-day-frame,
-/* .fc-scrollgrid-sync-inner, */
-.fc-daygrid-day-events,
-.fc-daygrid-event-harness,
 .fc-event,
 .fc-event-start,
 .fc-event-end,
@@ -103,10 +119,18 @@ td[role="gridcell"] {
 .fc-daygrid-event,
 .fc-daygrid-block-event,
 .fc-h-event,
-.fc-event-main,
 .fc-daygrid-day-bottom,
 .fc-daygrid-day-bg {
     background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+}
+
+.fc-daygrid-event-harness {
+    display: inline-block;
+    background: none;
     border: none !important;
     padding: 0 !important;
     margin: 0 !important;
@@ -141,7 +165,6 @@ td[role="gridcell"] {
 }
 
 .fc-daygrid-day-frame .fc-scrollgrid-sync-inner > * {
-    /* background-color: #0D87FF !important; */
     width: 100%; /* Forcer la largeur des éléments à 100% pour occuper toute la largeur disponible */
 }
 
@@ -149,8 +172,10 @@ td[role="gridcell"] {
     display: flex; /* Par défaut */
     flex-direction: row-reverse; /* Par défaut */
     justify-content: space-between;
-    /* align-items: center; */
-    /* border: 1px solid red; */
+}
+
+.fc .fc-scroller-harness {
+    background-color: rgba(14, 104, 194, 0.3);
 }
 
 .fc-daygrid-day-top div{
@@ -165,20 +190,16 @@ td[role="gridcell"] {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* border: 1px solid blue; */
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
 }
 
-/* .fc-daygrid-day-number > div {
-    flex: 0 1 auto; 
-    min-width: 0; 
-} */
-
 .fc-numerojour {
-    color: #92929D;
+    /* color: #92929D; */
+    color: whitesmoke;
     font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .fc-daygrid-day:hover {
@@ -234,11 +255,6 @@ td[role="gridcell"] {
         background-repeat: no-repeat;
         background-position: center; 
     }
-    
-    /* Assurez-vous que la couleur de fond par défaut est appliquée même si l'image échoue */
-    /* .fc-scrollgrid-liquid {
-        background-color: #87CEEB; 
-    } */
 
     @font-face {
         font-family: 'Heyday Serif';
@@ -250,3 +266,37 @@ td[role="gridcell"] {
     * {
         font-family: 'Heyday Serif', serif;
     }
+
+    #calendar {
+        display: flex;
+        padding: 5%;
+    }
+
+    .calendarContainer {
+
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-top: 3%;
+        padding-bottom: 3%;
+    }
+
+    .fc .fc-daygrid-day-frame {
+        background: none !important;
+        background-color: rgba(255, 255, 255, 0.3) !important;
+    }
+
+    .fc-theme-standard td, .fc-theme-standard th {
+        border: 1px black solid;
+    }
+/* 
+    .fc-dayGridWeek-view {
+        border: 1px black solid;
+    } */
+
+    .fc-view {
+        border: 1px black solid;
+    }
+
+    /* .fc-media-screen{
+        border: 1px black solid;
+    } */

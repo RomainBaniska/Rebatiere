@@ -4,15 +4,22 @@
     font-family: 'Poppins', Times, serif;
 }
 
-/* body {
-    background: #ffccbc
-} */
+
+.footer {
+    background-image: url('/assets/images/pages/header.jpg');
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center;
+    height: 8%;
+    width: auto;
+}
 
 .action {
-    background-image: linear-gradient(to bottom right, rgba(135, 206, 235, 0.4), rgba(255, 160, 122, 0.4)), url('/assets/images/headerTexture.jpg');
-    background-size: cover;      /* Redimensionne l'image pour couvrir tout l'élément */
-    background-repeat: no-repeat; /* Empêche la répétition de l'image */
-    background-position: center;  /* Centre l'image *
+    /* background-image: linear-gradient(to bottom right, rgba(135, 206, 235, 0.4), rgba(255, 160, 122, 0.4)), url('/assets/images/pages/header.jpg'); */
+    background-image: url('/assets/images/pages/header.jpg');
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center;  
     /* ajout de moi */
     display: flex;
     justify-content: space-between;
@@ -20,6 +27,7 @@
     padding: 5px;
     margin-top: -10px;
     margin-bottom: 5px;
+    /* width: 100%; */
     /* flex-direction: row-reverse; */
     /* padding-right: 10px; */
 
@@ -31,10 +39,12 @@
     background-color: lavender;
 }
 
-.logoRebatiere img {
-    max-width: 500px;
-    max-height: 200px;
-    width: auto;
+.container {
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+.footerContainer {
+    box-shadow: 0px -10px 10px rgba(0, 0, 0, 0.5);
 }
 
 .action .profile {

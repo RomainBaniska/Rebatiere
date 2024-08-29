@@ -37,10 +37,9 @@
     </map>
     {% endblock %}
 
-    {% block javascripts %}
-    <script src="{{ asset('assets/javascript/mapresizer.min.js') }}"></script>
-    <script>imageMapResize();</script>
-    <script src="{{ asset('assets/javascript/imagemapevent.js') }}"></script>
+   {% block stylesheets %}
+    {# Calendar & homestyle #}
+    <link rel="stylesheet" href="{{ asset('assets/css/calendar.css') }}">
     {% endblock %}
 
 </body>
