@@ -7,29 +7,37 @@
 <body>
 
 {# Début Container #}
-<div class="container">
+{# <div class="container"> #}
 
 {# Profil dropdown #}
-<div class="action">
+{# <div class="action"> #}
+<div class="header">
 
-<div class="logoRebatiere">
+<div class="vide">
+{# <div class="logoRebatiere"> #}
 {# <img src="/assets/images/logout.png"> #}
   </div>
 
-<div class="logoRebatiere">
+<div class="vide">
   </div>
 
-<div class="profile" onclick="menuToggle();">
+{# <div class="profile" onclick="menuToggle();"> #}
 
-<img src="{{ asset(photo) }}" alt="User Avatar">
-</div>
+{# Ouverture d'un container pour ajouter le cadre pour l'avatar #}
+    <div class="profile-container">
+
+       <img src="{{ asset(photo) }}" alt="User Avatar" class="profile-pic">
+      <img src="{{ asset('assets/images/woodFrame.png') }}" class="frame">
+
+    </div>
+
+{# </div> #}
 
 <div class="menu">
 <h3>{{ currentUser }}<br><span>{{currentUserFirstName}} {{currentUserLastName}}</span></h3>
     <ul>
         <li><i class="fa fa-user"></i> <a href="{{ path('user.check') }}">Mon profil</a></li>
         <li><i class="fa fa-pen-to-square"></i> <a href="{{ path('user.checkreservation') }}">Réservations</a></li>
-        {# <li><i class="fa fa-inbox"></i> <a href="#">Inbox</a></li> #}
         <li><i class="fa fa-right-from-bracket"></i> <a href="{{ path('app_logout') }}">Déconnexion</a></li>
     </ul>
 </div>

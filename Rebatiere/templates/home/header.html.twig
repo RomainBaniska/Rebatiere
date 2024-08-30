@@ -1,0 +1,45 @@
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href= "{{ asset('assets/css/header.css') }}" >
+<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'> 
+</head>
+
+<body>
+
+{# Profil dropdown - Début de la div "Action" #}
+<div class="action">
+
+<div class="header">
+
+    <div class="vide"> </div>
+
+    <div class="vide"> </div>
+
+    <div class="profile-container" onclick="menuToggle()">
+
+      <img src="{{ asset(photo) }}" alt="User Avatar" class="profile-pic">
+      <img src="{{ asset('assets/images/woodFrame.png') }}" class="frame">
+
+      {# Menu déroulant qui exécute le script (invisible si non togglé) #}
+      <div class="menu">
+      <h3>{{ currentUser }}<br><span>{{currentUserFirstName}} {{currentUserLastName}}</span></h3>
+          <ul>
+              <li><i class="fa fa-user"></i> <a href="{{ path('user.check') }}">Mon profil</a></li>
+              <li><i class="fa fa-pen-to-square"></i> <a href="{{ path('user.checkreservation') }}">Réservations</a></li>
+              <li><i class="fa fa-right-from-bracket"></i> <a href="{{ path('app_logout') }}">Déconnexion</a></li>
+          </ul>
+      </div>
+
+    </div>
+
+</div>
+
+
+
+
+</div>
+{# Fermeture ci-dessus de la div Action #}
+
+ <script src="{{ asset('assets/javascript/menuToggle.js') }}"></script>
+
+</body>

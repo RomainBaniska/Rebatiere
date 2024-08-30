@@ -71,6 +71,7 @@
 
         let calendar = new FullCalendar.Calendar(calendarEl, {          
           initialView: 'dayGridWeek',
+          showNonCurrentDates: false,
           views: {
                   dayGridWeek : { dayHeaderContent: function(arg) {
                     let date = arg.date;
@@ -99,7 +100,7 @@
           let end = new Date(info.end);
 
           // Obtenir la classe de saison pour la première date de la période visible
-          let firstDateClass = getSeasonClass(start);
+          let firstDateClass = getSeasonClass(start, calendar.view.type);
 
           if (calendar.view.type === 'dayGridWeek') {
               // Appliquer l'image de fond à chaque ligne de semaine (Décommenter)

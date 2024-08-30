@@ -51,10 +51,14 @@
 
 body {
     background-image: url('/assets/images/pages/toile_facade.jpg');
-    background-size: cover;      /* Redimensionne l'image pour couvrir tout l'élément */
-    background-repeat: no-repeat; /* Empêche la répétition de l'image */
-    background-position: center;  /* Centre l'image */
+    background-size: cover;  
+    background-repeat: no-repeat; 
+    background-position: center; 
     margin : 0px !important;
+    /* Limitations */
+    /* width: 100vw;
+    height: 100vh;
+    overflow: hidden; */
 }
 
 /* .fc fc-media-screen fc-direction-ltr fc-theme-standard {
@@ -295,6 +299,7 @@ td[role="gridcell"] {
 
     .fc-view {
         border: 1px black solid;
+        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);
     }
 
     /* .fc-media-screen{

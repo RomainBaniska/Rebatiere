@@ -13,8 +13,17 @@
 //     }
 // }
 
-function getSeasonClass(date) {
-    let month = date.getMonth(); // 0 = janvier, 11 = décembre
+function getSeasonClass(date, viewType) {
+    let month;
+
+    if (viewType === 'dayGridMonth') {
+        // Dans le cas de la vue 'dayGridMonth', utilisez le mois du premier jour visible du mois
+        let firstVisibleDate = new Date(date.getFullYear(), date.getMonth(), 1); 
+        month = firstVisibleDate.getMonth(); 
+    } else {
+        // Pour les autres vues, utilisez simplement le mois de la date donnée
+        month = date.getMonth();
+    }
 
     if (month >= 2 && month <= 4) {
         return 'spring';
