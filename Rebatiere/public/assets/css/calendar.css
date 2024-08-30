@@ -92,12 +92,17 @@ td[role="gridcell"] {
 }
 
 .fc-event-main {
-    display: inline-block;
-    background: none !important;
-    /* background-color: rgba(255, 255, 255, 0.5) !important; */
+    display: block;
+    /* background: none !important; */
+    background-color: rgba(255, 255, 255, 1) !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: block;
+    margin: auto;
     border: none !important;
     padding: 0 !important; 
-    margin: 0 !important;
+    margin: 5px !important;
 }
 
 .fc-event-main img {
@@ -107,6 +112,7 @@ td[role="gridcell"] {
     height: 30px;
     border-radius: 50%;
     background: none !important;
+    margin: 0 !important;
     
 }
 
@@ -183,10 +189,7 @@ td[role="gridcell"] {
 }
 
 .fc-daygrid-day-top div{
-    /* display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important; */
-    /* border: 1px solid red; */
+ 
 }
 
 .fc .fc-daygrid-day-number{
@@ -200,7 +203,6 @@ td[role="gridcell"] {
 }
 
 .fc-numerojour {
-    /* color: #92929D; */
     color: whitesmoke;
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -292,16 +294,8 @@ td[role="gridcell"] {
     .fc-theme-standard td, .fc-theme-standard th {
         border: 1px black solid;
     }
-/* 
-    .fc-dayGridWeek-view {
-        border: 1px black solid;
-    } */
 
     .fc-view {
         border: 1px black solid;
         box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);
     }
-
-    /* .fc-media-screen{
-        border: 1px black solid;
-    } */
