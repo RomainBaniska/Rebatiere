@@ -22,6 +22,16 @@ class ReservationController extends AbstractController
     {
         //Récupérer l'utilisateur connecté // Méthode de symfony qui vient d'AbstractController
         $currentUser = $this->getUser()->getUsername();
+        $currentUserFirstName = $this->getUser()->getFirstname();
+        $currentUserLastName = $this->getUser()->getLastname();
+
+        // Récupérer la photo pour le header
+        $photo = $this->getUser()->getImageFileName();
+        if(!$photo) {
+            $photo = 'assets/images/defaultavatar.png';
+        } else {
+            $photo = 'uploads/images/' . $photo;
+        }
 
         // Récupérer la liste de tous les usernames et chambernames
         $users = $em->getRepository(User::class)->findall();
@@ -31,6 +41,9 @@ class ReservationController extends AbstractController
             'users' => $users,
             'chambers' => $chambers,
             'currentUser' => $currentUser,
+            'currentUserFirstName' => $currentUserFirstName,
+            'currentUserLastName' => $currentUserLastName,
+            'photo' => $photo,
         ]);        
     }
 

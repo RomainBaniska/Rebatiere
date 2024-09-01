@@ -1,59 +1,74 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-{# On inclut le CSS parent pour s'assurer que les feuilles de "base" soient bien chargées #}
-{{ parent() }}
-    <link rel="stylesheet" href="{{ asset('assets/css/reservation.css') }}">
 
-{% endblock %}
+    {% block head %}
+  <head>
+    <html lang='en'>  
+    <meta charset='utf-8' />    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+    {% endblock %}
 
-{% block body %}
+    {% block stylesheets %}
+    {# On inclut le CSS parent pour s'assurer que les feuilles de "base" soient bien chargées #}
+    {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('assets/css/reservation.css') }}">
+    {% endblock %}
 
-<h1>Bienvenu dans l'espace réservation {{ currentUser }} !</h1>
+  {% block body %}
+  <body>
 
-{# <p>Vous souhaitez réserver sur la période de {{ from }} à {{ to }} </p>  #}
+    {# header #}
+    {% include 'home/header.html.twig' %}
 
-    {# Ouverture du formulaire #}
-    <form method="post" action="{{ path('app_persistreservation') }}">
+    <div class="container">
 
-    {# DatePicker jQuery #}
-    {% include 'datePicker/datepicker.html.twig' %}
+        <h1>Bienvenu dans l'espace réservation {{ currentUser }} !</h1>
 
-     <div class='datepicker_container'>
-        <label for="from">Date de d'arrivée</label> &nbsp;
-        <input type="text" id="from" name="from" autocomplete="off"> &nbsp;
+            {# Ouverture du formulaire #}
+            <form method="post" action="{{ path('app_persistreservation') }}">
 
-        <label for="to">Date de départ </label> &nbsp;
-        <input type="text" id="to" name="to" autocomplete="off"> &nbsp;
+            {# DatePicker jQuery #}
+            {% include 'datePicker/datepicker.html.twig' %}
+
+            <div class='datepicker_container'>
+                <label for="from">Date de d'arrivée</label> &nbsp;
+                <input type="text" id="from" name="from" autocomplete="off"> &nbsp;
+
+                <label for="to">Date de départ </label> &nbsp;
+                <input type="text" id="to" name="to" autocomplete="off"> &nbsp;
+            </div>
+
+            <p class="formLine">
+                <label for="chambername">Sélectionnez une chambre :</label>
+                    <select id="chambername" name="chambername">
+                        {% for chamber in chambers %}
+                            <option value="{{ chamber.id }}">{{ chamber.chambername }}</option>
+                        {% endfor %}
+                    </select>
+            </p>
+
+            <p class="formLine">
+                <label for="username">Ajoutez un utilisateur :</label>
+                    <select id="username" name="username">
+                    {% for user in users %}
+                            <option value="{{ user.id }}">{{ user.username }}</option>
+                        {% endfor %}
+                    </select>
+            </p>
+
+            
+            <p class="formLine">
+                <label for="privatisation">Privatisation ? :</label>
+                <input type="checkbox" id="privatisation" name="privatisation">
+            </p>
+            
+            <p class="formLine">
+                <button type="submit">Ajouter</button>
+            </p>
+
+            </form>
+
     </div>
-
-  </div>
-
-    <div class="formLine">
-         <label for="username">Ajoutez un utilisateur :</label>
-            <select id="username" name="username">
-               {% for user in users %}
-                    <option value="{{ user.id }}">{{ user.username }}</option>
-                {% endfor %}
-            </select>
-    </div>
-    
-    <div class="formLine">
-         <label for="chambername">Sélectionnez une chambre :</label>
-            <select id="chambername" name="chambername">
-                  {% for chamber in chambers %}
-                    <option value="{{ chamber.id }}">{{ chamber.chambername }}</option>
-                {% endfor %}
-            </select>
-    </div>
-    
-    <div class="formLine">
-        <label for="privatisation">Privatisation ? :</label>
-        <input type="checkbox" id="privatisation" name="privatisation">
-    </div>
-    
-        <button type="submit">Ajouter</button>
-
-    </form>
 
 {% endblock %}

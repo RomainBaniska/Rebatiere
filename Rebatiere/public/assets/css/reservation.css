@@ -1,5 +1,43 @@
+* {
+    font-family: 'Heyday Serif', serif !important;
+}
+
+@font-face {
+    font-family: 'Heyday Serif';
+    src: url('/assets/fonts/heyday-serif.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-image: url('/assets/images/pages/toile_jardin.jpg');
+    background-size: cover;  
+    background-repeat: no-repeat; 
+    background-position: center; 
+    margin : 0px !important;
+}
+
 .formLine {
     display : flex;
     justify-content: center;
     align-items: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: whitesmoke;
+    border-radius: 5%;
+    border: black solid 2px;
+    /* margin : 10vh; */
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding: 2%;
+}
+
+.datepicker_container {
+    flex-direction: column !important;
 }

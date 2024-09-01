@@ -36,21 +36,34 @@ class HomeController extends AbstractController
         ]);
     }
 
-    // #[Route('modal', name: 'app_modal')]
-    // public function modal(): Response 
-    // {
-    // return $this->render('home/modal.html.twig', [
-    //         'controller_name' => 'HomeController'
-    // ]);
-    // }
 
 
         #[Route('map', name: 'app_map')]
     public function modal(): Response 
     {
-    return $this->render('home/map.html.twig', [
-            'controller_name' => 'HomeController'
-    ]);
+
+        if (!$this->getUser()) {
+            return $this->render('home/ask.html.twig');
+        }
+
+        $currentUser = $this->getUser()->getUsername();
+        $currentUserFirstName = $this->getUser()->getFirstname();
+        $currentUserLastName = $this->getUser()->getLastname();
+
+        $photo = $this->getUser()->getImageFileName();
+        if(!$photo) {
+            $photo = 'assets/images/defaultavatar.png';
+        } else {
+            $photo = 'uploads/images/' . $photo;
+        }
+
+        return $this->render('home/map2.html.twig', [
+            'controller_name' => 'HomeController',
+            'currentUser' => $currentUser,
+            'currentUserFirstName' => $currentUserFirstName,
+            'currentUserLastName' => $currentUserLastName,
+            'photo' => $photo,
+        ]);
     }
 
     #[Route('animation', name: 'app_animation')]
