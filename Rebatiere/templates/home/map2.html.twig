@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
 
 {% block head %}
 <head>
@@ -9,15 +7,28 @@
 </head>
 {% endblock %}
 
-<body>
+<html>
 
-    {% block body %}
+    {% block header %}
+
     {% include 'home/header.html.twig' %}
 
+    {% endblock %}
+
+    {% block body %}
+
+<body>
+
+<div>
+        <div class="controls">
+        <button id="btnRDC">RDC</button>
+        <button id="btnDeuxiemeEtage">Deuxieme etage</button>
+        <button id="btnPremierEtage">Premier Etage</button>
+        </div>
+</div>
     {# Contient l'image en PNG/JPEG et l'image en SVG en overlay #}
     <div class="box">
         <div class="image-container">
-            {# <img src="{{ asset('assets/images/chambersPlan/fullPlan.png') }}" id="layer0" class="background-image responsive"/> #}
             <img src="{{ asset('assets/images/chambersPlan/fullPlan.png') }}" id="layer0" class="layer"/>
             <img src="{{ asset('assets/images/chambersPlan/shapeFirstFloor.png') }}" id="layer1" class="layer overlay"/>
             <img src="{{ asset('assets/images/chambersPlan/shapeRdc.png') }}" id="layer2" class="layer overlay"/>
@@ -26,5 +37,11 @@
     </div>
 
     {% endblock %}
+
 </body>
+
+    {% block javascripts %}
+    <script src="{{ asset('assets/javascript/mapLayers.js') }}"></script>
+    {% endblock %}
+
 </html>
