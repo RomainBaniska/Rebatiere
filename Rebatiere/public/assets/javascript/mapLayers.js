@@ -9,7 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnPremierEtage = document.getElementById('btnPremierEtage');
     
     function showLayer(layerToShow) {
+      // Masquer les couches
       layer0.style.display = 'block';
+      // layer0.style.display = 'none';
       layer1.style.display = 'none';
       layer2.style.display = 'none';
       layer3.style.display = 'none';
@@ -29,6 +31,22 @@ document.addEventListener('DOMContentLoaded', () => {
   
     btnPremierEtage.addEventListener('click', () => {
       showLayer(layer1);
+    });
+
+    // Écouteurs pour les zones mappées
+    areaFirstFloor.addEventListener('click', (event) => {
+        event.preventDefault(); // Empêche l'action par défaut du lien
+        showLayer(layer1);
+    });
+
+    areaRDC.addEventListener('click', (event) => {
+        event.preventDefault(); // Empêche l'action par défaut du lien
+        showLayer(layer2);
+    });
+
+    areaSecondFloor.addEventListener('click', (event) => {
+        event.preventDefault(); // Empêche l'action par défaut du lien
+        showLayer(layer3);
     });
   });
   

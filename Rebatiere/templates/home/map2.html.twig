@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="fr">
 
 {% block head %}
 <head>
@@ -7,7 +9,6 @@
 </head>
 {% endblock %}
 
-<html>
 
     {% block header %}
 
@@ -16,32 +17,43 @@
     {% endblock %}
 
     {% block body %}
-
 <body>
 
 <div>
         <div class="controls">
         <button id="btnRDC">RDC</button>
-        <button id="btnDeuxiemeEtage">Deuxieme etage</button>
         <button id="btnPremierEtage">Premier Etage</button>
+        <button id="btnDeuxiemeEtage">Deuxieme etage</button>
         </div>
 </div>
     {# Contient l'image en PNG/JPEG et l'image en SVG en overlay #}
     <div class="box">
         <div class="image-container">
-            <img src="{{ asset('assets/images/chambersPlan/fullPlan.png') }}" id="layer0" class="layer"/>
-            <img src="{{ asset('assets/images/chambersPlan/shapeFirstFloor.png') }}" id="layer1" class="layer overlay"/>
-            <img src="{{ asset('assets/images/chambersPlan/shapeRdc.png') }}" id="layer2" class="layer overlay"/>
-            <img src="{{ asset('assets/images/chambersPlan/shapeSecondFloor.png') }}" id="layer3" class="layer overlay"/>  
+            <img src="{{ asset('assets/images/chambersPlan/fullPlan.png') }}" id="layer0" class="layer" usemap="#plan"/>
+            <img src="{{ asset('assets/images/chambersPlan/shapeFirstFloor.png') }}" id="layer1" class="layer overlay" usemap="#firstFloor"/>
+            <img src="{{ asset('assets/images/chambersPlan/shapeRdc.png') }}" id="layer2" class="layer overlay" usemap="#RDC"/>
+            <img src="{{ asset('assets/images/chambersPlan/shapeSecondFloor.png') }}" id="layer3" class="layer overlay" usemap="#secondFloor"/>  
         </div>
     </div>
 
-    {% endblock %}
+{# Map Coordonnées #}
+
+<map name="plan">
+    <area alt="dortoirPetits" title="dortoirPetit" coords="1989,2624,1203,1259" shape="rect" href="#" id="dortoirPetit">
+    <area alt="dortoirFond" title="Sélectionner le dortoir du fond" coords="1125,2704,1949,3450" shape="rect" href="#" id="DortoirFond">
+</map>
 
 </body>
+    {% endblock %}
 
     {% block javascripts %}
     <script src="{{ asset('assets/javascript/mapLayers.js') }}"></script>
+    <script src="{{ asset('assets/javascript/mapresizer.min.js') }}"></script>
+    <script src="{{ asset('assets/javascript/imagemapevent.js') }}"></script>
+
+    <script>
+      imageMapResize();
+    </script>
     {% endblock %}
 
 </html>

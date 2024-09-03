@@ -46,6 +46,18 @@ body {
   background-color: red;
 }
 
+area {
+  cursor : pointer;
+}
+
+#layer1 {
+    display: block;
+}
+
+#layer2, #layer3 {
+    display: none;
+}
+
 .image-container img#layer0 {
   z-index: 2;
 }
@@ -53,6 +65,8 @@ body {
 .image-container img.overlay {
   z-index: 3;
   opacity: 0.6;
+  /* passer les clics à travers les calques */
+  pointer-events: none;
 }
 
 

@@ -6,6 +6,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset('assets/css/map.css') }}">
+    
+<style> area {
+  cursor : pointer;
+  border: 5px blue solid;
+} </style>
 </head>
 {% endblock %}
 
@@ -18,8 +23,9 @@
     {# Contient l'image en PNG/JPEG et l'image en SVG en overlay #}
     <div class="box">
         <div class="image-container">
-            <img usemap="#chambermap" src="{{ asset('assets/images/firstfloor/firstfloor.jpg') }}" alt="Carte des chambres" class="background-image responsive"/>
-            {# <img src="{{ asset('assets/images/firstfloor/overlay.svg') }}" alt="Overlay SVG" class="overlay-image"> #}
+            {# <img usemap="#chambermap" src="{{ asset('assets/images/firstfloor/firstfloor.jpg') }}" alt="Carte des chambres" class="background-image responsive"/> #}
+            <img usemap="#chambermap" src="{{ asset('assets/images/chambersPlan/fullPlan.png') }}" alt="Carte des chambres" class="background-image responsive"/>
+            
         </div>
     </div>
 
@@ -40,6 +46,19 @@
    {% block stylesheets %}
     {# Calendar & homestyle #}
     <link rel="stylesheet" href="{{ asset('assets/css/calendar.css') }}">
+
+
+    {% endblock %}
+
+        {% block javascripts %}
+
+    <script src="{{ asset('assets/javascript/mapresizer.min.js') }}"></script>
+    <script src="{{ asset('assets/javascript/imagemapevent2.js') }}"></script>
+
+
+    <script>
+      imageMapResize();
+    </script>
     {% endblock %}
 
 </body>
