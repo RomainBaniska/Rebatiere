@@ -36,15 +36,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Action à exécuter pour le milieu
                 console.log('Milieu sélectionné');
                 break;
-              case 'nicolas':
+              case 'nicole':
                 // Action à exécuter pour Nicolas
-                console.log('Nicolas sélectionné');
+                console.log('Nicole sélectionné');
                 break;
               case 'gauche':
                 // Action à exécuter pour la zone gauche
                 console.log('Zone gauche sélectionnée');
                 break;
-              // Ajoutez les autres cas ici
+              case 'dehors1':
+                // Action à exécuter pour la zone gauche
+                console.log('Zone dehors1 sélectionnée');
+                break;
+              case 'dehors2':
+                // Action à exécuter pour la zone gauche
+                console.log('Zone dehors2 sélectionnée');
+                break;
+              case 'bureau':
+                // Action à exécuter pour la zone gauche
+                console.log('Zone bureau sélectionnée');
+                break;
+                
               default:
                 console.log('Zone non gérée');
         }

@@ -69,6 +69,10 @@ area {
   pointer-events: none;
 }
 
+.not-clickable {
+  pointer-events: none;
+  cursor: auto;
+}
 
 .responsive {
   max-width: 100%;

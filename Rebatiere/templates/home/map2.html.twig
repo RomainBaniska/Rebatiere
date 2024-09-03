@@ -39,8 +39,22 @@
 {# Map Coordonnées #}
 
 <map name="plan">
-    <area alt="dortoirPetits" title="dortoirPetit" coords="1989,2624,1203,1259" shape="rect" href="#" id="dortoirPetit">
-    <area alt="dortoirFond" title="Sélectionner le dortoir du fond" coords="1125,2704,1949,3450" shape="rect" href="#" id="DortoirFond">
+<area alt="dortoirPetits" title="Sélectionner le dortoir des petits" coords="1989,2624,1203,1259" shape="rect" id="dortoirPetits">
+<area alt="dortoirFond" title="Sélectionner le dortoir du fond" coords="1125,2704,1949,3450" shape="rect" id="dortoirFond">
+<area alt="chambrebleue" title="Sélectionner Chambre bleue" coords="3090,1604,3893,2420" shape="rect" id="ChambreBleue">
+<area alt="jean-Claude" title="Sélectionner Jean-Claude" coords="3972,1322,4770,2432" shape="rect" id="jean-Claude">
+<area alt="alex" title="Sélectionner Alex" coords="4182,657,4849,1262" shape="rect" id="alex">
+<area alt="fenetre" title="Sélectionner Fenetre" coords="2011,78,2980,600" shape="rect" id="fenetre">
+<area alt="fond" title="Sélectionner Fond" coords="3989,82,4761,600" shape="rect" id="fond">
+<area alt="milieu" title="Sélectionner Milieu" coords="3077,94,3853,598" shape="rect" id="milieu">
+<area alt="nicole" title="Sélectionner Nicole" coords="98,94,945,629" shape="rect" id="nicole">
+<area alt="gauche" title="Sélectionner Gauche" coords="1998,657,2620,1253" shape="rect" id="gauche">
+<area alt="dehors1" title="Sélectionner Dehors1" coords="4007,2630,4287,2963" shape="rect" id="dehors1">
+<area alt="dehors2" title="Sélectionner Dehors2" coords="4331,2622,4612,2956" shape="rect" id="dehors2">
+<area alt="bureau" title="Sélectionner Bureau" coords="234,1697,853,3241" shape="rect" id="bureau">
+
+</map>
+</map>
 </map>
 
 </body>
@@ -49,7 +63,7 @@
     {% block javascripts %}
     <script src="{{ asset('assets/javascript/mapLayers.js') }}"></script>
     <script src="{{ asset('assets/javascript/mapresizer.min.js') }}"></script>
-    <script src="{{ asset('assets/javascript/imagemapevent.js') }}"></script>
+    <script src="{{ asset('assets/javascript/imagemapevent2.js') }}"></script>
 
     <script>
       imageMapResize();
