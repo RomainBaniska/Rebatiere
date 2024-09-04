@@ -85,7 +85,7 @@ area {
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 0;
+    top: -2px;
     /* left: 0; */
     max-width: 700px;
     max-height: 496px;
@@ -118,6 +118,7 @@ area {
     }
     50% {
       transform: scale(1.1, 1.1);
+      filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
     }
     100% {
       transform: scale(1, 1);
