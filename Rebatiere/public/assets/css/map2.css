@@ -23,8 +23,9 @@ body {
 .image-container {
   position: relative;
   width: 100%;
-  max-width: 700px;
   height: auto;
+  max-width: 700px;
+  max-height: 496px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,21 +86,23 @@ area {
     justify-content: center;
     align-items: center;
     top: 0;
-    left: 0;
-    width: 100%;
+    /* left: 0; */
     max-width: 700px;
-    height: 290px;
-    /* height: 100%; */
+    max-height: 496px;
+    width: 100%;
+    height: 496px;
     z-index: 4;
     border: 2px solid purple; 
+    /* margin-right: -1px; */
     background-color: rgba(0, 0, 255, 0.2);
+    border-radius: 1%;
   }
 
   .chamber-layer-container:hover {
     animation: zoom-in-zoom-out 1s ease infinite;
   }
 
-  .chamber-layer {
+  .chamber-layer-container img {
     position: absolute;
     top: 0;
     left: 0;
