@@ -66,12 +66,21 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('animation', name: 'app_animation')]
-    public function animation(): Response
-    {
-        return $this->render('home/animation.html.twig', [
-            'controller_name' => 'HomeController'
-    ]);
+    
+//     #[Route('animation', name: 'app_animation')]
+//     public function animation(): Response
+//     {
+//         return $this->render('home/animation.html.twig', [
+//             'controller_name' => 'HomeController'
+//     ]);
+// }
+
+#[Route('testpage', name: 'app_animation')]
+public function animation(): Response
+{
+    return $this->render('home/testpage.html.twig', [
+        'controller_name' => 'HomeController'
+]);
 }
 
 }

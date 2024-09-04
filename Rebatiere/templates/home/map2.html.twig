@@ -19,26 +19,46 @@
     {% block body %}
 <body>
 
-<div>
         <div class="controls">
         <button id="btnRDC">RDC</button>
         <button id="btnPremierEtage">Premier Etage</button>
         <button id="btnDeuxiemeEtage">Deuxieme etage</button>
         </div>
-</div>
-    {# Contient l'image en PNG/JPEG et l'image en SVG en overlay #}
+
     <div class="box">
         <div class="image-container">
+        {# Image de base #}
             <img src="{{ asset('assets/images/chambersPlan/fullPlan.png') }}" id="layer0" class="layer" usemap="#plan"/>
+        {# Shadow layers #}
             <img src="{{ asset('assets/images/chambersPlan/shapeFirstFloor.png') }}" id="layer1" class="layer overlay" usemap="#firstFloor"/>
             <img src="{{ asset('assets/images/chambersPlan/shapeRdc.png') }}" id="layer2" class="layer overlay" usemap="#RDC"/>
-            <img src="{{ asset('assets/images/chambersPlan/shapeSecondFloor.png') }}" id="layer3" class="layer overlay" usemap="#secondFloor"/>  
+            <img src="{{ asset('assets/images/chambersPlan/shapeSecondFloor.png') }}" id="layer3" class="layer overlay" usemap="#secondFloor"/>
+
+        {# Shapes éléments animation #}
+            <div class="chamber-layer-container">
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre bleue.png') }}" id="chambre1" class="chamber-layer"/>
+             </div>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre bureau.png') }}" id="chambre2" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre dehors1.png') }}" id="chambre3" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre dehors2.png') }}" id="chambre4" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre dortoirgrand.png') }}" id="chambre5" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre dortoirpetit.png') }}" id="chambre6" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre droite.png') }}" id="chambre7" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre fenetre.png') }}" id="chambre8" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre gauche.png') }}" id="chambre9" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre jc.png') }}" id="chambre10" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre milieu droite.png') }}" id="chambre11" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre milieu.png') }}" id="chambre12" class="chamber-layer"/>
+            <div class="chamber-layer-container">
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre nicole.png') }}" id="chambre13" class="chamber-layer"/>
+            </div>
+            </div>
         </div>
     </div>
 
-{# Map Coordonnées #}
+{# Map Coordonnées à décommenter #}
 
-<map name="plan">
+{# <map name="plan">
 <area alt="dortoirPetits" title="Sélectionner le dortoir des petits" coords="1989,2624,1203,1259" shape="rect" id="dortoirPetits">
 <area alt="dortoirFond" title="Sélectionner le dortoir du fond" coords="1125,2704,1949,3450" shape="rect" id="dortoirFond">
 <area alt="chambrebleue" title="Sélectionner Chambre bleue" coords="3090,1604,3893,2420" shape="rect" id="ChambreBleue">
@@ -52,10 +72,7 @@
 <area alt="dehors1" title="Sélectionner Dehors1" coords="4007,2630,4287,2963" shape="rect" id="dehors1">
 <area alt="dehors2" title="Sélectionner Dehors2" coords="4331,2622,4612,2956" shape="rect" id="dehors2">
 <area alt="bureau" title="Sélectionner Bureau" coords="234,1697,853,3241" shape="rect" id="bureau">
-
-</map>
-</map>
-</map>
+</map> #}
 
 </body>
     {% endblock %}

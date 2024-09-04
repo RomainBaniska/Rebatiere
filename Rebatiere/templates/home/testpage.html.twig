@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+{% block head %}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <style>
+
+        body {
+            background-color: lightblue;
+        }
+        .divIMG {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 500px;
+            height: auto;
+            margin: 0 auto; /* Pour centrer horizontalement la div */
+            /*animation: zoom-in-zoom-out 1s ease infinite;*/
+        }
+        .element {
+            width: 100%; /* L'image prendra toute la largeur de la div */
+            height: auto; /* La hauteur sera ajustée automatiquement */
+            box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
+            animation: zoom-in-zoom-out 1s ease infinite;
+        }
+
+      @keyframes zoom-in-zoom-out {
+  0% {
+    transform: scale(1, 1);
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); /* Pas d'ombre au début */
+  }
+  50% {
+    transform: scale(1.1, 1.1); /* Zoom plus subtil */
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5); /* Ombre plus prononcée pendant le zoom */
+  }
+  100% {
+    transform: scale(1, 1);
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); /* Retour à l'état initial sans ombre */
+  }
+}
+
+    </style>
+</head>
+{% endblock %}
+
+    {% block body %}
+<body>
+
+<div classe = "divIMG">
+
+<img>
+  <img src="{{ asset('assets/images/chambersPlan/elements/el chambre bureau.png') }}" class="element"/>
+
+</div>
+
+</body>
+    {% endblock %}
+
+    {% block javascripts %}
+
+    {% endblock %}
+
+</html>
