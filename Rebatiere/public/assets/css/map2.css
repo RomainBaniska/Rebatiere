@@ -60,10 +60,6 @@ body {
   background-color: red;
 }
 
-area {
-  cursor : pointer;
-}
-
 #layer1 {
     display: block;
 }
@@ -81,20 +77,18 @@ area {
 
 .chamber-layer-container {
     position: absolute;
-    /* position: relative; */
     display: flex;
     justify-content: center;
     align-items: center;
-    top: -2px;
+    top: 0;
     /* left: 0; */
     max-width: 700px;
     max-height: 496px;
     width: 100%;
     height: 496px;
     z-index: 4;
-    border: 2px solid purple; 
-    /* margin-right: -1px; */
-    background-color: rgba(0, 0, 255, 0.2);
+    /* border: 2px solid purple; 
+    background-color: rgba(0, 0, 255, 0.2); */
     border-radius: 1%;
   }
 
@@ -149,4 +143,62 @@ area {
   margin: 0 10px;
   font-size: 16px;
   cursor: pointer;
+}
+
+area {
+  cursor : pointer;
+}
+
+/* areas */
+
+#chambre1 {
+  visibility: hidden;
+}
+
+#chambre2 {
+  
+}
+
+#chambre3 {
+
+}
+
+#chambre4 {
+
+}
+
+#chambre5 {
+
+}
+
+#chambre6 {
+
+}
+
+#chambre7 {
+
+}
+
+#chambre8 {
+
+}
+
+#chambre9 {
+
+}
+
+#chambre10 {
+  
+}
+
+#chambre11 {
+
+}
+
+#chambre12 {
+
+}
+
+#chambre13 {
+
 }
