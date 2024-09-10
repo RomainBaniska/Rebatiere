@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const areas = {
       'dortoirPetit': document.getElementById('dortoirPetit'),
       'dortoirGrand': document.getElementById('dortoirGrand'),
-      'chambrebleue': document.getElementById('ChambreBleue'),
-      'jean-Claude': document.getElementById('jean-Claude'),
+      'chambrebleue': document.getElementById('chambreBleue'),
+      'jeanClaude': document.getElementById('jeanClaude'),
       'alex': document.getElementById('alex'),
       'fenetre': document.getElementById('fenetre'),
       'fond': document.getElementById('fond'),
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Récupération des boutons
     const buttons = {
-      'layer1': ['dortoirPetit', 'dortoirGrand', 'chambrebleue', 'jean-Claude', 'alex', 'fenetre', 'fond', 'milieu', 'gauche'],
+      'layer1': ['dortoirPetit', 'dortoirGrand', 'chambreBleue', 'jeanClaude', 'alex', 'fenetre', 'fond', 'milieu', 'gauche'],
       'layer2': ['dehors1', 'dehors2', 'bureau'],
       'layer3': ['nicole']
     };
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (layer === 'layer1') {
-            ['dortoirPetit', 'dortoirGrand', 'chambrebleue', 'jean-Claude', 'alex', 'fenetre', 'fond', 'milieu', 'gauche'].forEach(id => {
+            ['dortoirPetit', 'dortoirGrand', 'chambreBleue', 'jeanClaude', 'alex', 'fenetre', 'fond', 'milieu', 'gauche'].forEach(id => {
                 if (areas[id]) areas[id].classList.remove('not-clickable');
             });
             ['dehors1', 'dehors2', 'bureau', 'nicole'].forEach(id => {
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ['nicole'].forEach(id => {
                 if (areas[id]) areas[id].classList.remove('not-clickable');
             });
-            ['dortoirPetit', 'dortoirGrand', 'chambrebleue', 'jean-Claude', 'alex', 'fenetre', 'fond', 'milieu', 'gauche', 'dehors1', 'dehors2', 'bureau'].forEach(id => {
+            ['dortoirPetit', 'dortoirGrand', 'chambreBleue', 'jeanClaude', 'alex', 'fenetre', 'fond', 'milieu', 'gauche', 'dehors1', 'dehors2', 'bureau'].forEach(id => {
                 if (areas[id]) areas[id].classList.add('not-clickable');
             });
 
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ['dehors1', 'dehors2', 'bureau'].forEach(id => {
                 if (areas[id]) areas[id].classList.remove('not-clickable');
             });
-            ['dortoirPetit', 'dortoirGrand', 'chambrebleue', 'jean-Claude', 'alex', 'fenetre', 'fond', 'milieu', 'nicole', 'gauche'].forEach(id => {
+            ['dortoirPetit', 'dortoirGrand', 'chambreBleue', 'jeanClaude', 'alex', 'fenetre', 'fond', 'milieu', 'nicole', 'gauche'].forEach(id => {
                 if (areas[id]) areas[id].classList.add('not-clickable');
             });
         }

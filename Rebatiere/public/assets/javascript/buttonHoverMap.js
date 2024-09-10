@@ -26,7 +26,7 @@ const boutons = {
     fond: document.getElementById('fond'),
     fenetre: document.getElementById('fenetre'),
     gauche: document.getElementById('gauche'),
-    jeanClaude: document.getElementById('jean-Claude'),
+    jeanClaude: document.getElementById('jeanClaude'),
     milieuDroite: document.getElementById('alex'),
     milieu: document.getElementById('milieu'),
     nicole: document.getElementById('nicole')
