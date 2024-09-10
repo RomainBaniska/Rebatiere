@@ -1,18 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    // Récupération des différents "layers" du tableau
     const layer0 = document.getElementById('layer0');
     const layer1 = document.getElementById('layer1');
     const layer2 = document.getElementById('layer2');
     const layer3 = document.getElementById('layer3');
     
+    // Récupération des boutons servant à afficher/cacher les layers
     const btnRDC = document.getElementById('btnRDC');
     const btnDeuxiemeEtage = document.getElementById('btnDeuxiemeEtage');
     const btnPremierEtage = document.getElementById('btnPremierEtage');
 
     // Conditionnement des area(s)
-    
     const areas = {
-      'dortoirPetits': document.getElementById('dortoirPetits'),
-      'dortoirFond': document.getElementById('dortoirFond'),
+      'dortoirPetit': document.getElementById('dortoirPetit'),
+      'dortoirGrand': document.getElementById('dortoirGrand'),
       'chambrebleue': document.getElementById('ChambreBleue'),
       'jean-Claude': document.getElementById('jean-Claude'),
       'alex': document.getElementById('alex'),
@@ -43,8 +45,31 @@ document.addEventListener('DOMContentLoaded', () => {
       chambre13: document.getElementById('chambre13'),
     };
 
-    // Visibilité des éléments animés "chambre[n°] en fonction du layer"
+    // Récupération des boutons
+    const buttons = {
+      'layer1': ['dortoirPetit', 'dortoirGrand', 'chambrebleue', 'jean-Claude', 'alex', 'fenetre', 'fond', 'milieu', 'gauche'],
+      'layer2': ['dehors1', 'dehors2', 'bureau'],
+      'layer3': ['nicole']
+    };
 
+    // Visibilité des boutons en fonction du layer
+    function toggleButtonVisibility(layer) {
+      // Masquer tous les boutons au début
+      document.querySelectorAll('.buttons-container button').forEach(button => {
+        button.style.display = 'none';
+      });
+      // Afficher les boutons associés au layer sélectionné
+      if (buttons[layer]) {
+        buttons[layer].forEach(buttonId => {
+          const button = document.getElementById(buttonId);
+          if (button) {
+            button.style.display = 'block';
+          }
+        });
+      }
+    }
+
+    // Visibilité des éléments animés "chambre[n°] en fonction du layer"
     function toggleChambreVisibility(layer) {
       // Masquer toutes les chambres par défaut
       Object.values(chambres).forEach(chambre => chambre.style.display = 'none');
@@ -78,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (layer === 'layer1') {
-            ['dortoirPetits', 'dortoirFond', 'chambrebleue', 'jean-Claude', 'alex', 'fenetre', 'fond', 'milieu', 'gauche'].forEach(id => {
+            ['dortoirPetit', 'dortoirGrand', 'chambrebleue', 'jean-Claude', 'alex', 'fenetre', 'fond', 'milieu', 'gauche'].forEach(id => {
                 if (areas[id]) areas[id].classList.remove('not-clickable');
             });
             ['dehors1', 'dehors2', 'bureau', 'nicole'].forEach(id => {
@@ -89,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ['nicole'].forEach(id => {
                 if (areas[id]) areas[id].classList.remove('not-clickable');
             });
-            ['dortoirPetits', 'dortoirFond', 'chambrebleue', 'jean-Claude', 'alex', 'fenetre', 'fond', 'milieu', 'gauche', 'dehors1', 'dehors2', 'bureau'].forEach(id => {
+            ['dortoirPetit', 'dortoirGrand', 'chambrebleue', 'jean-Claude', 'alex', 'fenetre', 'fond', 'milieu', 'gauche', 'dehors1', 'dehors2', 'bureau'].forEach(id => {
                 if (areas[id]) areas[id].classList.add('not-clickable');
             });
 
@@ -97,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ['dehors1', 'dehors2', 'bureau'].forEach(id => {
                 if (areas[id]) areas[id].classList.remove('not-clickable');
             });
-            ['dortoirPetits', 'dortoirFond', 'chambrebleue', 'jean-Claude', 'alex', 'fenetre', 'fond', 'milieu', 'nicole', 'gauche'].forEach(id => {
+            ['dortoirPetit', 'dortoirGrand', 'chambrebleue', 'jean-Claude', 'alex', 'fenetre', 'fond', 'milieu', 'nicole', 'gauche'].forEach(id => {
                 if (areas[id]) areas[id].classList.add('not-clickable');
             });
         }
@@ -107,6 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
         layerToShow.style.display = 'block';
         // exécute toggleChambreVisibility et lui passe l'argument layer
         toggleChambreVisibility(layerToShow.id);
+        // Met à jour la visibilité des boutons selon le layer sélectionné
+        toggleButtonVisibility(layerToShow.id);
         // exécute setclickable et lui passe l'argument layer
         setClickableAreas(layerToShow.id);
       }

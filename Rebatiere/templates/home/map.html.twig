@@ -6,60 +6,108 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset('assets/css/map.css') }}">
-    
-<style> area {
-  cursor : pointer;
-  border: 5px blue solid;
-} </style>
 </head>
 {% endblock %}
 
-<body>
+
+    {% block header %}
+
+    {% include 'home/header.html.twig' %}
+
+    {% endblock %}
 
     {% block body %}
-    {# header #}
-    {% include 'header.html.twig' %}
+<body>
+        {# Control Panel Etages #}
+        <div class="controls">
+        <button id="btnRDC">RDC</button>
+        <button id="btnPremierEtage">Premier Etage</button>
+        <button id="btnDeuxiemeEtage">Deuxieme etage</button>
+        </div>
 
-    {# Contient l'image en PNG/JPEG et l'image en SVG en overlay #}
+        {# Buttons Etages #}
+        <div class="buttons-container">
+        <button id="chambrebleue">Chambre Bleue</button>
+        <button id="jean-Claude">Jean-Claude</button>
+        <button id="dortoirPetit">Dortoir Petits</button>
+        <button id="dortoirGrand">Dortoir Grand</button>
+        <button id="gauche">Gauche</button>
+        <button id="fenetre">Fenêtre</button>
+        <button id="milieu">Milieu</button>
+        <button id="alex">Alex</button>
+        <button id="fond">Fond</button>
+        <button id="dehors1">Dehors 1</button>
+        <button id="dehors2">Dehors 2</button>
+        <button id="bureau">Bureau</button>
+        <button id="nicole">Nicole</button>
+        </div>
+
     <div class="box">
+
         <div class="image-container">
-            {# <img usemap="#chambermap" src="{{ asset('assets/images/firstfloor/firstfloor.jpg') }}" alt="Carte des chambres" class="background-image responsive"/> #}
-            <img usemap="#chambermap" src="{{ asset('assets/images/chambersPlan/fullPlan.png') }}" alt="Carte des chambres" class="background-image responsive"/>
-            
+        {# Image de base #}
+            <img src="{{ asset('assets/images/chambersPlan/fullPlan.png') }}" id="layer0" class="layer" usemap="#plan"/>
+        {# Shadow layers #}
+            <img src="{{ asset('assets/images/chambersPlan/shapeFirstFloor.png') }}" id="layer1" class="layer overlay" usemap="#firstFloor"/>
+            <img src="{{ asset('assets/images/chambersPlan/shapeRdc.png') }}" id="layer2" class="layer overlay" usemap="#RDC"/>
+            <img src="{{ asset('assets/images/chambersPlan/shapeSecondFloor.png') }}" id="layer3" class="layer overlay" usemap="#secondFloor"/>
+
+        {# Shapes éléments animation #}
+            <div class="chamber-layer-container">
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre bleue.png') }}" id="chambre1" class="chamber-layer"/>
+             {# </div> #}
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre bureau.png') }}" id="chambre2" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre dehors1.png') }}" id="chambre3" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre dehors2.png') }}" id="chambre4" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre dortoirgrand.png') }}" id="chambre5" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre dortoirpetit.png') }}" id="chambre6" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre droite.png') }}" id="chambre7" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre fenetre.png') }}" id="chambre8" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre gauche.png') }}" id="chambre9" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre jc.png') }}" id="chambre10" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre milieu droite.png') }}" id="chambre11" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre milieu.png') }}" id="chambre12" class="chamber-layer"/>
+            {# <div class="chamber-layer-container"> #}
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre nicole.png') }}" id="chambre13" class="chamber-layer"/>
+            </div>
+            </div>
         </div>
     </div>
 
-    <map name="chambermap">
-        <area shape="rect" coords="1125,2704,1949,3450" href="#" alt="DortoirFond" title="Sélectionner le dortoir du fond" id="DortoirFond" />
-        <area shape="rect" coords="1133,1344,1932,2682" href="#" alt="DortoirPetits" title="Dortoir des petits" id="DortoirPetits" />
-        <area shape="rect" coords="3090,1604,3893,2420" href="#" alt="Chambrebleue" title="Chambre bleue" id="ChambreBleue" />
-        <area shape="rect" coords="3972,1322,4770,2432" href="#" alt="Jean-Claude" title="Jean-Claude" id="Jean-Claude" />
-        <area shape="rect" coords="4182,657,4849,1262" href="#" alt="Alex" title="Alex" id="Alex" />
-        <area shape="rect" coords="2011,78,2980,600" href="#" alt="Fenetre" title="Fenetre" id="Fenetre" />
-        <area shape="rect" coords="3989,82,4761,600" href="#" alt="Fond" title="Fond" id="Fond" />
-        <area shape="rect" coords="3077,94,3853,598" href="#" alt="Milieu" title="Milieu" id="Milieu" />
-        <area shape="rect" coords="98,94,945,629" href="#" alt="Nicolas" title="Nicolas" id="Nicolas" />
-        <area shape="rect" coords="1054,651,1936,1248" href="#" alt="Gauche" title="Gauche" id="Gauche" />
-    </map>
+{# Map Coordonnées à décommenter #}
+
+{# <map name="plan">
+<area alt="dortoirPetits" title="Sélectionner le dortoir des petits" coords="241,253,401,527" shape="rect" id="dortoirPetits">
+<area alt="dortoirFond" title="Sélectionner le dortoir du fond" coords="241,531,401,698" shape="rect" id="dortoirFond">
+<area alt="chambrebleue" title="Sélectionner Chambre bleue" coords="619,321,789,488" shape="rect" id="chambreBleue">
+<area alt="jean-Claude" title="Sélectionner Jean-Claude" coords="797,266,959,490" shape="rect" id="jean-Claude">
+<area alt="alex" title="Sélectionner Alex" coords="843,131,975,253" shape="rect" id="alex">
+<area alt="fenetre" title="Sélectionner Fenetre" coords="403,15,601,121" shape="rect" id="fenetre">
+<area alt="fond" title="Sélectionner Fond" coords="802,16,960,121" shape="rect" id="fond">
+<area alt="milieu" title="Sélectionner Milieu" coords="619,15,777,123" shape="rect" id="milieu">
+<area alt="nicole" title="Sélectionner Nicole" coords="20,18,191,126" shape="rect" id="nicole">
+<area alt="gauche" title="Sélectionner Gauche" coords="401,132,527,253" shape="rect" id="gauche">
+<area alt="dehors1" title="Sélectionner Dehors1" coords="805,527,866,597" shape="rect" id="dehors1">
+<area alt="dehors2" title="Sélectionner Dehors2" coords="869,527,928,596" shape="rect" id="dehors2">
+<area alt="bureau" title="Sélectionner Bureau" coords="46,341,170,653" shape="rect" id="bureau">
+</map> #}
+
+</body>
     {% endblock %}
 
-   {% block stylesheets %}
-    {# Calendar & homestyle #}
-    <link rel="stylesheet" href="{{ asset('assets/css/calendar.css') }}">
-
-
-    {% endblock %}
-
-        {% block javascripts %}
-
+    {% block javascripts %}
+    <script src="{{ asset('assets/javascript/mapLayers.js') }}"></script>
     <script src="{{ asset('assets/javascript/mapresizer.min.js') }}"></script>
     <script src="{{ asset('assets/javascript/imagemapevent2.js') }}"></script>
-
+    <script src="{{ asset('assets/javascript/buttonHoverMap.js') }}"></script>
 
     <script>
       imageMapResize();
     </script>
     {% endblock %}
 
-</body>
+    {# Chargement du fichier CSS mapAreas #}
+    {% block css_end %}
+    <link rel="stylesheet" href="{{ asset('assets/css/mapAreas.css') }}">
+    {% endblock %}
 </html>

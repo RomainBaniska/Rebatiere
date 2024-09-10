@@ -57,7 +57,7 @@ class HomeController extends AbstractController
             $photo = 'uploads/images/' . $photo;
         }
 
-        return $this->render('home/map2.html.twig', [
+        return $this->render('home/map.html.twig', [
             'controller_name' => 'HomeController',
             'currentUser' => $currentUser,
             'currentUserFirstName' => $currentUserFirstName,
