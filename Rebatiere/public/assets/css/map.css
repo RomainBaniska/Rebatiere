@@ -90,9 +90,9 @@ body {
     border-radius: 1%;
   }
 
-  .chamber-layer-container:hover {
+  /* .chamber-layer-container:hover {
     animation: zoom-in-zoom-out 1s ease infinite;
-  }
+  } */
 
   .zoom-animation {
     animation: zoom-in-zoom-out 1s ease infinite;

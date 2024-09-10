@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const areas = {
       'dortoirPetit': document.getElementById('dortoirPetit'),
       'dortoirGrand': document.getElementById('dortoirGrand'),
-      'chambrebleue': document.getElementById('chambreBleue'),
+      'chambreBleue': document.getElementById('chambreBleue'),
       'jeanClaude': document.getElementById('jeanClaude'),
       'alex': document.getElementById('alex'),
       'fenetre': document.getElementById('fenetre'),

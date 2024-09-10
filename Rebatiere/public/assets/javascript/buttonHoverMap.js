@@ -17,7 +17,7 @@ const chambres = {
 
 // Récupération des boutons
 const boutons = {
-    chambrebleue: document.getElementById('chambrebleue'),
+    chambrebleue: document.getElementById('chambreBleue'),
     bureau: document.getElementById('bureau'),
     dehors1: document.getElementById('dehors1'),
     dehors2: document.getElementById('dehors2'),
