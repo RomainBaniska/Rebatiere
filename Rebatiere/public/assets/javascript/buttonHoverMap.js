@@ -35,6 +35,7 @@ const boutons = {
     nicole: document.getElementById('nicole')
 };
 
+
 Object.keys(boutons).forEach(function(boutonKey, index) {
     const bouton = boutons[boutonKey];
     const chambreKey = `chambre${index + 1}`;
@@ -43,14 +44,20 @@ Object.keys(boutons).forEach(function(boutonKey, index) {
     if (bouton && chambre) {
         bouton.addEventListener('mouseenter', function() {
             chambre.classList.add('zoom-animation');
+            // Augmenter le z-index de la chambre & fullBlackShape lors de l'animation
+            chambre.style.zIndex = 9999;
             // Afficher layer4 lors du survol
-            layer4.style.visibility = 'visible';
+            layer4.style.display = 'block';
+            layer4.classList.add('shadowing-animation');
         });
 
         bouton.addEventListener('mouseleave', function() {
             chambre.classList.remove('zoom-animation');
+            // Réinitialiser le z-index de la chambre & fullBlackShape en fin d'animation
+            chambre.style.zIndex = 4;
             // Masquer layer4 lorsque le survol s'arrête
-            layer4.style.visibility = 'hidden';
+            layer4.classList.remove('shadowing-animation');
+            layer4.style.display = 'none';
         });
     }
 });

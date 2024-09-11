@@ -47,17 +47,13 @@ body {
 
 .image-container img#layer0 {
   z-index: 2;
+  background-color: red;
 }
 
 .image-container img.overlay {
   z-index: 3;
   opacity: 0.6;
-  /* passer les clics à travers les calques */
   pointer-events: none;
-}
-
-#layer0 {
-  background-color: red;
 }
 
 #layer1 {
@@ -68,15 +64,13 @@ body {
     display: none;
 }
 
+/* Full Black Shape */
 #layer4 {
-  /* display: none; */
-  visibility: hidden;
-}
-
-img.fullShadow {
-  z-index: 5;
-  opacity: 0.9;
-  pointer-events: none;
+  position: absolute; /* Ajouté pour essayer de régler le problème du stacking context */
+  display: none;
+  z-index : 5;
+  opacity: 0.6;
+  /* pointer-events: none; */
 }
 
 .not-clickable {
@@ -97,17 +91,8 @@ img.fullShadow {
     max-height: 496px;
     width: 100%;
     height: 496px;
-    z-index: 4;
+    /* z-index: 4; */
     border-radius: 1%;
-  }
-
-  /* .chamber-layer-container:hover {
-    animation: zoom-in-zoom-out 1s ease infinite;
-  } */
-
-  .zoom-animation {
-    animation: zoom-in-zoom-out 1s ease infinite;
-    /* background-color: rgba(0, 0, 0, 0.6); */
   }
 
   .chamber-layer-container img {
@@ -118,6 +103,10 @@ img.fullShadow {
     height: auto;
     pointer-events: none;
     z-index: 4;
+  }
+
+  .zoom-animation {
+    animation: zoom-in-zoom-out 1s ease infinite;
   }
 
   @keyframes zoom-in-zoom-out {
@@ -132,6 +121,22 @@ img.fullShadow {
       transform: scale(1, 1);
     }
   }
+
+  .shadowing-animation {
+    animation: fade-in-out 1s ease infinite;
+}
+
+@keyframes fade-in-out {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.6;
+    }
+    100% {
+        opacity: 0;
+    }
+}
 
 .visible {
   opacity: 1;
