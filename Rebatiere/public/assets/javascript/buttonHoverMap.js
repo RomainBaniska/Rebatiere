@@ -1,3 +1,6 @@
+// Récupération de la full black shape
+const layer4 = document.getElementById('layer4');
+
 // Récupération des chambres
 const chambres = {
     chambre1: document.getElementById('chambre1'),
@@ -40,10 +43,14 @@ Object.keys(boutons).forEach(function(boutonKey, index) {
     if (bouton && chambre) {
         bouton.addEventListener('mouseenter', function() {
             chambre.classList.add('zoom-animation');
+            // Afficher layer4 lors du survol
+            layer4.style.visibility = 'visible';
         });
 
         bouton.addEventListener('mouseleave', function() {
             chambre.classList.remove('zoom-animation');
+            // Masquer layer4 lorsque le survol s'arrête
+            layer4.style.visibility = 'hidden';
         });
     }
 });

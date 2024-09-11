@@ -68,6 +68,17 @@ body {
     display: none;
 }
 
+#layer4 {
+  /* display: none; */
+  visibility: hidden;
+}
+
+img.fullShadow {
+  z-index: 5;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
 .not-clickable {
   pointer-events: none;
   cursor: auto;
@@ -96,7 +107,7 @@ body {
 
   .zoom-animation {
     animation: zoom-in-zoom-out 1s ease infinite;
-    /* background-color: blue;  */
+    /* background-color: rgba(0, 0, 0, 0.6); */
   }
 
   .chamber-layer-container img {
