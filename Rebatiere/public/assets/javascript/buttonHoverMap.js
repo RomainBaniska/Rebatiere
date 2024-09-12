@@ -43,21 +43,34 @@ Object.keys(boutons).forEach(function(boutonKey, index) {
 
     if (bouton && chambre) {
         bouton.addEventListener('mouseenter', function() {
+            chambre.classList.remove('zoom-animation2');
             chambre.classList.add('zoom-animation');
             // Augmenter le z-index de la chambre & fullBlackShape lors de l'animation
             chambre.style.zIndex = 9999;
             // Afficher layer4 lors du survol
             layer4.style.display = 'block';
+            layer4.classList.remove('shadowing-animation2')
             layer4.classList.add('shadowing-animation');
         });
 
         bouton.addEventListener('mouseleave', function() {
             chambre.classList.remove('zoom-animation');
+            chambre.classList.add('zoom-animation2');
             // Réinitialiser le z-index de la chambre & fullBlackShape en fin d'animation
             chambre.style.zIndex = 4;
             // Masquer layer4 lorsque le survol s'arrête
             layer4.classList.remove('shadowing-animation');
-            layer4.style.display = 'none';
+            layer4.classList.add('shadowing-animation2')
+
+            // Écouter la fin de l'animation avant de cacher layer4
+            layer4.addEventListener('animationend', function handleAnimationEnd() {
+                // Vérifier si l'animation terminée est bien 'shadowing-animation2'
+                if (layer4.classList.contains('shadowing-animation2')) {
+                    layer4.style.display = 'none';
+                    layer4.removeEventListener('animationend', handleAnimationEnd); // Nettoyer l'écouteur
+                }
+            });
+            // layer4.style.display = 'none';
         });
     }
 });
