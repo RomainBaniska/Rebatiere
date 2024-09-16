@@ -59,16 +59,14 @@ Object.keys(boutons).forEach(function(boutonKey, index) {
             chambre.classList.remove('zoom-animation');
             chambre.classList.add('zoom-animationEnd');
 
-
-            chambre.style.zIndex = 4;
-
-            // // On attend la fin de l'animation de déZoom avant de refaire passer l'élément en z-index 4
-            // chambre.addEventListener('animationend', function onAnimationEnd(event) {
-            //     if (event.animationName === 'zoom-animationEnd') {
-            //         chambre.style.zIndex = 4; 
-            //         chambre.removeEventListener('animationend', onAnimationEnd); // Supprimer l'écouteur
-            //     }
-            // });
+            // Changement d'index quand zoom-animationEnd qui se termine
+            chambre.addEventListener('animationend', function onAnimationEnd(event) {
+                // Vérifier que c'est bien l'animation zoom-animationEnd qui se termine
+                if (event.animationName === 'zoom-out') {
+                    chambre.style.zIndex = 4;
+                    chambre.removeEventListener('animationend', onAnimationEnd);
+                }
+            });
 
 
             layer4.classList.remove('shadowing-animation');
