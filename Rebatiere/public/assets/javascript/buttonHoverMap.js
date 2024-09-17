@@ -68,7 +68,6 @@ Object.keys(boutons).forEach(function(boutonKey, index) {
                 }
             });
 
-
             layer4.classList.remove('shadowing-animation');
             layer4.classList.add('shadowing-animationEnd');
         });

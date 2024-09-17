@@ -6,6 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset('assets/css/map.css') }}">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 </head>
 {% endblock %}
 
@@ -18,6 +19,9 @@
 
     {% block body %}
 <body>
+
+<div class="mapContainer">
+
         {# Control Panel Etages #}
         <div class="controls">
         <button id="btnRDC">RDC</button>
@@ -27,19 +31,19 @@
 
         {# Buttons Etages #}
         <div class="buttons-container">
-        <button id="chambreBleue">Chambre Bleue</button>
-        <button id="jeanClaude">Jean-Claude</button>
-        <button id="dortoirPetit">Dortoir Petits</button>
-        <button id="dortoirGrand">Dortoir Grand</button>
-        <button id="gauche">Gauche</button>
-        <button id="fenetre">Fenêtre</button>
-        <button id="milieu">Milieu</button>
-        <button id="alex">Alex</button>
-        <button id="fond">Fond</button>
-        <button id="dehors1">Dehors 1</button>
-        <button id="dehors2">Dehors 2</button>
-        <button id="bureau">Bureau</button>
-        <button id="nicole">Nicole</button>
+        <button onclick="updateDisplay('Chambre Bleue')" id="chambreBleue">Chambre Bleue</button>
+        <button onclick="updateDisplay('Chambre de Jean-Claude')" id="jeanClaude">Jean-Claude</button>
+        <button onclick="updateDisplay('Dortoir des petits')" id="dortoirPetit">Dortoir Petits</button>
+        <button onclick="updateDisplay('Dortoir des grands')" id="dortoirGrand">Dortoir Grand</button>
+        <button onclick="updateDisplay('Chambre de gauche')" id="gauche">Gauche</button>
+        <button onclick="updateDisplay('Chambre Fenêtre')" id="fenetre">Fenêtre</button>
+        <button onclick="updateDisplay('Chambre du milieu')" id="milieu">Milieu</button>
+        <button onclick="updateDisplay('Chambre d'Alex')" id="alex">Alex</button>
+        <button onclick="updateDisplay('Chambre du fond')" id="fond">Fond</button>
+        <button onclick="updateDisplay('Chambre Dehors 1')" id="dehors1">Dehors 1</button>
+        <button onclick="updateDisplay('Chambre Dehors 2')" id="dehors2">Dehors 2</button>
+        <button onclick="updateDisplay('Chambre Bureau')" id="bureau">Bureau</button>
+        <button onclick="updateDisplay('Chambre Nicole')" id="nicole">Nicole</button>
         </div>
 
     <div class="box">
@@ -90,6 +94,15 @@
 <area alt="bureau" title="Sélectionner Bureau" coords="46,341,170,653" shape="rect" id="bureau">
 </map> #}
 
+<div class="validation-container">
+<div class="display-box"  id="displayBox">...</div>
+<i class="fa-solid fa-check check"></i>
+</div>
+
+{# div fin du mapContainer #}
+</div>
+<button id="toggleButton">Toggle</button>
+
 </body>
     {% endblock %}
 
@@ -98,9 +111,32 @@
     <script src="{{ asset('assets/javascript/mapresizer.min.js') }}"></script>
     <script src="{{ asset('assets/javascript/imagemapevent2.js') }}"></script>
     <script src="{{ asset('assets/javascript/buttonHoverMap.js') }}"></script>
-
+    <script>
+    function updateDisplay(name) {document.getElementById('displayBox').textContent = name;}
+    </script>
     <script>
       imageMapResize();
+    </script>
+
+    {# Toggle Button for map #}
+     <script>
+        const button = document.getElementById('toggleButton');
+        const mapContainer = document.querySelector('.mapContainer');
+
+        button.addEventListener('click', () => {
+            if (mapContainer.classList.contains('show')) {
+                mapContainer.classList.remove('show');
+                mapContainer.classList.add('hide');
+                // Pour garder la div cachée après l'animation de zoom-out
+                setTimeout(() => {
+                    mapContainer.style.visibility = 'hidden';
+                    mapContainer.classList.remove('hide');
+                }, 700); // Correspond à la durée de l'animation
+            } else {
+                mapContainer.style.visibility = 'visible';
+                mapContainer.classList.add('show');
+            }
+        });
     </script>
     {% endblock %}
 
