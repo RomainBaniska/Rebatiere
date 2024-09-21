@@ -10,6 +10,9 @@
 }
 
 .header {
+    /* position: absolute; */
+    position: relative;
+    z-index: 300;
     background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0)), url('/assets/images/pages/header.jpg');
     background-size: cover;
     background-repeat: no-repeat; 
@@ -56,7 +59,7 @@
 
 .action {
     z-index: 9999;
-    background-color: lavender;
+    /* background-color: lavender; */
 }
 
 .action .menu {
