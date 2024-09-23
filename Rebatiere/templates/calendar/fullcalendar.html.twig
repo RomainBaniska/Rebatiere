@@ -11,16 +11,14 @@
 {% endblock %}
 
 {% block body %}
+<body>
+<div class="bodyContainer">
+<div class="bodyOverlay">
     {# Calendar #}
 
     <div class="calendarContainer">
-
-    <div id='calendar'></div>
-
+      <div id='calendar'></div>
     </div>
-
-  {# Informations #}
-    {# <div id='infos'>Sélectionnez un événement pour laisser apparaitre le détail</div> #}
 
   {# Modal #}
 
@@ -37,6 +35,9 @@
           </div>
         </div>
     </div>
+</div>
+</div>
+</body>
 {% endblock %}
 
 

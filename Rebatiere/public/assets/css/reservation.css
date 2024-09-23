@@ -17,12 +17,36 @@ html {
 }
 
 body {
-    background-image: url('/assets/images/pages/toile_jardin.jpg');
-    background-size: cover;  
-    background-repeat: no-repeat; 
-    background-position: center; 
-    margin : 0px !important;
-}
+    height: 100%;
+    min-height: 100vh;
+    width: 100%;
+    margin: 0;
+    z-index: -1;
+  }
+  
+  .bodyContainer {
+      background-image: url('/assets/images/pages/toile_jardin.jpg');
+      background-size: cover;  
+      background-repeat:repeat; 
+      background-position: center; 
+      height: 100%;
+      min-height: 100vh;
+      width: 100%;
+      margin: 0;
+    }
+    
+    .bodyOverlay {
+      position: absolute;
+      background-color: rgb(112, 66, 20, 0.5);
+      background-size: cover;  
+      background-repeat:repeat; 
+      background-position: center; 
+      height: 100%;
+      min-height: 100vh;
+      width: 100%;
+      margin: 0;
+      /* padding-bottom: 50px; */
+    }
 
 .formLine {
     display : flex;
@@ -31,6 +55,16 @@ body {
 }
 
 .container {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.map {
+
+}
+
+.formSheet {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,8 +72,8 @@ body {
     border-radius: 5%;
     border: black solid 2px;
     /* margin : 10vh; */
-    margin-left: 20%;
-    margin-right: 20%;
+    /* margin-left: 20%;
+    margin-right: 20%; */
     margin-top: 5%;
     margin-bottom: 5%;
     padding: 2%;

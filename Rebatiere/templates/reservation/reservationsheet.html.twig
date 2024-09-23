@@ -15,15 +15,25 @@
         <link rel="stylesheet" href="{{ asset('assets/css/reservation.css') }}">
     {% endblock %}
 
+
   {% block body %}
+
   <body>
 
-    {# header #}
+   {% block header %}
+
     {% include 'home/header.html.twig' %}
 
-    <div class="container">
+    {% endblock %}
 
-        <h1>Bienvenu dans l'espace réservation {{ currentUser }} !</h1>
+<div class="bodyContainer">
+<div class="bodyOverlay">
+
+<div class="container">
+
+    <div class="formSheet">
+
+        <h1>Réservation</h1>
 
             {# Ouverture du formulaire #}
             <form method="post" action="{{ path('app_persistreservation') }}">
@@ -71,4 +81,15 @@
 
     </div>
 
+    <div class="map">
+LA MAP !
+    </div>
+
+{# Ajouter un lazy waiting screen "synchronisation des vacanciers" ou un truc du genre #}
+
+</div>
+
+</div>
+</div>
+</body>
 {% endblock %}
