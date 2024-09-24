@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+
+    {% block head %}
+  <head>
+    <html lang='en'>  
+    <meta charset='utf-8' />    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+    {% endblock %}
+
+    {% block stylesheets %}
+    {# On inclut le CSS parent pour s'assurer que les feuilles de "base" soient bien chargées #}
+    {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('assets/css/reservation.css') }}">
+    {% endblock %}
+
+
+  {% block body %}
+
+  <body>
+
+   {% block header %}
+
+    {% include 'home/header.html.twig' %}
+
+    {% endblock %}
+
+<div class="bodyContainer">
+<div class="bodyOverlay">
+
+<div class="container">
+
+    <div class="formSheet">
+
+        <h1>Réservation</h1>
+
+            {# Ouverture du formulaire #}
+            <form method="post" action="{{ path('app_persistreservation') }}">
+
+            {# DatePicker jQuery #}
+            {% include 'datePicker/datepicker.html.twig' %}
+
+            <div class='datepicker_container'>
+                <label for="from">Date de d'arrivée</label> &nbsp;
+                <input type="text" id="from" name="from" autocomplete="off"> &nbsp;
+
+                <label for="to">Date de départ </label> &nbsp;
+                <input type="text" id="to" name="to" autocomplete="off"> &nbsp;
+            </div>
+
+            <p class="formLine">
+                <label for="chambername">Sélectionnez une chambre :</label>
+                    <select id="chambername" name="chambername">
+                        {% for chamber in chambers %}
+                            <option value="{{ chamber.id }}">{{ chamber.chambername }}</option>
+                        {% endfor %}
+                    </select>
+            </p>
+
+            <p class="formLine">
+                <label for="username">Ajoutez un utilisateur :</label>
+                    <select id="username" name="username">
+                    {% for user in users %}
+                            <option value="{{ user.id }}">{{ user.username }}</option>
+                        {% endfor %}
+                    </select>
+            </p>
+
+            
+            <p class="formLine">
+                <label for="privatisation">Privatisation ? :</label>
+                <input type="checkbox" id="privatisation" name="privatisation">
+            </p>
+            
+            <p class="formLine">
+                <button type="submit">Ajouter</button>
+            </p>
+
+            </form>
+
+    </div>
+
+    <div class="map">
+LA MAP !
+    </div>
+
+{# Ajouter un lazy waiting screen "synchronisation des vacanciers" ou un truc du genre #}
+
+</div>
+
+</div>
+</div>
+</body>
+{% endblock %}

@@ -1,5 +1,7 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %} #}
 
+<!DOCTYPE html>
+<html lang="fr">
 
     {% block head %}
   <head>
@@ -10,9 +12,9 @@
     {% endblock %}
 
     {% block stylesheets %}
-    {# On inclut le CSS parent pour s'assurer que les feuilles de "base" soient bien chargées #}
-    {{ parent() }}
-        <link rel="stylesheet" href="{{ asset('assets/css/reservation.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/map2.css') }}">
+    {# <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> #}
+    <link rel="stylesheet" href="{{ asset('assets/css/reservation.css') }}">
     {% endblock %}
 
 
@@ -34,40 +36,34 @@
     <div class="formSheet">
 
         <h1>Réservation</h1>
-
             {# Ouverture du formulaire #}
             <form method="post" action="{{ path('app_persistreservation') }}">
-
             {# DatePicker jQuery #}
             {% include 'datePicker/datepicker.html.twig' %}
-
             <div class='datepicker_container'>
                 <label for="from">Date de d'arrivée</label> &nbsp;
                 <input type="text" id="from" name="from" autocomplete="off"> &nbsp;
-
                 <label for="to">Date de départ </label> &nbsp;
                 <input type="text" id="to" name="to" autocomplete="off"> &nbsp;
             </div>
 
             <p class="formLine">
-                <label for="chambername">Sélectionnez une chambre :</label>
-                    <select id="chambername" name="chambername">
-                        {% for chamber in chambers %}
-                            <option value="{{ chamber.id }}">{{ chamber.chambername }}</option>
-                        {% endfor %}
-                    </select>
+            <button id="toggleButton" type="button">Sélectionnez une chambre</button>
+            <div class="validation-container">
+            <div class="display-box"  id="displayBox">...</div>
+            <i class="fa-solid fa-check check"></i>
+            </div>
             </p>
 
             <p class="formLine">
-                <label for="username">Ajoutez un utilisateur :</label>
-                    <select id="username" name="username">
-                    {% for user in users %}
-                            <option value="{{ user.id }}">{{ user.username }}</option>
-                        {% endfor %}
-                    </select>
+            <label for="username">Ajoutez un utilisateur :</label>
+            <select id="username" name="username">
+            {% for user in users %}
+                <option value="{{ user.id }}">{{ user.username }}</option>
+            {% endfor %}
+            </select>
             </p>
 
-            
             <p class="formLine">
                 <label for="privatisation">Privatisation ? :</label>
                 <input type="checkbox" id="privatisation" name="privatisation">
@@ -76,14 +72,72 @@
             <p class="formLine">
                 <button type="submit">Ajouter</button>
             </p>
-
             </form>
-
     </div>
 
+{# DEBUT DIV MAP #}
     <div class="map">
-LA MAP !
+    <div class="mapContainer">
+
+        {# Control Panel Etages #}
+        <div class="controls">
+        <button id="btnRDC">RDC</button>
+        <button id="btnPremierEtage">Premier Etage</button>
+        <button id="btnDeuxiemeEtage">Deuxieme etage</button>
+        </div>
+
+        {# Buttons Etages #}
+        <div class="buttons-container">
+        <button onclick="updateDisplay('Chambre Bleue')" id="chambreBleue">Chambre Bleue</button>
+        <button onclick="updateDisplay('Chambre de Jean-Claude')" id="jeanClaude">Jean-Claude</button>
+        <button onclick="updateDisplay('Dortoir des petits')" id="dortoirPetit">Dortoir Petits</button>
+        <button onclick="updateDisplay('Dortoir des grands')" id="dortoirGrand">Dortoir Grand</button>
+        <button onclick="updateDisplay('Chambre de gauche')" id="gauche">Gauche</button>
+        <button onclick="updateDisplay('Chambre Fenêtre')" id="fenetre">Fenêtre</button>
+        <button onclick="updateDisplay('Chambre du milieu')" id="milieu">Milieu</button>
+        <button onclick="updateDisplay('Chambre d\'Alex')" id="alex">Alex</button>
+        <button onclick="updateDisplay('Chambre du fond')" id="fond">Fond</button>
+        <button onclick="updateDisplay('Chambre Dehors 1')" id="dehors1">Dehors 1</button>
+        <button onclick="updateDisplay('Chambre Dehors 2')" id="dehors2">Dehors 2</button>
+        <button onclick="updateDisplay('Chambre Bureau')" id="bureau">Bureau</button>
+        <button onclick="updateDisplay('Chambre Nicole')" id="nicole">Nicole</button>
+        </div>
+
+    <div class="box">
+
+        <div class="image-container">
+        {# Image de base #}
+            <img src="{{ asset('assets/images/chambersPlan/fullPlan.png') }}" id="layer0" class="layer" usemap="#plan"/>
+        {# Shadow layers #}
+            <img src="{{ asset('assets/images/chambersPlan/shapeFirstFloor.png') }}" id="layer1" class="layer overlay" usemap="#firstFloor"/>
+            <img src="{{ asset('assets/images/chambersPlan/shapeRdc.png') }}" id="layer2" class="layer overlay" usemap="#RDC"/>
+            <img src="{{ asset('assets/images/chambersPlan/shapeSecondFloor.png') }}" id="layer3" class="layer overlay" usemap="#secondFloor"/>
+        {# Full Shadow layer #}
+            <img src="{{ asset('assets/images/chambersPlan/fullBlackShape.png') }}" id="layer4" class="layer"/>
+        {# Shapes éléments animation #}
+            <div class="chamber-layer-container">
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre bleue.png') }}" id="chambre1" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre bureau.png') }}" id="chambre2" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre dehors1.png') }}" id="chambre3" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre dehors2.png') }}" id="chambre4" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre dortoirgrand.png') }}" id="chambre5" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre dortoirpetit.png') }}" id="chambre6" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre droite.png') }}" id="chambre7" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre fenetre.png') }}" id="chambre8" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre gauche.png') }}" id="chambre9" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre jc.png') }}" id="chambre10" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre milieu droite.png') }}" id="chambre11" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre milieu.png') }}" id="chambre12" class="chamber-layer"/>
+            <img src="{{ asset('assets/images/chambersPlan/elements/el chambre nicole.png') }}" id="chambre13" class="chamber-layer"/>
+            </div>
+        </div>
     </div>
+
+{# div fin du mapContainer #}
+</div>
+
+</div>
+{# FIN DIV MAP #}
 
 {# Ajouter un lazy waiting screen "synchronisation des vacanciers" ou un truc du genre #}
 
@@ -93,3 +147,38 @@ LA MAP !
 </div>
 </body>
 {% endblock %}
+
+{% block javascripts %} 
+    <script src="{{ asset('assets/javascript/mapLayers.js') }}"></script>
+    <script src="{{ asset('assets/javascript/mapresizer.min.js') }}"></script>
+    <script src="{{ asset('assets/javascript/imagemapevent2.js') }}"></script>
+    <script src="{{ asset('assets/javascript/buttonHoverMap.js') }}"></script>
+    <script>
+    function updateDisplay(name) {document.getElementById('displayBox').textContent = name;}
+    </script>
+    <script>
+      imageMapResize();
+    </script>
+
+    {# Toggle Button for map #}
+     <script>
+        const button = document.getElementById('toggleButton');
+        const mapContainer = document.querySelector('.mapContainer');
+
+        button.addEventListener('click', () => {
+            if (mapContainer.classList.contains('show')) {
+                mapContainer.classList.remove('show');
+                mapContainer.classList.add('hide');
+                // Pour garder la div cachée après l'animation de zoom-out
+                setTimeout(() => {
+                    mapContainer.style.visibility = 'hidden';
+                    mapContainer.classList.remove('hide');
+                }, 700); // Correspond à la durée de l'animation
+            } else {
+                mapContainer.style.visibility = 'visible';
+                mapContainer.classList.add('show');
+            }
+        });
+    </script>
+    {% endblock %}
+    </html>

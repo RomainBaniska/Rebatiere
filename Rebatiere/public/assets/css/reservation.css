@@ -57,10 +57,12 @@ body {
 .container {
 display: flex;
 justify-content: center;
-align-items: center;
+/* align-items: center; */
 }
 
 .map {
+    /* display: flex;
+    align-items: center; */
 
 }
 
@@ -71,9 +73,7 @@ align-items: center;
     background-color: whitesmoke;
     border-radius: 5%;
     border: black solid 2px;
-    /* margin : 10vh; */
-    /* margin-left: 20%;
-    margin-right: 20%; */
+
     margin-top: 5%;
     margin-bottom: 5%;
     padding: 2%;
