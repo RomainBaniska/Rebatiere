@@ -1,4 +1,8 @@
-* {
+/* * {
+    font-family: 'Heyday Serif', serif !important;
+} */
+
+html, body {
     font-family: 'Heyday Serif', serif !important;
 }
 
@@ -58,12 +62,6 @@ body {
 display: flex;
 justify-content: center;
 /* align-items: center; */
-}
-
-.map {
-    /* display: flex;
-    align-items: center; */
-
 }
 
 .formSheet {
