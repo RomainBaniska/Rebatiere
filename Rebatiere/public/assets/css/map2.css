@@ -210,6 +210,7 @@ html {
 .buttons-container {
   position: absolute;
   display: flex;
+  flex-wrap: wrap; 
   z-index: 6;
   top: 102%; 
   left: 10px;
@@ -260,4 +261,26 @@ area {
 
  .shake {
   animation: horizontal-shaking 0.5s ease-in-out;
+}
+
+/* Briques buttons */
+
+.brique1 {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  background-image: url('/assets/images/briques/brique1.png');
+  /* background-size: cover;
+  background-position: center; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 70px; 
 }

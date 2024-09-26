@@ -37,6 +37,8 @@ body {
       min-height: 100vh;
       width: 100%;
       margin: 0;
+
+      padding-bottom: 150px;
     }
     
     .bodyOverlay {
@@ -49,7 +51,8 @@ body {
       min-height: 100vh;
       width: 100%;
       margin: 0;
-      /* padding-bottom: 50px; */
+
+      padding-bottom: 150px;
     }
 
 .formLine {
