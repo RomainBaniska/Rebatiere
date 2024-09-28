@@ -146,37 +146,10 @@
 
 {% block javascripts %} 
     <script src="{{ asset('assets/javascript/mapLayers.js') }}"></script>
-    <script src="{{ asset('assets/javascript/mapresizer.min.js') }}"></script>
     <script src="{{ asset('assets/javascript/imagemapevent2.js') }}"></script>
     <script src="{{ asset('assets/javascript/buttonHoverMap.js') }}"></script>
     <script src="{{ asset('assets/javascript/buttonSMicroAnimations.js') }}"></script>
-    <script>
-    function updateDisplay(name) {document.getElementById('displayBox').textContent = name;}
-    </script>
-    <script>
-      imageMapResize();
-    </script>
-
-    {# Toggle Button for map #}
-     <script>
-        const button = document.getElementById('toggleButton');
-        {# const mapContainer = document.querySelector('.mapContainer'); #}
-        const box = document.querySelector('.box');
-
-        button.addEventListener('click', () => {
-            if (box.classList.contains('show')) {
-                box.classList.remove('show');
-                box.classList.add('hide');
-                // Pour garder la div cachée après l'animation de zoom-out
-                setTimeout(() => {
-                    box.style.visibility = 'hidden';
-                    box.classList.remove('hide');
-                }, 700); // Correspond à la durée de l'animation
-            } else {
-                box.style.visibility = 'visible';
-                box.classList.add('show');
-            }
-        });
-    </script>
+    <script src="{{ asset('assets/javascript/mapDisplayButton.js') }}"></script>
+    {# <script src="{{ asset('assets/javascript/mapresizer.min.js') }}"></script> Ajouter fonction mapResize();#}
     {% endblock %}
     </html>
