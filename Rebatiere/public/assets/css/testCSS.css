@@ -1,0 +1,30 @@
+#container {
+    width: 300px; /* Largeur initiale de la fenêtre */
+    height: 200px; /* Hauteur fixe de la fenêtre */
+    padding: 20px;
+    background-color: white;
+    border: 2px solid black;
+    position: relative; /* Pour que les éléments soient positionnés correctement */
+    display: flex;
+    flex-direction: column;
+    transition: width 0.5s ease; /* Animation de la largeur uniquement */
+    overflow: hidden;
+  }
+  
+  #container.expanded {
+    width: 600px; /* Largeur étendue lors du clic */
+  }
+  
+  .text-content {
+    position: absolute;
+    top: 50%; 
+    left: 20px; 
+    transform: translateY(-50%); 
+    white-space: nowrap; /* Empêche le texte de se décaler ou de faire un saut de ligne */
+    z-index: 1; /* Garde le texte au-dessus */
+  }
+  
+  .expandable-content {
+    display: none; /* Cette div n'est pas utilisée, elle peut contenir des éléments supplémentaires si nécessaire */
+  }
+  
