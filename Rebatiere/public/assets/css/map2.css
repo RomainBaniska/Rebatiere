@@ -202,15 +202,17 @@ html {
 /* Boutons étages */
 
 .controls {
+  position: absolute;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: row-reverse;
   justify-content: space-around;
-  margin-top: 20px;
+  /* margin-top: 20px; */
+  top : 500px;
 }
 
 .controls button {
-  padding: 10px 20px;
-  margin: 0 10px;
+  /* padding: 10px 20px;
+  margin: 0 10px; */
   font-size: 16px;
   cursor: pointer;
 }
@@ -218,16 +220,19 @@ html {
 .buttons-container {
   position: absolute;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap; 
   z-index: 6;
-  top: 102%; 
-  left: 10px;
+  height: 500px;
+  left: 100%;
+  justify-content: center;
+  /* top: 102%; 
+  left: 10px; */
   /* transform: translateY(-90%); */
 }
 
 .buttons-container button {
   display: none;
-  margin-right: 5px;
 }
 
 area {
@@ -277,19 +282,22 @@ area {
   background: none;
   border: none;
   padding: 0;
-  margin: 0;
+  /* margin: 0; */
   font: inherit;
   color: inherit;
   text-align: center;
   cursor: pointer;
   outline: none;
   background-image: url('/assets/images/briques/brique1.png');
-  /* background-size: cover;
-  background-position: center; */
+
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100px;
   height: 70px; 
+  transform: scale(0.8);
+
+  transform-origin: center;
+  margin: -10px 0; /* Ajuster les marges négatives pour réduire l'espace */
 }
 
