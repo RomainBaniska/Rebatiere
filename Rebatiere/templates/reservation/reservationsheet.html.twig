@@ -24,8 +24,9 @@
 
 <div class="container">
 
-    <div class="formSheet">
+<div class="formSheetContainer" id="formSheetContainer">
 
+    <div class="formSheet">
         <h1>Réservation</h1>
             {# Ouverture du formulaire #}
             <form method="post" action="{{ path('app_persistreservation') }}">
@@ -39,10 +40,10 @@
             </div>
 
             <p class="formLine">
+            <button id="toggle-btn" type="button">OUVRIR MAP</button>
             <button id="toggleButton" type="button">Sélectionnez une chambre</button>
             <div class="validation-container">
             <div class="display-box"  id="displayBox">...</div>
-            {# <i class="fa-solid fa-check check"></i> #}
             </div>
             </p>
 
@@ -59,12 +60,13 @@
                 <label for="privatisation">Privatisation ? :</label>
                 <input type="checkbox" id="privatisation" name="privatisation">
             </p>
-            
+
             <p class="formLine">
                 <button type="submit">Ajouter</button>
             </p>
             </form>
     </div>
+
 
 {# DEBUT DIV MAP #}
     <div class="map">
@@ -100,19 +102,17 @@
 
         {# Control Panel Etages #}
         <div class="controls">
-
-        <button id="btnRDC" style="background: none; border: none;">
-            <i class="fa-solid fa-arrow-down" style="font-size: 24px;"></i>
-        </button>
-        
-        <button id="btnPremierEtage" style="background: none; border: none;">
-            <i class="fa-solid fa-circle" style="font-size: 24px;"></i>
-        </button>
-        
-        <button id="btnDeuxiemeEtage" style="background: none; border: none;">
-            <i class="fa-solid fa-arrow-up" style="font-size: 24px;"></i>
-        </button>
-       
+            <button id="btnRDC" style="background: none; border: none;">
+                <i class="fa-solid fa-arrow-down" style="font-size: 24px;"></i>
+            </button>
+            
+            <button id="btnPremierEtage" style="background: none; border: none;">
+                <i class="fa-solid fa-circle" style="font-size: 24px;"></i>
+            </button>
+            
+            <button id="btnDeuxiemeEtage" style="background: none; border: none;">
+                <i class="fa-solid fa-arrow-up" style="font-size: 24px;"></i>
+            </button>
         </div>
 
         {# Buttons Etages #}
@@ -137,6 +137,9 @@
 </div>
 {# FIN DIV MAP #}
 
+{# FIN DU FormSheetContainer #}
+</div>
+
 {# Ajouter un lazy waiting screen "synchronisation des vacanciers" ou un truc du genre #}
 
 </div>
@@ -151,5 +154,14 @@
     <script src="{{ asset('assets/javascript/buttonSMicroAnimations.js') }}"></script>
     <script src="{{ asset('assets/javascript/mapDisplayButton.js') }}"></script>
     {# <script src="{{ asset('assets/javascript/mapresizer.min.js') }}"></script> Ajouter fonction mapResize();#}
+   
+        <script>
+ document.getElementById('toggle-btn').addEventListener('click', function() {
+  var formContainer = document.getElementById('formSheetContainer');
+  formContainer.classList.toggle('expanded'); // Ajoute ou retire la classe 'expanded'
+});
+
+    </script>
+   
     {% endblock %}
     </html>
