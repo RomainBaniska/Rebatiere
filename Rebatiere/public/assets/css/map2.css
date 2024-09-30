@@ -19,11 +19,11 @@ html {
 
 .box.show {
   visibility: visible;
-  animation: container-zoom-in 0.7s forwards;
+  animation: container-zoom-in 0.5s forwards;
 }
 
 .box.hide {
-  animation: container-zoom-out 0.7s forwards;
+  animation: container-zoom-out 0.5s forwards;
 }
 
 @keyframes container-zoom-in {
@@ -258,10 +258,6 @@ area {
   font-weight: bold;
 }
 
-.check {
-  color: red;
-}
-
 /* Arrows shaking */
 
 @keyframes horizontal-shaking {
@@ -296,6 +292,7 @@ area {
   width: 100px;
   height: 70px; 
   transform: scale(0.8);
+  z-index: 0;
 
   transform-origin: center;
   margin: -10px 0; /* Ajuster les marges négatives pour réduire l'espace */

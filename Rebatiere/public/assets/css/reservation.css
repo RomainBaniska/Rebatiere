@@ -64,7 +64,7 @@ body {
 .container {
   display: flex;
 /* justify-content: center; */
-  border: red 2px solid;
+  /* border: red 2px solid; */
 }
 
 #formSheetContainer {
@@ -79,7 +79,7 @@ body {
     padding: 10px;
     margin: 20px;
 
-    transition: width 0.5s ease;
+    transition: width 0.4s ease;
 
     /* align-items: flex-start; */
     justify-content: flex-start;
