@@ -46,8 +46,8 @@
             </div>
             </p>
 
-            <p class="formLine">
-            <label for="username">Ajoutez un utilisateur :</label>
+            <p class="formLine" style="flex-direction : column;">
+            <label for="username">Ajoutez un utilisateur :</label><br>
             <select id="username" name="username">
             {% for user in users %}
                 <option value="{{ user.id }}">{{ user.username }}</option>
@@ -102,7 +102,7 @@
         <div class="buttons-container">
 
         <button onclick="updateDisplay('Chambre Bleue')" id="chambreBleue" class="brique1">Chambre Bleue</button>
-        <button onclick="updateDisplay('Chambre de Jean-Claude')" id="jeanClaude" class="brique1">Jean-Claude</button>
+        <button onclick="updateDisplay('Chambre Jean-Claude')" id="jeanClaude" class="brique1">Jean-Claude</button>
         <button onclick="updateDisplay('Dortoir des petits')" id="dortoirPetit" class="brique1">Dortoir Petits</button>
         <button onclick="updateDisplay('Dortoir des grands')" id="dortoirGrand" class="brique1">Dortoir Grand</button>
         <button onclick="updateDisplay('Chambre de gauche')" id="gauche" class="brique1">Gauche</button>

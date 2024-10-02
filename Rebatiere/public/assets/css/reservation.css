@@ -82,7 +82,8 @@ body {
     transition: width 0.4s ease;
 
     /* align-items: flex-start; */
-    justify-content: flex-start;
+    /* justify-content: flex-start; */
+    justify-content: center;
     height: 600px;
     width: 400px;
 }
@@ -91,8 +92,9 @@ body {
     position: absolute;
     height: 600px;
     width: 1150px;
-    /* width: 95vw; */
-    /* overflow: hidden; */
+
+    /* On met un flex-start en justify content pour que le formsheet se cale à gauche */
+    justify-content: flex-start;
 }
 
 .formSheet {
