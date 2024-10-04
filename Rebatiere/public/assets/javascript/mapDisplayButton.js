@@ -2,6 +2,7 @@ const button = document.getElementById('toggleButton');
 const box = document.querySelector('.box');
 const map = document.querySelector('.map');
 const formContainer = document.getElementById('formSheetContainer');
+const formSheet = document.getElementById('formSheet');
 
 button.addEventListener('click', () => {
     if (box.classList.contains('show')) {
@@ -11,18 +12,24 @@ button.addEventListener('click', () => {
         
         setTimeout(() => {
             box.style.visibility = 'hidden';
-            box.classList.remove('hide');
-            
+            box.classList.remove('hide');  
+
             formContainer.classList.remove('expanded');
-            formContainer.style.justifyContent = "center";
             map.style.display = "none";
 
+            formSheet.classList.add('recenter');
 
+                setTimeout(() => {
+                    formSheet.classList.remove('recenter');
+                }, 400);
+                setTimeout(() => {
+                formContainer.classList.remove('position');
+            }, 400);
 
         }, 350); // Correspond à la durée de l'animation de fermeture de la map
     } else {
         formContainer.classList.add('expanded');
-        formContainer.style.justifyContent = "flex-start";
+        formContainer.classList.add('position');
         map.style.display = "block";
         
         setTimeout(() => {
