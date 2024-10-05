@@ -19,6 +19,7 @@ html {
   display: flex;
   justify-content: center;
   visibility: hidden;
+  padding-left: 100px;
 }
 
 .box.show {

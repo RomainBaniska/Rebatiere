@@ -22,7 +22,7 @@ button.addEventListener('click', () => {
             setTimeout(() => {
                 formContainer.classList.remove('position');
                 formSheet.classList.remove('recenter');
-            }, 3000);
+            }, 1500);
 
         }, 350); // Correspond à la durée de l'animation de fermeture de la map
     } else {

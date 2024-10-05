@@ -97,7 +97,7 @@ body {
 #formSheet.recenter {
   /* position: absolute; */
   transform: translateX(95px); /* Ajoute une translation vers le centre */
-  transition: transform 3s ease;
+  transition: transform 1.5s ease;
 }
 
 .formSheet {
