@@ -19,12 +19,10 @@ button.addEventListener('click', () => {
 
             formSheet.classList.add('recenter');
 
-                setTimeout(() => {
-                    formSheet.classList.remove('recenter');
-                }, 400);
-                setTimeout(() => {
+            setTimeout(() => {
                 formContainer.classList.remove('position');
-            }, 400);
+                formSheet.classList.remove('recenter');
+            }, 3000);
 
         }, 350); // Correspond à la durée de l'animation de fermeture de la map
     } else {

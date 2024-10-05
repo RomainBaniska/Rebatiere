@@ -80,7 +80,7 @@ body {
     width: 400px;
     position: relative;
 
-    transition: width 0.4s ease, justify-content 0.4s ease;
+    transition: width 0.4s ease;
     justify-content: center;
 }
 
@@ -95,8 +95,9 @@ body {
 }
 
 #formSheet.recenter {
-  transform: translateX(calc(35px)); /* Ajoute une translation vers le centre */
-  transition: transform 0.4s ease;
+  /* position: absolute; */
+  transform: translateX(95px); /* Ajoute une translation vers le centre */
+  transition: transform 3s ease;
 }
 
 .formSheet {
@@ -110,7 +111,11 @@ body {
     z-index: 0;
 
      /* Transition fluide du contenu */
-    transition: transform 0.4s ease;
+    /* transition: transform 0.4s ease; */
+}
+
+.no-transition {
+  transition: none !important; /* Annule les transitions */
 }
 
 .datepicker_container {
