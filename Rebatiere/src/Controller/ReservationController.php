@@ -54,8 +54,11 @@ class ReservationController extends AbstractController
         $from = new \DateTime($request->request->get('from'));
         $to = new \DateTime($request->request->get('to'));
         $userId = $request->request->getInt('username');
-        $chamberId = $request->request->getInt('chambername');
+        // $chamberId = $request->request->getInt('chambername');
+        $chamberId = $request->request->get('chambername');
         $privatisation = (bool) $request->request->get('privatisation');
+
+        dump($chamberId);
 
         // On charge les objets User et Chamber correspondants pour pas avoir d'erreur d'attendu en BDD
         $user = $em

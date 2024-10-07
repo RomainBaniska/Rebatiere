@@ -41,3 +41,10 @@ button.addEventListener('click', () => {
 function updateDisplay(name) {
     document.getElementById('displayBox').textContent = name;
 }
+
+ // Récupération de la valeur de l'encadré "chambre sélectionnée" depuis l'hidden input
+ document.querySelector('form').addEventListener('submit', function() {
+    const displayBoxValue = document.getElementById('displayBox').textContent;
+    document.getElementById('chamberInput').value = displayBoxValue.replace(/[\s']/g, ''); /* REGEX sans espace ni apostrophe */
+    console.log("le script s est executé");
+});
