@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Contracts\Cache\CacheInterface;
-use Symfony\Contracts\Cache\ItemInterface;
+use App\Service\ChamberService;
 
 class ReservationController extends AbstractController
 {
@@ -48,17 +48,18 @@ class ReservationController extends AbstractController
     }
 
     #[Route('/persistreservation', name: 'app_persistreservation')]
-    public function reservationPersist(Request $request, EntityManagerInterface $em): Response
+    public function reservationPersist(Request $request, EntityManagerInterface $em, ChamberService $chamberService): Response
     {
         
         $from = new \DateTime($request->request->get('from'));
         $to = new \DateTime($request->request->get('to'));
         $userId = $request->request->getInt('username');
         // $chamberId = $request->request->getInt('chambername');
-        $chamberId = $request->request->get('chambername');
         $privatisation = (bool) $request->request->get('privatisation');
 
-        dump($chamberId);
+        $chamberName = $request->request->get('chambername');
+        $chamberId = $chamberService->getChamberId($chamberName);
+        // dump($chamberId);
 
         // On charge les objets User et Chamber correspondants pour pas avoir d'erreur d'attendu en BDD
         $user = $em
