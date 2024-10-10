@@ -54,12 +54,10 @@ class ReservationController extends AbstractController
         $from = new \DateTime($request->request->get('from'));
         $to = new \DateTime($request->request->get('to'));
         $userId = $request->request->getInt('username');
-        // $chamberId = $request->request->getInt('chambername');
         $privatisation = (bool) $request->request->get('privatisation');
 
         $chamberName = $request->request->get('chambername');
         $chamberId = $chamberService->getChamberId($chamberName);
-        // dump($chamberId);
 
         // On charge les objets User et Chamber correspondants pour pas avoir d'erreur d'attendu en BDD
         $user = $em
@@ -120,17 +118,9 @@ class ReservationController extends AbstractController
         return $this->redirectToRoute('app_home');
     }
 
-    // Méthode de traitement de l'information envoyé au fullcalendar concernant les dates 
     #[Route('/api/reservations', name: 'api_reservations')]
-    public function getReservations(EntityManagerInterface $em, CacheInterface $cache): JsonResponse
+    public function getReservations(EntityManagerInterface $em): JsonResponse
     {
-
-        // // Cache
-        // $calendarData = $cache->get('events_cache', function (ItemInterface $item) use ($em) {
-        // $item->expiresAfter(1); // Une heure
-
-        // Ajouter purge du cache quand réservation faite !!!! /!\
-
         $reservations = $em->getRepository(Reservation::class)->findAll();
 
         $events = [];
@@ -155,9 +145,25 @@ class ReservationController extends AbstractController
                 ];
             }
         }
-
-    //     return $events;
-    // }); 
         return new JsonResponse($events);
+    }
+
+    #[Route('/api/search-users', name: 'api_search_users', methods: ['GET'])]
+    public function searchUsers(Request $request, EntityManagerInterface $em): JsonResponse
+    {
+        $term = $request->query->get('term', ''); 
+        $users = $em->getRepository(User::class)->searchByTerm($term);
+
+        $results = []; // Initialisation des résultats
+        foreach ($users as $user) {
+            $results[] = [
+                'id' => $user->getId(),
+                'username' => $user->getUsername(),
+                'firstName' => $user->getFirstname(),
+                'lastName' => $user->getLastname(),
+            ];
+        }
+
+        return new JsonResponse($results); // Retourne les résultats au format JSON
     }
 }

@@ -48,12 +48,17 @@
             </p>
 
             <p class="formLine" style="flex-direction : column;">
-            <label for="username">Ajoutez un utilisateur :</label><br>
-            <select id="username" name="username">
+            <label for="username">Rajoutez des utilisateurs :</label><br>
+
+{# <div class="search-container"> #}
+            <input type="text" id="userSearch" placeholder="Rechercher un utilisateur..." />
+            <ul id="user-list" class="user-list"></ul>
+{# </div> #}
+            {# <select id="username" name="username">
             {% for user in users %}
                 <option value="{{ user.id }}">{{ user.username }}</option>
             {% endfor %}
-            </select>
+            </select> #}
             </p>
 
             <p class="formLine">
@@ -152,6 +157,7 @@
     <script src="{{ asset('assets/javascript/buttonHoverMap.js') }}"></script>
     <script src="{{ asset('assets/javascript/buttonSMicroAnimations.js') }}"></script>
     <script src="{{ asset('assets/javascript/mapDisplayButton.js') }}"></script>
+    <script src="{{ asset('assets/javascript/searchUser.js') }}"></script>
     {# <script src="{{ asset('assets/javascript/mapresizer.min.js') }}"></script> Ajouter fonction mapResize();#}
 
     {% endblock %}

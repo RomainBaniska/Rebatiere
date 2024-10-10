@@ -121,3 +121,23 @@ body {
 .datepicker_container {
     flex-direction: column !important;
 }
+
+.search-container {
+  position: relative;
+  display: flex;
+  flex-direction: center;
+}
+
+.uList {
+  font-family: Arial, Helvetica, sans-serif;
+  /* list-style-type: none;
+  position: absolute;
+  z-index: 10;
+  background-color: white; */
+}
+
+/* Surlignage de l'élément sélectionné dans la liste */
+.highlight {
+  background-color: #ddd;
+  cursor: pointer;
+}
