@@ -24,6 +24,7 @@ class ReservationController extends AbstractController
         $currentUser = $this->getUser()->getUsername();
         $currentUserFirstName = $this->getUser()->getFirstname();
         $currentUserLastName = $this->getUser()->getLastname();
+        $currentUserId = $this->getUser()->getId();
 
         // Récupérer la photo pour le header
         $photo = $this->getUser()->getImageFileName();
@@ -40,9 +41,11 @@ class ReservationController extends AbstractController
           return $this->render('reservation/reservationsheet.html.twig', [
             'users' => $users,
             'chambers' => $chambers,
+            'currentUserId' => $currentUserId,
             'currentUser' => $currentUser,
             'currentUserFirstName' => $currentUserFirstName,
             'currentUserLastName' => $currentUserLastName,
+            // Penser à récupérer User, Firstname & Lastname pour le passer dans le controlleur du header
             'photo' => $photo,
         ]);        
     }
@@ -154,7 +157,7 @@ class ReservationController extends AbstractController
         $term = $request->query->get('term', ''); 
         $users = $em->getRepository(User::class)->searchByTerm($term);
 
-        $results = []; // Initialisation des résultats
+        $results = []; 
         foreach ($users as $user) {
             $results[] = [
                 'id' => $user->getId(),
@@ -164,6 +167,6 @@ class ReservationController extends AbstractController
             ];
         }
 
-        return new JsonResponse($results); // Retourne les résultats au format JSON
+        return new JsonResponse($results); 
     }
 }

@@ -76,7 +76,9 @@ body {
     border: black solid 2px;
     padding: 10px;
     margin: 20px;
-    height: 600px;
+    /* height: 600px; */
+    min-height: 600px;
+    height: auto;
     width: 400px;
     position: relative;
 
@@ -86,7 +88,9 @@ body {
 
 #formSheetContainer.expanded {
     position: absolute;
-    height: 600px;
+    /* height: 600px; */
+    min-height: 600px;
+    height: auto;
     width: 1150px;
 }
 
@@ -96,7 +100,7 @@ body {
 
 #formSheet.recenter {
   /* position: absolute; */
-  transform: translateX(95px); /* Ajoute une translation vers le centre */
+  transform: translateX(84px); /* Ajoute une translation vers le centre */
   transition: transform 1.5s ease;
 }
 
@@ -140,4 +144,34 @@ body {
 .highlight {
   background-color: #ddd;
   cursor: pointer;
+}
+
+.selectedUser {
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin: 5px; */
+  /* padding: 5px 5px; */
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  position: relative;
+}
+
+#selectedUsersContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 90%;
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 10px;
 }

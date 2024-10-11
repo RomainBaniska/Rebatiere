@@ -1,7 +1,7 @@
 let highlightedIndex = -1;
+let selectedUsers = [];
 
 document.getElementById('userSearch').addEventListener('input', function () {
-
     const searchTerm = this.value;
     const userList = document.getElementById('user-list');
 
@@ -18,14 +18,18 @@ document.getElementById('userSearch').addEventListener('input', function () {
         userList.innerHTML = '';
         highlightedIndex = -1;
 
-        data.forEach((user, index) => {
+        // Filtre les utilisateurs déjà sélectionnés
+        const filteredData = data.filter(user => !selectedUsers.includes(user.username));
+
+        filteredData.forEach((user, index) => {
             const li = document.createElement('li');
             li.textContent = user.username;
             li.classList.add('uList');
 
             // Gestion du clic pour sélectionner l'utilisateur
             li.addEventListener('click', function () {
-                document.getElementById('userSearch').value = user.username;
+                addUser(user.username);
+                document.getElementById('userSearch').value = '';
                 userList.innerHTML = '';
                 userList.style.display = 'none';
             });
@@ -39,7 +43,7 @@ document.getElementById('userSearch').addEventListener('input', function () {
             userList.appendChild(li);
         });
 
-        userList.style.display = data.length > 0 ? 'block' : 'none';
+        userList.style.display = filteredData.length > 0 ? 'block' : 'none';
     })
     .catch(error => {
         console.error('Erreur lors de la récupération des utilisateurs', error);
@@ -67,7 +71,9 @@ document.getElementById('userSearch').addEventListener('keydown', function (e) {
 
         if (e.key === 'Enter' && highlightedIndex >= 0) {
             e.preventDefault();
-            document.getElementById('userSearch').value = items[highlightedIndex].textContent;
+            const selectedUsername = items[highlightedIndex].textContent;
+            addUser(selectedUsername);
+            document.getElementById('userSearch').value = '';
             userList.innerHTML = '';
             userList.style.display = 'none';
         }
@@ -81,5 +87,35 @@ function updateHighlight(items, index) {
     }
     if (index >= 0 && items[index]) {
         items[index].classList.add('highlight');
+    }
+}
+
+// Fonction pour ajouter un utilisateur sélectionné
+function addUser(username) {
+    if (!selectedUsers.includes(username)) {
+        selectedUsers.push(username);
+
+        // Met à jour l'affichage des utilisateurs sélectionnés
+        const selectedUsersContainer = document.getElementById('selectedUsersContainer');
+        const userDiv = document.createElement('div');
+        userDiv.textContent = username;
+        userDiv.classList.add('selectedUser');
+        selectedUsersContainer.appendChild(userDiv);
+
+        // Met à jour le champ caché avec les utilisateurs sélectionnés
+        document.getElementById('selectedUsers').value = selectedUsers.join(',');
+
+        // Ajout d'un bouton pour retirer un utilisateur sélectionné
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'x';
+        removeButton.classList.add('removeButton');
+        userDiv.appendChild(removeButton);
+
+        // Retirer l'utilisateur lorsqu'on clique sur 'x'
+        removeButton.addEventListener('click', function () {
+            selectedUsers = selectedUsers.filter(user => user !== username);
+            userDiv.remove();
+            document.getElementById('selectedUsers').value = selectedUsers.join(',');
+        });
     }
 }

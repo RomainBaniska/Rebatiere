@@ -40,7 +40,7 @@
             </div>
 
             <p class="formLine">
-            <button id="toggleButton" type="button">Sélectionnez une chambre</button>
+            <button id="toggleButton" type="button">Sélectionnez votre chambre</button>
             <div class="validation-container">
             <div class="display-box"  id="displayBox">...</div>
             </div>
@@ -50,21 +50,25 @@
             <p class="formLine" style="flex-direction : column;">
             <label for="username">Rajoutez des utilisateurs :</label><br>
 
-{# <div class="search-container"> #}
-            <input type="text" id="userSearch" placeholder="Rechercher un utilisateur..." />
+            <input type="text" id="userSearch" placeholder="Rechercher un membre..." />
             <ul id="user-list" class="user-list"></ul>
-{# </div> #}
-            {# <select id="username" name="username">
-            {% for user in users %}
-                <option value="{{ user.id }}">{{ user.username }}</option>
-            {% endfor %}
-            </select> #}
+
+            <input type="hidden" name="username" value="{{ currentUserId }}">
+            
             </p>
 
-            <p class="formLine">
+            {# <p class="formLine">
                 <label for="privatisation">Privatisation ? :</label>
                 <input type="checkbox" id="privatisation" name="privatisation">
+            </p> #}
+
+            <p class="formLine">
+                {# <label for="selectedUsers">Utilisateurs sélectionnés :</label><br> #}
+                <div id="selectedUsersContainer"></div>
             </p>
+
+            <!-- Champ caché pour soumettre les utilisateurs sélectionnés -->
+            <input type="hidden" id="selectedUsers" name="selectedUsers">
 
             <p class="formLine">
                 <button type="submit">Ajouter</button>
