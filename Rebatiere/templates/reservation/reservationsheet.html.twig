@@ -43,23 +43,19 @@
             <label for="to">Sélectionnez votre chambre</label> &nbsp;
             <button id="toggleButton" type="button">></button>
             <div class="validation-container">
-            <div class="display-box"  id="displayBox">...</div>
+                <div class="display-box"  id="displayBox">...</div>
             </div>
             <input type="hidden" id="chamberInput" name="chambername" value="">
             </p>
 
-<br>
-    {# &nbsp; #}
+            <br>
 
             <p class="formLine">
             <label for="username">Rajoutez des utilisateurs :</label><br>
-
             <input type="text" id="userSearch" placeholder="Rechercher un membre..." />
             <button id="toggleMembers" type="button">></button>
             <ul id="user-list" class="user-list"></ul>
-
             <input type="hidden" name="username" value="{{ currentUserId }}">
-            
             </p>
 
             {# <p class="formLine">
@@ -68,11 +64,8 @@
             </p> #}
 
             <p class="formLine">
-                {# <label for="selectedUsers">Utilisateurs sélectionnés :</label><br> #}
                 <div id="selectedUsersContainer"></div>
             </p>
-
-            <!-- Champ caché pour soumettre les utilisateurs sélectionnés -->
             <input type="hidden" id="selectedUsers" name="selectedUsers">
 
             <p class="formLine">
@@ -80,6 +73,13 @@
             </p>
             </form>
     </div>
+
+{# DEBUT DIV MEMBERS #}
+    <div class="members">
+    <div class="membersBox">
+    </div>
+    </div>
+
 
 {# DEBUT DIV MAP #}
     <div class="map">
@@ -166,6 +166,7 @@
     <script src="{{ asset('assets/javascript/buttonHoverMap.js') }}"></script>
     <script src="{{ asset('assets/javascript/buttonSMicroAnimations.js') }}"></script>
     <script src="{{ asset('assets/javascript/mapDisplayButton.js') }}"></script>
+    <script src="{{ asset('assets/javascript/usersDisplayButton.js') }}"></script>
     <script src="{{ asset('assets/javascript/searchUser.js') }}"></script>
     {# <script src="{{ asset('assets/javascript/mapresizer.min.js') }}"></script> Ajouter fonction mapResize();#}
 
