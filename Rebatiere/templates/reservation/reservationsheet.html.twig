@@ -40,17 +40,22 @@
             </div>
 
             <p class="formLine">
-            <button id="toggleButton" type="button">Sélectionnez votre chambre</button>
+            <label for="to">Sélectionnez votre chambre</label> &nbsp;
+            <button id="toggleButton" type="button">></button>
             <div class="validation-container">
             <div class="display-box"  id="displayBox">...</div>
             </div>
             <input type="hidden" id="chamberInput" name="chambername" value="">
             </p>
 
-            <p class="formLine" style="flex-direction : column;">
+<br>
+    {# &nbsp; #}
+
+            <p class="formLine">
             <label for="username">Rajoutez des utilisateurs :</label><br>
 
             <input type="text" id="userSearch" placeholder="Rechercher un membre..." />
+            <button id="toggleMembers" type="button">></button>
             <ul id="user-list" class="user-list"></ul>
 
             <input type="hidden" name="username" value="{{ currentUserId }}">
@@ -71,7 +76,7 @@
             <input type="hidden" id="selectedUsers" name="selectedUsers">
 
             <p class="formLine">
-                <button type="submit">Ajouter</button>
+                <button type="submit">Réserver</button>
             </p>
             </form>
     </div>

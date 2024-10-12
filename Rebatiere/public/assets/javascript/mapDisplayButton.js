@@ -3,8 +3,14 @@ const box = document.querySelector('.box');
 const map = document.querySelector('.map');
 const formContainer = document.getElementById('formSheetContainer');
 const formSheet = document.getElementById('formSheet');
+let isAnimating = false;
 
 button.addEventListener('click', () => {
+
+    if (isAnimating) return;
+
+    isAnimating = true;
+
     if (box.classList.contains('show')) {
         box.classList.remove('show');
         box.classList.add('hide');
@@ -22,6 +28,8 @@ button.addEventListener('click', () => {
             setTimeout(() => {
                 formContainer.classList.remove('position');
                 formSheet.classList.remove('recenter');
+                button.innerHTML=">";
+                isAnimating = false; 
             }, 1500);
 
         }, 350); // Correspond à la durée de l'animation de fermeture de la map
@@ -33,6 +41,8 @@ button.addEventListener('click', () => {
         setTimeout(() => {
             box.style.visibility = 'visible';
             box.classList.add('show');
+            button.innerHTML="<";
+            isAnimating = false;
         }, 350); // Correspond à la durée de l'animation d'extension du formContainer
     }
 });

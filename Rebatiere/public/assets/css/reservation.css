@@ -57,8 +57,10 @@ body {
 
 .formLine {
     display : flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 10px;
 }
 
 .container {
@@ -100,7 +102,7 @@ body {
 
 #formSheet.recenter {
   /* position: absolute; */
-  transform: translateX(84px); /* Ajoute une translation vers le centre */
+  transform: translateX(80px); /* Ajoute une translation vers le centre */
   transition: transform 1.5s ease;
 }
 
@@ -140,6 +142,11 @@ body {
   background-color: white; */
 }
 
+.user-list {
+  padding-left: 20px;
+  width: 81%;
+}
+
 /* Surlignage de l'élément sélectionné dans la liste */
 .highlight {
   background-color: #ddd;
@@ -174,4 +181,14 @@ body {
   font-weight: bold;
   cursor: pointer;
   margin-left: 10px;
+}
+
+#toggleButton {
+  position: absolute;
+  transform: translate(100px, 65px);
+}
+
+#toggleMembers {
+  position: absolute;
+  transform: translate(100px, 19.25px);
 }
