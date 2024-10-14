@@ -17,6 +17,7 @@ buttonMembers.addEventListener('click', () => {
 
         
         setTimeout(() => {
+            formContainer.style.alignItems = "center"
             membersBox.style.visibility = 'hidden';
             membersBox.classList.remove('hide');  
 
@@ -34,6 +35,7 @@ buttonMembers.addEventListener('click', () => {
 
         }, 350); 
     } else {
+        formContainer.style.alignItems = "start"
         formContainer.classList.add('expanded');
         formContainer.classList.add('position');
         members.style.display = "block";

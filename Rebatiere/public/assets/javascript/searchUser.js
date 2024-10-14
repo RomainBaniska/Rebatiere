@@ -116,6 +116,22 @@ function addUser(username) {
             selectedUsers = selectedUsers.filter(user => user !== username);
             userDiv.remove();
             document.getElementById('selectedUsers').value = selectedUsers.join(',');
+                      
+            // Met à jour la div dupliquée quand un utilisateur est retiré
+            updateDuplicatedUsers();
         });
+        updateDuplicatedUsers();
     }
+}
+
+// Duplication des noms d'utilisateur et détails dans la div "membersBox"
+function updateDuplicatedUsers() {
+    const duplicatedUsersContainer = document.querySelector('.membersBox');
+    duplicatedUsersContainer.innerHTML = ''; // Vide d'abord la div avant d'ajouter les nouveaux noms
+
+    selectedUsers.forEach(user => {
+        const userDiv = document.createElement('div');
+        userDiv.textContent = `${user.firstname} ${user.lastname} (${user.username})`; // Affiche firstname, lastname et username
+        duplicatedUsersContainer.appendChild(userDiv);
+    });
 }
