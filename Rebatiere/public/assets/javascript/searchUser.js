@@ -19,7 +19,7 @@ document.getElementById('userSearch').addEventListener('input', function () {
         highlightedIndex = -1;
 
         // Filtre les utilisateurs déjà sélectionnés
-        const filteredData = data.filter(user => !selectedUsers.includes(user.username));
+        const filteredData = data.filter(user => !selectedUsers.some(u => u.username === user.username));
 
         filteredData.forEach((user, index) => {
             const li = document.createElement('li');
@@ -28,7 +28,7 @@ document.getElementById('userSearch').addEventListener('input', function () {
 
             // Gestion du clic pour sélectionner l'utilisateur
             li.addEventListener('click', function () {
-                addUser(user.username);
+                addUser(user);  // Passe l'objet complet
                 document.getElementById('userSearch').value = '';
                 userList.innerHTML = '';
                 userList.style.display = 'none';
@@ -90,20 +90,19 @@ function updateHighlight(items, index) {
     }
 }
 
-// Fonction pour ajouter un utilisateur sélectionné
-function addUser(username) {
-    if (!selectedUsers.includes(username)) {
-        selectedUsers.push(username);
+function addUser(user) {
+    if (!selectedUsers.find(u => u.username === user.username)) {
+        selectedUsers.push(user);  // Ajoute l'utilisateur entier à selectedUsers
 
         // Met à jour l'affichage des utilisateurs sélectionnés
         const selectedUsersContainer = document.getElementById('selectedUsersContainer');
         const userDiv = document.createElement('div');
-        userDiv.textContent = username;
+        userDiv.textContent = `${user.firstName} ${user.lastName} (${user.username})`; // Affiche firstname, lastname et username
         userDiv.classList.add('selectedUser');
         selectedUsersContainer.appendChild(userDiv);
 
         // Met à jour le champ caché avec les utilisateurs sélectionnés
-        document.getElementById('selectedUsers').value = selectedUsers.join(',');
+        document.getElementById('selectedUsers').value = selectedUsers.map(u => u.username).join(',');
 
         // Ajout d'un bouton pour retirer un utilisateur sélectionné
         const removeButton = document.createElement('button');
@@ -113,13 +112,15 @@ function addUser(username) {
 
         // Retirer l'utilisateur lorsqu'on clique sur 'x'
         removeButton.addEventListener('click', function () {
-            selectedUsers = selectedUsers.filter(user => user !== username);
+            selectedUsers = selectedUsers.filter(u => u.username !== user.username);
             userDiv.remove();
-            document.getElementById('selectedUsers').value = selectedUsers.join(',');
-                      
+            document.getElementById('selectedUsers').value = selectedUsers.map(u => u.username).join(',');
+
             // Met à jour la div dupliquée quand un utilisateur est retiré
             updateDuplicatedUsers();
         });
+
+        // Met à jour la div dupliquée
         updateDuplicatedUsers();
     }
 }
@@ -131,7 +132,7 @@ function updateDuplicatedUsers() {
 
     selectedUsers.forEach(user => {
         const userDiv = document.createElement('div');
-        userDiv.textContent = `${user.firstname} ${user.lastname} (${user.username})`; // Affiche firstname, lastname et username
+        userDiv.textContent = `${user.firstName} ${user.lastName} (${user.username})`; // Affiche firstname, lastname et username
         duplicatedUsersContainer.appendChild(userDiv);
     });
 }
