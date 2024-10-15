@@ -196,9 +196,10 @@ body {
 .membersBox {
   position: relative;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   visibility: hidden;
   padding-left: 100px;
+  width : 100%;
 }
 
 .membersBox.show {
@@ -212,4 +213,44 @@ body {
 
 .members {
   display: none;
+  width: 100%;
+
+  justify-content: center;
 }
+
+.duplicated {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 25px;
+  /* background-color: white; */
+  /* font-weight: bold; */
+}
+
+.ulFlex {
+  /* background-color: white; */
+  width: 90%;
+}
+
+.extraContainer {
+  display: flex;
+  /* flex-direction: row;
+  justify-content: space-between; */
+}
+
+.extraLabels {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 15px;
+  /* align-items: center; */
+}
+
+.extraFields {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+

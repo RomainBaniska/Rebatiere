@@ -28,7 +28,7 @@ document.getElementById('userSearch').addEventListener('input', function () {
 
             // Gestion du clic pour sélectionner l'utilisateur
             li.addEventListener('click', function () {
-                addUser(user);  // Passe l'objet complet
+                addUser(user); 
                 document.getElementById('userSearch').value = '';
                 userList.innerHTML = '';
                 userList.style.display = 'none';
@@ -97,7 +97,7 @@ function addUser(user) {
         // Met à jour l'affichage des utilisateurs sélectionnés
         const selectedUsersContainer = document.getElementById('selectedUsersContainer');
         const userDiv = document.createElement('div');
-        userDiv.textContent = `${user.firstName} ${user.lastName} (${user.username})`; // Affiche firstname, lastname et username
+        userDiv.textContent = `${user.username}`;
         userDiv.classList.add('selectedUser');
         selectedUsersContainer.appendChild(userDiv);
 
@@ -128,11 +128,41 @@ function addUser(user) {
 // Duplication des noms d'utilisateur et détails dans la div "membersBox"
 function updateDuplicatedUsers() {
     const duplicatedUsersContainer = document.querySelector('.membersBox');
-    duplicatedUsersContainer.innerHTML = ''; // Vide d'abord la div avant d'ajouter les nouveaux noms
+    duplicatedUsersContainer.innerHTML = '';
+
+    const userList = document.createElement('ul'); 
+    userList.classList.add('ulFlex');
 
     selectedUsers.forEach(user => {
-        const userDiv = document.createElement('div');
-        userDiv.textContent = `${user.firstName} ${user.lastName} (${user.username})`; // Affiche firstname, lastname et username
-        duplicatedUsersContainer.appendChild(userDiv);
+        const userItem = document.createElement('li'); 
+        userItem.classList.add("duplicated");
+        userItem.textContent = `${user.firstName} ${user.lastName}`; 
+
+        // Crée une div pour les dates et la chambre
+        const datepickerContainer = document.createElement('div');
+        // datepickerContainer.classList.add('datepicker_container');
+
+        // Ajoute les champs pour la date d'arrivée et la date de départ
+        datepickerContainer.innerHTML = `
+        <div class="extraContainer">
+            <div class="extraLabels">
+            <label for="from">Date d'arrivée</label>
+            <label for="to">Date de départ </label>
+            <label for="chambre">Chambre</label>
+            </div>
+            <div class="extraFields">
+            <input type="text" id="from" name="from" autocomplete="off">
+            <input type="text" id="to" name="to" autocomplete="off">
+            <input type="text" id="chambre" name="chambre" autocomplete="off">
+            </div>
+        </div>
+        `;
+
+        // Ajoute la div à l'élément de liste
+        userItem.appendChild(datepickerContainer);
+
+       userList.appendChild(userItem); 
     });
+
+    duplicatedUsersContainer.appendChild(userList); 
 }

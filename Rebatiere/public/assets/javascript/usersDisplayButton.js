@@ -38,7 +38,7 @@ buttonMembers.addEventListener('click', () => {
         formContainer.style.alignItems = "start"
         formContainer.classList.add('expanded');
         formContainer.classList.add('position');
-        members.style.display = "block";
+        members.style.display = "flex";
         
         setTimeout(() => {
             membersBox.style.visibility = 'visible';
