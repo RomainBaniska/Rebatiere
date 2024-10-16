@@ -29,7 +29,7 @@ body {
   }
   
   .bodyContainer {
-      background-image: url('/assets/images/pages/toile_jardin.jpg');
+      background-image: url('/assets/images/pages/sketch_jardin.png');
       background-size: cover;  
       background-repeat:repeat; 
       background-position: center; 
@@ -43,7 +43,9 @@ body {
     
     .bodyOverlay {
       position: absolute;
-      background-color: rgb(112, 66, 20, 0.5);
+   /* background-color: rgb(112, 66, 20, 0.5); */
+      /* background-color: rgb(174, 160, 138, 0.7); */
+      background-color: rgba(247, 202, 165, 0.5);
       background-size: cover;  
       background-repeat:repeat; 
       background-position: center; 

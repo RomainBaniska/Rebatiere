@@ -27,16 +27,23 @@
 }
 
 .fc-button-primary {
-    background-color: rgba(14, 104, 194, 0.5) !important;
+    /* background-color: rgba(14, 104, 194, 0.5) !important;
     border-color: var(--fc-button-border-color);
     color: var(--fc-button-text-color);
-    border: 1px rgba(14, 104, 194, 1); 
+    border: 1px rgba(14, 104, 194, 1);  */
 }
 
 .fc-myCustomButton-button {
-    background-color: var(--fc-custombutton-active-bg-color);
+    /* background-color: var(--fc-custombutton-active-bg-color); */
     border-color: #E2E2EA;
     color: white !important;
+
+    background-image: url('/assets/images/calendarImages/lit.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+
 }
 
 .fc-col-header-cell-cushion {
@@ -53,7 +60,7 @@ body {
 }
 
 .bodyContainer {
-    background-image: url('/assets/images/pages/toile_facade.jpg');
+    background-image: url('/assets/images/pages/sketch_facade.png');
     background-size: cover;  
     background-repeat:repeat; 
     background-position: center; 
@@ -64,9 +71,11 @@ body {
   }
   
   .bodyOverlay {
-    /* position: absolute; */
     position: relative;
-    background-color: rgb(112, 66, 20, 0.5);
+    /* background-color: rgb(112, 66, 20, 0.5); */
+    /* background-color: rgba(202, 169, 243, 0.5); */
+    background-color: rgba(247, 202, 165, 0.5);
+    /* background-color: rgba(244, 171, 55, 0.1); */
     background-size: cover;  
     background-repeat:repeat; 
     background-position: center; 
@@ -74,7 +83,6 @@ body {
     min-height: 100vh;
     width: 100%;
     margin: 0;
-    /* padding-bottom: 50px; */
   }
 
 .fc-daygrid-day-frame {
@@ -85,7 +93,6 @@ body {
 
 td[role="gridcell"] {
     display: table-cell;
-    /* background-color: red; */
 }
 
 .fc-daygrid-day-events {
@@ -105,7 +112,6 @@ td[role="gridcell"] {
 
 .fc-event-main {
     display: block;
-    /* background: none !important; */
     background-color: rgba(255, 255, 255, 1) !important;
     width: 30px;
     height: 30px;
@@ -180,19 +186,19 @@ td[role="gridcell"] {
 .fc-daygrid-day-frame .fc-scrollgrid-sync-inner {
     min-height: 10%;
     display: flex;
-    flex-direction: column; /* Afficher en liste verticale */
-    align-items: flex-start; /* Aligner les éléments à gauche (ou ajuster selon vos besoins) */
-    gap: 10px; /* Espacement entre les éléments, ajustez selon vos besoins */
+    flex-direction: column; 
+    align-items: flex-start; 
+    gap: 10px; 
     background-color: #0D87FF !important;
 }
 
 .fc-daygrid-day-frame .fc-scrollgrid-sync-inner > * {
-    width: 100%; /* Forcer la largeur des éléments à 100% pour occuper toute la largeur disponible */
+    width: 100%; 
 }
 
 .fc .fc-daygrid-day-top {
-    display: flex; /* Par défaut */
-    flex-direction: row-reverse; /* Par défaut */
+    display: flex; 
+    flex-direction: row-reverse; 
     justify-content: space-between;
 }
 
@@ -247,28 +253,29 @@ td[role="gridcell"] {
     }
 
     .spring-background {
-        background-image: url('/assets/images/calendarImages/printemps.jpeg'), linear-gradient(to bottom, #87CEEB, #87CEEB);
+        /* background-image: url('/assets/images/calendarImages/printemps.jpeg'), linear-gradient(to bottom, #87CEEB, #87CEEB); */
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center; 
     }
     
     .summer-background {
-        background-image: url('/assets/images/calendarImages/ete2.jpg'), linear-gradient(to bottom, #87CEEB, #87CEEB);
+        /* background-image: url('/assets/images/calendarImages/ete2.jpg'), linear-gradient(to bottom, #87CEEB, #87CEEB); */
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center; 
     }
     
     .autumn-background {
-        background-image: url('/assets/images/calendarImages/automne2.jpg'), linear-gradient(to bottom, #87CEEB, #87CEEB);
+        /* background-image: url('/assets/images/calendarImages/automne2.jpg'), linear-gradient(to bottom, #87CEEB, #87CEEB); */
+        background-color: rgba(33, 127, 236, 0.5);
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center; 
     }
     
     .winter-background {
-        background-image: url('/assets/images/calendarImages/hiver.png'), linear-gradient(to bottom, red, red);
+        /* background-image: url('/assets/images/calendarImages/hiver.png'), linear-gradient(to bottom, red, red); */
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center; 
@@ -300,7 +307,8 @@ td[role="gridcell"] {
 
     .fc .fc-daygrid-day-frame {
         background: none !important;
-        background-color: rgba(255, 255, 255, 0.3) !important;
+        /* background-color: rgba(243, 232, 232, 0.934) !important; */
+        background-color: rgba(133, 133, 192, 0.5) !important;
     }
 
     .fc-theme-standard td, .fc-theme-standard th {
@@ -308,6 +316,8 @@ td[role="gridcell"] {
     }
 
     .fc-view {
-        border: 1px black solid;
+        /* border: 1px black solid; */
         box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);
+        border-radius: 3px;
+        padding: 5px
     }

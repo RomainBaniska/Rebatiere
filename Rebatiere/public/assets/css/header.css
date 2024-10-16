@@ -9,17 +9,32 @@
     /* position: absolute; */
     position: relative;
     z-index: 300;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0)), url('/assets/images/pages/header.jpg');
+    /* background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0)), url('/assets/images/pages/header.jpg'); */
+    background-image: url('/assets/images/provenceWall.jpg');
     background-size: cover;
     background-repeat: no-repeat; 
     background-position: center;
-    height: 15vh;
+    height: 7vh;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
+}
+
+.headerOverlay {
+    position: relative;
+    /* background-color: rgb(95, 95, 240, 0.9); */
+    /* background-color: rgb(133, 133, 192) !important; */
+    background-color: rgb(85, 124, 210, 0.98) !important;
+    z-index: 301;
+    height: 7vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }
 
 
@@ -138,4 +153,13 @@
 
 .action .menu ul li:hover a {
     color: #ff5d94;
+}
+
+.logoRebat img {
+    /* position: absolute; */
+    width: 50px;
+    height: auto;
+    /* background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center; */
 }
