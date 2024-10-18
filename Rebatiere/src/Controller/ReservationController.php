@@ -35,11 +35,11 @@ class ReservationController extends AbstractController
         }
 
         // Récupérer la liste de tous les usernames et chambernames
-        $users = $em->getRepository(User::class)->findall();
+        // $users = $em->getRepository(User::class)->findall();
         $chambers = $em->getRepository(Chamber::class)->findall();
         
           return $this->render('reservation/reservationsheet.html.twig', [
-            'users' => $users,
+            // 'users' => $users,
             'chambers' => $chambers,
             'currentUserId' => $currentUserId,
             'currentUser' => $currentUser,

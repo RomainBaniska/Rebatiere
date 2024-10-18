@@ -145,18 +145,18 @@ function updateDuplicatedUsers() {
         // Ajoute les champs pour la date d'arrivée et la date de départ
         datepickerContainer.innerHTML = `
         <div class="extraContainer">
-            <div class="extraLabels">
-            <label for="from">Date d'arrivée</label>
-            <label for="to">Date de départ </label>
-            <label for="chambre">Chambre</label>
-            </div>
-            <div class="extraFields">
-            <input type="text" id="from" name="from" autocomplete="off">
-            <input type="text" id="to" name="to" autocomplete="off">
-            <input type="text" id="chambre" name="chambre" autocomplete="off">
-            </div>
-        </div>
-        `;
+          <div class="extraLabels">
+              <label for="from_${user.username}">Date d'arrivée</label>
+              <label for="to_${user.username}">Date de départ</label>
+              <label for="chamber_${user.username}">Chambre</label>
+          </div>
+          <div class="extraFields">
+              <input type="text" id="from_${user.username}" name="from_${user.username}" autocomplete="off">
+              <input type="text" id="to_${user.username}" name="to_${user.username}" autocomplete="off">
+              <input type="text" id="chamber_${user.username}" name="chamber_${user.username}" autocomplete="off">
+          </div>
+      </div>
+      `;
 
         // Ajoute la div à l'élément de liste
         userItem.appendChild(datepickerContainer);
@@ -165,4 +165,9 @@ function updateDuplicatedUsers() {
     });
 
     duplicatedUsersContainer.appendChild(userList); 
+
+    selectedUsers.forEach(user => {
+        $(`#from_${user.username}`).datepicker(); 
+        $(`#to_${user.username}`).datepicker();  
+    });
 }
