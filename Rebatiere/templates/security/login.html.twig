@@ -1,8 +1,23 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %} #}
 
-{% block title %}Log in!{% endblock %}
+{# {% block title %}Log in!{% endblock %} #}
+
+{% block head %}
+<head>
+<meta charset='utf-8' />    
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
+</head>
+{% endblock %}
 
 {% block body %}
+
+<div class="bodyContainer">
+<div class="bodyOverlay">
+
+    <div class="loginSheetContainer">
+    <div class="loginSheet">
+
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -10,15 +25,25 @@
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputUsername">Username</label>
-    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
-    <label for="inputPassword">Password</label>
+    <div>
+    <h1 class="h3 mb-3 font-weight-normal">Renseignez vos identifiants</h1>&nbsp;
+    </div>
+    <div>
+    <label for="inputUsername">Nom d'utilisateur</label>&nbsp;
+    </div>
+    <div>
+    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>&nbsp;
+    </div>
+    <div>
+    <label for="inputPassword">Mot de passe</label>&nbsp;
+    </div>
+    <div>
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    </div>&nbsp;
 
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
@@ -26,12 +51,19 @@
 
     <div class="checkbox mb-3">
         <label>
-            <input type="checkbox" name="_remember_me"> Remember me
+            <input type="checkbox" name="_remember_me"> Se souvenir de moi
         </label>
-    </div>
+    </div>&nbsp;
 
+    <div>
     <button class="btn btn-lg btn-primary" type="submit">
         Sign in
     </button>
+    </div>
 </form>
+
+    </div>
+    </div>
+</div>
+</div>
 {% endblock %}
