@@ -139,11 +139,10 @@ function updateDuplicatedUsers() {
         userItem.textContent = `${user.firstName} ${user.lastName}`; 
 
         // Crée une div pour les dates et la chambre
-        const datepickerContainer = document.createElement('div');
-        // datepickerContainer.classList.add('datepicker_container');
+        const additionnalUsersContainer = document.createElement('div');
 
-        // Ajoute les champs pour la date d'arrivée et la date de départ
-        datepickerContainer.innerHTML = `
+        // Ajoute les champs pour la date d'arrivée & la date de départ & la chambre
+        additionnalUsersContainer.innerHTML = `
         <div class="extraContainer">
           <div class="extraLabels">
               <label for="from_${user.username}">Date d'arrivée</label>
@@ -174,7 +173,7 @@ function updateDuplicatedUsers() {
       `;
 
         // Ajoute la div à l'élément de liste
-        userItem.appendChild(datepickerContainer);
+        userItem.appendChild(additionnalUsersContainer);
 
        userList.appendChild(userItem); 
     });
@@ -186,3 +185,6 @@ function updateDuplicatedUsers() {
         $(`#to_${user.username}`).datepicker();  
     });
 }
+
+// Ajout des utilisateurs supplémentaires en hidden 
+

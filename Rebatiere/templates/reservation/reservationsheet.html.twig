@@ -58,11 +58,6 @@
             <input type="hidden" name="username" value="{{ currentUserId }}">
             </p>
 
-            {# <p class="formLine">
-                <label for="privatisation">Privatisation ? :</label>
-                <input type="checkbox" id="privatisation" name="privatisation">
-            </p> #}
-
             <p class="formLine">
                 <div id="selectedUsersContainer"></div>
             </p>
@@ -117,19 +112,19 @@
         {# Buttons Etages #}
         <div class="buttons-container">
 
-        <button onclick="updateDisplay('Chambre Bleue')" id="chambreBleue" class="brique1">Chambre Bleue</button>
-        <button onclick="updateDisplay('Chambre Jean-Claude')" id="jeanClaude" class="brique1">Jean-Claude</button>
-        <button onclick="updateDisplay('Dortoir des petits')" id="dortoirPetit" class="brique1">Dortoir Petits</button>
-        <button onclick="updateDisplay('Dortoir des grands')" id="dortoirGrand" class="brique1">Dortoir Grand</button>
-        <button onclick="updateDisplay('Chambre de gauche')" id="gauche" class="brique1">Gauche</button>
-        <button onclick="updateDisplay('Chambre Fenêtre')" id="fenetre" class="brique1">Fenêtre</button>
-        <button onclick="updateDisplay('Chambre du milieu')" id="milieu" class="brique1">Milieu</button>
-        <button onclick="updateDisplay('Chambre d\'Alex')" id="alex" class="brique1">Alex</button>
-        <button onclick="updateDisplay('Chambre du fond')" id="fond" class="brique1">Fond</button>
-        <button onclick="updateDisplay('Chambre Dehors 1')" id="dehors1" class="brique1">Dehors 1</button>
-        <button onclick="updateDisplay('Chambre Dehors 2')" id="dehors2" class="brique1">Dehors 2</button>
-        <button onclick="updateDisplay('Chambre Bureau')" id="bureau" class="brique1">Bureau</button>
-        <button onclick="updateDisplay('Chambre Nicole')" id="nicole" class="brique1">Nicole</button>
+        <button data-id="5" data-chambre="Chambre Bleue" id="chambreBleue" class="chambre-btn">Chambre Bleue</button>
+        <button data-id="6" data-chambre="Chambre Jean-Claude" id="jeanClaude" class="chambre-btn">Jean-Claude</button>
+        <button data-id="10" data-chambre="Dortoir des petits" id="dortoirPetit" class="chambre-btn">Dortoir Petits</button>
+        <button data-id="11" data-chambre="Dortoir des grands" id="dortoirGrand" class="chambre-btn">Dortoir Grand</button>
+        <button data-id="15" data-chambre="Chambre de gauche" id="gauche" class="chambre-btn">Gauche</button>
+        <button data-id="8" data-chambre="Chambre Fenêtre" id="fenetre" class="chambre-btn">Fenêtre</button>
+        <button data-id="16" data-chambre="Chambre du milieu" id="milieu" class="chambre-btn">Milieu</button>
+        <button data-id="7" data-chambre="Chambre d\'Alex" id="alex" class="chambre-btn">Alex</button>
+        <button data-id="9" data-chambre="Chambre du fond" id="fond" class="chambre-btn">Fond</button>
+        <button data-id="3" data-chambre="Chambre Dehors 1" id="dehors1" class="chambre-btn">Dehors 1</button>
+        <button data-id="4" data-chambre="Chambre Dehors 2" id="dehors2" class="chambre-btn">Dehors 2</button>
+        <button data-id="14" data-chambre="Chambre Bureau" id="bureau" class="chambre-btn">Bureau</button>
+        <button data-id="12" data-chambre="Chambre Nicole" id="nicole" class="chambre-btn">Nicole</button>
         </div>
 
         {# Control Panel Etages #}
@@ -163,9 +158,9 @@
 
     {% block javascripts %} 
     <script src="{{ asset('assets/javascript/mapLayers.js') }}"></script>
-    <script src="{{ asset('assets/javascript/imagemapevent2.js') }}"></script>
+    {# <script src="{{ asset('assets/javascript/imagemapevent2.js') }}"></script> #}
     <script src="{{ asset('assets/javascript/buttonHoverMap.js') }}"></script>
-    <script src="{{ asset('assets/javascript/buttonSMicroAnimations.js') }}"></script>
+    <script src="{{ asset('assets/javascript/buttonsMicroAnimations.js') }}"></script>
     <script src="{{ asset('assets/javascript/mapDisplayButton.js') }}"></script>
     <script src="{{ asset('assets/javascript/usersDisplayButton.js') }}"></script>
     <script src="{{ asset('assets/javascript/searchUser.js') }}"></script>

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnDeuxiemeEtage = document.getElementById('btnDeuxiemeEtage');
     const btnPremierEtage = document.getElementById('btnPremierEtage');
 
-    // Conditionnement des area(s)
+    // Conditionnement des area(s) - Récupération & Assignation des boutons
     const areas = {
       'dortoirPetit': document.getElementById('dortoirPetit'),
       'dortoirGrand': document.getElementById('dortoirGrand'),

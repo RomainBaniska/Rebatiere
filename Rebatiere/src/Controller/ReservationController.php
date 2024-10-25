@@ -54,13 +54,16 @@ class ReservationController extends AbstractController
     public function reservationPersist(Request $request, EntityManagerInterface $em, ChamberService $chamberService): Response
     {
         
+
+
         $from = new \DateTime($request->request->get('from'));
         $to = new \DateTime($request->request->get('to'));
         $userId = $request->request->getInt('username');
+        $chamberId = $request->request->getInt('chambername');
         $privatisation = (bool) $request->request->get('privatisation');
 
-        $chamberName = $request->request->get('chambername');
-        $chamberId = $chamberService->getChamberId($chamberName);
+        // $chamberName = $request->request->get('chambername');
+        // $chamberId = $chamberService->getChamberId($chamberName);
 
         // On charge les objets User et Chamber correspondants pour pas avoir d'erreur d'attendu en BDD
         $user = $em
@@ -117,9 +120,48 @@ class ReservationController extends AbstractController
 
         $em->persist($reservation);
 
-// Ajout des utilisateurs supplémentaires
 
+    // **Gestion des utilisateurs supplémentaires**
+    $selectedUsers = $request->request->get('selectedUsers');
+    if ($selectedUsers) {
+        $usernames = explode(',', $selectedUsers);
+    
+    foreach ($usernames as $username) {
+        // Récupérer les informations des sous-formulaires
+        $subFrom = new \DateTime($request->request->get("from_{$username}"));
+        $subTo = new \DateTime($request->request->get("to_{$username}"));
+        $subChamberId = $request->request->getInt("chamber_{$username}");
+        
 
+        $subUser = $em->getRepository(User::class)->findOneBy(['username' => $username]);
+        $subChamber = $em->getRepository(Chamber::class)->find($subChamberId);
+
+        // // Valider les dates pour chaque utilisateur
+        // if ($subFrom >= $subTo) {
+        //     $this->addFlash('error', "La date d'arrivée de l'utilisateur {$username} ne peut être supérieure à sa date de départ.");
+        //     continue;
+        // }
+
+        // // Vérifier s'il y a chevauchement pour cet utilisateur
+        // $overlappingSubReservations = $em->getRepository(Reservation::class)
+        //     ->findOverlappingReservations($subUser->getId(), $subFrom, $subTo);
+
+        // if (count($overlappingSubReservations) > 0) {
+        //     $this->addFlash('error', "L'utilisateur {$username} a une réservation chevauchante.");
+        //     continue;
+        // }
+
+        // Créer une réservation pour chaque utilisateur sélectionné
+        $subReservation = new Reservation();
+        $subReservation->setStart($subFrom);
+        $subReservation->setEnd($subTo);
+        $subReservation->setUsers($subUser);
+        $subReservation->setChambers($subChamber);
+        $subReservation->setPrivatisation($privatisation);
+
+        $em->persist($subReservation);
+        }
+    }
         $em->flush();
 
         return $this->redirectToRoute('app_home');
