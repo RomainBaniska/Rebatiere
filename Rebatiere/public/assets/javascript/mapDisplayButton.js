@@ -48,7 +48,6 @@ button.addEventListener('click', () => {
 });
 
 
-// Sélectionner tous les boutons de chambres avec la classe commune "chambre-btn"
 const chambreButtons = document.querySelectorAll('.chambre-btn');
 
 // Ajouter un gestionnaire de clic à chaque bouton
@@ -63,21 +62,7 @@ chambreButtons.forEach(button => {
     });
 });
 
-
-// La fonction updateDisplay reste inchangée
 function updateDisplay(name) {
     document.getElementById('displayBox').textContent = name;
 }
 
-
-// // Mise à jour de l'encadré "chambre sélectionnée"
-// function updateDisplay(name) {
-//     document.getElementById('displayBox').textContent = name;
-// }
-
-//  // Récupération de la valeur de l'encadré "chambre sélectionnée" depuis l'hidden input
-//  document.querySelector('form').addEventListener('submit', function() {
-//     const displayBoxValue = document.getElementById('displayBox').textContent;
-//     document.getElementById('chamberInput').value = displayBoxValue.replace(/[\s']/g, ''); /* REGEX sans espace ni apostrophe */
-//     console.log("le script s est executé");
-// });

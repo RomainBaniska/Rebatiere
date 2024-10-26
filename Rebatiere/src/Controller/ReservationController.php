@@ -13,14 +13,14 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Contracts\Cache\CacheInterface;
-use App\Service\ChamberService;
+// use App\Service\ChamberService;
 
 class ReservationController extends AbstractController
 {
     #[Route('/reservation', name: 'app_reservation')]
-    public function reservation(EntityManagerInterface $em): Response
+    public function reservation(): Response
     {
-        //Récupérer l'utilisateur connecté // Méthode de symfony qui vient d'AbstractController
+        //Méthode de symfony qui vient d'AbstractController
         $currentUser = $this->getUser()->getUsername();
         $currentUserFirstName = $this->getUser()->getFirstname();
         $currentUserLastName = $this->getUser()->getLastname();
@@ -34,13 +34,7 @@ class ReservationController extends AbstractController
             $photo = 'uploads/images/' . $photo;
         }
 
-        // Récupérer la liste de tous les usernames et chambernames
-        // $users = $em->getRepository(User::class)->findall();
-        // $chambers = $em->getRepository(Chamber::class)->findall();
-        
           return $this->render('reservation/reservationsheet.html.twig', [
-            // 'users' => $users,
-            // 'chambers' => $chambers,
             'currentUserId' => $currentUserId,
             'currentUser' => $currentUser,
             'currentUserFirstName' => $currentUserFirstName,
@@ -54,16 +48,11 @@ class ReservationController extends AbstractController
     public function reservationPersist(Request $request, EntityManagerInterface $em, ChamberService $chamberService): Response
     {
         
-
-
         $from = new \DateTime($request->request->get('from'));
         $to = new \DateTime($request->request->get('to'));
         $userId = $request->request->getInt('username');
         $chamberId = $request->request->getInt('chambername');
         $privatisation = (bool) $request->request->get('privatisation');
-
-        // $chamberName = $request->request->get('chambername');
-        // $chamberId = $chamberService->getChamberId($chamberName);
 
         // On charge les objets User et Chamber correspondants pour pas avoir d'erreur d'attendu en BDD
         $user = $em
