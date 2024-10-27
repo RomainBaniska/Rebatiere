@@ -150,9 +150,10 @@ function updateDuplicatedUsers() {
               <label for="chamber_${user.username}">Chambre</label>
           </div>
           <div class="extraFields">
-              <input type="text" id="from_${user.username}" name="from_${user.username}" autocomplete="off">
-              <input type="text" id="to_${user.username}" name="to_${user.username}" autocomplete="off">
-                    <select id="chamber_${user.username}" name="chamber_${user.username}">
+            <input type="hidden" id="user_id_${user.username}" name="members[${user.username}][id]" value="${user.id}">
+            <input type="text" id="from_${user.username}" name="members[${user.username}][from]" autocomplete="off">
+            <input type="text" id="to_${user.username}" name="members[${user.username}][to]" autocomplete="off">
+                    <select id="chamber_${user.username}" name="members[${user.username}][chamber]">
                     <option value="">-- Sélectionner une chambre --</option>
                     <option value="3">ChambreDehors1</option>
                     <option value="4">ChambreDehors2</option>

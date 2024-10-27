@@ -45,112 +45,93 @@ class ReservationController extends AbstractController
     }
 
     #[Route('/persistreservation', name: 'app_persistreservation')]
-    public function reservationPersist(Request $request, EntityManagerInterface $em, ChamberService $chamberService): Response
+    public function reservationPersist(Request $request, EntityManagerInterface $em): Response
     {
-        
-        $from = new \DateTime($request->request->get('from'));
-        $to = new \DateTime($request->request->get('to'));
-        $userId = $request->request->getInt('username');
-        $chamberId = $request->request->getInt('chambername');
-        $privatisation = (bool) $request->request->get('privatisation');
+        // $from = new \DateTime($request->request->get('from'));
+        // $to = new \DateTime($request->request->get('to'));
+        // $userId = $request->request->getInt('username');
+        // $chamberId = $request->request->getInt('chambername');
+        // $privatisation = (bool) $request->request->get('privatisation');
 
-        // On charge les objets User et Chamber correspondants pour pas avoir d'erreur d'attendu en BDD
-        $user = $em
-                ->getRepository(User::class)
-                ->find($userId);
-        $chamber = $em
-                ->getRepository(Chamber::class)
-                ->find($chamberId);
+        // // On charge les objets User et Chamber correspondants pour pas avoir d'erreur d'attendu en BDD
+        // $user = $em->getRepository(User::class)->find($userId);
+        // $chamber = $em->getRepository(Chamber::class)->find($chamberId);
 
-            // On vérifie que la date de début n'est pas antérieure à la date de fin
-            if ($from >= $to) {
-                $this->addFlash('error', 'La date d\' arrivée à la Rebatière est ultérieure à la date de départ, veuillez réessayer');
-                return $this->redirectToRoute('app_reservation');
-            }
+        //     // On vérifie que la date de début n'est pas antérieure à la date de fin
+        //     if ($from >= $to) {
+        //         $this->addFlash('error', 'La date d\' arrivée à la Rebatière est ultérieure à la date de départ, veuillez réessayer');
+        //         return $this->redirectToRoute('app_reservation');
+        //     }
 
-            // Vérifier si la chambre est pleine pour cette période
-            if ($chamber->isChamberFull($from, $to, $em)) {
-                $this->addFlash('error', 'La chambre est pleine pour cette période.');
-                return $this->redirectToRoute('app_reservation');
-            }
+        //     // Vérifier si la chambre est pleine pour cette période
+        //     if ($chamber->isChamberFull($from, $to, $em)) {
+        //         $this->addFlash('error', 'La chambre est pleine pour cette période.');
+        //         return $this->redirectToRoute('app_reservation');
+        //     }
 
-        // On vérifie si les réservations d'un même utilisateur se chevauchent 
-        $overlappingReservations = $em->getRepository(Reservation::class)
-        ->findOverlappingReservations($userId, $from, $to);
+        // // On vérifie si les réservations d'un même utilisateur se chevauchent 
+        // $overlappingReservations = $em->getRepository(Reservation::class)
+        // ->findOverlappingReservations($userId, $from, $to);
 
-        if (count($overlappingReservations) > 0 ) {
-            $this->addFlash('error', 'Vous tentez de créer une réservation qui en chevauche une autre rendez-vous dans "Mes Réservations"');
-            return $this->redirectToRoute('app_reservation');
-        }
-
-        // On va multiplier le nombre de réservations pour afficher les éléments dans le calendar
-        $dates = [];
-        $currentDate = clone $from;
-        while ($currentDate <= $to) {
-            $dates[] = $currentDate->format('Y-m-d');
-            $currentDate->modify('+1 day');
-        }
-
-        $reservation = new Reservation();
-        $reservation->setStart($from);
-        $reservation->setEnd($to);
-        $reservation->setDates($dates);
-        $reservation->setUsers($user);
-        $reservation->setChambers($chamber);
-        $reservation->setPrivatisation($privatisation);
-
-        $overlappingReservations = $em->getRepository(Reservation::class)
-            ->findOverlappingReservations($userId, $from, $to);
-
-        if (count($overlappingReservations) > 0) {
-            $this->addFlash('error', 'Vous tentez de créer une réservation qui en chevauche une autre. Rendez-vous dans "Mes Réservations".');
-            return $this->redirectToRoute('app_reservation');
-        }
-
-        $em->persist($reservation);
-
-
-    // **Gestion des utilisateurs supplémentaires**
-    $selectedUsers = $request->request->get('selectedUsers');
-    if ($selectedUsers) {
-        $usernames = explode(',', $selectedUsers);
-    
-    foreach ($usernames as $username) {
-        // Récupérer les informations des sous-formulaires
-        $subFrom = new \DateTime($request->request->get("from_{$username}"));
-        $subTo = new \DateTime($request->request->get("to_{$username}"));
-        $subChamberId = $request->request->getInt("chamber_{$username}");
-        
-
-        $subUser = $em->getRepository(User::class)->findOneBy(['username' => $username]);
-        $subChamber = $em->getRepository(Chamber::class)->find($subChamberId);
-
-        // // Valider les dates pour chaque utilisateur
-        // if ($subFrom >= $subTo) {
-        //     $this->addFlash('error', "La date d'arrivée de l'utilisateur {$username} ne peut être supérieure à sa date de départ.");
-        //     continue;
+        // if (count($overlappingReservations) > 0 ) {
+        //     $this->addFlash('error', 'Vous tentez de créer une réservation qui en chevauche une autre rendez-vous dans "Mes Réservations"');
+        //     return $this->redirectToRoute('app_reservation');
         // }
 
-        // // Vérifier s'il y a chevauchement pour cet utilisateur
-        // $overlappingSubReservations = $em->getRepository(Reservation::class)
-        //     ->findOverlappingReservations($subUser->getId(), $subFrom, $subTo);
-
-        // if (count($overlappingSubReservations) > 0) {
-        //     $this->addFlash('error', "L'utilisateur {$username} a une réservation chevauchante.");
-        //     continue;
+        // // On va multiplier le nombre de réservations pour afficher les éléments dans le calendar
+        // $dates = [];
+        // $currentDate = clone $from;
+        // while ($currentDate <= $to) {
+        //     $dates[] = $currentDate->format('Y-m-d');
+        //     $currentDate->modify('+1 day');
         // }
 
-        // Créer une réservation pour chaque utilisateur sélectionné
-        $subReservation = new Reservation();
-        $subReservation->setStart($subFrom);
-        $subReservation->setEnd($subTo);
-        $subReservation->setUsers($subUser);
-        $subReservation->setChambers($subChamber);
-        $subReservation->setPrivatisation($privatisation);
+        // $reservation = new Reservation();
+        // $reservation->setStart($from);
+        // $reservation->setEnd($to);
+        // $reservation->setDates($dates);
+        // $reservation->setUsers($user);
+        // $reservation->setChambers($chamber);
+        // $reservation->setPrivatisation($privatisation);
 
-        $em->persist($subReservation);
+        // $overlappingReservations = $em->getRepository(Reservation::class)->findOverlappingReservations($userId, $from, $to);
+
+        // if (count($overlappingReservations) > 0) {
+        //     $this->addFlash('error', 'Vous tentez de créer une réservation qui en chevauche une autre. Rendez-vous dans "Mes Réservations".');
+        //     return $this->redirectToRoute('app_reservation');
+        // }
+
+        // $em->persist($reservation);
+
+    // On enregistre la réservation (facultative) des membres de la rebatière 
+
+        $membersData = $request->request->all('members');
+
+        if ($membersData) {
+        foreach ($membersData as $username => $data) {
+            // dump($data);
+            // exit();
+            $subFrom = new \DateTime($data['from']); 
+            $subTo = new \DateTime($data['to']); 
+            $subChamberId = $data['chamber']; 
+            $subUserId = $data['id'];
+
+            // dump($data);
+            dump($username, $subFrom, $subTo, $subChamberId, $subUserId);
+            exit();
+
+            // Créer une réservation pour chaque utilisateur supplémentaire
+            $subReservation = new Reservation();
+            $subReservation->setStart($subFrom);
+            $subReservation->setEnd($subTo);
+            $subReservation->setUsers($subUserId);
+            $subReservation->setChambers($subChamberId);
+            $subReservation->setPrivatisation($privatisation);
+
+            $em->persist($subReservation);
+            }
         }
-    }
+
         $em->flush();
 
         return $this->redirectToRoute('app_home');
