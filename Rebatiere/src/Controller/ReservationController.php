@@ -109,26 +109,33 @@ class ReservationController extends AbstractController
 
         if ($membersData) {
         foreach ($membersData as $username => $data) {
-            // dump($data);
-            // exit();
             $subFrom = new \DateTime($data['from']); 
             $subTo = new \DateTime($data['to']); 
             $subChamberId = $data['chamber']; 
             $subUserId = $data['id'];
 
-            // dump($data);
-            dump($username, $subFrom, $subTo, $subChamberId, $subUserId);
-            exit();
+            $subUser = $em->getRepository(User::class)->find($subUserId);
+            $subChamber = $em->getRepository(Chamber::class)->find($subChamberId);
+
+            // On va multiplier le nombre de réservations pour afficher les éléments dans le calendar
+            $subDates = [];
+            $subCurrentDate = clone $subFrom;
+            while ($subCurrentDate <= $subTo) {
+            $subDates[] = $subCurrentDate->format('Y-m-d');
+            $subCurrentDate->modify('+1 day');
+            }
 
             // Créer une réservation pour chaque utilisateur supplémentaire
             $subReservation = new Reservation();
             $subReservation->setStart($subFrom);
             $subReservation->setEnd($subTo);
-            $subReservation->setUsers($subUserId);
-            $subReservation->setChambers($subChamberId);
-            $subReservation->setPrivatisation($privatisation);
+            $subReservation->setDates($subDates);
+            $subReservation->setUsers($subUser);
+            $subReservation->setChambers($subChamber);
+            $subReservation->setPrivatisation("0");
 
             $em->persist($subReservation);
+
             }
         }
 
