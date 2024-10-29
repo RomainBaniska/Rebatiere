@@ -182,8 +182,8 @@ function updateDuplicatedUsers() {
     duplicatedUsersContainer.appendChild(userList); 
 
     selectedUsers.forEach(user => {
-        $(`#from_${user.username}`).datepicker(); 
-        $(`#to_${user.username}`).datepicker();  
+        $(`#from_${user.username}`).datepicker({numberOfMonths: 2}); 
+        $(`#to_${user.username}`).datepicker({numberOfMonths: 2});  
     });
 }
 
