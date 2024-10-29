@@ -215,9 +215,14 @@ body {
 
 .members {
   display: none;
-  width: 100%;
+  /* width: 100%; */
 
   justify-content: center;
+
+  position: absolute;
+  left: 300px;
+  top : 0px;
+  width : 70%;
 }
 
 .duplicated {

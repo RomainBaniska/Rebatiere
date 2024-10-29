@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Contracts\Cache\CacheInterface;
+// use Symfony\Contracts\Cache\CacheInterface;
 // use App\Service\ChamberService;
 
 class ReservationController extends AbstractController
@@ -166,7 +166,7 @@ class ReservationController extends AbstractController
             // L'utilisateur n'a pas de réservations qui se chevauchent sur la période 
             $overlappingReservations = $em->getRepository(Reservation::class)->findOverlappingReservations($subUserId, $subFrom, $subTo);
             if (count($overlappingReservations) > 0 ) {
-                $this->addFlash('error', 'la réservation d\'un utilisateur ajouté se chevauche avec une de ses autres réservations');
+                $this->addFlash('error', 'les réservations d\'un utilisateur ajouté se chevauchent');
                 return $this->redirectToRoute('app_reservation');
             }
 

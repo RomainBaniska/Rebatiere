@@ -187,5 +187,19 @@ function updateDuplicatedUsers() {
     });
 }
 
-// Ajout des utilisateurs supplémentaires en hidden 
+// Clonage des informations "members"/"membersBox" dans le formulaire (pour by-passer le mauvais rendu esthétique du formulaire)
 
+// Script pour cloner les divs membres au moment de la soumission
+// document.querySelector('form').addEventListener('submit', function() {
+//     // Sélectionne les divs à copier
+//     const membersDiv = document.querySelector('.members').cloneNode(true);
+//     const membersBoxDiv = document.querySelector('.membersBox').cloneNode(true);
+
+//     // Cache les divs clonées
+//     membersDiv.style.display = 'none';
+//     membersBoxDiv.style.display = 'none';
+
+//     // Ajoute les divs clonées dans le formulaire
+//     this.appendChild(membersDiv);
+//     this.appendChild(membersBoxDiv);
+// });
