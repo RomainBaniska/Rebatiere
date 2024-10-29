@@ -256,3 +256,8 @@ body {
   /* align-items: center; */
 }
 
+.alertMessage {
+  font-family: Arial, Helvetica, sans-serif;
+  color: red;
+  font-size: 12px;
+}
