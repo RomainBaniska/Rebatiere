@@ -6,11 +6,18 @@ const formContainer = document.getElementById('formSheetContainer');
 const formSheet = document.getElementById('formSheet');
 let isAnimating = false;
 
-buttonMap.addEventListener('click', () => {
+buttonMap.addEventListener('click', async () => {
 
     if (isAnimating) return;
 
     isAnimating = true;
+
+    // Si membersBox est ouvert, on le referme (toggleMembers dans usersDisplayButton.js)
+    if (membersBox.classList.contains('show')) {
+        buttonMembers.click();
+
+        await new Promise(resolve => setTimeout(resolve, 2200));
+    }
 
     if (box.classList.contains('show')) {
         box.classList.remove('show');
@@ -47,22 +54,7 @@ buttonMap.addEventListener('click', () => {
         }, 350); // Correspond à la durée de l'animation d'extension du formContainer
     }
 
-
-    // const buttonMembers = document.getElementById('buttonMembers');
-
-    // if (buttonMembers.innerHTML === "<" && buttonMap.innerHTML === ">"){
-    //     event.preventDefault();
-    //     buttonMembers.click();
-    // };
-
 });
-
-
-// Ajout d'une condition en lien avec le bouton "buttonMembers" (voir usersDisplayButton.js)
-
-
-
-//////////////////////////////
 
 // Boutons des chambres
 const chambreButtons = document.querySelectorAll('.chambre-btn');

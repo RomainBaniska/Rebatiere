@@ -1,5 +1,5 @@
 function buttonShake(){
-    const floorArrows = document.querySelectorAll('.fa-solid');
+    const floorArrows = document.querySelectorAll('.boutonEtage');
 
     floorArrows.forEach(arrow => {
         arrow.addEventListener('click', function() {

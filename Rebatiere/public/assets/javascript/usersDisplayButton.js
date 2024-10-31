@@ -3,11 +3,19 @@ const members = document.querySelector('.members');
 const buttonMembers = document.getElementById('toggleMembers');
 let isAnimatingMembers = false;
 
-buttonMembers.addEventListener('click', () => {
+buttonMembers.addEventListener('click', async () => {
 
     if (isAnimatingMembers) return;
 
     isAnimatingMembers = true;
+
+
+    // Si box est ouvert, on le referme (toggleMap dans mapDisplayButton.js)
+    if (box.classList.contains('show')) {
+        buttonMap.click();
+
+        await new Promise(resolve => setTimeout(resolve, 2200));
+    }
 
     if (membersBox.classList.contains('show')) {
         membersBox.classList.remove('show');
