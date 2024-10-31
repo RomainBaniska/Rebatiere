@@ -266,3 +266,8 @@ body {
   color: red;
   font-size: 12px;
 }
+
+.boutonEtage {
+  height: 50px;
+  width: auto;
+}

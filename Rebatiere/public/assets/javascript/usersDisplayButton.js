@@ -1,5 +1,3 @@
-// const formContainer = document.getElementById('formSheetContainer');
-// const formSheet = document.getElementById('formSheet');
 const membersBox = document.querySelector('.membersBox');
 const members = document.querySelector('.members');
 const buttonMembers = document.getElementById('toggleMembers');

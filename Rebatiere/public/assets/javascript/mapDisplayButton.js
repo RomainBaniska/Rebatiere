@@ -1,11 +1,12 @@
-const button = document.getElementById('toggleButton');
+const buttonMap = document.getElementById('toggleButton');
+// const buttonMembers = document.getElementById('toggleMembers');
 const box = document.querySelector('.box');
 const map = document.querySelector('.map');
 const formContainer = document.getElementById('formSheetContainer');
 const formSheet = document.getElementById('formSheet');
 let isAnimating = false;
 
-button.addEventListener('click', () => {
+buttonMap.addEventListener('click', () => {
 
     if (isAnimating) return;
 
@@ -28,7 +29,7 @@ button.addEventListener('click', () => {
             setTimeout(() => {
                 formContainer.classList.remove('position');
                 formSheet.classList.remove('recenter');
-                button.innerHTML=">";
+                buttonMap.innerHTML=">";
                 isAnimating = false; 
             }, 1500);
 
@@ -41,13 +42,29 @@ button.addEventListener('click', () => {
         setTimeout(() => {
             box.style.visibility = 'visible';
             box.classList.add('show');
-            button.innerHTML="<";
+            buttonMap.innerHTML="<";
             isAnimating = false;
         }, 350); // Correspond à la durée de l'animation d'extension du formContainer
     }
+
+
+    // const buttonMembers = document.getElementById('buttonMembers');
+
+    // if (buttonMembers.innerHTML === "<" && buttonMap.innerHTML === ">"){
+    //     event.preventDefault();
+    //     buttonMembers.click();
+    // };
+
 });
 
 
+// Ajout d'une condition en lien avec le bouton "buttonMembers" (voir usersDisplayButton.js)
+
+
+
+//////////////////////////////
+
+// Boutons des chambres
 const chambreButtons = document.querySelectorAll('.chambre-btn');
 
 // Ajouter un gestionnaire de clic à chaque bouton
@@ -62,6 +79,8 @@ chambreButtons.forEach(button => {
     });
 });
 
+
+// Mise à jour de la displayBox pour récupérer l'Id (value) de la chambre sélectionnée
 function updateDisplay(name) {
     document.getElementById('displayBox').textContent = name;
 }
