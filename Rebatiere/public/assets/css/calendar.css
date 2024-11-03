@@ -33,8 +33,7 @@
     border: 1px rgba(14, 104, 194, 1);  */
 }
 
-.fc-myCustomButton-button {
-    /* background-color: var(--fc-custombutton-active-bg-color); */
+.fc-myCustomButton1-button {
     border-color: #E2E2EA;
     color: white !important;
 
@@ -43,7 +42,22 @@
     background-repeat: no-repeat;
     width: 40px;
     height: 40px;
+}
 
+.fc-myCustomButton2-button {
+    border-color: #E2E2EA;
+    color: white !important;
+
+    /* border: 1px solid black !important; */
+    /* filter: drop-shadow(0 0 0px #E2E2EA) drop-shadow(0 0 2px #E2E2EA); */
+
+    background-image: url('/assets/images/calendarImages/piscineIcon2.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: none !important;
+    filter: drop-shadow(0.3px 0.3px 0.3px #333333);
+    width: 40px;
+    height: 40px;
 }
 
 .fc-col-header-cell-cushion {
@@ -262,6 +276,7 @@ td[role="gridcell"] {
 
     .spring-background {
         /* background-image: url('/assets/images/calendarImages/printemps.jpeg'), linear-gradient(to bottom, #87CEEB, #87CEEB); */
+        background-color: rgba(33, 127, 236, 0.5);
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center; 
@@ -269,6 +284,7 @@ td[role="gridcell"] {
     
     .summer-background {
         /* background-image: url('/assets/images/calendarImages/ete2.jpg'), linear-gradient(to bottom, #87CEEB, #87CEEB); */
+        background-color: rgba(33, 127, 236, 0.5);
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center; 
@@ -284,6 +300,7 @@ td[role="gridcell"] {
     
     .winter-background {
         /* background-image: url('/assets/images/calendarImages/hiver.png'), linear-gradient(to bottom, red, red); */
+        background-color: rgba(33, 127, 236, 0.5);
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center; 
@@ -325,7 +342,13 @@ td[role="gridcell"] {
 
     .fc-view {
         /* border: 1px black solid; */
+        /* background-color: rgba(33, 127, 236, 0.5);  */
         box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);
         border-radius: 3px;
         padding: 5px
+    }
+
+    .fc-scroller {
+        scrollbar-color: rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.1); 
+        scrollbar-width: thin;
     }

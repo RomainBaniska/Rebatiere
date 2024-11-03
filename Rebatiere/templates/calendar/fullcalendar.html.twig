@@ -116,6 +116,9 @@
               monthGrid.classList.remove('spring-background', 'summer-background', 'autumn-background', 'winter-background');
               monthGrid.classList.add(firstDateClass + '-background');
           }
+           // Retirer les classes CSS des boutons personnalisés
+          document.querySelector('.fc-myCustomButton1-button').classList.remove('fc-button-primary');
+          document.querySelector('.fc-myCustomButton2-button').classList.remove('fc-button-primary');
       },
            //Informations lorsque je clique sur une date
           dateClick: function(info) {
@@ -157,7 +160,7 @@
                 },
           eventDisplay : 'block',
           headerToolbar: {
-            left: 'myCustomButton',
+            left: 'myCustomButton1 myCustomButton2',
             center: 'title' ,
             right: 'prev,dayGridWeek,dayGridMonth,next'
           },
@@ -182,16 +185,19 @@
                             return { html: pastille + dateHtml };
                         }
                     },
-
           // Ajout de boutons //
           customButtons: {
-            myCustomButton: {
-              click: function() {
-                window.location.href = "{{ path('app_reservation') }}";
-              }
+          myCustomButton1: {
+            click: function() {
+              window.location.href = "{{ path('app_reservation') }}";
             }
           },
-
+          myCustomButton2: {
+            click: function() {
+              window.location.href = "{{ path('app_piscine') }}";
+            }
+          }
+        },
           {# Traduction des boutons #}
           buttonText: {
             today: 'aujourd\'hui',

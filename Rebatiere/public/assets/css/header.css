@@ -56,16 +56,25 @@
 }
 
 .profile-pic {
-    position: absolute;
-    width: 80%;
-    height: 75%;
+    /* position: absolute; */
+    width: 40px;
+    height: 40px;
     max-height: 100%;
     border-radius: 50% / 60%;
     z-index: 1;
-    object-fit: cover;
-    top: 60%; 
-    left: 50%;
-    transform: translate(-50%, -50%); 
+    margin: 0 5px 0 5px;
+    /* object-fit: cover; */
+    /* top: 60%;  */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%);  */
+}
+
+.myReservations {
+    width: auto;
+    height: 75%;
+    margin: 0 5px 0 5px;
+    max-height: 100%;
+    z-index: 1;
 }
 
 .action {
