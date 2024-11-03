@@ -20,21 +20,24 @@
 
     <div class="vide"> </div>
 
-    <div class="profile-container" onclick="menuToggle()">
+    <div class="profile-container">
 
-      <img src="{{ asset('assets/images/book2.png')}}" class="myReservations">
+      <img src="{{ asset('assets/images/agenda.png')}}" class="myReservations">
+      <img src="{{ asset('assets/images/message.png')}}" class="profile-message">
+      <img src="{{ asset('assets/images/profileEdit.png')}}" class="profile-edit">
       <img src="{{ asset(photo) }}" alt="User Avatar" class="profile-pic">
+      <img src="{{ asset('assets/images/logout.png')}}" class="profile-logout">
       {# <img src="{{ asset('assets/images/woodFrame.png') }}" class="frame"> #}
 
       {# Menu déroulant qui exécute le script (invisible si non togglé) #}
-      <div class="menu">
+      {# <div class="menu">
       <h3>{{ currentUser }}<br><span>{{currentUserFirstName}} {{currentUserLastName}}</span></h3>
           <ul>
               <li><i class="fa fa-user"></i> <a href="{{ path('user.check') }}">Mon profil</a></li>
               <li><i class="fa fa-pen-to-square"></i> <a href="{{ path('user.checkreservation') }}">Réservations</a></li>
               <li><i class="fa fa-right-from-bracket"></i> <a href="{{ path('app_logout') }}">Déconnexion</a></li>
           </ul>
-      </div>
+      </div> #}
 
     </div>
 
@@ -45,6 +48,7 @@
 </div>
 {# Fermeture ci-dessus de la div Action #}
 
- <script src="{{ asset('assets/javascript/menuToggle.js') }}"></script>
+{# <script src="{{ asset('assets/javascript/menuToggle.js') }}"></script> #}
+<script src="{{ asset('assets/javascript/headerMenu.js') }}"></script>
 
 </body>
