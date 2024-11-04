@@ -352,3 +352,8 @@ td[role="gridcell"] {
         scrollbar-color: rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.1); 
         scrollbar-width: thin;
     }
+
+    .fc .fc-button-group {
+        /* border: #4e809e 1.5px solid;
+        border-radius: 5px; */
+    }
