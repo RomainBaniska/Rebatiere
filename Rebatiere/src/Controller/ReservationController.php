@@ -5,15 +5,12 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Chamber;
 use App\Entity\Reservation;
-// use App\Form\ReservationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-// use Symfony\Contracts\Cache\CacheInterface;
-// use App\Service\ChamberService;
 
 class ReservationController extends AbstractController
 {
@@ -21,26 +18,10 @@ class ReservationController extends AbstractController
     public function reservation(): Response
     {
         //Méthode de symfony qui vient d'AbstractController
-        $currentUser = $this->getUser()->getUsername();
-        $currentUserFirstName = $this->getUser()->getFirstname();
-        $currentUserLastName = $this->getUser()->getLastname();
-        $currentUserId = $this->getUser()->getId();
-
-        // Récupérer la photo pour le header
-        $photo = $this->getUser()->getImageFileName();
-        if(!$photo) {
-            $photo = 'assets/images/defaultavatar.png';
-        } else {
-            $photo = 'uploads/images/' . $photo;
-        }
+        // $currentUserId = $this->getUser()->getId();
 
           return $this->render('reservation/reservationsheet.html.twig', [
-            'currentUserId' => $currentUserId,
-            'currentUser' => $currentUser,
-            'currentUserFirstName' => $currentUserFirstName,
-            'currentUserLastName' => $currentUserLastName,
-            // Penser à récupérer User, Firstname & Lastname pour le passer dans le controlleur du header
-            'photo' => $photo,
+            // 'currentUserId' => $currentUserId,
         ]);        
     }
 

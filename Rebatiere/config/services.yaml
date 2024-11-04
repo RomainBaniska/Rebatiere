@@ -23,6 +23,12 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    # Configuration du service TwigEventListener pour écouter les événements
+    App\EventListener\TwigEventListener:
+        tags:
+            - { name: 'kernel.event_listener', event: 'kernel.controller' }
+        
+
     # App\EventListener\ExceptionListener:
     #     tags: [kernel.event_listener]
 

@@ -145,4 +145,11 @@ class UserController extends AbstractController
     return new RedirectResponse($referer);
     }
 
+    #[Route('/cropper', name: 'app_cropper')]
+    public function imageCropper(): Response
+    {
+
+        return $this->render('user/cropper.html.twig');
+    }
+
 }
