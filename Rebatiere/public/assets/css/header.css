@@ -84,9 +84,40 @@
 
 .show {
     visibility: visible;
+    animation: slide-right 0.5s forwards;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.hide {
+    /* visibility: hidden; */
+    visibility: visible;
+    animation: slide-right-reverse 0.5s forwards;
+    cursor: auto;
+}
+
+.showLogout {
+    visibility: visible;
     animation: slide-left 0.5s forwards;
     pointer-events: auto;
     cursor: pointer;
+}
+
+.hideLogout {
+    visibility: visible;
+    animation: slide-left-reverse 0.5s forwards;
+    cursor: auto;
+}
+
+@keyframes slide-right {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 @keyframes slide-left {
@@ -98,9 +129,30 @@
         transform: translateX(0);
         opacity: 1;
     }
-
 }
 
+
+@keyframes slide-right-reverse {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes slide-left-reverse {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
 
 .logoRebat img {
     /* position: absolute; */
