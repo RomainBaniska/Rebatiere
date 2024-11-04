@@ -22,26 +22,20 @@
 
     <div class="profile-container">
 
-      <img src="{{ asset('assets/images/agenda.png')}}" class="myReservations">
-      <img src="{{ asset('assets/images/message.png')}}" class="profile-message">
-      <img src="{{ asset('assets/images/profileEdit.png')}}" class="profile-edit">
+      <a href="{{ path('user.checkreservation') }}">
+      <img src="{{ asset('assets/images/agenda.png')}}" class="myReservations" title="Mes Réservations">
+      </a>
+      <img src="{{ asset('assets/images/message.png')}}" class="profile-message" title="Mes Messages">
+      <a href="{{ path('user.check') }}">
+      <img src="{{ asset('assets/images/profileEdit.png')}}" class="profile-edit" title="Mon profil">
+      </a>
       <img src="{{ asset(photo) }}" alt="User Avatar" class="profile-pic">
-      <img src="{{ asset('assets/images/logout.png')}}" class="profile-logout">
-      {# <img src="{{ asset('assets/images/woodFrame.png') }}" class="frame"> #}
+      <a href="{{ path('app_logout') }}">
+      <img src="{{ asset('assets/images/logout.png')}}" class="profile-logout" title="Déconnexion">
+      </a>
 
-      {# Menu déroulant qui exécute le script (invisible si non togglé) #}
-      {# <div class="menu">
-      <h3>{{ currentUser }}<br><span>{{currentUserFirstName}} {{currentUserLastName}}</span></h3>
-          <ul>
-              <li><i class="fa fa-user"></i> <a href="{{ path('user.check') }}">Mon profil</a></li>
-              <li><i class="fa fa-pen-to-square"></i> <a href="{{ path('user.checkreservation') }}">Réservations</a></li>
-              <li><i class="fa fa-right-from-bracket"></i> <a href="{{ path('app_logout') }}">Déconnexion</a></li>
-          </ul>
-      </div> #}
-
+      {# <h3>{{ currentUser }}<br><span>{{currentUserFirstName}} {{currentUserLastName}}</span></h3> #}
     </div>
-
-</div>
 {# Fermeture overlay #}
 </div>
 {# Fermeture header #}
