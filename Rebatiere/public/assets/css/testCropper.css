@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+}
+
+.cropImage img {
+    display: block;
+    width: 600px;
+    height: 400px;
+    max-height: 600px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.croppedImage img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-height: 600px;
+}
+
+#output {
+    margin: 0 5px;
+}

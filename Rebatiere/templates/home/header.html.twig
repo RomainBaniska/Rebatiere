@@ -6,8 +6,7 @@
 
 <body>
 
-{# Profil dropdown - Début de la div "Action" #}
-<div class="action">
+<div>
 {# Ouverture header #}
 <div class="header">
 {# Ouverture overlay #}
@@ -31,21 +30,19 @@
       <a href="{{ path('user.check') }}">
       <img src="{{ asset('assets/images/profileEdit.png')}}" class="profile-edit" title="Mon profil">
       </a>
-<div class="profile-pic-container">      
-      <img src="{{ asset(photo) }}" alt="User Avatar" class="profile-pic">
-      <img src="{{ asset('assets/images/glare2.png')}}" class="glare">
-</div>
+      <div class="profile-pic-container">      
+            <img src="{{ asset(photo) }}" alt="User Avatar" class="profile-pic">
+            <img src="{{ asset('assets/images/glare2.png')}}" class="glare">
+      </div>
       <a href="{{ path('app_logout') }}">
       <img src="{{ asset('assets/images/logout.png')}}" class="profile-logout" title="Déconnexion">
       </a>
 
-      {# <h3>{{ currentUser }}<br><span>{{currentUserFirstName}} {{currentUserLastName}}</span></h3> #}
-    </div>
+</div>
 {# Fermeture overlay #}
 </div>
 {# Fermeture header #}
 </div>
-{# Fermeture ci-dessus de la div Action #}
 
 {# <script src="{{ asset('assets/javascript/menuToggle.js') }}"></script> #}
 <script src="{{ asset('assets/javascript/headerMenu.js') }}"></script>
