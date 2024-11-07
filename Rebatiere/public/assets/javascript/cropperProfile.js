@@ -2,17 +2,11 @@
 document.addEventListener("DOMContentLoaded", () => {
 const profileImageInput = document.getElementById("profileImageInput");
 const imageToCrop = document.getElementById("imageToCrop");
-
-// const imageToCrop2 = document.getElementById("imageToCrop2");
 const cropImageBtn = document.getElementById('cropImageBtn');
 const output = document.getElementById('output');
 
 let cropper;
-
 const reader = new FileReader();
-
-
-// let cropper;
 
     profileImageInput.addEventListener("change", (event) => {
         const file = event.target.files[0];
@@ -21,18 +15,18 @@ const reader = new FileReader();
             reader.onload = (fileEvent) => {
                 imageToCrop.src = fileEvent.target.result;
                 imageToCrop.style.display = "block";
-                 // Détruire l'ancien Cropper si l'image change
+
                  if (cropper) {
                     cropper.destroy();
                 }
 
-                // Initialiser le nouveau Cropper une fois l'image chargée
                 imageToCrop.onload = () => {
                     cropper = new Cropper(imageToCrop, {
                         aspectRatio: 1,
                         viewMode: 0,
-                        minCanvasWidth: imageToCrop.width,
-                        minCanvasHeight: imageToCrop.height,
+                        zoomable: false
+                        // minCanvasWidth: imageToCrop.width,
+                        // minCanvasHeight: imageToCrop.height,
                     });
                 };
             };

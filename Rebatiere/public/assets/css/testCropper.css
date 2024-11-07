@@ -2,11 +2,10 @@ body {
     margin: 0;
 }
 
-.cropImage img {
+.cropImage.imageToCrop {
     display: block;
-    width: 600px;
-    height: 400px;
     max-height: 600px;
+    max-width: 700px;
     border: red 2px solid;
 }
 
@@ -18,9 +17,6 @@ body {
 
 .croppedImage img {
     display: block;
-    width: auto;
-    height: auto;
-    max-height: 600px;
     border: blue 2px solid
 }
 

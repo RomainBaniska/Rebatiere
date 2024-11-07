@@ -25,19 +25,15 @@
 
         {# Div pour afficher l'image et le cropper #}
         <div class="container">
-              <div class="cropImage">
-        <img id="imageToCrop" style="display: none; margin-top: 20px; max-width: 700px; border: red 2px solid;">
-
-        {# <img src="{{ asset('assets/images/cropperTestImage.jpg') }}" id="imageToCrop2">
-      </div> #}
+            <div class="cropImage">
+                <img id="imageToCrop" style="display: none; margin-top: 20px; max-width: 700px; border: red 2px solid;">
+            </div>
+             <div class="croppedImage">
+                <img src="" id="output" style="max-width: 350px">
+            </div>
+        </div>
 
         <button id="cropImageBtn">Crop!</button>
-
-      <div class="croppedImage">
-        <img src="" id="output">
-      </div>
-      
-    </div>
 
         {{ form_row(registrationForm.photo, {
             label: 'PROFLE-PIC' }) 
