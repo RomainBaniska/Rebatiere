@@ -1,23 +1,59 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %} #}
 
-{% block title %}Register{% endblock %}
+
+{% block stylesheets %}
+   <link rel="stylesheet" href="{{ asset('assets/css/testCropper.css') }}">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css" integrity="sha512-UtLOu9C7NuThQhuXXrGwx9Jb/z9zPQJctuAgNUBK3Z6kkSYT9wJ+2+dh6klS+TDBCV9kNPBbAxbVD+vCcfGPaA==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
+{% endblock %}
 
 {% block body %}
+  <body style="background-color : lightblue">
+
     <h1>Register</h1>
 
     {{ form_errors(registrationForm) }}
 
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.firstname) }}
-        {{ form_row(registrationForm.lastname) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.photo) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
+        {{ form_row(registrationForm.username, {label: 'Nom d\'utilisateur' })}}
+        {{ form_row(registrationForm.firstname, {label: 'Prénom' })}}
+        {{ form_row(registrationForm.lastname, {label: 'Nom' })}}
+        {{ form_row(registrationForm.plainPassword, {label: 'Mot de passe' })}}
+
+        {# Champ de téléchargement de l'image #}
+        <label for="profileImageInput">Photo de profil</label>
+        <input type="file" id="profileImageInput" accept="image/jpeg, image/png, image/gif">
+
+        {# Div pour afficher l'image et le cropper #}
+        <div class="container">
+              <div class="cropImage">
+        <img id="imageToCrop" style="display: none; margin-top: 20px; max-width: 700px; border: red 2px solid;">
+
+        {# <img src="{{ asset('assets/images/cropperTestImage.jpg') }}" id="imageToCrop2">
+      </div> #}
+
+        <button id="cropImageBtn">Crop!</button>
+
+      <div class="croppedImage">
+        <img src="" id="output">
+      </div>
+      
+    </div>
+
+        {{ form_row(registrationForm.photo, {
+            label: 'PROFLE-PIC' }) 
+            }}
         {{ form_row(registrationForm.agreeTerms) }}
-        {# {{ form_row(registrationForm.captcha) }} #}
 
         <button type="submit" class="btn">Register</button>
+        
     {{ form_end(registrationForm) }}
+
+    
+  </body>
 {% endblock %}
+
+{% block javascripts %} 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js" integrity="sha512-JyCZjCOZoyeQZSd5+YEAcFgz2fowJ1F1hyJOXgtKu4llIa0KneLcidn5bwfutiehUTiOuK87A986BZJMko0eWQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{# <script src="{{ asset('assets/javascript/cropperTest.js') }}"> </script> #}
+<script src="{{ asset('assets/javascript/cropperProfile.js') }}"></script>
+{% endblock %}  
