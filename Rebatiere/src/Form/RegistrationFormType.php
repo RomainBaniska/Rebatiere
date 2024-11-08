@@ -24,22 +24,21 @@ class RegistrationFormType extends AbstractType
             ->add('firstname')
             ->add('lastname')   
             ->add('username')
-            ->add('photo', FileType::class,[
-                'required' => false,
-                'mapped' => false,
-                'constraints' => [
-                    new Image ([
-                        'maxSize' => '5000k',
-                        'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                            'image/gif',
-                        ],
-                        'mimeTypesMessage' => 'Merci d\'utiliser les formats d\'image suivants : JPEG, PNG, GIF',
-                        ])
-                ],
-                
-            ])
+            // ->add('photo', FileType::class,[
+            //     'required' => false,
+            //     'mapped' => false,
+            //     'constraints' => [
+            //         new Image ([
+            //             'maxSize' => '5000k',
+            //             'mimeTypes' => [
+            //                 'image/jpeg',
+            //                 'image/png',
+            //                 'image/gif',
+            //             ],
+            //             'mimeTypesMessage' => 'Merci d\'utiliser les formats d\'image suivants : JPEG, PNG, GIF',
+            //             ])
+            //     ],  
+            // ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [

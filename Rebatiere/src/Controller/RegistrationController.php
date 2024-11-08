@@ -23,28 +23,48 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            $password = $form->get('plainPassword')->getData();
             $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
+                $userPasswordHasher->hashPassword($user, $password)
             );
 
             // Ajout de l'avatar en BDD avec la condition de null
-            $photo = $form['photo']->getData();  
-            if(isset($photo)) {
-                $fileName = uniqid().'.'.$photo->guessExtension();
-                $photo->move($photoDir, $fileName);
-            }
-            $user->setImageFileName($fileName);
+            // $photo = $form['photo']->getData();  
+            // if($photo) {
+            //     $fileName = uniqid().'.'.$photo->guessExtension();
+            //     $photo->move($photoDir, $fileName);
+            // }
+            // $user->setImageFileName($fileName);
 
+            // Gestion du fichier image (croppedImage)
+            $croppedImage = $request->files->get('croppedImage');  // Récupère le fichier "croppedImage"
+        
+            if ($croppedImage) {
+            // Génère un nom unique pour l'image
+            $filename = uniqid() . '.' . $croppedImage->getClientOriginalExtension();
+
+            // Déplace le fichier dans le répertoire spécifié
+            $croppedImage->move($photoDir, $filename);
+
+            // Tu peux ensuite enregistrer ce nom de fichier dans l'entité User
+            $user->setImageFileName($filename);
+        }
+
+
+ 
 
             // Persist & Flush en BDD
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $security->login($user, 'form_login', 'main');
+            // return $security->login($user, 'form_login', 'main');
+
+                    // Répondre avec un JSON pour indiquer le succès
+        return $this->json([
+            'success' => true,
+            'message' => 'Utilisateur créé avec succès',
+            'data' => $user,
+        ]);
         }
 
         return $this->render('registration/register.html.twig', [

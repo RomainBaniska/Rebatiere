@@ -23,21 +23,20 @@
         <label for="profileImageInput">Photo de profil</label>
         <input type="file" id="profileImageInput" accept="image/jpeg, image/png, image/gif">
 
-        {# Div pour afficher l'image et le cropper #}
-        <div class="container">
-            <div class="cropImage">
-                <img id="imageToCrop" style="display: none; margin-top: 20px; max-width: 700px; border: red 2px solid;">
-            </div>
-             <div class="croppedImage">
-                <img src="" id="output" style="max-width: 350px">
-            </div>
+        {# Container #}
+        <div class="container" style="margin-top: 20px;">
+            {# Image téléchargée avec outil crop #}
+                <div class="imageToCropContainer">
+                    <img id="imageToCrop" style="display: none;">
+                </div>
+            
+                <div class="cropOutputContainer">
+                    <img src="" id="cropOutput" style="max-width: 350px">
+                </div>
         </div>
 
-        <button id="cropImageBtn">Crop!</button>
+        <button type="button" id="cropImageBtn">Crop!</button>
 
-        {{ form_row(registrationForm.photo, {
-            label: 'PROFLE-PIC' }) 
-            }}
         {{ form_row(registrationForm.agreeTerms) }}
 
         <button type="submit" class="btn">Register</button>
