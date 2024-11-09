@@ -22,49 +22,51 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
             $password = $form->get('plainPassword')->getData();
             $user->setPassword(
                 $userPasswordHasher->hashPassword($user, $password)
             );
 
-            // Ajout de l'avatar en BDD avec la condition de null
-            // $photo = $form['photo']->getData();  
-            // if($photo) {
-            //     $fileName = uniqid().'.'.$photo->guessExtension();
-            //     $photo->move($photoDir, $fileName);
+
+            // // Ajout de l'avatar en BDD avec la condition de null
+            // $croppedImage = $request->files->get('croppedImage');  
+            // if ($croppedImage) {
+            //        $filename = uniqid() . '.' . $croppedImage->getClientOriginalExtension();
+            //        $croppedImage->move($photoDir, $filename);
+            //        $user->setImageFileName($filename);
             // }
-            // $user->setImageFileName($fileName);
 
-            // Gestion du fichier image (croppedImage)
-            $croppedImage = $request->files->get('croppedImage');  // Récupère le fichier "croppedImage"
-        
-            if ($croppedImage) {
-            // Génère un nom unique pour l'image
-            $filename = uniqid() . '.' . $croppedImage->getClientOriginalExtension();
+            // Récupérer l'image en base64
+            $croppedImageBase64 = $request->get('croppedImage'); // Supposons que l'image soit envoyée via un champ caché
 
-            // Déplace le fichier dans le répertoire spécifié
-            $croppedImage->move($photoDir, $filename);
+            dump($croppedImageBase64);
+            exit();
+            
+            if ($croppedImageBase64) {
+                // Décoder l'image en base64
+                $data = base64_decode(preg_replace('/^data:image\/\w+;base64,/', '', $croppedImageBase64));
 
-            // Tu peux ensuite enregistrer ce nom de fichier dans l'entité User
-            $user->setImageFileName($filename);
-        }
+                // Générer un nom unique pour le fichier
+                $filename = uniqid() . '.png'; // Ou l'extension correspondant à l'image
 
+                // Enregistrer l'image décodée dans un fichier
+                file_put_contents($photoDir . '/' . $filename, $data);
 
- 
+                // Assigner le nom du fichier à l'utilisateur
+                $user->setImageFileName($filename);
+            }
+
+            // dump($user);
+            // dump($croppedImage);
+            // exit();
 
             // Persist & Flush en BDD
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // return $security->login($user, 'form_login', 'main');
-
-                    // Répondre avec un JSON pour indiquer le succès
-        return $this->json([
-            'success' => true,
-            'message' => 'Utilisateur créé avec succès',
-            'data' => $user,
-        ]);
+            return $security->login($user, 'form_login', 'main');
         }
 
         return $this->render('registration/register.html.twig', [
@@ -72,3 +74,27 @@ class RegistrationController extends AbstractController
         ]);
     }
 }
+
+//     // Récupération de la photo de profil croppée envoyée par AJAX
+//     public function uploadCroppedImage(Request $request)
+//     {
+//     $croppedImage = $request->files->get('croppedImage');
+
+//     if ($croppedImage) {
+//         $originalFilename = pathinfo($croppedImage->getClientOriginalName(), PATHINFO_FILENAME);
+//         $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [:Punctuation:]', $originalFilename);
+//         $newFilename = $safeFilename.'-'.uniqid().'.'.$croppedImage->guessExtension();
+
+//         // Déplacer le fichier téléchargé
+//         $croppedImage->move(
+//             $this->getParameter('profile_pictures_directory'),
+//             $newFilename
+//         );
+
+//         // Retourner une réponse JSON avec l'URL du fichier ou une autre donnée
+//         return $this->json(['success' => true, 'filename' => $newFilename]);
+//     }
+
+//     return $this->json(['success' => false, 'message' => 'No image received']);
+// }
+

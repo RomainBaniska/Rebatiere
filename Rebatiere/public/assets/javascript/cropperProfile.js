@@ -36,10 +36,10 @@ let croppedImage = null;
         }
     });
 
-// Je configure le bouton du cropper ("Crop!") pour qu'il crée un élément <canvas> qui contient la zone rognée par l'utilisateur. | Par défaut, toDataURL() utilise le format PNG
+// Je configure le bouton du cropper ("Crop!") pour qu'il crée un élément <canvas> qui contient la zone rognée par l'utilisateur. | Par défaut, toDataURL() utilise le format PNG (je change en jpg)
 // On remplit la source de l'img "cropOutput" auparavant vide par l'url en base64
     cropImageBtn.addEventListener('click', function () {
-        croppedImage = cropper.getCroppedCanvas().toDataURL("image/png");
+        croppedImage = cropper.getCroppedCanvas().toDataURL("image/jpg");
         cropOutput.src = croppedImage;
     });
 
@@ -48,67 +48,58 @@ let croppedImage = null;
     document.querySelector("form").addEventListener("submit", (event) => {
         if (croppedImage) {
             event.preventDefault();
-            console.log(croppedImage);
-            // Appel de la fonction dataURLToBlob écrite plus bas
-            const croppedImageBlob = dataURLToBlob(croppedImage);
-            console.log(croppedImageBlob);
-            console.log('Type MIME:', croppedImageBlob.type);  
-            console.log('Taille du Blob:', croppedImageBlob.size); 
+
+            // On décode la Base64 string
+            const croppedImageData = croppedImage.split(',')[1];
+            const croppedImageBinary = window.atob(croppedImageData);
+
+            // On crée un blob de la data décodée
+            const len = croppedImageBinary.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = croppedImageBinary.charCodeAt(i)
+            }
+            const blob = new Blob([bytes], { type: 'image/jpg'});
+
+            // On génère une URL pour le blob
+            const url = URL.createObjectURL(blob);
+
+            // On télécharge l'image 
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'image.jpg';
+            console.log(a);
+            console.log('OK!');
+            a.style.display = 'none'; // On cache l'élément dans le DOM
+            document.body.appendChild(a); // On l'ajoute temporairement au document
+            a.click(); // On déclenche le clic pour télécharger l'image
+            document.body.removeChild(a); // On le supprime ensuite du DOM
             return;
-            }}); 
+
+
+        }
+    });
+
+
+
+    //         event.preventDefault();
+    //         // Appel de la fonction dataURLToBlob écrite plus bas
+    //         const croppedImageBlob = dataURLToBlob(croppedImage);
+    //         // Ajout du Blob dans le hidden input
+    //         const croppedImageField = document.getElementById('croppedImage');
+    //         croppedImageField.value = croppedImageBlob; 
+
+    //         // On décide d'envoyer l'image rognée sous forme de fichier Blob directement au contrôleur via une requête AJAX (par exemple, avec Fetch).
+    //         // Pourquoi ? Parce qu'un controlleur ne peut pas avaler un objet Blob Javascript via un formulaire HTML
+
+    //         // DEBUG
+    //         // console.log(croppedImage);
+    //         // console.log(croppedImageBlob);
+    //         // console.log('Type MIME:', croppedImageBlob.type);  
+    //         // console.log('Taille du Blob:', croppedImageBlob.size); 
+    //         event.target.submit();
+    //         }
+    //     }); 
 
              
-    // Je convertis la dataURL (base64) en blob pour créer un fichier binaire (jpg,gif...)
-    function dataURLToBlob(dataURL) {
-        const byteString = atob(dataURL.split(',')[1]);
-        const arrayBuffer = new ArrayBuffer(byteString.length);
-        const uintArray = new Uint8Array(arrayBuffer);
-        
-            for (let i = 0; i < byteString.length; i++) {
-                uintArray[i] = byteString.charCodeAt(i);
-            }
-        
-            const mimeString = dataURL.split(',')[0].split(':')[1].split(';')[0];
-            return new Blob([uintArray], { type: mimeString });
-    }
 });
-
-
-   // if (croppedImageBlob) { 
-
-                    // console.log('Blob:', croppedImageBlob);
-                    // console.log('Type MIME:', croppedImageBlob.type);  // Type MIME, par exemple 'image/png'
-                    // console.log('Taille du Blob:', croppedImageBlob.size);  // Taille du Blob en octets
-
-                            // const formData = new FormData(event.target); // Création d'un FormData et ajout du blob
-                            // formData.append("croppedImage", croppedImageBlob, "cropped-image.png");
-                            // fetch(event.target.action, {method: "POST", body: formData})
-                            //     .then(response => {console.log(response); return response.json()})
-                            //     .then(data => {
-                            //         console.log("Image envoyée avec succès", data);
-                            //     })
-                            // .catch(error => {
-                            //     console.error("Erreur lors de l'envoi de l'image", error);
-                            //     // console.log(event.target.action);  // Vérifie l'URL de la soumission
-                            //     });
-                            
-        //                     fetch(event.target.action, {method: "POST", body: formData})
-        //                     .then(response => {
-        //                         if (!response.ok) {
-        //                             return response.text().then(text => {
-        //                                 console.error('Erreur dans la réponse du serveur :', text);
-        //                                 throw new Error('Erreur serveur');
-        //                             });
-        //                         }
-        //                         return response.json();
-        //                     })
-        //                     .then(data => {
-        //                         console.log("Image envoyée avec succès", data);
-        //                     })
-        //                     .catch(error => {
-        //                         console.error("Erreur lors de l'envoi de l'image", error);
-        //                     });
-
-        //         } else {console.error("Aucune image croppée n\'existe.");}
-        // }
-    // });

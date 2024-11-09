@@ -30,9 +30,13 @@
                     <img id="imageToCrop" style="display: none;">
                 </div>
             
+            {# Image croppée #}
                 <div class="cropOutputContainer">
                     <img src="" id="cropOutput" style="max-width: 350px">
                 </div>
+
+            {# Input caché contenant l'image #}
+                <input type="hidden" id="hiddenCroppedImage" name="croppedImage">
         </div>
 
         <button type="button" id="cropImageBtn">Crop!</button>
