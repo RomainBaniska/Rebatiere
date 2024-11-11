@@ -43,7 +43,7 @@ class RegistrationController extends AbstractController
 
             dump($croppedImageBase64);
             exit();
-            
+
             if ($croppedImageBase64) {
                 // Décoder l'image en base64
                 $data = base64_decode(preg_replace('/^data:image\/\w+;base64,/', '', $croppedImageBase64));
@@ -75,26 +75,4 @@ class RegistrationController extends AbstractController
     }
 }
 
-//     // Récupération de la photo de profil croppée envoyée par AJAX
-//     public function uploadCroppedImage(Request $request)
-//     {
-//     $croppedImage = $request->files->get('croppedImage');
-
-//     if ($croppedImage) {
-//         $originalFilename = pathinfo($croppedImage->getClientOriginalName(), PATHINFO_FILENAME);
-//         $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [:Punctuation:]', $originalFilename);
-//         $newFilename = $safeFilename.'-'.uniqid().'.'.$croppedImage->guessExtension();
-
-//         // Déplacer le fichier téléchargé
-//         $croppedImage->move(
-//             $this->getParameter('profile_pictures_directory'),
-//             $newFilename
-//         );
-
-//         // Retourner une réponse JSON avec l'URL du fichier ou une autre donnée
-//         return $this->json(['success' => true, 'filename' => $newFilename]);
-//     }
-
-//     return $this->json(['success' => false, 'message' => 'No image received']);
-// }
 

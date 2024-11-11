@@ -1,5 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", () => {
+const form = document.querySelector("form"); 
 const profileImageInput = document.getElementById("profileImageInput");
 const imageToCrop = document.getElementById("imageToCrop");
 const cropOutput = document.getElementById('cropOutput');
@@ -45,7 +46,7 @@ let croppedImage = null;
 
 
     // J'empêche l'envoi du formulaire lors de la soumission pour ajouter une action si on a une image croppée existe
-    document.querySelector("form").addEventListener("submit", (event) => {
+    form.addEventListener("submit", (event) => {
         if (croppedImage) {
             event.preventDefault();
 
@@ -74,32 +75,11 @@ let croppedImage = null;
             document.body.appendChild(a); // On l'ajoute temporairement au document
             a.click(); // On déclenche le clic pour télécharger l'image
             document.body.removeChild(a); // On le supprime ensuite du DOM
+            URL.revokeObjectURL(url); // On libère la mémoire de l'URL
             return;
 
 
         }
     });
-
-
-
-    //         event.preventDefault();
-    //         // Appel de la fonction dataURLToBlob écrite plus bas
-    //         const croppedImageBlob = dataURLToBlob(croppedImage);
-    //         // Ajout du Blob dans le hidden input
-    //         const croppedImageField = document.getElementById('croppedImage');
-    //         croppedImageField.value = croppedImageBlob; 
-
-    //         // On décide d'envoyer l'image rognée sous forme de fichier Blob directement au contrôleur via une requête AJAX (par exemple, avec Fetch).
-    //         // Pourquoi ? Parce qu'un controlleur ne peut pas avaler un objet Blob Javascript via un formulaire HTML
-
-    //         // DEBUG
-    //         // console.log(croppedImage);
-    //         // console.log(croppedImageBlob);
-    //         // console.log('Type MIME:', croppedImageBlob.type);  
-    //         // console.log('Taille du Blob:', croppedImageBlob.size); 
-    //         event.target.submit();
-    //         }
-    //     }); 
-
              
 });

@@ -2,12 +2,17 @@
 
 
 {% block stylesheets %}
+   <link rel="stylesheet" href="{{ asset('assets/css/register.css') }}">
    <link rel="stylesheet" href="{{ asset('assets/css/testCropper.css') }}">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css" integrity="sha512-UtLOu9C7NuThQhuXXrGwx9Jb/z9zPQJctuAgNUBK3Z6kkSYT9wJ+2+dh6klS+TDBCV9kNPBbAxbVD+vCcfGPaA==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
 {% endblock %}
 
 {% block body %}
-  <body style="background-color : lightblue">
+  <body>
+    <div class="bodyContainer">
+        <div class="bodyOverlay">
+            <div class="bigContainer">
+
 
     <h1>Register</h1>
 
@@ -36,7 +41,8 @@
                 </div>
 
             {# Input caché contenant l'image #}
-                <input type="hidden" id="hiddenCroppedImage" name="croppedImage">
+                {# <input type="hidden" id="croppedImageData" name="croppedImageData"> #}
+                <input type="file" id="croppedImageData" name="croppedImageData" style="display:none">
         </div>
 
         <button type="button" id="cropImageBtn">Crop!</button>
@@ -47,7 +53,9 @@
         
     {{ form_end(registrationForm) }}
 
-    
+        </div>
+      </div>
+    </div>
   </body>
 {% endblock %}
 
