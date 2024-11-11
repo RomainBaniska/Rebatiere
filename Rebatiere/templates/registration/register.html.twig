@@ -39,13 +39,13 @@
                 <div class="cropOutputContainer">
                     <img src="" id="cropOutput" style="max-width: 350px">
                 </div>
-
-            {# Input caché contenant l'image #}
-                {# <input type="hidden" id="croppedImageData" name="croppedImageData"> #}
-                <input type="file" id="croppedImageData" name="croppedImageData" style="display:none">
         </div>
 
+        {# Bouton de cropping #}
         <button type="button" id="cropImageBtn">Crop!</button>
+
+        {# Input contenant l'image réinjectée #}
+        <input type="file" id="croppedImageJPGFile" name="registrationForm[croppedImageJPGFile]" style="display:none;">
 
         {{ form_row(registrationForm.agreeTerms) }}
 
