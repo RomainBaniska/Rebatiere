@@ -22,7 +22,6 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
-
         if ($form->isSubmitted() && $form->isValid()) {
 
             $username = $form->get('username')->getData();
@@ -33,25 +32,10 @@ class RegistrationController extends AbstractController
             // Récupérer le fichier envoyé (image de profil)
             $croppedImage = $request->files->get('registrationForm')['croppedImageJPGFile'];
 
-            // $randomText = $request->get('randomText')->getData();
-
                     // Afficher les informations pour déboguer
             dump($username, $firstname, $lastname, $password);
             dump($croppedImage);  // Cela vous montre le fichier téléchargé
             exit();
-
-            // $user->setPassword(
-            //     $userPasswordHasher->hashPassword($user, $password)
-            // );
-
-
-            // // Ajout de l'avatar en BDD avec la condition de null
-            // $croppedImage = $request->files->get('croppedImage');  
-            // if ($croppedImage) {
-            //        $filename = uniqid() . '.' . $croppedImage->getClientOriginalExtension();
-            //        $croppedImage->move($photoDir, $filename);
-            //        $user->setImageFileName($filename);
-            // }
 
             // Persist & Flush en BDD
             $entityManager->persist($user);
@@ -81,13 +65,19 @@ class RegistrationController extends AbstractController
             $plainPassword = $request->request->get('plainPassword');
             $croppedImage = $request->files->get('croppedImageJPGFile');
 
+
+            // Ajout d'une REGEX excluant tous les caractères spéciaux pour les identifiants
+            // (todo) Ajouter aussi un script avant envoi
+            $pattern = '/[^a-zA-Z0-9]/';
+            if (preg_match($pattern, $username) || preg_match($pattern, $firstname) || preg_match($pattern, $lastname)) {
+                $this->addFlash('error', 'Les caractères spéciaux sont interdits dans le nom d\'utilisateur, le prénom, et le nom de famille.');
+                return $this->redirectToRoute('app_register2');
+            }
+
+
             // Je crée une nouvelle instance d'User
             $user = new User();
 
-            // Hachage de password
-            // $hashedPassword = $user->setPassword (
-            //         $userPasswordHasher->hashPassword($user, $plainPassword)
-            // );
             $hashedPassword = $userPasswordHasher->hashPassword($user, $plainPassword);
             $user->setPassword($hashedPassword);
 
