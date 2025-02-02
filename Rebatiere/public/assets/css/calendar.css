@@ -361,6 +361,10 @@ td[role="gridcell"] {
         scrollbar-width: thin;
     }
 
+    .fc-dayGridMonth-view .fc-scrollgrid-section-header .fc-scroller-harness .fc-scroller {
+        overflow-y: hidden !important;
+    }
+
     .fc .fc-button-group {
         /* border: #4e809e 1.5px solid;
         border-radius: 5px; */
