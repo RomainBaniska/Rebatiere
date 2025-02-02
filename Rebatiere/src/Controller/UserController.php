@@ -72,20 +72,23 @@ class UserController extends AbstractController
             $user = $form->getData();
 
             //hashage pw
+            if (!empty($plainPassword)) {
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
             );
+        }
 
             // Ajout de l'avatar en BDD avec la condition de null
             $photo = $form['photo']->getData();  
             if(isset($photo)) {
                 $fileName = uniqid().'.'.$photo->guessExtension();
                 $photo->move($photoDir, $fileName);
+                $user->setImageFileName($fileName);
             }
-            $user->setImageFileName($fileName);
+            // $user->setImageFileName($fileName);
 
 
             // Persist & Flush en BDD
