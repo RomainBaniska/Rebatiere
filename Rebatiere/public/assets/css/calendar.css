@@ -42,15 +42,17 @@
     background-repeat: no-repeat;
     width: 40px;
     height: 40px;
+
+    transition: transform 0.2s ease-in-out;
+}
+
+.fc-myCustomButton1-button:hover {
+    transform: scale(1.1) rotate(-10deg);
 }
 
 .fc-myCustomButton2-button {
     border-color: #E2E2EA;
     color: white !important;
-
-    /* border: 1px solid black !important; */
-    /* filter: drop-shadow(0 0 0px #E2E2EA) drop-shadow(0 0 2px #E2E2EA); */
-
     background-image: url('/assets/images/calendarImages/piscineIcon2.png');
     background-size: contain;
     background-repeat: no-repeat;
@@ -58,6 +60,12 @@
     filter: drop-shadow(0.3px 0.3px 0.3px #333333);
     width: 40px;
     height: 40px;
+
+    transition: transform 0.2s ease-in-out;
+}
+
+.fc-myCustomButton2-button:hover {
+    transform: scale(1.1) rotate(10deg);
 }
 
 .fc-col-header-cell-cushion {

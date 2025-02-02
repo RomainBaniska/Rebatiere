@@ -56,6 +56,7 @@ animation-name: bounceOutDown;
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.5s;
+    cursor: pointer;
 }
 
 /* Classe pour afficher la modal */
