@@ -142,10 +142,15 @@
                     let fin = moment(event.extendedProps.fin, 'DD-MM-YYYY').format('dddd D MMMM');
                     let eventInfo = `
                       <div>
+                        <div class="modalReservationCell">
                         <img src="${icon}" style="width: 30px; height: 30px; border-radius: 50%; margin: 5px; border: 1px solid black">
+                        <br>
                         ${firstname} ${lastname}
+                        <br>
                         <strong>Chambre:</strong> ${chamber}
+                        <br>
                         <strong>Période de réservation:</strong> du ${debut} au ${fin}
+                        <div>
                       </div>
                     `;
                     // On remplit la div 'infos' qui n'est autre que la variable eventDetailsEl

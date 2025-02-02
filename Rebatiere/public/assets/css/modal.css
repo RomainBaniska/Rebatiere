@@ -3,20 +3,34 @@
 animation-name: bounceOutDown;
 }
 
+.modalReservationCell {
+    font-family: 'Courier New', Courier, monospace;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #FFFADF;
+    color: black;
+    margin: 3px 0;
+}
+
 #animatedModal.animated.animatedModal-on.zoomIn {
     box-sizing: border-box; /* Assurez-vous que le padding est inclus dans la largeur totale */
     position: relative;
     width: 80%;
-    background-color: #FFFADF !important;
+    /* background-color: #FFFADF !important; */
+    background-color: rgb(85, 124, 210, 0.7) !important;
     padding: 5%;
+    color : white;
 }
 
 #animatedModal.animated.animatedModal-off.zoomOut {
-    background-color: #FFFADF !important;
+    /* background-color: #FFFADF !important; */
+    background-color: rgb(85, 124, 210, 0.98) !important;
 }
 
 #animatedModal.animated.animatedModal-off {
-    background-color: #FFFADF !important;
+    /* background-color: #FFFADF !important; */
+    background-color: rgb(85, 124, 210, 0.98) !important;
 }
 
 .zoomIn {
