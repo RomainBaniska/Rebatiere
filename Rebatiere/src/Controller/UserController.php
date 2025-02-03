@@ -71,6 +71,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
+            $plainPassword = $form->get('plainPassword')->getData();
             //hashage pw
             if (!empty($plainPassword)) {
             $user->setPassword(
