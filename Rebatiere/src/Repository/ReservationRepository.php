@@ -54,8 +54,8 @@ class ReservationRepository extends ServiceEntityRepository
         {
             return $this->createQueryBuilder('r')
                 ->select('r.id, r.start, r.end, u.id AS user_id, c.id AS chamber_id')
-                ->join('r.users', 'u') // Jointure avec l'utilisateur
-                ->join('r.chambers', 'c') // Jointure avec la chambre
+                ->join('r.users', 'u') 
+                ->join('r.chambers', 'c') 
                 ->where('r.start <= :end')
                 ->andWhere('r.end >= :start')
                 ->setParameter('start', $start)
