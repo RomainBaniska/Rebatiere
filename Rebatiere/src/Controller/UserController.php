@@ -95,12 +95,12 @@ class UserController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            // Remplacer plus tard le "addFlash" par une modal javascript
-        $this->addFlash(
+            $this->addFlash(
             'success',
             'les informations de votre compte ont bien été modifiées'
         );
-        return $this->redirectToRoute('app_home');
+
+        return $this->redirectToRoute('user.edit', ['id' => $user->getId()]);
         }
 
         return $this->render('user/edit.html.twig', [

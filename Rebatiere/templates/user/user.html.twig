@@ -12,9 +12,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axentix@2.4.0/dist/axentix.min.css">
 
         {% block stylesheets %}
-        {% endblock %}
-
-        {% block javascripts %}
+       
         {% endblock %}
     </head>
 
@@ -22,26 +20,36 @@
 
     <header>
       <nav class="navbar shadow-1 primary">
-        {# <a href="#" target="_blank" class="navbar-brand">Axentix</a> #}
         <div class="navbar-menu ml-auto">
           <a class="navbar-link" href="{{ path('user.edit', {'id': currentUser.id}) }} ">Mon profil</a>
           <a class="navbar-link" href=" {{ path('user.reservation.edit', {'id': currentUser.id}) }} ">Mes réservations</a>
-          {# <a class="navbar-link" href="#">Mes réservations</a> #}
         </div>
       </nav>
     </header>
 
-    {% include 'partials/flash.html.twig' %}
-    {# {{ dump(app.flashes) }} #}
-
+    {# Flash Messages #}
+    {# {% include 'partials/flash.html.twig' %} #}
+   
     <main class="mainContainer">
     <main class="mainOverlay">
       
-          <main>
-          <!-- Code here the main content -->
-          </main>
-      
-        {% block body %}{% endblock %}
+    {% block body %}
+    {# User edit et reservations #}
+
+        {% block javascripts %}
+        {# Script pour la modal flash #}
+          <script>
+          document.addEventListener("DOMContentLoaded", function () {
+              setTimeout(function () {
+                  document.querySelectorAll('.alert-sucess').forEach(function(flash) {
+                      flash.classList.add('hide');
+                      setTimeout(() => flash.remove(), 500); // Supprime l'élément après l'animation
+                  });
+              }, 3000);
+            });
+          </script>
+        {% endblock %}
+    {% endblock %}
     </main>
     </main>
 

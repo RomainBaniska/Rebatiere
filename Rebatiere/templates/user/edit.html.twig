@@ -11,6 +11,7 @@
 {% endblock %}
 
 {% block body %}
+
 <div class="container">
 
 <div class="titreProfil">
@@ -18,6 +19,24 @@
 </div>
 
 {{ form(form) }}
-</div>
 
+{% for messages in app.flashes %}
+    {% for message in messages %}
+          <div class="alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const alert = document.querySelector('.alert-success');
+        setTimeout(function() {
+            alert.classList.add('hide');
+        }, 2500);
+});
+</script>
+
+</div>
 {% endblock %}
+
