@@ -38,12 +38,16 @@
             <form method="post" action="{{ path('app_persistreservation') }}">
             {# DatePicker jQuery #}
             {% include 'datePicker/datepicker.html.twig' %}
-            <div class='datepicker_container'>
-                <label for="from">Date d'arrivée</label> &nbsp;
-                <input type="text" id="from" name="from" autocomplete="off" value=""> &nbsp;
-                <label for="to">Date de départ </label> &nbsp;
-                <input type="text" id="to" name="to" autocomplete="off" value=""> &nbsp;
-            </div>
+            {# <div class='dates_container'> #}
+                <div class='datepicker_container'>
+                    <label for="from">Date d'arrivée</label> &nbsp;
+                    <button id="toggleDate" type="button">></button>
+                    <input type="text" id="from" name="from" autocomplete="off" value=""> &nbsp;
+                    <label for="to">Date de départ </label> &nbsp;
+                    <input type="text" id="to" name="to" autocomplete="off" value=""> &nbsp;
+                </div>
+
+            {# </div> #}
 
             <p class="formLine">
             <label for="to">Sélectionnez votre chambre</label> &nbsp;
@@ -178,6 +182,8 @@
     <script src="{{ asset('assets/javascript/mapDisplayButton.js') }}"></script>
     <script src="{{ asset('assets/javascript/usersDisplayButton.js') }}"></script>
     <script src="{{ asset('assets/javascript/searchUser.js') }}"></script>
+
+     <script src="{{ asset('assets/javascript/whoBooked.js') }}"></script>
     {# Confettis #}
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <script src="{{ asset('assets/javascript/confetti.js') }}"></script>

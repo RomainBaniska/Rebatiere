@@ -126,6 +126,10 @@ body {
   transition: none !important; /* Annule les transitions */
 }
 
+.dates_container {
+  display: flex;
+}
+
 .datepicker_container {
     flex-direction: column !important;
 }
@@ -183,6 +187,11 @@ body {
   font-weight: bold;
   cursor: pointer;
   margin-left: 10px;
+}
+
+#toggleDate {
+  position: absolute;
+  transform: translate(100px, 7px);
 }
 
 #toggleButton {

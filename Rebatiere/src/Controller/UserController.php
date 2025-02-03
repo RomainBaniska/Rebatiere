@@ -84,13 +84,12 @@ class UserController extends AbstractController
 
             // Ajout de l'avatar en BDD avec la condition de null
             $photo = $form['photo']->getData();  
+            // isset permet d'accepter un champs ""
             if(isset($photo)) {
                 $fileName = uniqid().'.'.$photo->guessExtension();
                 $photo->move($photoDir, $fileName);
                 $user->setImageFileName($fileName);
             }
-            // $user->setImageFileName($fileName);
-
 
             // Persist & Flush en BDD
             $em->persist($user);
