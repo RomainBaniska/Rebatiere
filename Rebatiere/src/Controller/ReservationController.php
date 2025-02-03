@@ -17,11 +17,7 @@ class ReservationController extends AbstractController
     #[Route('/reservation', name: 'app_reservation')]
     public function reservation(): Response
     {
-        //Méthode de symfony qui vient d'AbstractController
-        // $currentUserId = $this->getUser()->getId();
-
           return $this->render('reservation/reservationsheet.html.twig', [
-            // 'currentUserId' => $currentUserId,
         ]);        
     }
 
@@ -178,17 +174,22 @@ class ReservationController extends AbstractController
         return $this->redirectToRoute('app_home');
     }
 
+    // API qui formate toutes les réservations existantes
     #[Route('/api/reservations', name: 'api_reservations')]
     public function getReservations(EntityManagerInterface $em): JsonResponse
     {
+        // On récupère toutes les réservations
         $reservations = $em->getRepository(Reservation::class)->findAll();
 
+        // On crée un tableau "events"
         $events = [];
+        // Pour toutes les réservations...
         foreach ($reservations as $reservation) {
+            // ... Et parmi toutes ces réservations, pour chacune on récupère les dates
             foreach ($reservation->getDates() as $date) {
+                // Le tableau des événements renvoie l'id, date début, fin et des props
                 $events[] = [
                     'id' => $reservation->getId(),
-                    // 'title' => $reservation->getUsers()->getUsername(),
                     'start' => $date,
                     'end' => $date,
                      'color' => 'transparent',
@@ -208,15 +209,38 @@ class ReservationController extends AbstractController
         return new JsonResponse($events);
     }
 
+    // API qui compte toutes les réservations existantes sur une période donnée
+    #[Route('/api/reservations-period', name: 'api_reservations_period', methods: ['GET'])]
+    public function getReservationsForPeriod(Request $request, EntityManagerInterface $em): JsonResponse
+    {
+
+        $start = \DateTime::createFromFormat('d-m-Y', $request->query->get('from'));
+        $end = \DateTime::createFromFormat('d-m-Y', $request->query->get('to'));
+
+        if (!$start || !$end) {
+            return new JsonResponse(['error' => 'Données invalides'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $reservations = $em->getRepository(Reservation::class)->countReservationsForPeriod($start, $end);
+
+        return new JsonResponse(['count' => count($reservations), 'reservations' => $reservations]);
+    }
+
+
+
+    // API qui recherche les utilisateurs en fonction d'un terme ($term) passé en paramètre de l'URL
     #[Route('/api/search-users', name: 'api_search_users', methods: ['GET'])]
     public function searchUsers(Request $request, EntityManagerInterface $em): JsonResponse
     {
         $term = $request->query->get('term', ''); 
+        // les $users sont définis comme correspondants aux résultats de la méthode searchByTerm dans le UserRepository
         $users = $em->getRepository(User::class)->searchByTerm($term);
 
+        // Tableau de résultats (ensemble des utilisateurs trouvés)
         $results = []; 
         foreach ($users as $user) {
             $results[] = [
+                // Pour chaque résultat, on récupère l'id, le nom, le prénom et le pseudo
                 'id' => $user->getId(),
                 'username' => $user->getUsername(),
                 'firstName' => $user->getFirstname(),

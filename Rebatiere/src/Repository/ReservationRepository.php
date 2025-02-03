@@ -49,4 +49,18 @@ class ReservationRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
        }
+
+       public function countReservationsForPeriod(\DateTimeInterface $start, \DateTimeInterface $end): array
+        {
+            return $this->createQueryBuilder('r')
+                ->select('r.id, r.start, r.end, u.id AS user_id, c.id AS chamber_id')
+                ->join('r.users', 'u') // Jointure avec l'utilisateur
+                ->join('r.chambers', 'c') // Jointure avec la chambre
+                ->where('r.start <= :end')
+                ->andWhere('r.end >= :start')
+                ->setParameter('start', $start)
+                ->setParameter('end', $end)
+                ->getQuery()
+                ->getResult();
+        }
 }

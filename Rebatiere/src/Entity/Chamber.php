@@ -91,8 +91,8 @@ class Chamber
 
     public function isChamberFull(\DateTimeInterface $start, \DateTimeInterface $end, EntityManagerInterface $em): bool
     {
-        $reservationsCount = $em->getRepository(Reservation::class)
-            ->countReservationsForChamberAndDates($this, $start, $end);
+        // Appel de la méthode qui va compter le nombre de réservations sur une période donnée
+        $reservationsCount = $em->getRepository(Reservation::class)->countReservationsForChamberAndDates($this, $start, $end);
 
         // Comparaison avec la capacité maximale de la chambre
         return $reservationsCount >= $this->getMaxCapacity();
