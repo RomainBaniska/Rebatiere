@@ -53,7 +53,7 @@ class ReservationRepository extends ServiceEntityRepository
        public function countReservationsForPeriod(\DateTimeInterface $start, \DateTimeInterface $end): array
         {
             return $this->createQueryBuilder('r')
-                ->select('r.id, r.start, r.end, u.id AS user_id, c.id AS chamber_id')
+                ->select('r.id, r.start, r.end, u.id AS user_id, u.firstname, u.lastname, c.id AS chamber_id, c.chambername AS chambername')
                 ->join('r.users', 'u') 
                 ->join('r.chambers', 'c') 
                 ->where('r.start <= :end')

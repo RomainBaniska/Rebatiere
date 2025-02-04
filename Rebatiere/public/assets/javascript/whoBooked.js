@@ -29,7 +29,7 @@ let toDate = null;
             .then(data => {
                 console.log(`Total de réservations sur cette période : ${data.count}`);
                 data.reservations.forEach(reservation => {
-                    console.log(`${reservation.user_id} a réservé la chambre ${reservation.chamber_id} du ${new Date(reservation.start.date).toLocaleDateString()} au ${new Date(reservation.end.date).toLocaleDateString()}`);
+                    console.log(`${reservation.firstname} ${reservation.lastname} a réservé la chambre ${reservation.chambername} du ${new Date(reservation.start.date).toLocaleDateString()} au ${new Date(reservation.end.date).toLocaleDateString()}`);
                 });
             })
             .catch(error => console.error('Erreur:', error));
