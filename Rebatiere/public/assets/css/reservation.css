@@ -227,7 +227,7 @@ body {
   position: relative;
   display: flex;
   justify-content: space-between;
-  /* visibility: hidden; */
+  visibility: hidden;
   padding-left: 100px;
   width : 100%;
 }

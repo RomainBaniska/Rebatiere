@@ -74,6 +74,7 @@ let toDate = null;
 
                 // On crée une div dans le box qui va contenir nos informations
                 // let userBookings = document.createElement("div");
+                usersBookingContainer.classList.add("show");
                 usersBookingContainer.textContent = "Nouvelle div ajoutée !";
                 console.log('YAAAAAAAAAAAY!');
                 // Ajoute la nouvelle div à la div existante
