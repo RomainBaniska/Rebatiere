@@ -12,7 +12,6 @@
 {% block body %}
 <body>
 
-    {# header #}
     {% include 'home/header.html.twig' %}
 
 <div class="bodyContainer">
@@ -38,7 +37,7 @@
             <form method="post" action="{{ path('app_persistreservation') }}">
             {# DatePicker jQuery #}
             {% include 'datePicker/datepicker.html.twig' %}
-            {# <div class='dates_container'> #}
+
                 <div class='datepicker_container'>
                     <label for="from">Date d'arrivée</label> &nbsp;
                     <button id="toggleDate" type="button">></button>
@@ -46,8 +45,6 @@
                     <label for="to">Date de départ </label> &nbsp;
                     <input type="text" id="to" name="to" autocomplete="off" value=""> &nbsp;
                 </div>
-
-            {# </div> #}
 
             <p class="formLine">
             <label for="to">Sélectionnez votre chambre</label> &nbsp;
@@ -86,14 +83,13 @@
             </form>
     </div>
 
-{# DIV MEMBERS #}
-    {# <div class="members">
-    <div class="membersBox">
 
+    {# DIV USER BOOKINGS #}
+
+    <div id="usersBookingContainer">
     </div>
-    </div> #}
 
-{# DEBUT DIV MAP #}
+    {# DEBUT DIV MAP #}
     <div class="map">
     <div class="box">
 

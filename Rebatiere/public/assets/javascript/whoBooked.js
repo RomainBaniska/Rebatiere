@@ -1,4 +1,5 @@
 const buttonDate = document.getElementById('toggleDate');
+const usersBookingContainer = document.getElementById('usersBookingContainer');
 // const membersBox = document.querySelector('.membersBox');
 // const buttonMembers = document.getElementById('toggleMembers');
 // const box = document.querySelector('.box');
@@ -9,14 +10,15 @@ let fromDate = null;
 let toDate = null;
 
     buttonDate.addEventListener('click', () => {
+        // On récupère les valeurs de from et to si elles existent
         fromDate = document.getElementById("from").value;
         toDate = document.getElementById("to").value;
-        console.log(fromDate);
-        console.log(toDate);
+
     // Si la date de début et la date de fin sont rentrées
     if (fromDate && toDate) {
         // Appeler la fonction checkTotalReservations avec les dates sélectionnées
         checkTotalReservations(fromDate, toDate);
+
     } else {
         console.log("Veuillez sélectionner les deux dates.");
     }
@@ -30,6 +32,9 @@ let toDate = null;
                 console.log(`Total de réservations sur cette période : ${data.count}`);
                 data.reservations.forEach(reservation => {
                     console.log(`${reservation.firstname} ${reservation.lastname} a réservé la chambre ${reservation.chambername} du ${new Date(reservation.start.date).toLocaleDateString()} au ${new Date(reservation.end.date).toLocaleDateString()}`);
+                    
+
+                
                 });
             })
             .catch(error => console.error('Erreur:', error));
@@ -41,7 +46,8 @@ let toDate = null;
         
             isAnimating = true;
             // Si membersBox est ouvert, on le referme (toggleMembers dans usersDisplayButton.js)
-            if (membersBox.classList.contains('show')) {
+            // if (membersBox.classList.contains('show')) {
+            if (usersBookingContainer.classList.contains('show')) {
                 buttonMembers.click();
                 await new Promise(resolve => setTimeout(resolve, 2200));
             }
@@ -62,9 +68,17 @@ let toDate = null;
     
                 }, 350); // Correspond à la durée de l'animation de fermeture de la map
             } else {
+                // Si membersBox n'est pas ouvert on l'étend et on ajuste sa position
                 formContainer.classList.add('expanded');
                 formContainer.classList.add('position');
-                // map.style.display = "block";
+
+                // On crée une div dans le box qui va contenir nos informations
+                // let userBookings = document.createElement("div");
+                usersBookingContainer.textContent = "Nouvelle div ajoutée !";
+                console.log('YAAAAAAAAAAAY!');
+                // Ajoute la nouvelle div à la div existante
+                // usersBookingContainer.appendChild(userBookings);
+
                 
                 setTimeout(() => {
                     box.style.visibility = 'visible';

@@ -222,6 +222,25 @@ body {
   animation: container-zoom-out 0.3s forwards;
 }
 
+
+#usersBookingContainer {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  /* visibility: hidden; */
+  padding-left: 100px;
+  width : 100%;
+}
+
+#usersBookingContainer.show {
+  visibility: visible;
+  animation: container-zoom-in 0.5s forwards;
+}
+
+#usersBookingContainer.hide {
+  animation: container-zoom-out 0.3s forwards;
+}
+
 .members {
   display: none;
   /* width: 100%; */
