@@ -1,5 +1,7 @@
 const buttonDate = document.getElementById('toggleDate');
 const usersBookingContainer = document.getElementById('usersBookingContainer');
+const bookingList = usersBookingContainer.querySelector('ul');
+
 // const membersBox = document.querySelector('.membersBox');
 // const buttonMembers = document.getElementById('toggleMembers');
 // const box = document.querySelector('.box');
@@ -29,12 +31,11 @@ let toDate = null;
         fetch(`/api/reservations-period?from=${fromDate}&to=${toDate}`)
             .then(response => response.json())
             .then(data => {
+                // usersBookingContainer.textContent = `Total de réservations sur cette période : ${data.count}`;
                 console.log(`Total de réservations sur cette période : ${data.count}`);
                 data.reservations.forEach(reservation => {
-                    console.log(`${reservation.firstname} ${reservation.lastname} a réservé la chambre ${reservation.chambername} du ${new Date(reservation.start.date).toLocaleDateString()} au ${new Date(reservation.end.date).toLocaleDateString()}`);
-                    
-
-                
+                    bookingList.innerHTML += `<li> ${reservation.firstname} ${reservation.lastname} a réservé la chambre ${reservation.chambername} du ${new Date(reservation.start.date).toLocaleDateString()} au ${new Date(reservation.end.date).toLocaleDateString()} </li>`
+                    // console.log(`${reservation.firstname} ${reservation.lastname} a réservé la chambre ${reservation.chambername} du ${new Date(reservation.start.date).toLocaleDateString()} au ${new Date(reservation.end.date).toLocaleDateString()}`);
                 });
             })
             .catch(error => console.error('Erreur:', error));
@@ -45,8 +46,6 @@ let toDate = null;
         if (isAnimating) return;
         
             isAnimating = true;
-            // Si membersBox est ouvert, on le referme (toggleMembers dans usersDisplayButton.js)
-            // if (membersBox.classList.contains('show')) {
             if (usersBookingContainer.classList.contains('show')) {
                 buttonMembers.click();
                 await new Promise(resolve => setTimeout(resolve, 2200));
@@ -54,6 +53,7 @@ let toDate = null;
             if (box.classList.contains('show')) {
                 box.classList.remove('show');
                 box.classList.add('hide');
+                bookingList.textContent = "";
                 setTimeout(() => {
                     box.style.visibility = 'hidden';
                     box.classList.remove('hide');  
@@ -75,10 +75,8 @@ let toDate = null;
                 // On crée une div dans le box qui va contenir nos informations
                 // let userBookings = document.createElement("div");
                 usersBookingContainer.classList.add("show");
-                usersBookingContainer.textContent = "Nouvelle div ajoutée !";
+                // usersBookingContainer.textContent = "Nouvelle div ajoutée !";
                 console.log('YAAAAAAAAAAAY!');
-                // Ajoute la nouvelle div à la div existante
-                // usersBookingContainer.appendChild(userBookings);
 
                 
                 setTimeout(() => {
