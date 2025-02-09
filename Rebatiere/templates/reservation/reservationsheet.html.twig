@@ -24,12 +24,20 @@
     <div class="formSheet" id="formSheet">
     
         {# Message d'erreur #}
-        {% for type, messages in app.flashes %}
+        {# {% for type, messages in app.flashes %}
         <div class="alertMessage">
             {% for message in messages %}
                 <p>{{ message }}</p>
             {% endfor %}
         </div>
+        {% endfor %} #}
+
+        {% for messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert-error">
+                {{ message }}
+            </div>
+            {% endfor %}
         {% endfor %}
 
         <h1>Réservation</h1>
@@ -169,6 +177,7 @@
 {# Ajouter un lazy waiting screen "synchronisation des vacanciers" ou un truc du genre #}
 
 </div>
+
 </div>
 </body>
 {% endblock %}
@@ -185,4 +194,14 @@
     {# Confettis #}
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <script src="{{ asset('assets/javascript/confetti.js') }}"></script>
+
+    {# addFlash #}
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const alert = document.querySelector('.alert-error');
+            setTimeout(function() {
+                alert.classList.add('hide');
+            }, 2500);
+    });
+    </script>
     {% endblock %}
