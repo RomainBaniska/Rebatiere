@@ -225,7 +225,8 @@ body {
 
 #usersBookingContainer {
   position: relative;
-  display: flex;
+  /* display: flex; */
+  display: none;
   justify-content: space-between;
   visibility: hidden;
   padding-left: 100px;
@@ -234,6 +235,7 @@ body {
 
 #usersBookingContainer.show {
   visibility: visible;
+  display: flex;
   animation: container-zoom-in 0.5s forwards;
 }
 
