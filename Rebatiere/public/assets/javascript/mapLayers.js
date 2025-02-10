@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const layer1Element = document.getElementById('layer1');
     const layer2Element = document.getElementById('layer2');
     const layer3Element = document.getElementById('layer3');
+    // Récupération de la carte des chambre "black shape"
+    const layer4Element = document.getElementById('layer4');
     
     // Récupération des boutons servant à afficher ou cacher les calques (individuellement)
     const btnRDC = document.getElementById('btnRDC');
@@ -21,19 +23,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const chamberButtons = document.querySelectorAll(".chambre-btn");
     // On récupère également tous ces boutons individuellement avec leur id, dans un objet
     const chamberButtonsObject = {
-      'dortoirPetit': document.getElementById('dortoirPetit'),
-      'dortoirGrand': document.getElementById('dortoirGrand'),
-      'chambreBleue': document.getElementById('chambreBleue'),
-      'jeanClaude': document.getElementById('jeanClaude'),
-      'alex': document.getElementById('alex'),
-      'fenetre': document.getElementById('fenetre'),
-      'fond': document.getElementById('fond'),
-      'milieu': document.getElementById('milieu'),
-      'nicole': document.getElementById('nicole'),
-      'gauche': document.getElementById('gauche'),
-      'dehors1': document.getElementById('dehors1'),
-      'dehors2': document.getElementById('dehors2'),
-      'bureau': document.getElementById('bureau'),
+      dortoirPetit: document.getElementById('dortoirPetit'),
+      dortoirGrand: document.getElementById('dortoirGrand'),
+      chambreBleue: document.getElementById('chambreBleue'),
+      jeanClaude: document.getElementById('jeanClaude'),
+      alex: document.getElementById('alex'),
+      fenetre: document.getElementById('fenetre'),
+      fond: document.getElementById('fond'),
+      milieu: document.getElementById('milieu'),
+      nicole: document.getElementById('nicole'),
+      gauche: document.getElementById('gauche'),
+      dehors1: document.getElementById('dehors1'),
+      dehors2: document.getElementById('dehors2'),
+      bureau: document.getElementById('bureau'),
   };
 
   // Dans un objet "chambres", on récupère toutes les chambres grâce à leur id, chaque élément représente la chambre "découpée" sur la map
@@ -55,11 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Dans un objet "boutons" on assigne tous les calques à un tableau de boutons des chambres
     const buttonsObject = {
-      'layer1': ['dortoirPetit', 'dortoirGrand', 'chambreBleue', 'jeanClaude', 'alex', 'fenetre', 'fond', 'milieu', 'gauche'],
-      'layer2': ['dehors1', 'dehors2', 'bureau'],
-      'layer3': ['nicole']
+      layer1: ['dortoirPetit', 'dortoirGrand', 'chambreBleue', 'jeanClaude', 'alex', 'fenetre', 'fond', 'milieu', 'gauche'],
+      layer2: ['dehors1', 'dehors2', 'bureau'],
+      layer3: ['nicole']
     };
 
+    // DEBUT FOREACH
     // On attribue des actions sur le click pour chaque bouton d'étage
     floorButtonsArray.forEach(({button, layer}) => {
         button.addEventListener('click', () => {
@@ -68,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
           layer2Element.style.display = 'none';
           layer3Element.style.display = 'none';
 
+        // Si layer existe
         if (layer) {
           layer.style.display = 'block';
           // Attention confusion possible : layer.id renvoie à une chaine de caractère (exemple :"layer1" pour layer1Element)
@@ -78,18 +82,18 @@ document.addEventListener('DOMContentLoaded', () => {
                   chamberButton.style.display = 'none';
               });
               // On affiche ensuite seulement les boutons associés à l'étage sélectionné
-                buttonsObject[layer.id].forEach(
-                  buttonId => {
-                  const button = document.getElementById(buttonId);
-                  if (button) {
-                    button.style.display = 'block';
-                  }
-                });
+              buttonsObject[layer.id].forEach(id => {
+                if (chamberButtonsObject[id]) {
+                  chamberButtonsObject[id].style.display = 'block';
+                }
+              });
+              
 
           // 2- On laisse apparaitre seulement les vignettes de chambres correspondantes à l'étage
               // On commence par masquer toutes les vignettes de chambre par défaut
                 Object.values(chambres).forEach(chambre => chambre.style.display = 'none');
 
+                // Puis on fait apparaitre les vignettes de chambre en fonction de l'étage
                 if (layer.id === 'layer1') {
                     ['chambre1', 'chambre5', 'chambre6', 'chambre7', 'chambre8', 'chambre9', 'chambre10', 'chambre11', 'chambre12'].forEach(id => {
                         chambres[id].style.display = 'block';
@@ -104,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
 
-          // 3 - On définit les boutons de chambres cliquables
+          // 3 - On définit les boutons de chambres cliquables (Non utilisé dans cette version /!\)
             // Définir toutes les boutons de chambres comme non cliquables par défaut
                 Object.values(chamberButtonsObject).forEach(chamberButton => {
                   chamberButton.classList.add('not-clickable');
@@ -112,18 +116,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (layer.id === 'layer1') {
                     ['dortoirPetit', 'dortoirGrand', 'chambreBleue', 'jeanClaude', 'alex', 'fenetre', 'fond', 'milieu', 'gauche'].forEach(id => {
-                        if (chamberButtonsObject[id]) chamberButtonsObject[id].classList.remove('not-clickable');
+                      // if (button) button.classList.remove('not-clickable');
+                      if (chamberButtonsObject[id]) chamberButtonsObject[id].classList.remove('not-clickable');
                     });
                     ['dehors1', 'dehors2', 'bureau', 'nicole'].forEach(id => {
-                        if (chamberButtonsObject[id]) chamberButtonsObject[id].classList.add('not-clickable');
+                      // if (button) button.classList.add('not-clickable');
+                      if (chamberButtonsObject[id]) chamberButtonsObject[id].classList.add('not-clickable');
                     });
 
                 } else if (layer.id === 'layer3') {
                     ['nicole'].forEach(id => {
-                        if (chamberButtonsObject[id]) chamberButtonsObject[id].classList.remove('not-clickable');
+                      // if (button) button.classList.remove('not-clickable');
+                      if (chamberButtonsObject[id]) chamberButtonsObject[id].classList.remove('not-clickable');
                     });
                     ['dortoirPetit', 'dortoirGrand', 'chambreBleue', 'jeanClaude', 'alex', 'fenetre', 'fond', 'milieu', 'gauche', 'dehors1', 'dehors2', 'bureau'].forEach(id => {
-                        if (chamberButtonsObject[id]) chamberButtonsObject[id].classList.add('not-clickable');
+                      // if (button) button.classList.add('not-clickable');
+                      if (chamberButtonsObject[id]) chamberButtonsObject[id].classList.add('not-clickable');
                     });
 
                 } else if (layer.id === 'layer2') {
@@ -134,10 +142,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (chamberButtonsObject[id]) chamberButtonsObject[id].classList.add('not-clickable');
                     });
                 }
-              }
-      });
-    });
-      
+              } // FIN IF layer
+           }); // FIN EventListener click
+        }); // FIN FOREACH
 
   });
   

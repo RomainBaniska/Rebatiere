@@ -23,15 +23,7 @@
 
     <div class="formSheet" id="formSheet">
     
-        {# Message d'erreur #}
-        {# {% for type, messages in app.flashes %}
-        <div class="alertMessage">
-            {% for message in messages %}
-                <p>{{ message }}</p>
-            {% endfor %}
-        </div>
-        {% endfor %} #}
-
+    {# Messages d'erreur / de succès #}
         {% for messages in app.flashes %}
         {% for message in messages %}
             <div class="alert-error">
@@ -54,6 +46,7 @@
                     <input type="text" id="to" name="to" autocomplete="off" value=""> &nbsp;
                 </div>
 
+            {# (form) Sélection de la chambre #}
             <p class="formLine">
             <label for="to">Sélectionnez votre chambre</label> &nbsp;
             <button id="toggleButton" type="button">></button>
@@ -65,6 +58,7 @@
 
             <br>
 
+            {# (form) Ajout facultatif de membres #}
             <p class="formLine">
             <label for="username">Rajoutez des membres ?</label><br>
             <input type="text" id="userSearch" placeholder="Rechercher un membre..." />
@@ -72,19 +66,18 @@
             <ul id="user-list" class="user-list"></ul>
             <input type="hidden" name="username" value="{{ currentUserId }}">
             </p>
-
             <p class="formLine">
                 <div id="selectedUsersContainer"></div>
             </p>
             <input type="hidden" id="selectedUsers" name="selectedUsers">
 
-            {# DIV MEMBERS #}
+            {# DIV Contenant les membres ajoutés #}
             <div class="members">
             <div class="membersBox">
-
             </div>
             </div>
 
+            {# Soumettre le formulaire #}
             <p class="formLine">
                 <button type="submit">Réserver</button>
             </p>
@@ -93,7 +86,6 @@
 
 
     {# DIV USER BOOKINGS #}
-
     <div id="usersBookingContainer">
     <ul class="bookingList">
     </ul>
@@ -113,7 +105,7 @@
             <img src="{{ asset('assets/images/chambersPlan/shapeSecondFloor.png') }}" id="layer3" class="layer overlay" usemap="#secondFloor"/>
         {# Full Shadow layer #}
             <img src="{{ asset('assets/images/chambersPlan/fullBlackShape.png') }}" id="layer4" class="layer"/>
-        {# Shapes éléments animation #}
+        {# Assets des vignettes des chambres #}
             <div class="chamber-layer-container">
             <img src="{{ asset('assets/images/chambersPlan/elements/el chambre bleue.png') }}" id="chambre1" class="chamber-layer"/>
             <img src="{{ asset('assets/images/chambersPlan/elements/el chambre bureau.png') }}" id="chambre2" class="chamber-layer"/>
@@ -131,7 +123,7 @@
             </div>
         </div>
 
-        {# Buttons Etages #}
+        {# Boutons de sélection des chambres #}
         <div class="buttons-container">
         <button data-id="5" data-chambre="Chambre Bleue" id="chambreBleue" class="chambre-btn">Chambre Bleue</button>
         <button data-id="6" data-chambre="Chambre Jean-Claude" id="jeanClaude" class="chambre-btn">JeanClaude</button>
@@ -148,20 +140,15 @@
         <button data-id="12" data-chambre="Chambre Nicole" id="nicole" class="chambre-btn">Nicole</button>
         </div>
 
-        {# Control Panel Etages #}
+        {# Boutons de sélection des étages #}
         <div class="controls">
             <button id="btnRDC" style="background: none; border: none;">
-                {# <i class="fa-solid fa-arrow-down" style="font-size: 24px;"></i> #}
                 <img src="/assets/images/boutonsEtages/rdc low.png" class="boutonEtage">
             </button>
-            
             <button id="btnPremierEtage" style="background: none; border: none;">
-                {# <i class="fa-solid fa-circle" style="font-size: 24px;"></i> #}
                 <img src="/assets/images/boutonsEtages/1er etage low.png" class="boutonEtage">
             </button>
-            
             <button id="btnDeuxiemeEtage" style="background: none; border: none;">
-                {# <i class="fa-solid fa-arrow-up" style="font-size: 24px;"></i> #}
                  <img src="/assets/images/boutonsEtages/2eme etage low.png" class="boutonEtage">
             </button>
         </div>
