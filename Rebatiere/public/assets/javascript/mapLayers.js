@@ -146,5 +146,43 @@ document.addEventListener('DOMContentLoaded', () => {
            }); // FIN EventListener click
         }); // FIN FOREACH
 
+        // Agrandissement des vignettes de chambre lors du survol des boutons de chambre
+      //   Object.keys(chamberButtonsObject).forEach(function(boutonKey, index) {
+      //     const bouton = chamberButtonsObject[boutonKey];
+      //     const chambreKey = `chambre${index + 1}`;
+      //     const chambre = chambres[chambreKey];
+      
+      //     if (bouton && chambre) {
+      //         bouton.addEventListener('mouseenter', function() {
+      
+      //             // Lorsque la souris entre sur le bouton, les éléments ont un zoom.
+      //             chambre.classList.remove('zoom-animationEnd');
+      //             chambre.classList.add('zoom-animation');
+      //             chambre.style.zIndex = 9999;
+      
+      //             layer4Element.classList.remove('shadowing-animationEnd');
+      //             layer4Element.classList.add('shadowing-animation');
+                   
+      //         });
+      
+      //         bouton.addEventListener('mouseleave', function() {
+                  
+      //             chambre.classList.remove('zoom-animation');
+      //             chambre.classList.add('zoom-animationEnd');
+      
+      //             // Changement d'index quand zoom-animationEnd qui se termine
+      //             chambre.addEventListener('animationend', function onAnimationEnd(event) {
+      //                 // Vérifier que c'est bien l'animation zoom-animationEnd qui se termine
+      //                 if (event.animationName === 'zoom-out') {
+      //                     chambre.style.zIndex = 4;
+      //                     chambre.removeEventListener('animationend', onAnimationEnd);
+      //                 }
+      //             });
+      
+      //             layer4Element.classList.remove('shadowing-animation');
+      //             layer4Element.classList.add('shadowing-animationEnd');
+      //         });
+      //     }
+      // });
   });
   

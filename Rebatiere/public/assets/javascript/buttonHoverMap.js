@@ -1,5 +1,8 @@
+// PROGRAMME L'ANIMATION D'AGRANDISSEMENT DES VIGNETTES DE CHAMBRE LORS DU SURVOL DES BOUTONS de chambre
+
+
 // Récupération de la full black shape
-const layer4 = document.getElementById('layer4');
+const layer4Element = document.getElementById('layer4');
 
 // Récupération des chambres
 const chambres = {
@@ -19,7 +22,7 @@ const chambres = {
 };
 
 // Récupération des boutons
-const boutons = {
+const chamberButtonsObject = {
     chambrebleue: document.getElementById('chambreBleue'),
     bureau: document.getElementById('bureau'),
     dehors1: document.getElementById('dehors1'),
@@ -36,8 +39,8 @@ const boutons = {
 };
 
 
-Object.keys(boutons).forEach(function(boutonKey, index) {
-    const bouton = boutons[boutonKey];
+Object.keys(chamberButtonsObject).forEach(function(boutonKey, index) {
+    const bouton = chamberButtonsObject[boutonKey];
     const chambreKey = `chambre${index + 1}`;
     const chambre = chambres[chambreKey];
 
@@ -49,8 +52,8 @@ Object.keys(boutons).forEach(function(boutonKey, index) {
             chambre.classList.add('zoom-animation');
             chambre.style.zIndex = 9999;
 
-            layer4.classList.remove('shadowing-animationEnd');
-            layer4.classList.add('shadowing-animation');
+            layer4Element.classList.remove('shadowing-animationEnd');
+            layer4Element.classList.add('shadowing-animation');
              
         });
 
@@ -68,8 +71,8 @@ Object.keys(boutons).forEach(function(boutonKey, index) {
                 }
             });
 
-            layer4.classList.remove('shadowing-animation');
-            layer4.classList.add('shadowing-animationEnd');
+            layer4Element.classList.remove('shadowing-animation');
+            layer4Element.classList.add('shadowing-animationEnd');
         });
     }
 });
