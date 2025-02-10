@@ -22,29 +22,14 @@ let toDate = null;
         checkTotalReservations(fromDate, toDate);
 
     } else {
-        console.log("Veuillez sélectionner les deux dates.");
+        console.log("Veuillez renseigner la date d'arrivée et de départ.");
+        
     }
     });
-
-    // Méthode appelée qui donne les réservations existantes en fonction des dates renseignées
-    function checkTotalReservations(fromDate, toDate) {
-        fetch(`/api/reservations-period?from=${fromDate}&to=${toDate}`)
-            .then(response => response.json())
-            .then(data => {
-                // usersBookingContainer.textContent = `Total de réservations sur cette période : ${data.count}`;
-                console.log(`Total de réservations sur cette période : ${data.count}`);
-                data.reservations.forEach(reservation => {
-                    bookingList.innerHTML += `<li> ${reservation.firstname} ${reservation.lastname} a réservé la chambre ${reservation.chambername} du ${new Date(reservation.start.date).toLocaleDateString()} au ${new Date(reservation.end.date).toLocaleDateString()} </li>`
-                    // console.log(`${reservation.firstname} ${reservation.lastname} a réservé la chambre ${reservation.chambername} du ${new Date(reservation.start.date).toLocaleDateString()} au ${new Date(reservation.end.date).toLocaleDateString()}`);
-                });
-            })
-            .catch(error => console.error('Erreur:', error));
-    }
 
     // AFFICHAGE - Déroulement du formulaire sur la droite
     buttonDate.addEventListener('click', async () => {
         if (isAnimating) return;
-        
             isAnimating = true;
             if (usersBookingContainer.classList.contains('show')) {
                 buttonMembers.click();
@@ -73,11 +58,7 @@ let toDate = null;
                 formContainer.classList.add('position');
 
                 // On crée une div dans le box qui va contenir nos informations
-                // let userBookings = document.createElement("div");
                 usersBookingContainer.classList.add("show");
-                // usersBookingContainer.textContent = "Nouvelle div ajoutée !";
-                console.log('YAAAAAAAAAAAY!');
-
                 
                 setTimeout(() => {
                     box.style.visibility = 'visible';
@@ -87,6 +68,21 @@ let toDate = null;
                 }, 350); // Correspond à la durée de l'animation d'extension du formContainer
             }
     });
+
+    // Méthode appelée qui donne les réservations existantes en fonction des dates renseignées
+    function checkTotalReservations(fromDate, toDate) {
+        fetch(`/api/reservations-period?from=${fromDate}&to=${toDate}`)
+            .then(response => response.json())
+            .then(data => {
+                // usersBookingContainer.textContent = `Total de réservations sur cette période : ${data.count}`;
+                console.log(`Total de réservations sur cette période : ${data.count}`);
+                data.reservations.forEach(reservation => {
+                    bookingList.innerHTML += `<li> ${reservation.firstname} ${reservation.lastname} a réservé la chambre ${reservation.chambername} du ${new Date(reservation.start.date).toLocaleDateString()} au ${new Date(reservation.end.date).toLocaleDateString()} </li>`
+                    // console.log(`${reservation.firstname} ${reservation.lastname} a réservé la chambre ${reservation.chambername} du ${new Date(reservation.start.date).toLocaleDateString()} au ${new Date(reservation.end.date).toLocaleDateString()}`);
+                });
+            })
+            .catch(error => console.error('Erreur:', error));
+    }
 
 
 

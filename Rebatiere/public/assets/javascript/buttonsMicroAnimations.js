@@ -1,3 +1,5 @@
+// Animation ds boutons de la carte des chambres
+
 function buttonShake(){
     const floorArrows = document.querySelectorAll('.boutonEtage');
 
