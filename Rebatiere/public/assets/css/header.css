@@ -94,32 +94,6 @@
     }
 }
 
-/*
-.profile-pic {
-    width: 40px;
-    height: 40px;
-    max-height: 100%;
-    border-radius: 50% / 50%;
-    z-index: 2;
-    margin: 0 5px 0 5px;
-    border : 1.5px solid whitesmoke;
-    pointer-events: auto;
-    cursor: pointer;
-}
-*/
-
-/* .profile-message {
-}
-
-.profile-edit {
-}
-
-.profile-logout {
-}
-
-.myReservations {
-} */
-
 .profile-message,
 .profile-edit,
 .profile-logout,
@@ -206,11 +180,7 @@
 }
 
 .logoRebat img {
-    /* position: absolute; */
     width: 50px;
     height: auto;
     cursor: pointer;
-    /* background-size: cover;
-    background-repeat: no-repeat; 
-    background-position: center; */
 }
