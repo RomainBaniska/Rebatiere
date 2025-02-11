@@ -1,5 +1,4 @@
-// CE FICHIER GERE L'INTEGRALITE DES INTERACTIONS AVEC LA CARTE DES CHAMBRES ET LEUR SELECTION
-
+// CE SCRIPT GERE L'INTEGRALITE DES INTERACTIONS AVEC LA CARTE DES CHAMBRES ET LEUR SELECTION
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -171,22 +170,18 @@ document.addEventListener('DOMContentLoaded', () => {
       
           if (bouton && chambre) {
               bouton.addEventListener('mouseenter', function() {
-      
                   // Lorsque la souris entre sur le bouton, les éléments ont un zoom.
                   chambre.classList.remove('zoom-animationEnd');
                   chambre.classList.add('zoom-animation');
                   chambre.style.zIndex = 9999;
-      
+                  // Animation de la black shape
                   layer4Element.classList.remove('shadowing-animationEnd');
-                  layer4Element.classList.add('shadowing-animation');
-                   
+                  layer4Element.classList.add('shadowing-animation');  
               });
-      
               bouton.addEventListener('mouseleave', function() {
-                  
+                  // Retrait du zoom
                   chambre.classList.remove('zoom-animation');
                   chambre.classList.add('zoom-animationEnd');
-      
                   // Changement d'index quand zoom-animationEnd qui se termine
                   chambre.addEventListener('animationend', function onAnimationEnd(event) {
                       // Vérifier que c'est bien l'animation zoom-animationEnd qui se termine
@@ -195,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
                           chambre.removeEventListener('animationend', onAnimationEnd);
                       }
                   });
-      
+                  // Animation de retrait de la black shape
                   layer4Element.classList.remove('shadowing-animation');
                   layer4Element.classList.add('shadowing-animationEnd');
               });
@@ -266,14 +261,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('chamberInput').value = chambreId;
             });
           });
-
-
           // Mise à jour de la displayBox pour récupérer l'Id (value) de la chambre sélectionnée
           function updateDisplay(name) {
             document.getElementById('displayBox').textContent = name;
           }
 
           // BONUS : Ajout de petits confettis lors de la sélection de la chambre
+          Array.from(chamberButtons).forEach(chamberButton => {
+            chamberButton.addEventListener("click", () => {
+              // On crée un élément canvas pour les confettis
+              let confettiCanvas = document.createElement("canvas");
+              // On récupère le validation-container (il s'agit de la div qui est parente de la "display-box", soit l'espace pour la sélection de chambre)
+              let validationContainer = document.querySelector(".validation-container");
+              // Dimension du canvas
+              confettiCanvas.width = 600;
+              confettiCanvas.height = 600;
+              // On ajoute le canvas au validationContainer
+              validationContainer.appendChild(confettiCanvas);
           
+              // fonctions provenant de la bibliothèque confettis (cdn)
+              let confettiButton = confetti.create(confettiCanvas);
+              // Lorsque l'animation est terminée, suppression du canvas
+              confettiButton().then(() => validationContainer.removeChild(confettiCanvas));
+            });
+          });
   });
   

@@ -62,7 +62,7 @@
             <p class="formLine">
             <label for="username">Rajoutez des membres ?</label><br>
             <input type="text" id="userSearch" placeholder="Rechercher un membre..." />
-            <button id="toggleMembers" type="button">></button>
+            <button id="buttonAddReservations" type="button">></button>
             <ul id="user-list" class="user-list"></ul>
             <input type="hidden" name="username" value="{{ currentUserId }}">
             </p>
@@ -169,13 +169,12 @@
 {% endblock %}
 
     {% block javascripts %} 
-    <script src="{{ asset('assets/javascript/chambersMap.js') }}"></script>
-    <script src="{{ asset('assets/javascript/usersDisplayButton.js') }}"></script>
-    <script src="{{ asset('assets/javascript/searchUser.js') }}"></script>
-     <script src="{{ asset('assets/javascript/whoBooked.js') }}"></script>
     {# Confettis #}
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-    <script src="{{ asset('assets/javascript/confetti.js') }}"></script>
+    {# Scripts du formulaire #}
+    <script src="{{ asset('assets/javascript/chambersMap.js') }}"></script>
+    <script src="{{ asset('assets/javascript/optionalAdditionalReservationSearchBar.js') }}"></script>
+    <script src="{{ asset('assets/javascript/whoBooked.js') }}"></script>
 
     {# addFlash #}
     <script>
