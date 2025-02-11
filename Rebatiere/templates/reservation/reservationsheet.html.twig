@@ -10,18 +10,14 @@
 
 
 {% block body %}
+
+{% include 'home/header.html.twig' %}
+
 <body>
-
-    {% include 'home/header.html.twig' %}
-
-{# <div class="bodyContainer"> #}
 <div class="bodyOverlay">
-
-<div class="container">
-
 <div class="formSheetContainer" id="formSheetContainer">
 
-    <div class="formSheet" id="formSheet">
+    <div id="formSheet">
     
     {# Messages d'erreur / de succès #}
         {% for messages in app.flashes %}
@@ -162,9 +158,6 @@
 
 {# Ajouter un lazy waiting screen "synchronisation des vacanciers" ou un truc du genre #}
 
-</div>
-
-{# </div> #}
 </body>
 {% endblock %}
 

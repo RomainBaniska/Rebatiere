@@ -17,48 +17,27 @@ html {
 }
 
 body {
-  background-image: url('/assets/images/pages/sketch_jardin.png');
-  background-size: cover;  
-  background-repeat:repeat; 
-  background-position: center; 
-  /* padding-bottom: 50px; */
+    background-image: linear-gradient(0deg, rgba(247, 202, 165, 0.5), rgba(247, 202, 165, 0.5)), url('/assets/images/pages/sketch_jardin.png');
+    background-size: cover;  
+    background-repeat:repeat; 
+    background-position: center;
 
     height: 100%;
-    min-height: 100vh;
     width: 100%;
     margin: 0;
     z-index: -1;
+
+    /* display: flex; */
   }
-  
-/* .bodyContainer {
-    background-image: url('/assets/images/pages/sketch_jardin.png');
-    background-size: cover;  
-    background-repeat:repeat; 
-    background-position: center; 
-    height: 100%;
-    min-height: 100vh;
-    width: 100%;
-    margin: 0;
-
-    padding-bottom: 50px;
-  } */
     
-    .bodyOverlay {
-      position: absolute;
-   /* background-color: rgb(112, 66, 20, 0.5); */
-      /* background-color: rgb(174, 160, 138, 0.7); */
-      background-color: rgba(247, 202, 165, 0.5);
-      background-size: cover;  
-      background-repeat:repeat; 
-      background-position: center; 
-      height: 100%;
-      min-height: 100vh;
-      width: 100%;
-      margin: 0;
+.bodyOverlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+  }
 
-      padding-bottom: 50px;
-    }
-
+/* Espace de réponse du formulaire */
 .formLine {
     display : flex;
     flex-direction: column;
@@ -67,13 +46,10 @@ body {
     margin-top: 10px;
 }
 
-.container {
-  display: flex;
-/* justify-content: center; */
-  /* border: red 2px solid; */
-}
-
+/* Conteneur du formulaire */
 #formSheetContainer {
+    /* position: relative; */
+    position: absolute;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -82,19 +58,14 @@ body {
     border: black solid 2px;
     padding: 10px;
     margin: 20px;
-    /* height: 600px; */
-    min-height: 600px;
     height: auto;
     width: 400px;
-    position: relative;
-
     transition: width 0.4s ease;
     justify-content: center;
 }
 
 #formSheetContainer.expanded {
     position: absolute;
-    /* height: 600px; */
     min-height: 600px;
     height: auto;
     width: 1150px;
@@ -104,52 +75,36 @@ body {
   justify-content: flex-start;
 }
 
-#formSheet.recenter {
-  /* position: absolute; */
-  transform: translateX(80px); /* Ajoute une translation vers le centre */
-  transition: transform 1.5s ease;
-}
-
-.formSheet {
+/* Formulaire */
+#formSheet {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centrer le contenu horizontalement */
-    justify-content: center; /* Centrer le contenu verticalement */
+    align-items: center; 
+    justify-content: center;
     background-color: lightsteelblue;
     padding: 10px;
     white-space: nowrap;
     z-index: 0;
-
-     /* Transition fluide du contenu */
-    /* transition: transform 0.4s ease; */
 }
 
-.no-transition {
-  transition: none !important; /* Annule les transitions */
+#formSheet.recenter {
+  transform: translateX(80px); 
+  transition: transform 1.5s ease;
 }
 
-.dates_container {
-  display: flex;
-}
-
+/* datepicker */
 .datepicker_container {
     flex-direction: column !important;
 }
 
-.search-container {
-  position: relative;
-  display: flex;
-  flex-direction: center;
-}
 
+/* Liste des utilisateurs rajoutés */
 .uList {
   font-family: Arial, Helvetica, sans-serif;
   list-style-type: none;
-  /* position: absolute;
-  z-index: 10;
-  background-color: white; */
 }
 
+/* Liste des utilisateurs trouvés dans la searchBar */
 .user-list {
   padding-left: 20px;
   width: 81%;
@@ -161,17 +116,15 @@ body {
   cursor: pointer;
 }
 
-.selectedUser {
+.selectedUsers {
   font-family: Arial, Helvetica, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin: 5px; */
-  /* padding: 5px 5px; */
   background-color: #f0f0f0;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  position: relative;
+  /* border-radius: 5px; */
+  /* position: relative; */
 }
 
 #selectedUsersContainer {
