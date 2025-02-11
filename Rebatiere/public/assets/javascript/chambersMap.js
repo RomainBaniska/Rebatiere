@@ -1,3 +1,6 @@
+// CE FICHIER GERE L'INTEGRALITE DES INTERACTIONS AVEC LA CARTE DES CHAMBRES ET LEUR SELECTION
+
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // Récupération des différents "calques" de la carte des chambres (Plan entier, RDC, 1er étage, 2ème étage)
@@ -198,5 +201,79 @@ document.addEventListener('DOMContentLoaded', () => {
               });
           }
       });
+
+
+      // GESTION DU BOUTON D'OUVERTURE DE LA CARTE DES CHAMBRES
+      // Récupération des éléments du DOM
+      const buttonMap = document.getElementById('buttonMap');
+      const box = document.querySelector('.box');
+      const map = document.querySelector('.map');
+      const formContainer = document.getElementById('formSheetContainer');
+      const formSheet = document.getElementById('formSheet');
+      // Déclaration de la variable d'animation
+      let isAnimating = false;
+
+      // Lancement de l'animation d'ouverture de la carte des chambres lors du clic sur le bouton
+      buttonMap.addEventListener('click', async () => {
+          if (isAnimating) return;
+          isAnimating = true;
+          // Si membersBox est ouvert, on le referme (toggleMembers dans usersDisplayButton.js)
+          if (membersBox.classList.contains('show')) {
+              buttonMembers.click();
+              await new Promise(resolve => setTimeout(resolve, 2200));
+          }
+          // Si la box est ouverte (prolongement de la fenêtre du formulaire), on la referme 
+          if (box.classList.contains('show')) {
+              box.classList.remove('show');
+              box.classList.add('hide');
+              setTimeout(() => {
+                  box.style.visibility = 'hidden';
+                  box.classList.remove('hide');  
+                  formContainer.classList.remove('expanded');
+                  map.style.display = "none";
+                  // On repositionne le formulaire avec une petite animation
+                  formSheet.classList.add('recenter');
+                  // On replace le formulaire à la fin de son animation, l'illusion est parfaite
+                  setTimeout(() => {
+                      formContainer.classList.remove('position');
+                      formSheet.classList.remove('recenter');
+                      buttonMap.innerHTML=">";
+                      isAnimating = false; 
+                  }, 1500);
+              }, 350); // Correspond à la durée de l'animation de fermeture de la map
+            // Si la box est fermée, alors on l'ouvre lors du click
+          } else {
+              formContainer.classList.add('expanded');
+              formContainer.classList.add('position');
+              // On affiche la map
+              map.style.display = "block";
+              setTimeout(() => {
+                  box.style.visibility = 'visible';
+                  box.classList.add('show');
+                  buttonMap.innerHTML="<";
+                  isAnimating = false;
+              }, 350); // Correspond à la durée de l'animation d'extension du formContainer
+          }
+    });
+
+        // RECUPERATION DES INFORMATIONS DE LA CHAMBRE SELECTIONNEE
+        // Ajouter un gestionnaire de clic à chaque bouton
+          chamberButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const chambreName = button.getAttribute('data-chambre');
+                const chambreId = button.getAttribute('data-id');
+                updateDisplay(chambreName);
+                document.getElementById('chamberInput').value = chambreId;
+            });
+          });
+
+
+          // Mise à jour de la displayBox pour récupérer l'Id (value) de la chambre sélectionnée
+          function updateDisplay(name) {
+            document.getElementById('displayBox').textContent = name;
+          }
+
+          // BONUS : Ajout de petits confettis lors de la sélection de la chambre
+          
   });
   

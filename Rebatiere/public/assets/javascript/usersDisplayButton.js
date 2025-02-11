@@ -1,3 +1,4 @@
+const box = document.querySelector('.box');
 const membersBox = document.querySelector('.membersBox');
 const members = document.querySelector('.members');
 const buttonMembers = document.getElementById('toggleMembers');

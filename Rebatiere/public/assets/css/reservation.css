@@ -194,7 +194,7 @@ body {
   transform: translate(100px, 7px);
 }
 
-#toggleButton {
+#buttonMap {
   position: absolute;
   transform: translate(100px, 65px);
 }
