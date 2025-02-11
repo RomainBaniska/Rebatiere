@@ -8,6 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Récupération de la carte des chambre "black shape"
     const layer4Element = document.getElementById('layer4');
     
+
+    //On récupère l'ensemble des boutons servant à afficher ou cacher les calques
+    const floorButtonsQS = document.querySelectorAll('.boutonEtage');
+    //On leur passe une petite animation vite fait bien fait
+    floorButtonsQS.forEach(arrow => {
+        arrow.addEventListener('click', function() {
+            arrow.classList.remove('shake'); 
+            void arrow.offsetWidth;  // Recalcul du style
+            arrow.classList.add('shake');
+        });
+    });
     // Récupération des boutons servant à afficher ou cacher les calques (individuellement)
     const btnRDC = document.getElementById('btnRDC');
     const btnDeuxiemeEtage = document.getElementById('btnDeuxiemeEtage');
@@ -22,20 +33,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // On récupère l'ensemble des boutons de chambres (en pierre)
     const chamberButtons = document.querySelectorAll(".chambre-btn");
     // On récupère également tous ces boutons individuellement avec leur id, dans un objet
+    // L'ordre de l'objet est important pour une instruction future
     const chamberButtonsObject = {
-      dortoirPetit: document.getElementById('dortoirPetit'),
-      dortoirGrand: document.getElementById('dortoirGrand'),
-      chambreBleue: document.getElementById('chambreBleue'),
-      jeanClaude: document.getElementById('jeanClaude'),
-      alex: document.getElementById('alex'),
-      fenetre: document.getElementById('fenetre'),
-      fond: document.getElementById('fond'),
-      milieu: document.getElementById('milieu'),
-      nicole: document.getElementById('nicole'),
-      gauche: document.getElementById('gauche'),
-      dehors1: document.getElementById('dehors1'),
-      dehors2: document.getElementById('dehors2'),
-      bureau: document.getElementById('bureau'),
+    chambrebleue: document.getElementById('chambreBleue'),
+    bureau: document.getElementById('bureau'),
+    dehors1: document.getElementById('dehors1'),
+    dehors2: document.getElementById('dehors2'),
+    dortoirGrand: document.getElementById('dortoirGrand'),
+    dortoirPetit: document.getElementById('dortoirPetit'),
+    fond: document.getElementById('fond'),
+    fenetre: document.getElementById('fenetre'),
+    gauche: document.getElementById('gauche'),
+    jeanClaude: document.getElementById('jeanClaude'),
+    milieuDroite: document.getElementById('alex'),
+    milieu: document.getElementById('milieu'),
+    nicole: document.getElementById('nicole')
   };
 
   // Dans un objet "chambres", on récupère toutes les chambres grâce à leur id, chaque élément représente la chambre "découpée" sur la map
@@ -77,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
           // Attention confusion possible : layer.id renvoie à une chaine de caractère (exemple :"layer1" pour layer1Element)
 
           // 1- On laisse apparaitre seulement le boutons de chambres correspondants à l'étage
-              // On commence par masquer tous les boutons de chambre
+              // On commence par masquer tous les boutons de chambre (en vrac)
                 chamberButtons.forEach(chamberButton => {
                   chamberButton.style.display = 'none';
               });
@@ -109,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
           // 3 - On définit les boutons de chambres cliquables (Non utilisé dans cette version /!\)
-            // Définir toutes les boutons de chambres comme non cliquables par défaut
+            // Définir tous les boutons de chambres comme non cliquables par défaut
                 Object.values(chamberButtonsObject).forEach(chamberButton => {
                   chamberButton.classList.add('not-clickable');
                 });
@@ -146,43 +158,45 @@ document.addEventListener('DOMContentLoaded', () => {
            }); // FIN EventListener click
         }); // FIN FOREACH
 
+        
+        // HOVER SUR LES BOUTONS DE CHAMBRES
         // Agrandissement des vignettes de chambre lors du survol des boutons de chambre
-      //   Object.keys(chamberButtonsObject).forEach(function(boutonKey, index) {
-      //     const bouton = chamberButtonsObject[boutonKey];
-      //     const chambreKey = `chambre${index + 1}`;
-      //     const chambre = chambres[chambreKey];
+        Object.keys(chamberButtonsObject).forEach(function(boutonKey, index) {
+          const bouton = chamberButtonsObject[boutonKey];
+          const chambreKey = `chambre${index + 1}`;
+          const chambre = chambres[chambreKey];
       
-      //     if (bouton && chambre) {
-      //         bouton.addEventListener('mouseenter', function() {
+          if (bouton && chambre) {
+              bouton.addEventListener('mouseenter', function() {
       
-      //             // Lorsque la souris entre sur le bouton, les éléments ont un zoom.
-      //             chambre.classList.remove('zoom-animationEnd');
-      //             chambre.classList.add('zoom-animation');
-      //             chambre.style.zIndex = 9999;
+                  // Lorsque la souris entre sur le bouton, les éléments ont un zoom.
+                  chambre.classList.remove('zoom-animationEnd');
+                  chambre.classList.add('zoom-animation');
+                  chambre.style.zIndex = 9999;
       
-      //             layer4Element.classList.remove('shadowing-animationEnd');
-      //             layer4Element.classList.add('shadowing-animation');
+                  layer4Element.classList.remove('shadowing-animationEnd');
+                  layer4Element.classList.add('shadowing-animation');
                    
-      //         });
+              });
       
-      //         bouton.addEventListener('mouseleave', function() {
+              bouton.addEventListener('mouseleave', function() {
                   
-      //             chambre.classList.remove('zoom-animation');
-      //             chambre.classList.add('zoom-animationEnd');
+                  chambre.classList.remove('zoom-animation');
+                  chambre.classList.add('zoom-animationEnd');
       
-      //             // Changement d'index quand zoom-animationEnd qui se termine
-      //             chambre.addEventListener('animationend', function onAnimationEnd(event) {
-      //                 // Vérifier que c'est bien l'animation zoom-animationEnd qui se termine
-      //                 if (event.animationName === 'zoom-out') {
-      //                     chambre.style.zIndex = 4;
-      //                     chambre.removeEventListener('animationend', onAnimationEnd);
-      //                 }
-      //             });
+                  // Changement d'index quand zoom-animationEnd qui se termine
+                  chambre.addEventListener('animationend', function onAnimationEnd(event) {
+                      // Vérifier que c'est bien l'animation zoom-animationEnd qui se termine
+                      if (event.animationName === 'zoom-out') {
+                          chambre.style.zIndex = 4;
+                          chambre.removeEventListener('animationend', onAnimationEnd);
+                      }
+                  });
       
-      //             layer4Element.classList.remove('shadowing-animation');
-      //             layer4Element.classList.add('shadowing-animationEnd');
-      //         });
-      //     }
-      // });
+                  layer4Element.classList.remove('shadowing-animation');
+                  layer4Element.classList.add('shadowing-animationEnd');
+              });
+          }
+      });
   });
   
