@@ -180,7 +180,6 @@ body {
 
 #usersBookingContainer {
   position: relative;
-  /* display: flex; */
   display: none;
   justify-content: space-between;
   visibility: hidden;
