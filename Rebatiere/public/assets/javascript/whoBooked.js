@@ -5,7 +5,7 @@ const bookingList = usersBookingContainer.querySelector('ul');
 
 // const membersBox = document.querySelector('.membersBox');
 // const buttonMembers = document.getElementById('toggleMembers');
-// const box = document.querySelector('.box');
+// const map = document.querySelector('.map');
 
 let isAnimating = false;
 
@@ -37,14 +37,14 @@ let toDate = null;
                 await new Promise(resolve => setTimeout(resolve, 2200));
             }
             // Si membersBox est ouvert
-            if (box.classList.contains('show')) {
-                box.classList.remove('show');
-                box.classList.add('hide');
+            if (map.classList.contains('show')) {
+                map.classList.remove('show');
+                map.classList.add('hide');
                 bookingList.textContent = "";
                 // bookingList.style.display = 'none';
                 setTimeout(() => {
-                    box.style.visibility = 'hidden';
-                    box.classList.remove('hide');  
+                    map.style.visibility = 'hidden';
+                    map.classList.remove('hide');  
                     formContainer.classList.remove('expanded');
                     formSheet.classList.add('recenter');
                     setTimeout(() => {
@@ -60,12 +60,12 @@ let toDate = null;
                 formContainer.classList.add('expanded');
                 formContainer.classList.add('position');
 
-                // On crée une div dans le box qui va contenir nos informations
+                // On crée une div dans le map qui va contenir nos informations
                 usersBookingContainer.classList.add("show");
                 
                 setTimeout(() => {
-                    box.style.visibility = 'visible';
-                    box.classList.add('show');
+                    map.style.visibility = 'visible';
+                    map.classList.add('show');
                     buttonWhoBooked.innerHTML="<";
                     isAnimating = false;
                 }, 350); // Correspond à la durée de l'animation d'extension du formContainer

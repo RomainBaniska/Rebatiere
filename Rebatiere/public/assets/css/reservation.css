@@ -321,7 +321,7 @@ html {
   /* display: block; */
 }
 
-.box {
+.map {
   /* position: absolute;  Changer en relative pour que la map prenne sa place */
   position: relative;
   display: flex;
@@ -330,12 +330,12 @@ html {
   padding-left: 100px;
 }
 
-.box.show {
+.map.show {
   visibility: visible;
   animation: container-zoom-in 0.5s forwards;
 }
 
-.box.hide {
+.map.hide {
   animation: container-zoom-out 0.3s forwards;
 }
 

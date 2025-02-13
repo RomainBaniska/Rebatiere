@@ -206,20 +206,20 @@ let selectedUsers = [];
     }
 
     // GESTION DU BOUTON D'OUVERTURE DES RESERVATIONS SUPPLEMENTAIRES FACULTATIVES
-    const box = document.querySelector('.box');
+    const map = document.querySelector('.map');
     const membersBox = document.querySelector('.membersBox');
     const members = document.querySelector('.members');
     const buttonMembers = document.getElementById('buttonAddReservations');
     const formContainer = document.getElementById('formSheetContainer');
     let isAnimatingMembers = false;
 
-    // La logique de dépliage de la box est comparable à celle de chambersMap.js
+    // La logique de dépliage de la map est comparable à celle de chambersMap.js
     buttonMembers.addEventListener('click', async () => {
         if (isAnimatingMembers) return;
         isAnimatingMembers = true;
     
-        // Si box est ouvert, on le referme (la map)
-        if (box.classList.contains('show')) {
+        // Si map est ouvert, on le referme (la map)
+        if (map.classList.contains('show')) {
             buttonMap.click();
             await new Promise(resolve => setTimeout(resolve, 2200));
         }

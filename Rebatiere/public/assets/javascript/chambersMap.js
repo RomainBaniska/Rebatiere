@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // GESTION DU BOUTON D'OUVERTURE DE LA CARTE DES CHAMBRES
       // Récupération des éléments du DOM
       const buttonMap = document.getElementById('buttonMap');
-      const box = document.querySelector('.box');
+      const map = document.querySelector('.map');
       const mapContainer = document.querySelector('.mapContainer');
       const formContainer = document.getElementById('formSheetContainer');
       const formSheet = document.getElementById('formSheet');
@@ -217,13 +217,13 @@ document.addEventListener('DOMContentLoaded', () => {
               buttonMembers.click();
               await new Promise(resolve => setTimeout(resolve, 2200));
           }
-          // Si la box est ouverte (prolongement de la fenêtre du formulaire), on la referme 
-          if (box.classList.contains('show')) {
-              box.classList.remove('show');
-              box.classList.add('hide');
+          // Si la map est ouverte (prolongement de la fenêtre du formulaire), on la referme 
+          if (map.classList.contains('show')) {
+              map.classList.remove('show');
+              map.classList.add('hide');
               setTimeout(() => {
-                  box.style.visibility = 'hidden';
-                  box.classList.remove('hide');  
+                  map.style.visibility = 'hidden';
+                  map.classList.remove('hide');  
                   formContainer.classList.remove('expanded');
                   mapContainer.style.display = "none";
                   // On repositionne le formulaire avec une petite animation
@@ -236,15 +236,15 @@ document.addEventListener('DOMContentLoaded', () => {
                       isAnimating = false; 
                   }, 1500);
               }, 350); // Correspond à la durée de l'animation de fermeture de la map
-            // Si la box est fermée, alors on l'ouvre lors du click
+            // Si la map est fermée, alors on l'ouvre lors du click
           } else {
               formContainer.classList.add('expanded');
               formContainer.classList.add('position');
               // On affiche la map
               mapContainer.style.display = "block";
               setTimeout(() => {
-                  box.style.visibility = 'visible';
-                  box.classList.add('show');
+                  map.style.visibility = 'visible';
+                  map.classList.add('show');
                   buttonMap.innerHTML="<";
                   isAnimating = false;
               }, 350); // Correspond à la durée de l'animation d'extension du formContainer
