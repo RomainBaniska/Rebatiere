@@ -1,4 +1,5 @@
-const buttonDate = document.getElementById('toggleDate');
+const buttonWhoBooked = document.getElementById('buttonWhoBooked');
+console.log (buttonWhoBooked);
 const usersBookingContainer = document.getElementById('usersBookingContainer');
 const bookingList = usersBookingContainer.querySelector('ul');
 
@@ -6,12 +7,12 @@ const bookingList = usersBookingContainer.querySelector('ul');
 // const buttonMembers = document.getElementById('toggleMembers');
 // const box = document.querySelector('.box');
 
-// let isAnimating = false;
+let isAnimating = false;
 
 let fromDate = null;
 let toDate = null;
 
-    buttonDate.addEventListener('click', () => {
+    buttonWhoBooked.addEventListener('click', () => {
         // On récupère les valeurs de from et to si elles existent
         fromDate = document.getElementById("from").value;
         toDate = document.getElementById("to").value;
@@ -20,25 +21,27 @@ let toDate = null;
     if (fromDate && toDate) {
         // Appeler la fonction checkTotalReservations avec les dates sélectionnées
         checkTotalReservations(fromDate, toDate);
-
     } else {
         console.log("Veuillez renseigner la date d'arrivée et de départ.");
-        
     }
     });
 
     // AFFICHAGE - Déroulement du formulaire sur la droite
-    buttonDate.addEventListener('click', async () => {
+    buttonWhoBooked.addEventListener('click', async () => {
+        // Cliquer lors de l'animation n'execute pas l'action
         if (isAnimating) return;
             isAnimating = true;
+            // 
             if (usersBookingContainer.classList.contains('show')) {
                 buttonMembers.click();
                 await new Promise(resolve => setTimeout(resolve, 2200));
             }
+            // Si membersBox est ouvert
             if (box.classList.contains('show')) {
                 box.classList.remove('show');
                 box.classList.add('hide');
                 bookingList.textContent = "";
+                // bookingList.style.display = 'none';
                 setTimeout(() => {
                     box.style.visibility = 'hidden';
                     box.classList.remove('hide');  
@@ -47,7 +50,7 @@ let toDate = null;
                     setTimeout(() => {
                         formContainer.classList.remove('position');
                         formSheet.classList.remove('recenter');
-                        buttonDate.innerHTML=">";
+                        buttonWhoBooked.innerHTML=">";
                         isAnimating = false; 
                     }, 1500);
     
@@ -63,7 +66,7 @@ let toDate = null;
                 setTimeout(() => {
                     box.style.visibility = 'visible';
                     box.classList.add('show');
-                    buttonDate.innerHTML="<";
+                    buttonWhoBooked.innerHTML="<";
                     isAnimating = false;
                 }, 350); // Correspond à la durée de l'animation d'extension du formContainer
             }
@@ -74,11 +77,9 @@ let toDate = null;
         fetch(`/api/reservations-period?from=${fromDate}&to=${toDate}`)
             .then(response => response.json())
             .then(data => {
-                // usersBookingContainer.textContent = `Total de réservations sur cette période : ${data.count}`;
                 console.log(`Total de réservations sur cette période : ${data.count}`);
                 data.reservations.forEach(reservation => {
                     bookingList.innerHTML += `<li> ${reservation.firstname} ${reservation.lastname} a réservé la chambre ${reservation.chambername} du ${new Date(reservation.start.date).toLocaleDateString()} au ${new Date(reservation.end.date).toLocaleDateString()} </li>`
-                    // console.log(`${reservation.firstname} ${reservation.lastname} a réservé la chambre ${reservation.chambername} du ${new Date(reservation.start.date).toLocaleDateString()} au ${new Date(reservation.end.date).toLocaleDateString()}`);
                 });
             })
             .catch(error => console.error('Erreur:', error));

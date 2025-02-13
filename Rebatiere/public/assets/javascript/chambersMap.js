@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Récupération des éléments du DOM
       const buttonMap = document.getElementById('buttonMap');
       const box = document.querySelector('.box');
-      const map = document.querySelector('.map');
+      const mapContainer = document.querySelector('.mapContainer');
       const formContainer = document.getElementById('formSheetContainer');
       const formSheet = document.getElementById('formSheet');
       // Déclaration de la variable d'animation
@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
       buttonMap.addEventListener('click', async () => {
           if (isAnimating) return;
           isAnimating = true;
-          // Si membersBox est ouvert, on le referme (toggleMembers dans usersDisplayButton.js)
+          // Si membersBox est ouvert, on le referme (buttonMembers)
           if (membersBox.classList.contains('show')) {
               buttonMembers.click();
               await new Promise(resolve => setTimeout(resolve, 2200));
@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   box.style.visibility = 'hidden';
                   box.classList.remove('hide');  
                   formContainer.classList.remove('expanded');
-                  map.style.display = "none";
+                  mapContainer.style.display = "none";
                   // On repositionne le formulaire avec une petite animation
                   formSheet.classList.add('recenter');
                   // On replace le formulaire à la fin de son animation, l'illusion est parfaite
@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
               formContainer.classList.add('expanded');
               formContainer.classList.add('position');
               // On affiche la map
-              map.style.display = "block";
+              mapContainer.style.display = "block";
               setTimeout(() => {
                   box.style.visibility = 'visible';
                   box.classList.add('show');

@@ -144,7 +144,7 @@ body {
   margin-left: 10px;
 }
 
-#toggleDate {
+#buttonWhoBooked {
   position: absolute;
   transform: translate(100px, 7px);
 }
@@ -313,11 +313,11 @@ html {
   padding: 0;
 }
 
-.map {
+.mapContainer {
   display: none;
 }
 
-.map .show {
+.mapContainer .show {
   /* display: block; */
 }
 
