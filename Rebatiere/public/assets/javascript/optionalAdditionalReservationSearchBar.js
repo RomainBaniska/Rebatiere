@@ -224,6 +224,11 @@ let selectedUsers = [];
             buttonMap.click();
             await new Promise(resolve => setTimeout(resolve, 2200));
         }
+
+        if (usersBookingContainer.classList.contains('show')) {
+            buttonWhoBooked.click();
+            await new Promise(resolve => setTimeout(resolve, 2200));
+        }
     
         if (membersBox.classList.contains('show')) {
             membersBox.classList.remove('show');

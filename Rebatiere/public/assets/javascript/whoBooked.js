@@ -1,5 +1,4 @@
 const buttonWhoBooked = document.getElementById('buttonWhoBooked');
-console.log (buttonWhoBooked);
 const usersBookingContainer = document.getElementById('usersBookingContainer');
 const bookingList = usersBookingContainer.querySelector('ul');
 const datepickerContainer = document.querySelector('.datepicker_container');

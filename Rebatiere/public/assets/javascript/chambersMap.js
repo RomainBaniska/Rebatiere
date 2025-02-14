@@ -217,6 +217,11 @@ document.addEventListener('DOMContentLoaded', () => {
               buttonMembers.click();
               await new Promise(resolve => setTimeout(resolve, 2200));
           }
+          // Idem pour le userbooking
+          if (usersBookingContainer.classList.contains('show')) {
+            buttonWhoBooked.click();
+            await new Promise(resolve => setTimeout(resolve, 2200));
+        }
           // Si la map est ouverte (prolongement de la fenêtre du formulaire), on la referme 
           if (map.classList.contains('show')) {
               map.classList.remove('show');
