@@ -177,6 +177,31 @@ body {
   animation: container-zoom-out 0.3s forwards;
 }
 
+/* #usersBookingContainer {
+  display: none;
+}
+
+#usersBookingContainer .show {
+  display: block;
+} */
+/* 
+.map {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  visibility: hidden;
+  padding-left: 100px;
+}
+
+.map.show {
+  visibility: visible;
+  animation: container-zoom-in 0.5s forwards;
+}
+
+.map.hide {
+  animation: container-zoom-out 0.3s forwards;
+} */
+
 
 #usersBookingContainer {
   position: relative;
@@ -306,12 +331,13 @@ body {
   width: auto;
 }
 
-html {
+/* html {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
-}
+} */
+
 
 .mapContainer {
   display: none;

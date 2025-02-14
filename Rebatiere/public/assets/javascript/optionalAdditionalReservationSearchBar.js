@@ -3,6 +3,7 @@
 const searchBar = document.getElementById('userSearch'); // Barre de recherche
 const userList = document.getElementById('user-list'); // Liste des utilisateurs trouvés (vide par défaut)
 const duplicatedUsersContainer = document.querySelector('.membersBox'); // Utilisateurs "dupliqués"
+// const buttonMap = document.getElementById('buttonMap');
 let highlightedIndex = -1;
 let selectedUsers = [];
 
