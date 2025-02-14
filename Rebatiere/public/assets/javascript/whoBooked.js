@@ -10,10 +10,12 @@ const datepickerContainer = document.querySelector('.datepicker_container');
 // const map = document.querySelector('.map');
 // const buttonMap = document.getElementById('buttonMap');
 // const formSheet = document.getElementById('formSheet');  
+// const formSheetContainer = document.getElementById('formSheetContainer');  
 
 let isAnimating = false;
 let fromDate = null;
 let toDate = null;
+let quickModal = false;
 
     buttonWhoBooked.addEventListener('click', () => {
         // On récupère les valeurs de from et to si elles existent
@@ -22,8 +24,15 @@ let toDate = null;
 
     // Si la date de début et la date de fin sont rentrées
     if (fromDate && toDate) {
+        // Si la date de départ est bien inférieure à la date d'arrivée, alors :
+        if (fromDate < toDate) {
         // Appeler la fonction checkTotalReservations avec les dates sélectionnées
         checkTotalReservations(fromDate, toDate);
+        } else {
+        // Sinon envoyer une erreur
+        quickModal = true;
+        errorModal();
+        }
     } else {
         console.log("Veuillez renseigner la date d'arrivée et de départ.");
         errorModal();
@@ -32,48 +41,69 @@ let toDate = null;
 
     // AFFICHAGE - Expension du formulaire sur la droite
     buttonWhoBooked.addEventListener('click', async () => {
+
         // Cliquer lors de l'animation n'execute pas l'action
         if (isAnimating) return;
             isAnimating = true;
+
             // Si le box des réservations additionnelles est ouverte on le ferme
             if (membersBox.classList.contains('show')) {
                 buttonMembers.click();
                 await new Promise(resolve => setTimeout(resolve, 2200));
             }
-            // Si la map est ouverte, on la ferme
+            // Idem pour la map
             if (map.classList.contains('show')) {
                 buttonMap.click();
                 await new Promise(resolve => setTimeout(resolve, 2200));
             }
-            
-            // // Si la Booking List box est ouverte
-            // if (usersBookingContainer.classList.contains('show')) {
 
-            //     // On aretire la classe "show" et on ajoute la classe "hide"
-            //     usersBookingContainer.classList.remove('show');
-            //     bookingList.classList.add('hide');
-            //     // On vide le BookingList de son contenu et l'invisibilise
-            //     bookingList.textContent = "";
-            //     bookingList.style.display = 'none';
-            //     bookingList.style.visibility = 'hidden';
+            // Si le conteneur n'est pas encore ouvert et qu'on clique alors :
+            if (!usersBookingContainer.classList.contains('show')) {
+            // On étend le formSheetContainer
+            formSheetContainer.classList.add('expanded');
+            formSheetContainer.classList.add('position');
+            // On crée une div dans le map qui va contenir nos informations
+            usersBookingContainer.classList.add("show");
+            setTimeout(() => {
+                buttonWhoBooked.innerHTML="<";
+                bookingList.style.display = 'block';
+                isAnimating = false;
+            }, 350); // Correspond à la durée de l'animation d'extension du formSheetContainer
+        } else {
+            // Si la Booking List box est déjà ouverte
+            usersBookingContainer.classList.remove("show");
+            formSheetContainer.classList.remove('expanded');
+            formSheet.classList.add('recenter');
+            setTimeout(() => {
+                formSheetContainer.classList.remove('position');
+                formSheet.classList.remove('recenter');
+                buttonWhoBooked.innerHTML=">";
+                isAnimating = false; 
+            }, 1500);
+            // formSheetContainer.classList.remove('position');
+                // On vide le BookingList de son contenu et l'invisibilise
+                // bookingList.innerHTML = "";
+                bookingList.style.display = 'none';
+            }
+    });
 
-            //     // setTimeout(() => {
+                // setTimeout(() => {
 
-            //     //     // bookingList.classList.remove('hide');  
-            //     //     formContainer.classList.remove('expanded');
-            //     //     formSheet.classList.add('recenter');
-            //     //     setTimeout(() => {
-            //     //         formContainer.classList.remove('position');
-            //     //         formSheet.classList.remove('recenter');
-            //     //         buttonWhoBooked.innerHTML=">";
-            //     //         isAnimating = false; 
-            //     //     }, 1500);
-            //     // }, 350); // Correspond à la durée de l'animation de fermeture de la map
+                //     // bookingList.classList.remove('hide');  
+                //     formSheetContainer.classList.remove('expanded');
+                //     formSheet.classList.add('recenter');
+                //     setTimeout(() => {
+                //         formSheetContainer.classList.remove('position');
+                //         formSheet.classList.remove('recenter');
+                //         buttonWhoBooked.innerHTML=">";
+                //         isAnimating = false; 
+                //     }, 1500);
+                // }, 350); // Correspond à la durée de l'animation de fermeture de la map
 
             // } else {
             //     // Si membersBox n'est pas ouvert on l'étend et on ajuste sa position
-            //     formContainer.classList.add('expanded');
-            //     formContainer.classList.add('position');
+            //     formSheetContainer.classList.add('expanded');
+            //     formSheetContainer.classList.add('position');
 
             //     // On crée une div dans le map qui va contenir nos informations
             //     usersBookingContainer.classList.add("show");
@@ -83,15 +113,16 @@ let toDate = null;
             //         map.classList.add('show');
             //         buttonWhoBooked.innerHTML="<";
             //         isAnimating = false;
-            //     }, 350); // Correspond à la durée de l'animation d'extension du formContainer
+            //     }, 350); // Correspond à la durée de l'animation d'extension du formSheetContainer
             // }
-    });
+    // });
 
     // Méthode appelée qui donne les réservations existantes en fonction des dates renseignées
     function checkTotalReservations(fromDate, toDate) {
         fetch(`/api/reservations-period?from=${fromDate}&to=${toDate}`)
             .then(response => response.json())
             .then(data => {
+                bookingList.innerHTML = "";
                 console.log(`Total de réservations sur cette période : ${data.count}`);
                 data.reservations.forEach(reservation => {
                     bookingList.innerHTML += `<li> ${reservation.firstname} ${reservation.lastname} a réservé la chambre ${reservation.chambername} du ${new Date(reservation.start.date).toLocaleDateString()} au ${new Date(reservation.end.date).toLocaleDateString()} </li>`
@@ -102,7 +133,12 @@ let toDate = null;
 
     function errorModal() {
         let modal = document.createElement("div");
-        modal.textContent = "Veuillez renseigner la date d'arrivée et de départ.";
+
+        if (quickModal) {
+            modal.textContent = "Dates invalides";
+        } else {
+            modal.textContent = "Veuillez renseigner la date d'arrivée et de départ.";
+        }
         modal.style.backgroundColor = "red";
         modal.style.color = "white";
         modal.style.position = "absolute";
@@ -115,6 +151,7 @@ let toDate = null;
         datepickerContainer.appendChild(modal);
         setTimeout(() => {
             datepickerContainer.removeChild(modal);
+            quickModal = false;
         }, 3000);
     }
 

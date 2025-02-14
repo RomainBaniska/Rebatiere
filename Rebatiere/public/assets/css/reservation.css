@@ -235,6 +235,10 @@ body {
   background-color: #FFFADF;
 }
 
+.bookingList.hide {
+  animation: container-zoom-out 0.3s forwards;
+}
+
 
 .members {
   display: none;

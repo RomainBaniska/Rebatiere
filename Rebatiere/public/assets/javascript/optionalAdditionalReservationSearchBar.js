@@ -211,7 +211,7 @@ let selectedUsers = [];
     const membersBox = document.querySelector('.membersBox');
     const members = document.querySelector('.members');
     const buttonMembers = document.getElementById('buttonAddReservations');
-    const formContainer = document.getElementById('formSheetContainer');
+    const formSheetContainer = document.getElementById('formSheetContainer');
     let isAnimatingMembers = false;
 
     // La logique de dépliage de la map est comparable à celle de chambersMap.js
@@ -230,15 +230,15 @@ let selectedUsers = [];
             membersBox.classList.add('hide');
     
             setTimeout(() => {
-                formContainer.style.alignItems = "center"
+                formSheetContainer.style.alignItems = "center"
                 membersBox.style.visibility = 'hidden';
                 membersBox.classList.remove('hide');  
-                formContainer.classList.remove('expanded');
+                formSheetContainer.classList.remove('expanded');
                 members.style.display = "none";
                 formSheet.classList.add('recenter');
     
                 setTimeout(() => {
-                    formContainer.classList.remove('position');
+                    formSheetContainer.classList.remove('position');
                     formSheet.classList.remove('recenter');
                     buttonMembers.innerHTML=">";
                     isAnimatingMembers = false; 
@@ -246,9 +246,9 @@ let selectedUsers = [];
     
             }, 350); 
         } else {
-            formContainer.style.alignItems = "start"
-            formContainer.classList.add('expanded');
-            formContainer.classList.add('position');
+            formSheetContainer.style.alignItems = "start"
+            formSheetContainer.classList.add('expanded');
+            formSheetContainer.classList.add('position');
             members.style.display = "flex";
             
             setTimeout(() => {

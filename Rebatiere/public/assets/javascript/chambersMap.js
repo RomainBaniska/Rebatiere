@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const buttonMap = document.getElementById('buttonMap');
       const map = document.querySelector('.map');
       const mapContainer = document.querySelector('.mapContainer');
-      const formContainer = document.getElementById('formSheetContainer');
+      const formSheetContainer = document.getElementById('formSheetContainer');
       const formSheet = document.getElementById('formSheet');
       // Déclaration de la variable d'animation
       let isAnimating = false;
@@ -224,13 +224,13 @@ document.addEventListener('DOMContentLoaded', () => {
               setTimeout(() => {
                   map.style.visibility = 'hidden';
                   map.classList.remove('hide');  
-                  formContainer.classList.remove('expanded');
+                  formSheetContainer.classList.remove('expanded');
                   mapContainer.style.display = "none";
                   // On repositionne le formulaire avec une petite animation
                   formSheet.classList.add('recenter');
                   // On replace le formulaire à la fin de son animation, l'illusion est parfaite
                   setTimeout(() => {
-                      formContainer.classList.remove('position');
+                      formSheetContainer.classList.remove('position');
                       formSheet.classList.remove('recenter');
                       buttonMap.innerHTML=">";
                       isAnimating = false; 
@@ -238,8 +238,8 @@ document.addEventListener('DOMContentLoaded', () => {
               }, 350); // Correspond à la durée de l'animation de fermeture de la map
             // Si la map est fermée, alors on l'ouvre lors du click
           } else {
-              formContainer.classList.add('expanded');
-              formContainer.classList.add('position');
+              formSheetContainer.classList.add('expanded');
+              formSheetContainer.classList.add('position');
               // On affiche la map
               mapContainer.style.display = "block";
               setTimeout(() => {
@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   map.classList.add('show');
                   buttonMap.innerHTML="<";
                   isAnimating = false;
-              }, 350); // Correspond à la durée de l'animation d'extension du formContainer
+              }, 350); // Correspond à la durée de l'animation d'extension du formSheetContainer
           }
     });
 
