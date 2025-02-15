@@ -97,7 +97,7 @@ let quickModal = false;
                 bookingList.innerHTML = "";
                 console.log(`Total de réservations sur cette période : ${data.count}`);
                 data.reservations.forEach(reservation => {
-                    bookingList.innerHTML += `<li> ${reservation.firstname} ${reservation.lastname} a réservé la chambre ${reservation.chambername} du ${new Date(reservation.start.date).toLocaleDateString()} au ${new Date(reservation.end.date).toLocaleDateString()} </li>`
+                    bookingList.innerHTML += `<li>${reservation.firstname} ${reservation.lastname} a réservé la chambre ${reservation.chambername} du ${new Date(reservation.start.date).toLocaleDateString()} au ${new Date(reservation.end.date).toLocaleDateString()} </li>`
                 });
             })
             .catch(error => console.error('Erreur:', error));
