@@ -3,6 +3,7 @@
 const searchBar = document.getElementById('userSearch'); // Barre de recherche
 const userList = document.getElementById('user-list'); // Liste des utilisateurs trouvés (vide par défaut)
 const duplicatedUsersContainer = document.querySelector('.membersBox'); // Utilisateurs "dupliqués"
+const submitButton = document.querySelector('.formLine button'); // bouton submit du formulaire
 // const buttonMap = document.getElementById('buttonMap');
 let highlightedIndex = -1;
 let selectedUsers = [];
@@ -169,8 +170,8 @@ let selectedUsers = [];
             additionnalUsersContainer.innerHTML = `
             <div class="extraContainer">
             <div class="extraLabels">
-                <label for="from_${user.username}">Date d'arrivée</label>
-                <label for="to_${user.username}">Date de départ</label>
+                <label for="from_${user.username}">Première nuit</label>
+                <label for="to_${user.username}">Dernière nuit</label>
                 <label for="chamber_${user.username}">Chambre</label>
             </div>
             <div class="extraFields">

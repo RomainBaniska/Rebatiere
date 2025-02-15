@@ -24,23 +24,24 @@ let quickModal = false;
     // Si la date de début et la date de fin sont rentrées
     if (fromDate && toDate) {
         // Si la date de départ est bien inférieure à la date d'arrivée, alors :
-        if (fromDate < toDate) {
+        if (fromDate <= toDate) {
         // Appeler la fonction checkTotalReservations avec les dates sélectionnées
         checkTotalReservations(fromDate, toDate);
+        displayBookings();
         } else {
         // Sinon envoyer une erreur
         quickModal = true;
         errorModal();
+        return;
         }
     } else {
         console.log("Veuillez renseigner la date d'arrivée et de départ.");
         errorModal();
+        return;
     }
     });
 
-    // AFFICHAGE - Expension du formulaire sur la droite
-    buttonWhoBooked.addEventListener('click', async () => {
-
+    async function displayBookings () {
         // Cliquer lors de l'animation n'execute pas l'action
         if (isAnimating) return;
             isAnimating = true;
@@ -79,42 +80,9 @@ let quickModal = false;
                 buttonWhoBooked.innerHTML=">";
                 isAnimating = false; 
             }, 1500);
-            // formSheetContainer.classList.remove('position');
-                // On vide le BookingList de son contenu et l'invisibilise
-                // bookingList.innerHTML = "";
                 bookingList.style.display = 'none';
             }
-    });
-
-                // setTimeout(() => {
-
-                //     // bookingList.classList.remove('hide');  
-                //     formSheetContainer.classList.remove('expanded');
-                //     formSheet.classList.add('recenter');
-                //     setTimeout(() => {
-                //         formSheetContainer.classList.remove('position');
-                //         formSheet.classList.remove('recenter');
-                //         buttonWhoBooked.innerHTML=">";
-                //         isAnimating = false; 
-                //     }, 1500);
-                // }, 350); // Correspond à la durée de l'animation de fermeture de la map
-
-            // } else {
-            //     // Si membersBox n'est pas ouvert on l'étend et on ajuste sa position
-            //     formSheetContainer.classList.add('expanded');
-            //     formSheetContainer.classList.add('position');
-
-            //     // On crée une div dans le map qui va contenir nos informations
-            //     usersBookingContainer.classList.add("show");
-                
-            //     setTimeout(() => {
-            //         map.style.visibility = 'visible';
-            //         map.classList.add('show');
-            //         buttonWhoBooked.innerHTML="<";
-            //         isAnimating = false;
-            //     }, 350); // Correspond à la durée de l'animation d'extension du formSheetContainer
-            // }
-    // });
+}
 
     // Méthode appelée qui donne les réservations existantes en fonction des dates renseignées
     function checkTotalReservations(fromDate, toDate) {
