@@ -21,10 +21,15 @@ let quickModal = false;
         fromDate = document.getElementById("from").value;
         toDate = document.getElementById("to").value;
 
+        // On crée une écriture de fromdate et todate en DD-MM-YYYY de manière à pas fausser la comparaison
+        let fromDateObj = new Date(fromDate.split('-').reverse().join('-'));
+        let toDateObj = new Date(toDate.split('-').reverse().join('-'));
+
     // Si la date de début et la date de fin sont rentrées
     if (fromDate && toDate) {
         // Si la date de départ est bien inférieure à la date d'arrivée, alors :
-        if (fromDate <= toDate) {
+        // if (fromDate <= toDate) {
+        if (fromDateObj <= toDateObj) {
         // Appeler la fonction checkTotalReservations avec les dates sélectionnées
         checkTotalReservations(fromDate, toDate);
         displayBookings();
