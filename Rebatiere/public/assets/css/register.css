@@ -7,7 +7,7 @@ body {
   }
   
   .bodyContainer {
-      background-image: url('/assets/images/pages/sketch_piscine.png');
+      background-image: linear-gradient(0deg, rgba(247, 202, 165, 0.5), rgba(247, 202, 165, 0.5)), url('/assets/images/pages/sketch_piscine.png');
       background-size: cover;  
       background-repeat:repeat; 
       background-position: center; 
@@ -15,22 +15,7 @@ body {
       min-height: 100vh;
       width: 100%;
       margin: 0;
-
-      padding-bottom: 50px;
     }
-  
-  .bodyOverlay {
-    position: absolute;
-    background-color: rgba(247, 202, 165, 0.5);
-    background-size: cover;  
-    background-repeat:repeat; 
-    background-position: center; 
-    height: 100%;
-    min-height: 100vh;
-    width: 100%;
-    margin: 0;
-    padding-bottom: 50px;
-   }
 
   .bigContainer {
       display: flex;

@@ -100,9 +100,7 @@ class RegistrationController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            // return new Response('<h1>Formulaire soumis avec succès.</h1>');
-
-            return $this->render('security/login.html.twig');
+            return $this->render('registration/register_success.html.twig');
     }
 }
 

@@ -1,0 +1,33 @@
+{# {% extends 'base.html.twig' %} #}
+
+
+{% block stylesheets %}
+   <link rel="stylesheet" href="{{ asset('assets/css/register.css') }}"> 
+    <title>Inscription réussie</title>
+{% endblock %}
+
+{% block body %}
+  <body>
+    <div class="bodyContainer">
+        <div class="bodyOverlay">
+            <div class="bigContainer">
+                <div class="registrationSheet">
+
+        <h1>Votre compte a bien été enregistré.</h1>
+        <p>Pour vous connecter, vous devez attendre qu'un administrateur valide votre compte.</p>
+        <p>Redirection vers la page de connexion dans 10 secondes...</p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+{% endblock %}
+
+{% block javascripts %} 
+    <script>
+        setTimeout(function() {
+            window.location.href = "{{ path('app_login') }}";
+        }, 10000); 
+    </script>
+{% endblock %}  
