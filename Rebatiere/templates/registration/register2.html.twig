@@ -29,28 +29,28 @@
 
     <form action="{{ path('app_persistregistration') }}" method="POST" enctype="multipart/form-data">
         
-        <div>
+        <div class="form-group">
             <label for="username">Nom d'utilisateur</label>
             <input type="text" id="username" name="username" value="{{ app.request.get('username') }}" required>
         </div>
 
-        <div>
+        <div class="form-group">
             <label for="firstname">Prénom</label>
             <input type="text" id="firstname" name="firstname" value="{{ app.request.get('firstname') }}" required>
         </div>
 
-        <div>
+        <div class="form-group">
             <label for="lastname">Nom</label>
             <input type="text" id="lastname" name="lastname" value="{{ app.request.get('lastname') }}" required>
         </div>
 
-        <div>
+        <div class="form-group">
             <label for="password">Mot de passe</label>
             <input type="password" id="password" name="plainPassword" required>
         </div>
 
         {# Champ de téléchargement de l'image #}
-        <div>
+        <div class="form-group">
             <label for="profileImageInput">Photo de profil</label>
             <input type="file" id="profileImageInput" name="profileImage" accept="image/jpeg, image/png, image/gif">
         </div>
@@ -72,9 +72,11 @@
 
         <button type="button" id="cropImageBtn">Crop!</button>
 
-        <div class="form-group">
+        <div>
+        <p>
             <input type="checkbox" name="agreeTerms" value="1" id="agreeTerms" required>
             <label for="agreeTerms">J'accepte les termes</label>
+        </p>
         </div>
 
         <div class="form-group">
