@@ -7,7 +7,7 @@ const submitButton = document.querySelector('.formLine button'); // bouton submi
 // const buttonMap = document.getElementById('buttonMap');
 let highlightedIndex = -1;
 let selectedUsers = [];
-
+let filteredData = [];
 
     // INTERACTIONS AVEC LA SEARCHBAR
     // L'événement se déclenche lorsqu'on rentre un input dans la barre de recherche
@@ -31,7 +31,7 @@ let selectedUsers = [];
         highlightedIndex = -1;
 
         // Filtre les utilisateurs déjà sélectionnés
-        const filteredData = data.filter(user => !selectedUsers.some(u => u.username === user.username));
+        filteredData = data.filter(user => !selectedUsers.some(u => u.username === user.username));
         // Pour chaque utilisateur renvoyé on crée une ligne contenant l'username de l'utilisateur et on lui assigne la classe uList
         filteredData.forEach((user, index) => {
             const li = document.createElement('li');
@@ -88,7 +88,8 @@ let selectedUsers = [];
             if (e.key === 'Enter' && highlightedIndex >= 0) {
                 e.preventDefault();
                 const selectedUsername = items[highlightedIndex].textContent;
-                addUser(selectedUsername);
+                const selectedUser = filteredData.find(user => user.username === selectedUsername);
+                addUser(selectedUser);
                 searchBar.value = '';
                 userList.innerHTML = '';
                 userList.style.display = 'none';
