@@ -74,6 +74,12 @@ class RegistrationController extends AbstractController
                 return $this->redirectToRoute('app_register2');
             }
 
+            // Vérifier si le nom d'utilisateur existe déjà avant l'insertion
+            $existingUser = $em->getRepository(User::class)->findOneBy(['username' => $username]);
+            if ($existingUser) {
+                $this->addFlash('error', 'Nom d\'utilisateur déjà pris.');
+                return $this->redirectToRoute('app_register2');
+            }
 
             // Je crée une nouvelle instance d'User
             $user = new User();

@@ -11,6 +11,16 @@
   <body>
     <div class="bodyContainer">
         <div class="bodyOverlay">
+
+{# Messages d'erreur / de succès #}
+        {% for messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert-error">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endfor %}
+
             <div class="bigContainer">
                 <div class="registrationSheet">
 
@@ -84,4 +94,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js" integrity="sha512-JyCZjCOZoyeQZSd5+YEAcFgz2fowJ1F1hyJOXgtKu4llIa0KneLcidn5bwfutiehUTiOuK87A986BZJMko0eWQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {# <script src="{{ asset('assets/javascript/cropperTest.js') }}"> </script> #}
 <script src="{{ asset('assets/javascript/cropperProfile.js') }}"></script>
+{# addFlash #}
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const alert = document.querySelector('.alert-error');
+            setTimeout(function() {
+                alert.classList.add('hide');
+            }, 2500);
+    });
+    </script>
 {% endblock %}  
