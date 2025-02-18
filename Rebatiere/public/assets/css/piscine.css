@@ -54,12 +54,6 @@ body {
   gap: 10px;
 }
 
-/* .form-group div {
-    display: flex;
-    align-items: center;  */
-    /* gap: 10px; */
-  /* } */
-
 .form-group label {
   min-width: 150px; 
   text-align: right;
