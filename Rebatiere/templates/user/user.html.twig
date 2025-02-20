@@ -12,7 +12,11 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axentix@2.4.0/dist/axentix.min.css">
 
         {% block stylesheets %}
-       
+        <style> 
+        .left-align {
+          margin-right: auto !important;
+        }
+        </style>
         {% endblock %}
     </head>
 
@@ -21,6 +25,7 @@
     <header>
       <nav class="navbar shadow-1 primary">
         <div class="navbar-menu ml-auto">
+          <a class="navbar-link left-align" href="{{ path('app_home') }} ">Calendrier</a>
           <a class="navbar-link" href="{{ path('user.edit', {'id': currentUser.id}) }} ">Mon profil</a>
           <a class="navbar-link" href=" {{ path('user.reservation.edit', {'id': currentUser.id}) }} ">Mes réservations</a>
         </div>
