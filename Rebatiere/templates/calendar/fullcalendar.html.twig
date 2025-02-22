@@ -58,6 +58,26 @@
         let calendarEl = document.getElementById('calendar');
         let eventDetailsModalContent = document.getElementById('eventDetailsModalContent');
         let openModalButton = document.getElementById('openModalButton');
+        const userRole = "{{ app.user.roles[0] }}";
+        /*const headerToolbarConfig = userRole === 'ROLE_ADMIN' 
+              ? { left: 'myCustomButton1 myCustomButton2', center: 'title', right: 'prev,dayGridWeek,dayGridMonth,next' }
+              : { left: 'myCustomButton1', center: 'title', right: 'prev,dayGridWeek,dayGridMonth,next' };
+        */
+        let headerToolbarConfig;
+        if (userRole === 'ROLE_ADMIN') {
+            headerToolbarConfig = {
+                left: 'myCustomButton1 myCustomButton2',
+                center: 'title',
+                right: 'prev,dayGridWeek,dayGridMonth,next'
+            };
+        } else {
+            headerToolbarConfig = {
+                left: 'myCustomButton1',
+                center: 'title',
+                right: 'prev,dayGridWeek,dayGridMonth,next'
+            };
+        }
+
 
         // Fetch des dates pour la piscine
         fetch('/api/piscine-dates')
@@ -163,11 +183,13 @@
                  openModalButton.click();
                 },
           eventDisplay : 'block',
-          headerToolbar: {
+          headerToolbar: headerToolbarConfig,
+          /* {
             left: 'myCustomButton1 myCustomButton2',
             center: 'title' ,
             right: 'prev,dayGridWeek,dayGridMonth,next'
           },
+          */
           events: '/api/reservations',
  
         // Contenu de la cellule 'jour' //
