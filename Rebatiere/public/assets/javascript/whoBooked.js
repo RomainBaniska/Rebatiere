@@ -82,7 +82,7 @@ let quickModal = false;
             setTimeout(() => {
                 formSheetContainer.classList.remove('position');
                 formSheet.classList.remove('recenter');
-                buttonWhoBooked.innerHTML=">";
+                buttonWhoBooked.innerHTML="⚙️";
                 isAnimating = false; 
             }, 1500);
                 bookingList.style.display = 'none';
