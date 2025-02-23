@@ -63,7 +63,14 @@
               ? { left: 'myCustomButton1 myCustomButton2', center: 'title', right: 'prev,dayGridWeek,dayGridMonth,next' }
               : { left: 'myCustomButton1', center: 'title', right: 'prev,dayGridWeek,dayGridMonth,next' };
         */
-        let headerToolbarConfig;
+
+        const headerToolbarConfig = {
+                left: 'myCustomButton1 myCustomButton2',
+                center: 'title',
+                right: 'prev,dayGridWeek,dayGridMonth,next'
+            };
+
+        /* let headerToolbarConfig;
         if (userRole === 'ROLE_ADMIN') {
             headerToolbarConfig = {
                 left: 'myCustomButton1 myCustomButton2',
@@ -77,6 +84,7 @@
                 right: 'prev,dayGridWeek,dayGridMonth,next'
             };
         }
+        */
 
 
         // Fetch des dates pour la piscine

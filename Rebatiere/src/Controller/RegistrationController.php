@@ -15,44 +15,44 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegistrationController extends AbstractController
 {
+    // #[Route('/register', name: 'app_register')]
+    // public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager, #[Autowire('%photo_dir%')] string $photoDir): Response
+    // {
+    //     $user = new User();
+    //     $form = $this->createForm(RegistrationFormType::class, $user);
+    //     $form->handleRequest($request);
+
+    //     if ($form->isSubmitted() && $form->isValid()) {
+
+    //         $username = $form->get('username')->getData();
+    //         $firstname = $form->get('firstname')->getData();
+    //         $lastname = $form->get('lastname')->getData();
+    //         $password = $form->get('plainPassword')->getData();
+
+    //         // Récupérer le fichier envoyé (image de profil)
+    //         $croppedImage = $request->files->get('registrationForm')['croppedImageJPGFile'];
+
+    //                 // Afficher les informations pour déboguer
+    //         dump($username, $firstname, $lastname, $password);
+    //         dump($croppedImage);  // Cela vous montre le fichier téléchargé
+    //         exit();
+
+    //         // Persist & Flush en BDD
+    //         $entityManager->persist($user);
+    //         $entityManager->flush();
+
+    //         return $security->login($user, 'form_login', 'main');
+    //     }
+
+    //     return $this->render('registration/register.html.twig', [
+    //         'registrationForm' => $form,
+    //     ]);
+    // }
+
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager, #[Autowire('%photo_dir%')] string $photoDir): Response
+    public function register(): Response
     {
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $username = $form->get('username')->getData();
-            $firstname = $form->get('firstname')->getData();
-            $lastname = $form->get('lastname')->getData();
-            $password = $form->get('plainPassword')->getData();
-
-            // Récupérer le fichier envoyé (image de profil)
-            $croppedImage = $request->files->get('registrationForm')['croppedImageJPGFile'];
-
-                    // Afficher les informations pour déboguer
-            dump($username, $firstname, $lastname, $password);
-            dump($croppedImage);  // Cela vous montre le fichier téléchargé
-            exit();
-
-            // Persist & Flush en BDD
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            return $security->login($user, 'form_login', 'main');
-        }
-
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form,
-        ]);
-    }
-
-    #[Route('/register2', name: 'app_register2')]
-    public function register2(): Response
-    {
-        return $this->render('registration/register2.html.twig');
+        return $this->render('registration/register.html.twig');
     }
 
 
@@ -68,17 +68,17 @@ class RegistrationController extends AbstractController
 
             // Ajout d'une REGEX excluant tous les caractères spéciaux pour les identifiants
             // (todo) Ajouter aussi un script avant envoi
-            $pattern = '/[^a-zA-Z0-9]/';
+            $pattern = '/[^a-zA-Z0-9àâäéèêëîïôöùûüÿç]/';
             if (preg_match($pattern, $username) || preg_match($pattern, $firstname) || preg_match($pattern, $lastname)) {
                 $this->addFlash('error', 'Les caractères spéciaux sont interdits dans le nom d\'utilisateur, le prénom, et le nom de famille.');
-                return $this->redirectToRoute('app_register2');
+                return $this->redirectToRoute('app_register');
             }
 
             // Vérifier si le nom d'utilisateur existe déjà avant l'insertion
             $existingUser = $em->getRepository(User::class)->findOneBy(['username' => $username]);
             if ($existingUser) {
                 $this->addFlash('error', 'Nom d\'utilisateur déjà pris.');
-                return $this->redirectToRoute('app_register2');
+                return $this->redirectToRoute('app_register');
             }
 
             // Je crée une nouvelle instance d'User

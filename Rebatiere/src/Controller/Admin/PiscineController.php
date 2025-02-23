@@ -15,17 +15,24 @@ use Exception;
 class PiscineController extends AbstractController
 {
     #[Route('/piscine', name: 'app_piscine')]
+    #[IsGranted('ROLE_ADMIN')]
     public function watchPiscine(): Response
     {
-
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->render('errors/error403.html.twig');
+        }
         return $this->render('piscine/index.html.twig', [
             'controller_name' => 'PiscineController',
         ]);
     }
 
     #[Route('/persistpiscine', name: 'app_persistpiscine')]
+    #[IsGranted('ROLE_ADMIN')]
     public function persistPiscine(Request $request, EntityManagerInterface $em): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->render('errors/error403.html.twig');
+        }
         try {
             $from = new \DateTime($request->request->get('from'));
             $to = new \DateTime($request->request->get('to'));
@@ -52,8 +59,12 @@ class PiscineController extends AbstractController
     }
 
     #[Route('/piscineDelete/{id}', name: 'app_deletepiscine', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function deletePiscine(EntityManagerInterface $em, Request $request, Piscine $piscine): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->render('errors/error403.html.twig');
+        }
            // Protection contre les CSRF
            if ($this->isCsrfTokenValid('delete'.$piscine->getId(), $request->request->get('_token'))) {
             $em->remove($piscine);
@@ -66,12 +77,13 @@ class PiscineController extends AbstractController
     }
 
     #[Route('/piscinelist', name: 'app_piscinelist')]
+    #[IsGranted('ROLE_ADMIN')]
     public function piscinelist(EntityManagerInterface $em): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->render('errors/error403.html.twig');
+        }
         $piscineList = $em->getRepository(Piscine::class)->findAll();
-
-        // dump($piscineList);
-
         return $this->render('piscine/list.html.twig', [
             'piscines' => $piscineList,
         ]);
