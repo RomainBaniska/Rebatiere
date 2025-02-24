@@ -245,6 +245,7 @@ class ReservationController extends AbstractController
                 'username' => $user->getUsername(),
                 'firstName' => $user->getFirstname(),
                 'lastName' => $user->getLastname(),
+                'imageFileName' => $user->getImageFileName(),
             ];
         }
 

@@ -16,7 +16,7 @@ let filteredData = [];
         const searchTerm = this.value;
         
         // Si la barre de recherche est inférieure à deux caractères, alors on retourne.
-        if (searchTerm.length < 2) {
+        if (searchTerm.length < 1) {
             userList.innerHTML = '';
             userList.style.display = 'none';
             highlightedIndex = -1;
@@ -159,7 +159,10 @@ let filteredData = [];
             // à chaque ligne, on leur assigne la classe "duplicated"
             userItem.classList.add("duplicated");
             // Le contenu de l'item affiche le nom et prénom de l'utilisateur
-            userItem.textContent = `${user.firstName} ${user.lastName}`; 
+            console.log(user);
+            userItem.innerHTML = `
+            <img src="uploads/images/${user.imageFileName}" style="width: 30px; height: 30px; border-radius: 50%; margin: 5px; border: 1px solid black">
+            ${user.firstName} ${user.lastName}`; 
 
             // Crée une div pour les dates et la chambre
             const additionnalUsersContainer = document.createElement('div');
