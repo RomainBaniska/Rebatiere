@@ -45,6 +45,8 @@ let filteredData = [];
             // Ensuite, lorsqu'on clique sur un élément de la liste on appelle la méthode addUser:
             li.addEventListener('click', function () {
                 addUser(user); 
+                userList.innerHTML = ''; 
+                userList.style.display = 'none';
             });
 
             // Style de l'élément listé lors du hover avec la souris
